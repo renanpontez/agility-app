@@ -10,9 +10,11 @@ type ButtonProps = {
   icon?: React.ReactNode;
   loading?: boolean;
   disabled?: boolean;
+  href?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading, disabled }) => {
+const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading, disabled, href }) => {
+  const Tag = href ? 'a' : 'button';
   const baseClasses = 'px-4 py-2 font-semibold rounded-xxl focus:outline-none focus:ring-0 flex items-center justify-center transition-colors duration-200';
 
   const buttonClasses = classNames(baseClasses, {
@@ -27,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
   });
 
   return (
-    <button
+    <Tag
       type="button"
       className={buttonClasses}
       onClick={onClick}
@@ -44,7 +46,7 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
               {icon && <span className="ml-2">{icon}</span>}
             </>
           )}
-    </button>
+    </Tag>
   );
 };
 

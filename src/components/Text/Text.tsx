@@ -9,7 +9,7 @@ type TextProps = {
   children: ReactNode;
 };
 
-const Text: FC<TextProps> = ({ as, decoration, className, children }) => {
+const Text: FC<TextProps> = ({ as = 'p', decoration, className, children }) => {
   const Tag = as;
   const baseClasses = classNames(
     'font-poppins',

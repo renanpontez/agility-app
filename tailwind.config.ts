@@ -24,7 +24,7 @@ export default {
         darkLight: '#2D3748',
       },
       fontFamily: {
-        sans: ['Muli', ...fontFamily.sans], // Add Inter as the primary font
+        poppins: ['Poppins', ...fontFamily.sans], // Add Inter as the primary font
       },
       fontSize: {
         base: ['16px', '24px'], // Default font size

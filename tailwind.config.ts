@@ -10,8 +10,18 @@ export default {
     extend: {
       colors: {
         primary: '#BC01FD',
+        primaryDark: '#7200BD',
         secondary: '#3c3c3c',
+        secondaryDark: '#1a1a1a',
         text: '#3c3c3c',
+        warning: '#FFA800',
+        warningDark: '#CC8400',
+        error: '#FF0000',
+        errorDark: '#CC0000',
+        light: '#F9FAFB',
+        lightDark: '#E5E7EB',
+        dark: '#1A202C',
+        darkLight: '#2D3748',
       },
       fontFamily: {
         poppins: ['Poppins', ...fontFamily.sans], // Add Inter as the primary font

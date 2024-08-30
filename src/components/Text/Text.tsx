@@ -4,12 +4,13 @@ import React from 'react';
 
 type TextProps = {
   as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'em' | 'blockquote';
+  styleOverride?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'em' | 'blockquote';
   decoration?: 'italic' | 'bold' | 'strike';
   className?: string;
   children: ReactNode;
 };
 
-const Text: FC<TextProps> = ({ as = 'p', decoration, className, children }) => {
+const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, children }) => {
   const Tag = as;
   const baseClasses = classNames(
     'font-poppins',
@@ -32,7 +33,7 @@ const Text: FC<TextProps> = ({ as = 'p', decoration, className, children }) => {
     blockquote: classNames(baseClasses, 'border-l-4 pl-4 text-lg italic text-muted-foreground'),
   };
 
-  return <Tag className={elementStyles[as]}>{children}</Tag>;
+  return <Tag className={elementStyles[styleOverride ?? as]}>{children}</Tag>;
 };
 
 export default Text;

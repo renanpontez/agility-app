@@ -3,7 +3,7 @@ import React from 'react';
 
 import { SimpleLoading } from '../Loading';
 
-type ButtonProps = {
+export type ButtonProps = {
   style: 'primary' | 'secondary' | 'light' | 'dark' | 'link' | 'warning' | 'error';
   onClick?: () => void;
   children: React.ReactNode;

@@ -12,26 +12,29 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ style, isScrolled = false }) => {
   const headerClasses = classNames(
-    'fixed top-0 left-0 w-full z-50 flex items-center justify-between py-4 transition-colors duration-300',
+    'fixed top-0 left-0 w-full z-50 transition-colors duration-300',
     {
       'bg-white text-black': style === 'light',
       'bg-black text-white': style === 'dark',
       'bg-transparent text-white': style === 'transparent',
-      'shadow-md': isScrolled,
+      'shadow-lg bg-secondaryDarker bg-opacity-80': isScrolled,
     },
   );
 
   return (
     <header className={headerClasses}>
-      <div className="flex items-center">
-        <Logo showName showSlogan symbolColor="primary" nameSloganColor="white" style="horizontal" />
+      <div className="container flex items-center justify-between py-4 transition-colors duration-300">
+        <div className="flex items-center">
+          <Logo showName showSlogan symbolColor="primary" nameSloganColor="white" style="horizontal" />
+        </div>
+        <nav className="flex gap-10">
+          <HeaderLink href="#home" text="SOBRE NÓS" />
+          <HeaderLink href="#home" text="NOSSAS SOLUÇÕES" />
+          <HeaderLink href="#home" text="PORTFOLIO" />
+          <HeaderLink href="#home" text="FALE COM A GENTE" />
+        </nav>
       </div>
-      <nav className="flex gap-10">
-        <HeaderLink href="#home" text="SOBRE NÓS" />
-        <HeaderLink href="#home" text="NOSSAS SOLUÇÕES" />
-        <HeaderLink href="#home" text="PORTFOLIO" />
-        <HeaderLink href="#home" text="FALE COM A GENTE" />
-      </nav>
+
     </header>
   );
 };

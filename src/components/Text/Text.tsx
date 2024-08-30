@@ -13,7 +13,7 @@ type TextProps = {
 const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, children }) => {
   const Tag = as;
   const baseClasses = classNames(
-    'font-poppins',
+    'font-poppins leading-normal tracking-wide text-white',
     {
       'italic': decoration === 'italic',
       'font-bold': decoration === 'bold',

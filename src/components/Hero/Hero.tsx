@@ -8,7 +8,7 @@ import { Button } from '@/components/Button'; // Assuming you have a Button comp
 type HeroProps = {
   mediaType: 'image' | 'video';
   mediaSrc: string;
-  style: 'full-height' | 'auto-height';
+  style: 'full-height' | 'auto-height' | 'custom-height';
   className?: string;
   altText?: string; // Alt text for images
   videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>; // Additional video props
@@ -60,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({
       </div>
       <div className="absolute size-full items-center">
         <div className="container z-10 flex h-full flex-col items-start justify-center text-left">
-          {title && <h1 className="mb-4 text-4xl text-white">{title}</h1>}
+          {title && <span>{title}</span>}
           {cta && <Button {...cta} />}
         </div>
       </div>

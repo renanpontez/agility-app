@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ style, isScrolled = false }) => {
       'bg-white text-black': style === 'light',
       'bg-black text-white': style === 'dark',
       'bg-transparent text-white': style === 'transparent',
-      'shadow-lg bg-secondaryDarker bg-opacity-80': isScrolled,
+      'shadow-lg !bg-secondaryDarker bg-opacity-80': isScrolled,
     },
   );
 

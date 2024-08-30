@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Loading from './Loading';
+import { SimpleLoading } from '.';
 
-const meta: Meta<typeof Loading> = {
-  title: 'Components/Loading',
+const meta: Meta<typeof SimpleLoading> = {
+  title: 'Components/Loading/SimpleLoading',
   tags: ['autodocs'],
-  component: Loading,
+  component: SimpleLoading,
   argTypes: {
     size: {
       control: 'select',
@@ -17,7 +17,7 @@ const meta: Meta<typeof Loading> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Loading>;
+type Story = StoryObj<typeof SimpleLoading>;
 
 export const Small: Story = {
   args: {

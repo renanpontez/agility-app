@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import Loading from '../Loading';
+import { SimpleLoading } from '../Loading';
 
 type ButtonProps = {
   style: 'primary' | 'secondary' | 'light' | 'dark' | 'link' | 'warning' | 'error';
@@ -38,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
       {loading
         ? (
           // TODO: Replace with an appropriate loading spinner
-            <Loading size="small" />
+            <SimpleLoading size="small" />
           )
         : (
             <>

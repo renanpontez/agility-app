@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
   const Tag = href ? 'a' : 'button';
 
   const baseClasses = classNames(
-    'px-6 py-2 font-normal rounded-lg flex items-center justify-center text-sm tracking-wider',
+    'px-6 py-2 font-semibold rounded-lg flex items-center justify-center text-sm tracking-wider',
     'transition duration-200 ease-in-out focus:outline-none focus:ring-0',
   );
 
@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
         'bg-error text-white hover:bg-errorDark active:shadow': style === 'error',
         'bg-success text-white hover:bg-successDark active:shadow': style === 'success',
         'bg-transparent text-primary border border-primary hover:bg-primary hover:text-white active:shadow': style === 'outlined',
-        'bg-transparent text-white border border-white hover:border-primary hover:text-primary active:shadow-lg active:text-primaryLight active:border-primaryLight': style === 'outlined-light',
+        'bg-transparent text-white border border-white hover:bg-white hover:text-primary active:shadow-lg': style === 'outlined-light',
         'opacity-50 cursor-not-allowed': disabled || loading,
       },
       {

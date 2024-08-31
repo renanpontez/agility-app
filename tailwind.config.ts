@@ -60,6 +60,29 @@ export default {
         soft: '0 4px 8px rgba(0, 0, 0, 0.05)', // Light shadow for depth
         strong: '0 8px 16px rgba(0, 0, 0, 0.1)', // Stronger shadow for focus elements
       },
+
+      keyframes: {
+        pulseShadow: {
+          '0%': {
+            boxShadow: '0 0 15px rgba(0, 0, 0, 0.3)',
+          },
+          '25%': {
+            boxShadow: '12px 12px 15px rgba(0, 0, 0, 0.3)',
+          },
+          '50%': {
+            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.5)',
+          },
+          '75%': {
+            boxShadow: '-12px -12px 15px rgba(0, 0, 0, 0.3)',
+          },
+          '100%': {
+            boxShadow: '0 0 15px rgba(0, 0, 0, 0.3)',
+          },
+        },
+      },
+      animation: {
+        pulseShadow: 'pulseShadow 10s infinite',
+      },
     },
   },
   plugins: [

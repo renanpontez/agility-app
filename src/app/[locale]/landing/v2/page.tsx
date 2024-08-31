@@ -11,9 +11,10 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import { Input } from '@/components/Input';
 import Logo from '@/components/Logo';
+import { Portfolio } from '@/components/Portfolio';
 import Text from '@/components/Text';
 import { TextArea } from '@/components/TextArea';
-import { SOCIAL_NETWORKS } from '@/utils/Constants';
+import { PORTFOLIO_ITEMS, SOCIAL_NETWORKS } from '@/utils/Constants';
 
 const HeaderTitle: React.ReactNode = (
   <Text as="h1" styleOverride="h1" className="font-light leading-normal tracking-wide text-white">
@@ -41,6 +42,7 @@ const LandingPage: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <>
       {/* <Head>
@@ -57,9 +59,9 @@ const LandingPage: React.FC = () => {
           className="h-[80vh]"
         />
 
-        <div className="container relative -mt-16">
-          <Card className="mx-auto w-full">
-            <div className="flex items-center justify-between px-16 py-2">
+        <div className="relative mx-auto -mt-16 w-fit">
+          <Card className="mx-auto animate-pulseShadow bg-secondaryDarker">
+            <div className="flex items-center justify-between gap-32 px-10 py-4">
               {
                 [{
                   title: '11',
@@ -74,9 +76,9 @@ const LandingPage: React.FC = () => {
                   title: '5',
                   description: 'MENTES CRIATIVAS',
                 }].map(item => (
-                  <div key={item.title} className="flex flex-col items-center justify-center">
-                    <Text as="h2" className="text-primary">{item.title}</Text>
-                    <Text as="p">{item.description}</Text>
+                  <div key={item.title} className="flex flex-col items-center justify-center gap-2">
+                    <Text as="h5" styleOverride="h2" className="tracking-wider text-primary">{item.title}</Text>
+                    <Text as="small" className="text-secondaryLighter">{item.description}</Text>
                   </div>
                 ))
               }
@@ -116,13 +118,30 @@ const LandingPage: React.FC = () => {
             altText="A desk containing a laptop, a notebook, and a cup of coffee"
 
             content={(
-              <div className="flex max-w-[35%] flex-col items-start gap-5 py-24 text-left">
+              <div className="flex w-[30%] flex-col items-start gap-10 py-20 pr-12 text-left">
                 <Logo symbolColor="primary" />
-                <Text as="p">
-                  A gente acredita que organizando o processo criativo e trabalhando em parceria com o cliente, conseguimos multiplicar os resultados do seu projeto.
+                {/* <div className="-mb-4 -ml-6">
+                  <BrandLoading size="xlg" />
+                </div> */}
+                <Text as="p" size="md">
+                  Nós acreditamos que organizando o
+                  {' '}
+                  <b>processo criativo</b>
+                  {' '}
+                  e trabalhando em
+                  {' '}
+                  <b>parceria com o cliente</b>
+                  , conseguimos
+                  {' '}
+                  <b>maximizar os resultados</b>
+                  {' '}
+                  do seu projeto.
                 </Text>
-                <Text as="p">
-                  Descubra como podemos impulsionar o seu negócio de maneira ágil e confiável.
+                <Text as="p" size="md">
+                  Descubra como podemos impulsionar o seu negócio de maneira
+                  {' '}
+                  <span className="text-primaryLighter">ágil e confiável</span>
+                  .
                 </Text>
                 <Button style="outlined-light" size="sm">
                   NOSSOS PROJETOS
@@ -143,14 +162,9 @@ const LandingPage: React.FC = () => {
           <Text as="em">
             Conheça os cases de sucesso que nos inspiram a cada dia.
           </Text>
-          <div className="mt-10 grid grid-cols-3 gap-2">
-            {[1, 2, 3, 4, 5, 6].map(item => (
-              <Card key={item} className="aspect-square w-full bg-secondaryDark" />
-            ))}
 
-          </div>
-          <div>
-            {/* TODO: PORTFOLIO COMPONENT */}
+          <div className="mt-10">
+            <Portfolio items={PORTFOLIO_ITEMS} />
           </div>
         </section>
 

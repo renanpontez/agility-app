@@ -22,3 +22,48 @@ export const SOCIAL_NETWORKS = [
     href: 'tel:+5585996284730',
   },
 ];
+
+export const PORTFOLIO_ITEMS = [
+  {
+    id: 1,
+    imageSrc: '/assets/images/portfolio/dynotest_cover.png',
+    title: 'Dynotest Performance Solutions',
+    description: 'Site corporativo',
+    // href: 'https://dynotest.com.br',
+  },
+  {
+    id: 2,
+    imageSrc: '/assets/images/portfolio/cimbalo_cover.png',
+    title: 'Címbalo Comunicação',
+    description: 'Site corporativo',
+  },
+  {
+    id: 3,
+    imageSrc: '/assets/images/portfolio/easytolive_cover.png',
+    title: 'Easy To Live',
+    description: 'Aplicativo Web',
+    // href: 'https://easytolive.com.br',
+  },
+  {
+    id: 4,
+    imageSrc: '/assets/images/portfolio/agillock_cover.png',
+    title: 'ÁgilLock Gestão de Risco',
+    description: 'Site corporativo',
+    // href: 'https://agillock.com.br',
+  },
+  {
+    id: 5,
+    imageSrc: '/assets/images/portfolio/academia_cover.png',
+    title: 'Academia Cearense de Economia',
+    description: 'Site institucional',
+    // href: 'https://academiacearensedeeconomia.com.br',
+  },
+
+  {
+    id: 6,
+    imageSrc: '/assets/images/portfolio/agillock_cover.png',
+    title: 'ÁgilLock Gestão de Risco',
+    description: 'Site corporativo',
+    // href: 'https://agillock.com.br',
+  },
+];

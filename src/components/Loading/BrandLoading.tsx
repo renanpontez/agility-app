@@ -6,20 +6,28 @@ import BrandLoader from '@/public/assets/gifs/loading_agility_3.gif';
 
 type BrandLoadingProps = {
   className?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xlg' | 'fullscreen' | 'full';
 };
 
-const BrandLoading: React.FC<BrandLoadingProps> = ({ className }) => {
+const BrandLoading: React.FC<BrandLoadingProps> = ({ className, size = 'fullscreen' }) => {
   const sizeClasses = {
-    small: 'w-4 h-4',
-    medium: 'w-8 h-8',
-    big: 'w-12 h-12',
-    fullscreen: 'w-16 h-16 absolute inset-0 flex items-center justify-center bg-white bg-opacity-75',
+    sm: 'w-4 h-4',
+    md: 'w-8 h-8',
+    lg: 'w-12 h-12',
+    xlg: 'w-24 h-24',
+    fullscreen: 'w-64 h-64 fixed left-0 right-0 mx-auto flex items-center justify-center bg-opacity-75 ',
     full: 'w-12 h-12 flex items-center justify-center',
   };
 
   return (
-    <div role="status">
-      <Image src={BrandLoader} className={classNames(sizeClasses.full, className)} alt="Brand Loading Spinner" />
+    <div
+      role="status"
+      className={classNames(
+        'flex items-center justify-center',
+        size === 'fullscreen' && 'fixed inset-0 bg-secondaryEvenDarker bg-opacity-75 z-80',
+      )}
+    >
+      <Image src={BrandLoader} className={classNames(sizeClasses[size], className)} alt="Brand Loading Spinner" />
     </div>
   );
 };

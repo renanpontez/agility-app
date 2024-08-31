@@ -4,8 +4,8 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type TextProps = {
-  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'em' | 'blockquote';
-  styleOverride?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'em' | 'blockquote';
+  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'blockquote' | 'small';
+  styleOverride?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'em' | 'blockquote' | 'small';
   decoration?: 'italic' | 'bold' | 'strike';
   className?: string;
   children: ReactNode;
@@ -29,7 +29,9 @@ const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, c
     h3: classNames(baseClasses, 'text-2xl font-semibold'),
     h4: classNames(baseClasses, 'text-xl font-semibold'),
     h5: classNames(baseClasses, 'text-lg font-normal'),
-    p: classNames(baseClasses, 'text-base leading-relaxed'),
+    h6: classNames(baseClasses, 'text-sm font-semibold uppercase'),
+    p: classNames(baseClasses, 'text-sm leading-relaxed'),
+    small: classNames(baseClasses, 'text-xs leading-relaxed'),
     em: classNames(baseClasses, 'italic text-xs font-regular tracking-normal'),
     blockquote: classNames(baseClasses, 'border-l-4 pl-4 text-lg italic text-muted-foreground'),
   };

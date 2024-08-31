@@ -8,37 +8,46 @@ import { Button } from '@/components/Button'; // Assuming you have a Button comp
 type HeroProps = {
   mediaType: 'image' | 'video';
   mediaSrc: string;
-  style: 'full-height' | 'auto-height';
+  style: 'full-height' | 'auto-height' | 'custom-height';
   className?: string;
   altText?: string; // Alt text for images
   videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>; // Additional video props
-  title?: React.ReactNode; // Accepts React children for the title
+  content?: React.ReactNode; // Accepts React children for the title
   cta?: ButtonProps; // Button props for the CTA
+  applyMask?: boolean; // Apply a gradient mask over the media
+  maskClassName?: string; // Additional class names for the mask
 };
 
 const Hero: React.FC<HeroProps> = ({
+  applyMask = false,
+  maskClassName,
   mediaType,
   mediaSrc,
   style,
   className,
   altText,
   videoProps,
-  title,
+  content,
   cta,
 }) => {
   return (
     <div
       className={classNames(
-        'relative w-full',
+        'relative w-full bg-no-repeat bg-cover bg-center flex items-center justify-center',
         {
           'h-screen': style === 'full-height',
           'h-auto': style === 'auto-height',
         },
         className,
       )}
+      {...(mediaType === 'image' && {
+        style: { backgroundImage: `url(${mediaSrc})` },
+      })}
     >
+      {applyMask && (
+        <div className={classNames('absolute left-0 top-0 z-0 size-full bg-gradient-to-r from-transparent to-black z-10', maskClassName)} />
+      )}
       <div>
-
         {mediaType === 'image'
           ? (
               <Image
@@ -46,7 +55,7 @@ const Hero: React.FC<HeroProps> = ({
                 alt={altText || 'Hero Image'}
                 layout="fill"
                 objectFit="cover"
-                className="z-0"
+                className="absolute left-0 top-0 z-0 size-full object-cover"
               />
             )
           : (
@@ -58,9 +67,9 @@ const Hero: React.FC<HeroProps> = ({
               />
             )}
       </div>
-      <div className="absolute size-full items-center">
-        <div className="container z-10 flex h-full flex-col items-start justify-center text-left">
-          {title && <h1 className="mb-4 text-4xl text-white">{title}</h1>}
+      <div className="size-full items-center">
+        <div className="container relative z-20 flex h-full flex-col items-start justify-center text-left">
+          {content && <>{content}</>}
           {cta && <Button {...cta} />}
         </div>
       </div>

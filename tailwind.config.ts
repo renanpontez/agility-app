@@ -10,19 +10,19 @@ export default {
     extend: {
       colors: {
         primary: '#BC01FD',
-        primaryLighter: '#E200FF',
-        primaryLight: '#D946FF',
-        primaryDark: '#7200BD',
-        primaryDarker: '#4A0077',
+        primaryLighter: '#E7B9F8',
+        primaryLight: '#DA71FF',
+        primaryDark: '#861AAB',
+        primaryDarker: '#6A008F',
         secondary: '#3c3c3c',
-        secondaryLighter: '#6b6b6b',
-        secondaryLight: '#4f4f4f',
-        secondaryDark: '#1a1a1a',
-        secondaryDarker: '#0d0d0d',
+        secondaryLighter: '#B9B9B9',
+        secondaryLight: '#595959',
+        secondaryDark: '#252525',
+        secondaryDarker: '#151515',
         text: '#3c3c3c',
         warning: '#FFA800',
         warningDark: '#CC8400',
-        error: '#FF0000',
+        error: '#B3251E',
         errorDark: '#CC0000',
         light: '#F9FAFB',
         lightDark: '#E5E7EB',
@@ -30,7 +30,9 @@ export default {
         darkLight: '#2D3748',
       },
       fontFamily: {
-        poppins: ['Poppins', ...fontFamily.sans], // Add Inter as the primary font
+        poppins: ['Poppins', ...fontFamily.sans],
+        serif: ['Sorts Mill Goudy', ...fontFamily.serif],
+
       },
       fontSize: {
         base: ['16px', '24px'], // Default font size

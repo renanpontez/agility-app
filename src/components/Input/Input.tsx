@@ -28,7 +28,7 @@ const Input: FC<InputProps> = ({
   label,
 }) => {
   const inputClass = classNames(
-    'rounded-md px-3 py-3 text-sm placeholder-secondaryLight w-full', // Basic styles
+    'rounded-md px-3 py-3 text-sm placeholder-secondaryLight w-full transition duration-300 ease-in-out', // Basic styles
     'focus:outline-none focus:shadow-md focus:outline-secondaryDark', // Remove default focus styles
     {
       'border border-error': isInvalid, // Invalid state styling

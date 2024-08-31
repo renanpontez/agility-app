@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ style, isScrolled = false }) => {
     <header className={headerClasses}>
       <div className="container flex items-center justify-between py-4 transition-colors duration-300">
         <div className="flex items-center">
-          <Logo showName showSlogan symbolColor="primary" nameSloganColor="white" style="horizontal" />
+          <Logo showName showSlogan symbolColor="primary" nameSloganColor="white" style="horizontal" size="sm" />
         </div>
         <nav className="flex gap-10">
           <HeaderLink href="#home" text="SOBRE NÓS" />

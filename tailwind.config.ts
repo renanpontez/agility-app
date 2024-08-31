@@ -19,6 +19,7 @@ export default {
         secondaryLight: '#595959',
         secondaryDark: '#252525',
         secondaryDarker: '#151515',
+        secondaryEvenDarker: '#0A0A0A',
         text: '#3c3c3c',
         warning: '#FFA800',
         warningDark: '#CC8400',

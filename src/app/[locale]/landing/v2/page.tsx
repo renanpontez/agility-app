@@ -2,22 +2,24 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { FaLinkedin, FaMessage, FaPhone, FaWhatsapp } from 'react-icons/fa6';
+import { FaWhatsapp } from 'react-icons/fa6';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
+import { Footer } from '@/components/Footer';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import { Input } from '@/components/Input';
 import Logo from '@/components/Logo';
 import Text from '@/components/Text';
 import { TextArea } from '@/components/TextArea';
+import { SOCIAL_NETWORKS } from '@/utils/Constants';
 
 const HeaderTitle: React.ReactNode = (
   <Text as="h1" styleOverride="h1" className="font-light leading-normal tracking-wide text-white">
     TRANSFORMANDO IDEIAS EM
     <br />
-    <Text as="h1" className="leading-normal tracking-wide">SOLUÇÕES QUE INSPIRAM</Text>
+    <span className="font-bold tracking-wider">SOLUÇÕES QUE INSPIRAM</span>
   </Text>
 );
 
@@ -210,23 +212,11 @@ const LandingPage: React.FC = () => {
               <span className="text-primary">AGILITY</span>
             </Text>
             <div className="flex flex-col gap-3">
-              {[{
-                icon: FaMessage,
-                title: 'hi@agilitycreative.com',
-                href: 'mailto:hi@agilitycreative.com',
-              }, {
-                icon: FaLinkedin,
-                title: '/agilitycreative',
-                href: 'https://www.linkedin.com/company/agilitycreative',
-              }, {
-                icon: FaPhone,
-                title: '+55 85 99628-4730',
-                href: 'tel:+5585996284730',
-              }].map(item => (
+              {SOCIAL_NETWORKS.map(item => (
                 <div key={item.title} className="flex items-center gap-2">
-                  <item.icon className="text-sm text-primaryLighter" />
-                  <a href={item.href} className="text-sm text-white" target="_blank" rel="noopener noreferrer">
-                    <Text as="p" className="text-sm">{item.title}</Text>
+                  <item.icon className="text-sm text-primaryLighter " />
+                  <a href={item.href} className="text-sm" target="_blank" rel="noopener noreferrer">
+                    <Text as="p" size="sm" className="hover:text-primaryLighter">{item.title}</Text>
                   </a>
                 </div>
               ))}
@@ -257,32 +247,7 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        <footer className="mt-64 bg-black">
-          <div className="container flex justify-between py-10">
-            <div>
-              <Text as="h4" className="text-white">AGILITY</Text>
-              <Text as="p" className="text-white">Transformando ideias em soluções que inspiram</Text>
-            </div>
-            <div>
-              <Text as="h4" className="text-white">SERVIÇOS</Text>
-              <Text as="p" className="text-white">Desenvolvimento Web</Text>
-              <Text as="p" className="text-white">Design de Interfaces</Text>
-              <Text as="p" className="text-white">Branding e Identidade Visual</Text>
-            </div>
-            <div>
-              <Text as="h4" className="text-white">REDES SOCIAIS</Text>
-              <Text as="p" className="text-white">Instagram</Text>
-              <Text as="p" className="text-white">LinkedIn</Text>
-              <Text as="p" className="text-white">Facebook</Text>
-            </div>
-            <div>
-              <Text as="h4" className="text-white">REDES SOCIAIS</Text>
-              <Text as="p" className="text-white">Instagram</Text>
-              <Text as="p" className="text-white">LinkedIn</Text>
-              <Text as="p" className="text-white">Facebook</Text>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

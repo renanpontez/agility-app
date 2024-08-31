@@ -29,7 +29,7 @@ const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, c
     h4: classNames(baseClasses, 'text-xl font-semibold'),
     h5: classNames(baseClasses, 'text-lg font-semibold'),
     p: classNames(baseClasses, 'text-base leading-relaxed'),
-    em: classNames(baseClasses, 'italic text-sm font-medium'),
+    em: classNames(baseClasses, 'italic text-xs font-regular tracking-normal'),
     blockquote: classNames(baseClasses, 'border-l-4 pl-4 text-lg italic text-muted-foreground'),
   };
 

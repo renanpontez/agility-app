@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({ radius = 'lg', className, children, shadow 
   const cardClassNames = twMerge(
     classNames(
       'p-4', // Shared styles
-      { 'bg-secondaryDarker text-white': style === 'dark' }, // Default dark background and padding
+      { 'bg-secondaryDark text-white': style === 'dark' }, // Default dark background and padding
       { 'bg-white text-dark': style === 'light' }, // Default dark background and padding
       radiusClasses, // Apply the radius class
       shadowClasses, // Apply the shadow class

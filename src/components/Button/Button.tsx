@@ -13,16 +13,11 @@ export type ButtonProps = {
   disabled?: boolean;
   href?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
+  fullWidth?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading, disabled, href, size = 'md' }) => {
+const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading, disabled, href, size = 'md', fullWidth = false }) => {
   const Tag = href ? 'a' : 'button';
-
-  // const sizeClasses = {
-  //   sm: 'px-4 py-1 text-xs',
-  //   md: 'px-6 py-2 text-sm',
-  //   lg: 'px-8 py-3 text-lg',
-  // };
 
   const baseClasses = classNames(
     'px-6 py-2 font-normal rounded-lg flex items-center justify-center text-sm tracking-wider',
@@ -49,9 +44,10 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
         'text-xs px-4 py-1': size === 'xs',
         'text-xs px-6 py-2': size === 'sm',
         'text-sm px-6 py-2': size === 'md',
-        'text-lg px-10 py-3': size === 'lg',
-        'text-xlg px-10 py-4': size === 'xlg',
+        'text-sm px-10 py-3': size === 'lg',
+        'text-md px-10 py-4': size === 'xlg',
       },
+      { 'w-full': fullWidth },
     ),
   );
 

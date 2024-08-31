@@ -2,13 +2,16 @@
 
 import Image from 'next/image';
 import React from 'react';
+import { FaLinkedin, FaMessage, FaPhone, FaWhatsapp } from 'react-icons/fa6';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import { Input } from '@/components/Input';
 import Logo from '@/components/Logo';
 import Text from '@/components/Text';
+import { TextArea } from '@/components/TextArea';
 
 const HeaderTitle: React.ReactNode = (
   <Text as="h1" styleOverride="h1" className="font-light leading-normal tracking-wide text-white">
@@ -197,9 +200,89 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        <div style={{ minHeight: 2000, textAlign: 'center' }}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        </div>
+        <section className="container my-24 flex w-full justify-between">
+          <div className="flex flex-col gap-10">
+            <Text as="h2" styleOverride="h1">
+              ENTRE EM CONTATO
+              <br />
+              COM A
+              {' '}
+              <span className="text-primary">AGILITY</span>
+            </Text>
+            <div className="flex flex-col gap-3">
+              {[{
+                icon: FaMessage,
+                title: 'hi@agilitycreative.com',
+                href: 'mailto:hi@agilitycreative.com',
+              }, {
+                icon: FaLinkedin,
+                title: '/agilitycreative',
+                href: 'https://www.linkedin.com/company/agilitycreative',
+              }, {
+                icon: FaPhone,
+                title: '+55 85 99628-4730',
+                href: 'tel:+5585996284730',
+              }].map(item => (
+                <div key={item.title} className="flex items-center gap-2">
+                  <item.icon className="text-sm text-primaryLighter" />
+                  <a href={item.href} className="text-sm text-white" target="_blank" rel="noopener noreferrer">
+                    <Text as="p" className="text-sm">{item.title}</Text>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <form className="flex min-w-84 flex-col gap-2">
+              <div>
+                <Input type="text" placeholder="Antonio Araujo" label="Nome e Sobrenome" />
+              </div>
+              <div>
+                <Input type="email" placeholder="contato@araujocolchoes.com.br" label="E-mail" />
+              </div>
+              <div>
+                <TextArea
+                  // onChange={e => setText(e.target.value)}
+                  placeholder="Conta pra gente como podemos ajudar seu projeto"
+                  label="Sua mensagem"
+                />
+              </div>
+              <div>
+                <Button style="primary" size="lg" fullWidth>
+                  <span>Enviar mensagem</span>
+                  <span className="ml-2"><FaWhatsapp size={14} /></span>
+                </Button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <footer className="mt-64 bg-black">
+          <div className="container flex justify-between py-10">
+            <div>
+              <Text as="h4" className="text-white">AGILITY</Text>
+              <Text as="p" className="text-white">Transformando ideias em soluções que inspiram</Text>
+            </div>
+            <div>
+              <Text as="h4" className="text-white">SERVIÇOS</Text>
+              <Text as="p" className="text-white">Desenvolvimento Web</Text>
+              <Text as="p" className="text-white">Design de Interfaces</Text>
+              <Text as="p" className="text-white">Branding e Identidade Visual</Text>
+            </div>
+            <div>
+              <Text as="h4" className="text-white">REDES SOCIAIS</Text>
+              <Text as="p" className="text-white">Instagram</Text>
+              <Text as="p" className="text-white">LinkedIn</Text>
+              <Text as="p" className="text-white">Facebook</Text>
+            </div>
+            <div>
+              <Text as="h4" className="text-white">REDES SOCIAIS</Text>
+              <Text as="p" className="text-white">Instagram</Text>
+              <Text as="p" className="text-white">LinkedIn</Text>
+              <Text as="p" className="text-white">Facebook</Text>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
 
@@ -31,7 +32,11 @@ const LandingPage: React.FC = () => {
 
       <div className="relative mx-auto -mt-16 w-fit">
         <Card className="mx-auto animate-pulseShadow bg-secondaryDarker">
-          <div className="flex items-center justify-between gap-32 px-10 py-4">
+          <div className={classNames(
+            'flex flex-col items-center justify-between gap-16 px-10 py-4',
+            'md:flex-row md:gap-32',
+          )}
+          >
             {
               [{
                 title: '11',
@@ -56,7 +61,7 @@ const LandingPage: React.FC = () => {
         </Card>
       </div>
 
-      <section className="mx-auto w-fit max-w-[30%] justify-center py-32 text-center">
+      <section className="mx-auto w-fit max-w-[70%] justify-center py-32 text-center md:max-w-[30%]">
         <Testimonials />
       </section>
 
@@ -100,7 +105,7 @@ const LandingPage: React.FC = () => {
         />
       </section>
 
-      <section className="mx-auto max-w-[50%] py-24 text-center" id="Portfolio">
+      <section className="mx-auto max-w-[90%] py-24 text-center md:max-w-[50%]" id="Portfolio">
         <Text as="h2" styleOverride="h1">
           PROJETOS QUE FIZERAM A
           <br />
@@ -154,7 +159,7 @@ const LandingPage: React.FC = () => {
             title: 'Qualidade e suporte',
             description: 'Comprometidos com a excelência, garantimos a qualidade em cada etapa. Além disso, oferecemos suporte contínuo para garantir o sucesso contínuo do seu projeto.',
           }].map(item => (
-            <Card key={item.title} className="flex w-[350px] flex-col items-center justify-center gap-5 bg-secondaryDark p-10 text-center" shadow="lg">
+            <Card key={item.title} className="flex w-[33%] flex-col items-center justify-center gap-5 bg-secondaryDark p-10 text-center" shadow="lg">
               <div className="flex items-center justify-center">
                 <item.icon className="text-primaryLighter" size={36} />
               </div>
@@ -167,7 +172,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="container my-24 flex w-full justify-between" id="Contato">
+      <section className="container my-24 flex w-full flex-col justify-between gap-16 md:flex-row" id="Contato">
         <div className="flex flex-col gap-10">
           <Text as="h2" styleOverride="h1">
             ENTRE EM CONTATO
@@ -187,7 +192,7 @@ const LandingPage: React.FC = () => {
             ))}
           </div>
         </div>
-        <div>
+        <div className="md:p-5">
           <ContactForm />
         </div>
       </section>

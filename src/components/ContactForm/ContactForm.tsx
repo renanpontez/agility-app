@@ -81,7 +81,7 @@ const ContactForm: React.FC = () => {
 
   return (
     <form
-      className="relative flex min-w-96 flex-col items-stretch justify-center gap-2 p-5"
+      className="relative flex min-w-96 flex-col items-stretch justify-center gap-2"
       onSubmit={e => e.preventDefault()}
     >
       {isLoading && (

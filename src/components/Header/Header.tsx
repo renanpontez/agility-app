@@ -55,14 +55,16 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
             />
           </Link>
         </div>
-        <nav className="flex gap-10">
-          {MENU_ITEMS.map(item => (
-            <HeaderLink
-              key={item.title + item.href}
-              href={item.href}
-              text={item.title}
-            />
-          ))}
+        <nav className="">
+          <div className="invisible flex gap-10 md:visible">
+            {MENU_ITEMS.map(item => (
+              <HeaderLink
+                key={item.title + item.href}
+                href={item.href}
+                text={item.title}
+              />
+            ))}
+          </div>
         </nav>
       </div>
 

@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
   return (
     <footer>
       <div className="mt-64 bg-secondaryEvenDarker py-10 text-xs text-secondary">
-        <div className="container flex justify-between py-10">
+        <div className="container flex flex-col justify-between gap-8 py-10 md:flex-row md:gap-0">
           <div className="flex flex-col gap-5">
             <Logo symbolColor="primary" showName showSlogan style="horizontal" size="sm" />
             <Text as="p" className="w-2/3 text-xs text-secondaryLighter">

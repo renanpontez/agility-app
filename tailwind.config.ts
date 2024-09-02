@@ -45,6 +45,17 @@ export default {
       container: {
         center: true, // Center the container for a clean look
         padding: '2rem',
+        screens: {
+          'sm': '512px', // Default: 640px
+          'md': '614.4px', // Default: 768px
+          'lg': '819.2px', // Default: 1024px
+          'xl': '1024px', // Default: 1280px
+          '2xl': '1228.8px', // Default: 1536px
+        },
+      },
+      smallContainer: {
+        center: true,
+        padding: '1rem',
       },
       borderRadius: {
         md: '8px', // Medium rounded corners for buttons, cards

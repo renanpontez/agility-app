@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Link from '@/components/Link';
-import { SOCIAL_NETWORKS } from '@/utils/Constants';
+import SocialIcons from '@/components/SocialIcons/SocialIcons';
 
 import Logo from '../Logo';
 import Text from '../Text';
@@ -35,15 +35,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-5">
             <Text as="h6" className=" text-white">Redes Sociais</Text>
             <div className="flex flex-row gap-3">
-              {SOCIAL_NETWORKS.map(item => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="text-secondaryLight transition-colors duration-300 hover:text-secondaryLighter"
-                >
-                  <item.icon size={16} />
-                </Link>
-              ))}
+              <SocialIcons />
             </div>
           </div>
           <div className="flex flex-col gap-5">
@@ -51,7 +43,7 @@ const Footer: React.FC = () => {
             <div className="flex flex-col gap-2">
               <FooterLink text="Início" href="/" />
               <FooterLink text="Sobre nós" href="/sobre-nos" />
-              <FooterLink text="Nossos serviços" href="/servicos" />
+              <FooterLink text="Nossos serviços" href="/sobre-nos#Servicos" />
               <FooterLink text="Portfolio" href="/portfolio" />
               <FooterLink text="Entre em contato" href="/contato" />
             </div>

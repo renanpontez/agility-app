@@ -11,3 +11,8 @@ body {
 ::placeholder {
   font-family: 'Poppins', sans-serif;
 }
+
+/* scroll margin top */
+html {
+  scroll-padding-top: 50px;
+}

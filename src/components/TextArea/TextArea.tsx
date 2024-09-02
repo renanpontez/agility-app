@@ -12,6 +12,7 @@ export type TextAreaProps = {
   rows?: number; // Number of rows for the textarea
   style?: 'light' | 'dark';
   label?: string;
+  required?: boolean;
 };
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -23,6 +24,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   rows = 4,
   style = 'dark',
   label,
+  required,
 }) => {
   return (
     <div>
@@ -32,6 +34,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         onChange={onChange}
         placeholder={placeholder}
         rows={rows}
+        required={required}
         className={classNames(
           'w-full p-3 rounded-lg focus:outline-none placeholder-secondaryLight text-sm',
           'focus:outline-none focus:shadow-md focus:outline-secondaryDark', // Remove default focus styles

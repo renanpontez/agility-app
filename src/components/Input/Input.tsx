@@ -14,6 +14,7 @@ type InputProps = {
   type?: string;
   style?: 'light' | 'dark';
   label?: string;
+  required?: boolean;
 };
 
 const Input: FC<InputProps> = ({
@@ -26,6 +27,7 @@ const Input: FC<InputProps> = ({
   type = 'text',
   style = 'dark',
   label,
+  required,
 }) => {
   const inputClass = classNames(
     'rounded-md px-3 py-3 text-sm placeholder-secondaryLight w-full transition duration-300 ease-in-out', // Basic styles
@@ -50,6 +52,7 @@ const Input: FC<InputProps> = ({
         onFocus={onFocus}
         value={value}
         placeholder={placeholder}
+        {...(required && { required: true })}
       />
       <InputErrorLabel isInvalid={isInvalid} errorMessage="Este campo está inválido" />
     </div>

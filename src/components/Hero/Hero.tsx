@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import Image from 'next/image';
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import Button from '@/components/Button'; // Assuming you have a Button component
 import type { ButtonProps } from '@/components/Button/Button';
@@ -45,7 +46,7 @@ const Hero: React.FC<HeroProps> = ({
       })}
     >
       {applyMask && (
-        <div className={classNames('absolute left-0 top-0 z-0 size-full bg-gradient-to-r from-transparent to-black z-10', maskClassName)} />
+        <div className={twMerge('absolute left-0 top-0 z-0 size-full bg-gradient-to-r from-transparent to-black z-10', maskClassName)} />
       )}
       <div>
         {mediaType === 'image'

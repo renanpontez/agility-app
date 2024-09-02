@@ -1,14 +1,14 @@
 import React from 'react';
-import { FaChartColumn, FaComputer, FaEnvelopesBulk, FaWhatsapp } from 'react-icons/fa6';
+import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
+import ContactForm from '@/components/ContactForm';
 import Hero from '@/components/Hero';
-import Input from '@/components/Input';
 import Logo from '@/components/Logo';
 import Portfolio from '@/components/Portfolio';
+import Testimonials from '@/components/Testimonials/Testimonials';
 import Text from '@/components/Text';
-import TextArea from '@/components/TextArea';
 import { PORTFOLIO_ITEMS, SOCIAL_NETWORKS } from '@/utils/Constants';
 
 const LandingPage: React.FC = () => {
@@ -57,25 +57,7 @@ const LandingPage: React.FC = () => {
       </div>
 
       <section className="mx-auto w-fit max-w-[30%] justify-center py-32 text-center">
-        <Text as="h2">
-          O QUE NOSSOS CLIENTES FALAM
-        </Text>
-        <div className="relative">
-          <div className="absolute -left-5 -top-5">
-            <Text as="p" className="font-serif text-5xl italic text-primaryLighter">"</Text>
-          </div>
-          <div className="mt-8 flex w-fit flex-col gap-2 px-5 ">
-            <Text as="p" className="tracking-wider">
-              Nossa presença digital foi transformada com um site que superou expectativas. O resultado impulsionou nossos negócios, e a experiência com a equipe foi excepcional!
-            </Text>
-            <Text as="em" className="text-secondaryLight">
-              Leandro P | Agillock Gestão de Risco
-            </Text>
-          </div>
-          <div className="absolute -bottom-10 -right-5">
-            <Text as="p" className="font-serif text-5xl italic text-primaryLighter">"</Text>
-          </div>
-        </div>
+        <Testimonials />
       </section>
 
       <section>
@@ -118,7 +100,7 @@ const LandingPage: React.FC = () => {
         />
       </section>
 
-      <section className="mx-auto max-w-[50%] py-24 text-center">
+      <section className="mx-auto max-w-[50%] py-24 text-center" id="Portfolio">
         <Text as="h2" styleOverride="h1">
           PROJETOS QUE FIZERAM A
           <br />
@@ -185,7 +167,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="container my-24 flex w-full justify-between">
+      <section className="container my-24 flex w-full justify-between" id="Contato">
         <div className="flex flex-col gap-10">
           <Text as="h2" styleOverride="h1">
             ENTRE EM CONTATO
@@ -206,27 +188,7 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
         <div>
-          <form className="flex min-w-84 flex-col gap-2">
-            <div>
-              <Input type="text" placeholder="Antonio Araujo" label="Nome e Sobrenome" />
-            </div>
-            <div>
-              <Input type="email" placeholder="contato@araujocolchoes.com.br" label="E-mail" />
-            </div>
-            <div>
-              <TextArea
-                // onChange={e => setText(e.target.value)}
-                placeholder="Conta pra gente como podemos ajudar seu projeto"
-                label="Sua mensagem"
-              />
-            </div>
-            <div>
-              <Button style="outlined" size="lg" fullWidth>
-                <span>Enviar mensagem</span>
-                <span className="ml-2"><FaWhatsapp size={14} /></span>
-              </Button>
-            </div>
-          </form>
+          <ContactForm />
         </div>
       </section>
 

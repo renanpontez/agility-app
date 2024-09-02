@@ -7,15 +7,15 @@ export const MENU_ITEMS = [
   },
   {
     title: 'NOSSAS SOLUÇÕES',
-    href: '/solucoes-agility',
+    href: '/sobre-nos#Servicos',
   },
   {
     title: 'PORTFOLIO',
-    href: '/portfolio-agility',
+    href: '/#Portfolio',
   },
   {
     title: 'FALE COM A GENTE',
-    href: '/contato',
+    href: '/#Contato',
   },
 ];
 

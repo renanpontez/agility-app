@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Link from '@/components/Link';
 import Text from '@/components/Text';
 
 type HeaderLinkProps = {
@@ -9,9 +10,9 @@ type HeaderLinkProps = {
 
 const HeaderLink: React.FC<HeaderLinkProps> = ({ href, text }) => {
   return (
-    <a href={href}>
+    <Link href={href}>
       <Text as="p" className="border-b border-transparent text-sm font-semibold transition duration-300 ease-in-out hover:border-b hover:border-primary">{text}</Text>
-    </a>
+    </Link>
   );
 };
 

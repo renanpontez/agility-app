@@ -11,9 +11,6 @@ const meta: Meta<typeof Header> = {
       control: 'select',
       options: ['light', 'dark', 'transparent'],
     },
-    isScrolled: {
-      control: 'boolean',
-    },
   },
 };
 
@@ -23,27 +20,23 @@ type Story = StoryObj<typeof Header>;
 export const Light: Story = {
   args: {
     style: 'light',
-    isScrolled: false,
   },
 };
 
 export const Dark: Story = {
   args: {
     style: 'dark',
-    isScrolled: false,
   },
 };
 
 export const Transparent: Story = {
   args: {
     style: 'transparent',
-    isScrolled: false,
   },
 };
 
 export const Scrolled: Story = {
   args: {
     style: 'dark',
-    isScrolled: true,
   },
 };

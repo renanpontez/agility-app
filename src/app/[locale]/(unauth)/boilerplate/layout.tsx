@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 import LocaleSwitcher from '@/components/LocaleSwitcher';
-import { BaseTemplate } from '@/templates/BaseTemplate';
+import { BaseTemplate } from '@/templates/boilerplate/BaseTemplate';
 
 export default function Layout(props: {
   children: React.ReactNode;

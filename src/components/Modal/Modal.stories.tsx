@@ -2,7 +2,7 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { Button } from '@/components/Button';
+import Button from '@/components/Button';
 import Text from '@/components/Text';
 
 import Modal from './Modal';

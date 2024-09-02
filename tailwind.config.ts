@@ -1,9 +1,6 @@
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
-// This file is just a sample configuration file for Tailwind CSS
-// TODO: Replace this with our own AGILITY configuration
-
 export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {

@@ -32,11 +32,11 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
         'bg-secondary text-white hover:bg-secondaryDark active:shadow': style === 'secondary',
         'bg-light text-dark hover:bg-lightDark active:shadow': style === 'light',
         'bg-dark text-white hover:bg-darkLight active:shadow': style === 'dark',
-        'text-primary hover:text-primaryDark underline': style === 'link',
+        'text-primaryLighter hover:text-white underline': style === 'link',
         'bg-warning text-white hover:bg-warningDark active:shadow': style === 'warning',
         'bg-error text-white hover:bg-errorDark active:shadow': style === 'error',
         'bg-success text-white hover:bg-successDark active:shadow': style === 'success',
-        'bg-transparent text-primary border border-primary hover:bg-primary hover:text-white active:shadow': style === 'outlined',
+        'bg-transparent text-primaryLight border border-primaryLight hover:bg-primary hover:text-white active:shadow': style === 'outlined',
         'bg-transparent text-white border border-white hover:bg-white hover:text-primary active:shadow-lg': style === 'outlined-light',
         'opacity-50 cursor-not-allowed': disabled || loading,
       },
@@ -60,7 +60,6 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
     >
       {loading
         ? (
-          // TODO: Replace with an appropriate loading spinner
             <SimpleLoading size="small" />
           )
         : (

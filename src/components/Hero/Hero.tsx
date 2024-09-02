@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import React from 'react';
 
-import type { ButtonProps } from '@/components/Button';
-import { Button } from '@/components/Button'; // Assuming you have a Button component
+import Button from '@/components/Button'; // Assuming you have a Button component
+import type { ButtonProps } from '@/components/Button/Button';
 
 type HeroProps = {
   mediaType: 'image' | 'video';

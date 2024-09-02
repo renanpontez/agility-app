@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
 import { NextIntlClientProvider } from 'next-intl';
+import React from 'react';
 
 import messages from '@/locales/en.json';
 

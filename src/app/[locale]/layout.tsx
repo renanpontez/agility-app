@@ -7,28 +7,41 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { AppConfig } from '@/utils/AppConfig';
 
 export const metadata: Metadata = {
-  icons: [
-    {
-      rel: 'apple-touch-icon',
-      url: '/apple-touch-icon.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      url: '/favicon-32x32.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      url: '/favicon-16x16.png',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon.ico',
-    },
-  ],
+  title: 'Agility Creative - Soluções que inspiram.',
+  description: 'Agility Creative oferece soluções digitais inovadoras, incluindo desenvolvimento de sites, aplicativos, branding e marketing digital.',
+  keywords: 'Agility Creative, soluções digitais, desenvolvimento web, branding, marketing digital',
+  authors: [{ name: 'Agility Creative' }],
+  viewport: 'width=device-width, initial-scale=1.0',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: 'https://www.agilitycreative.com',
+  },
+  openGraph: {
+    title: 'Agility Creative - Soluções Digitais Inteligentes',
+    description: 'Explore as soluções digitais da Agility Creative, incluindo desenvolvimento web, branding e marketing digital.',
+    url: 'https://www.agilitycreative.com',
+    siteName: 'Agility Creative',
+    images: [
+      {
+        url: 'https://www.agilitycreative.com/assets/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Agility Creative Open Graph Image',
+      },
+    ],
+    type: 'website',
+  },
+  icons: {
+    icon: [
+      { url: '/assets/images/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/assets/images/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/assets/images/favicon.ico', type: 'image/x-icon' },
+    ],
+    apple: '/assets/images/apple-touch-icon.png',
+  },
 };
 
 export function generateStaticParams() {

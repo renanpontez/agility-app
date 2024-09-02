@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import React from 'react';
 
+import Link from '@/components/Link';
 import { SOCIAL_NETWORKS } from '@/utils/Constants';
 
 import Logo from '../Logo';
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-5">
             <Text as="h6" className=" text-white">Vamos voar juntos?</Text>
             <div className="flex flex-col gap-2">
-              <FooterLink text="hi@agilitycreative.com" href="https://instagram.com/agilitycreative" />
+              <FooterLink text="hi@agilitycreative.com" href="mailto:hi@agilitycreative.com" />
               <FooterLink text="+55 85 99628-4730" href="tel:+5585996284730" />
             </div>
           </div>

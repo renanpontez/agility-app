@@ -1,4 +1,23 @@
-import { FaInstagram, FaLinkedin, FaMessage, FaPhone } from 'react-icons/fa6';
+import { FaInstagram, FaLinkedin, FaMessage } from 'react-icons/fa6';
+
+export const MENU_ITEMS = [
+  {
+    title: 'SOBRE NÓS',
+    href: '/sobre-nos',
+  },
+  {
+    title: 'NOSSAS SOLUÇÕES',
+    href: '/solucoes-agility',
+  },
+  {
+    title: 'PORTFOLIO',
+    href: '/portfolio-agility',
+  },
+  {
+    title: 'FALE COM A GENTE',
+    href: '/contato',
+  },
+];
 
 export const SOCIAL_NETWORKS = [
   {
@@ -15,11 +34,6 @@ export const SOCIAL_NETWORKS = [
     icon: FaMessage,
     title: 'hi@agilitycreative.com',
     href: 'mailto:hi@agilitycreative.com',
-  },
-  {
-    icon: FaPhone,
-    title: '+55 85 99628-4730',
-    href: 'tel:+5585996284730',
   },
 ];
 

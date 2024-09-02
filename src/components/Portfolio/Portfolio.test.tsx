@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Button } from '@/components/Button';
+import Button from '@/components/Button';
 
 describe('Button component', () => {
   it('should render the button with primary style', () => {

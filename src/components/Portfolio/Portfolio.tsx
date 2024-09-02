@@ -14,7 +14,7 @@ export type PortfolioProps = {
 
 const Portfolio: React.FC<PortfolioProps> = ({ items }) => {
   return (
-    <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+    <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
       {items.map(item => (
         <PortfolioItem
           key={item.id}

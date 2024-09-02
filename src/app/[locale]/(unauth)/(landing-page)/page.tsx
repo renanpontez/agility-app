@@ -21,13 +21,13 @@ const LandingPage: React.FC = () => {
         style="custom-height"
         videoProps={{ autoPlay: true, loop: true, muted: true, poster: 'https://media.cleanshot.cloud/media/31388/419LxoWlUd6cNz0SXcYoiiMVSKjZR3BffGTVWHjK.jpeg?Expires=1725224290&Signature=WJQfDTU7kg7R6Y78mGl-ylDgJRjReocUGaMd~D9~xQpdHjcj4q8ztAz4oSLwhZeCy6Ki6IzFawTP1WQcpHKPkiD1u~lrBviIPNkffT6wz0tRKPJ0rMh3Pv-Jse53h4Nwf3zW5VdlsVewRx6RxKYyPyLT8NE3XyxWX6t5gdxLsx4m0MUM0Qc30kz1m-HY9SAl5klw96GTPodqrcFRMbleZ8TPRjmgB95OTsIRqBIn2tkWMIc0uTs5be-nCf3JM0sjoT7pBAy59zr6L2G-9MQxEcyzIh~yvIJ0GBFrNIKmQt1NTslbGE5GMMJmLJIB9OFC8vYzstpZuW7Qinakph4UiQ__&Key-Pair-Id=K269JMAT9ZF4GZ' }}
         content={(
-          <Text as="h1" styleOverride="h1" className="font-light leading-normal tracking-wide text-white">
+          <Text as="h1" styleOverride="h1" className="xs:text-sm font-light leading-normal tracking-wide text-white">
             TRANSFORMANDO IDEIAS EM
             <br />
             <span className="font-bold tracking-wider">SOLUÇÕES QUE INSPIRAM</span>
           </Text>
         )}
-        className="h-[80vh]"
+        className="h-[500px] md:h-[80vh]"
       />
 
       <div className="relative mx-auto -mt-16 w-fit">
@@ -61,7 +61,7 @@ const LandingPage: React.FC = () => {
         </Card>
       </div>
 
-      <section className="mx-auto w-fit max-w-[70%] justify-center py-32 text-center md:max-w-[30%]">
+      <section className="mx-auto w-fit max-w-[70%] justify-center py-16 text-center md:max-w-[30%] md:py-32">
         <Testimonials />
       </section>
 
@@ -75,7 +75,7 @@ const LandingPage: React.FC = () => {
           altText="A desk containing a laptop, a notebook, and a cup of coffee"
 
           content={(
-            <div className="flex w-[30%] flex-col items-start gap-10 py-20 pr-12 text-left">
+            <div className="flex w-full flex-col items-start gap-10 py-20 pr-12 text-left md:w-[30%]">
               <Logo symbolColor="primary" />
               {/* <div className="-mb-4 -ml-6">
                   <BrandLoading size="xlg" />
@@ -88,7 +88,9 @@ const LandingPage: React.FC = () => {
                 e trabalhando em
                 {' '}
                 <b>parceria com o cliente</b>
-                , conseguimos
+              </Text>
+              <Text as="p" size="lg">
+                Conseguimos
                 {' '}
                 <b>maximizar os resultados</b>
                 {' '}
@@ -105,10 +107,10 @@ const LandingPage: React.FC = () => {
         />
       </section>
 
-      <section className="mx-auto max-w-[90%] py-24 text-center md:max-w-[50%]" id="Portfolio">
+      <section className="mx-auto max-w-[90%] py-16 text-center md:max-w-[50%] md:py-24" id="Portfolio">
         <Text as="h2" styleOverride="h1">
           PROJETOS QUE FIZERAM A
-          <br />
+          {' '}
           <span className="text-primary">DIFERENÇA</span>
           {' '}
           NA NOSSA HISTÓRIA
@@ -122,7 +124,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="w-full py-24 text-center">
+      <section className="w-full py-16 text-center md:py-24">
         <Hero
           applyMask
           mediaType="image"
@@ -130,7 +132,7 @@ const LandingPage: React.FC = () => {
           style="auto-height"
           altText="An amazing hero image"
           content={(
-            <div className="mx-auto flex max-w-[35%] flex-col items-center gap-5 py-24 text-center">
+            <div className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[35%]">
               <Text as="h2">
                 MENTES CRIATIVAS E PROCESSOS ORGANIZADOS GERAM MAIS
                 {' '}
@@ -145,7 +147,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       <section className="container pb-24">
-        <div className="flex justify-between">
+        <div className="flex flex-col justify-between gap-8 md:flex-row">
           {[{
             icon: FaComputer,
             title: 'Design único e tecnologia sempre atual',
@@ -159,7 +161,7 @@ const LandingPage: React.FC = () => {
             title: 'Qualidade e suporte',
             description: 'Comprometidos com a excelência, garantimos a qualidade em cada etapa. Além disso, oferecemos suporte contínuo para garantir o sucesso contínuo do seu projeto.',
           }].map(item => (
-            <Card key={item.title} className="flex w-[33%] flex-col items-center justify-center gap-5 bg-secondaryDark p-10 text-center" shadow="lg">
+            <Card key={item.title} className="flex w-full flex-col items-center justify-center gap-5 bg-secondaryDark p-10 text-center md:w-[33%]" shadow="lg">
               <div className="flex items-center justify-center">
                 <item.icon className="text-primaryLighter" size={36} />
               </div>
@@ -172,7 +174,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="container my-24 flex w-full flex-col justify-between gap-16 md:flex-row" id="Contato">
+      <section className="container my-8 flex w-full flex-col justify-between gap-16 md:my-24 md:flex-row" id="Contato">
         <div className="flex flex-col gap-10">
           <Text as="h2" styleOverride="h1">
             ENTRE EM CONTATO

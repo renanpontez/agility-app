@@ -24,7 +24,7 @@ const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, c
   );
 
   const elementStyles: Record<TextProps['as'], string> = {
-    h1: classNames(baseClasses, 'text-4xl font-bold'),
+    h1: classNames(baseClasses, 'text-3xl md:text-4xl font-bold'),
     h2: classNames(baseClasses, 'text-3xl font-semibold'),
     h3: classNames(baseClasses, 'text-2xl font-semibold'),
     h4: classNames(baseClasses, 'text-xl font-semibold'),

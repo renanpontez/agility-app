@@ -8,16 +8,12 @@ import Link from '@/components/Link';
 import SocialIcons from '@/components/SocialIcons/SocialIcons';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import Text from '@/components/Text';
-import { SOCIAL_NETWORKS } from '@/utils/Constants';
 
-// import type { generateMetadata } from '../../boilerplate/guestbook/page';
-
-// export async function generateMetadata() {
-//   return {
-//     title: 'Sobre Nós - Agility Creative',
-
-//   };
-// }
+export async function generateMetadata() {
+  return {
+    title: 'Sobre Nós - Agility Creative',
+  };
+}
 
 const AboutUsPage: React.FC = () => {
   return (
@@ -53,43 +49,42 @@ const AboutUsPage: React.FC = () => {
         )}
       />
 
-      <section className="mx-auto w-fit max-w-[30%] justify-center py-32 text-center">
+      <section className="3xl:px-160 mx-auto w-fit justify-center px-16 py-24 text-center md:px-64 md:py-32 lg:px-84 2xl:px-128">
         <Testimonials />
       </section>
 
       <section className="container flex flex-col gap-56 pb-32 pt-16">
-        <div className="grid grid-cols-2 gap-16">
-          <div className="flex flex-col gap-5">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
+          <div className="order-last flex flex-col gap-5 lg:order-first">
             <Text as="h3" className="font-light">
               COMO TRANSFORMAMOS IDEIAS EM
               {' '}
               <span className="font-bold">SOLUÇÕES QUE INSPIRAM?</span>
             </Text>
             <Text as="p" className="text-secondaryLighter">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Reiciendis, alias excepturi in sed velit rem eveniet enim aperiam odit nemo ullam praesentium corporis, vero voluptate maxime! Dolore ab quas maiores.
+              Na Agility, cada projeto começa com uma visão clara, transformada em realidade por uma equipe apaixonada por inovação. Usamos um método comprovado que excede as expectativas.
             </Text>
-            <ul className="list-disc pl-4 text-secondaryLighter marker:text-primary">
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
+            <ul className="list-disc pl-4 text-sm text-secondaryLighter marker:text-primary">
+              <li>Reunião de Briefing</li>
+              <li>Descoberta do Projeto</li>
+              <li>Montagem da Proposta</li>
+              <li>Desenvolvimento e Testes</li>
+              <li>Revisão de Código e Suporte</li>
             </ul>
 
             <Text as="p" className="text-secondaryLighter">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Reiciendis, alias excepturi in sed velit rem eveniet enim aperiam odit nemo ullam praesentium corporis, vero voluptate maxime! Dolore ab quas maiores.
+              Nossa abordagem transparente permite que clientes acompanhem o desenvolvimento, construindo confiança e garantindo personalização.
             </Text>
             <Text as="p" className="text-secondaryLighter">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Reiciendis, alias excepturi in sed velit rem eveniet enim aperiam odit nemo ullam praesentium corporis, vero voluptate maxime! Dolore ab quas maiores.
+              Com a Agility, cada projeto é uma missão para inspirar. Estamos ao seu lado desde a concepção até a conclusão, abrindo novas possibilidades para o futuro.
             </Text>
 
-            <progress value="50" max="100" />
-            <progress value="64" max="100" />
-            <progress value="32" max="100" />
-            {/* progress bars */}
+            <progress value="50" max="100"></progress>
+            <progress value="64" max="100"></progress>
+            <progress value="32" max="100"></progress>
+
           </div>
-          <div className="relative flex justify-center">
+          <div className="relative order-first flex h-64 justify-center lg:order-last lg:h-auto">
             <Image
               src="/assets/images/monitors.jpeg"
               // width={450}
@@ -97,19 +92,17 @@ const AboutUsPage: React.FC = () => {
               objectFit="cover"
               layout="fill"
               alt="Agility Creative"
-              className="aspect-square rounded-lg"
+              className="aspect-square h-64  rounded-lg"
             />
           </div>
         </div>
       </section>
-      {/*
+      {/* TODO: create a decent about us section
       <section className="container flex flex-col gap-56 px-32 py-16">
         <div className="grid grid-cols-2 gap-16">
           <div className="relative flex justify-center">
             <Image
               src="/assets/images/monitors.jpeg"
-              // width={450}
-              // height={400}
               objectFit="cover"
               layout="fill"
               alt="Agility Creative"
@@ -132,8 +125,9 @@ const AboutUsPage: React.FC = () => {
           </div>
         </div>
       </section> */}
+
       {/* team section */}
-      <section className="container flex flex-col gap-16 py-16">
+      <section className="container flex flex-col gap-16 p-16 sm:px-32 md:px-16">
         <Text
           as="h3"
           styleOverride="h2"
@@ -146,7 +140,7 @@ const AboutUsPage: React.FC = () => {
           {' '}
           <span className="text-primary">AGILITY</span>
         </Text>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
           {[{
             photo: '/assets/images/renan.jpeg',
             name: 'Renan Martins',
@@ -217,15 +211,13 @@ const AboutUsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* clients */}
-      <section className="container flex flex-col gap-16 py-16">
+      {/* TODO: create a decent clients section */}
+      {/* <section className="container flex flex-col gap-16 py-16">
         <div className="grid grid-cols-4 items-center gap-y-16 py-16">
           {[1, 2, 3, 4].map(item => (
             <div key={item} className="relative h-12 w-full text-center">
               <Image
                 src="/assets/images/clients/dynotest.png"
-                // width={450}
-                // height={400}
                 objectFit="contain"
                 layout="fill"
                 alt="Agility Creative"
@@ -234,7 +226,7 @@ const AboutUsPage: React.FC = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section className="flex flex-col py-16" id="Servicos">
         <Hero
@@ -253,7 +245,6 @@ const AboutUsPage: React.FC = () => {
                 className="text-center font-light leading-normal tracking-wide"
               >
                 SERVIÇOS COM A
-                <br />
                 {' '}
                 <span className="font-bold">QUALIDADE AGILITY</span>
               </Text>
@@ -288,30 +279,7 @@ const AboutUsPage: React.FC = () => {
 
       </section>
 
-      <section className="container flex w-full justify-between py-16">
-        <div className="flex flex-col gap-10">
-          <Text as="h2" styleOverride="h1">
-            ENTRE EM CONTATO
-            <br />
-            COM A
-            {' '}
-            <span className="text-primary">AGILITY</span>
-          </Text>
-          <div className="flex flex-col gap-3">
-            {SOCIAL_NETWORKS.map(item => (
-              <div key={item.title} className="flex items-center gap-2">
-                <item.icon className="text-sm text-primaryLighter " />
-                <a href={item.href} className="text-sm" target="_blank" rel="noopener noreferrer">
-                  <Text as="p" size="sm" className="hover:text-primaryLighter">{item.title}</Text>
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <ContactForm />
-        </div>
-      </section>
+      <ContactForm />
     </>
   );
 };

@@ -41,6 +41,8 @@ export default {
         72: '18rem', // Large padding/margin value
         84: '21rem',
         96: '24rem',
+        128: '32rem',
+        160: '40rem',
       },
       container: {
         center: true, // Center the container for a clean look

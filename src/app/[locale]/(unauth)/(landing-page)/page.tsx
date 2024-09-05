@@ -10,7 +10,7 @@ import Logo from '@/components/Logo';
 import Portfolio from '@/components/Portfolio';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import Text from '@/components/Text';
-import { PORTFOLIO_ITEMS, SOCIAL_NETWORKS } from '@/utils/Constants';
+import { PORTFOLIO_ITEMS } from '@/utils/Constants';
 
 const LandingPage: React.FC = () => {
   return (
@@ -21,11 +21,14 @@ const LandingPage: React.FC = () => {
         style="custom-height"
         videoProps={{ autoPlay: true, loop: true, muted: true, poster: 'https://media.cleanshot.cloud/media/31388/419LxoWlUd6cNz0SXcYoiiMVSKjZR3BffGTVWHjK.jpeg?Expires=1725224290&Signature=WJQfDTU7kg7R6Y78mGl-ylDgJRjReocUGaMd~D9~xQpdHjcj4q8ztAz4oSLwhZeCy6Ki6IzFawTP1WQcpHKPkiD1u~lrBviIPNkffT6wz0tRKPJ0rMh3Pv-Jse53h4Nwf3zW5VdlsVewRx6RxKYyPyLT8NE3XyxWX6t5gdxLsx4m0MUM0Qc30kz1m-HY9SAl5klw96GTPodqrcFRMbleZ8TPRjmgB95OTsIRqBIn2tkWMIc0uTs5be-nCf3JM0sjoT7pBAy59zr6L2G-9MQxEcyzIh~yvIJ0GBFrNIKmQt1NTslbGE5GMMJmLJIB9OFC8vYzstpZuW7Qinakph4UiQ__&Key-Pair-Id=K269JMAT9ZF4GZ' }}
         content={(
-          <Text as="h1" styleOverride="h1" className="xs:text-sm font-light leading-normal tracking-wide text-white">
-            TRANSFORMANDO IDEIAS EM
-            <br />
-            <span className="font-bold tracking-wider">SOLUÇÕES QUE INSPIRAM</span>
-          </Text>
+          <div className="mx-auto -mt-16 flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
+            <Logo symbolColor="primary" className="mx-auto lg:invisible" size="sm" />
+            <Text as="h1" styleOverride="h1" className="xs:text-sm text-center text-lg font-light leading-normal tracking-wide text-white lg:text-left">
+              TRANSFORMANDO IDEIAS EM
+              <br />
+              <span className="font-bold tracking-wider">SOLUÇÕES QUE INSPIRAM</span>
+            </Text>
+          </div>
         )}
         className="h-[500px] md:h-[80vh]"
       />
@@ -46,14 +49,14 @@ const LandingPage: React.FC = () => {
                 description: 'PROJETOS CONCLUÍDOS',
               }, {
                 title: '+90%',
-                description: 'APROVAÇÃO DOS PARCEIROS',
+                description: 'CLIENTES APROVAM',
               }, {
                 title: '5',
                 description: 'MENTES CRIATIVAS',
               }].map(item => (
                 <div key={item.title} className="flex flex-col items-center justify-center gap-2">
                   <Text as="h5" styleOverride="h2" className="tracking-wider text-primary">{item.title}</Text>
-                  <Text as="small" className="text-secondaryLighter">{item.description}</Text>
+                  <Text as="small" className="text-center text-secondaryLighter">{item.description}</Text>
                 </div>
               ))
             }
@@ -175,28 +178,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       <section className="container my-8 flex w-full flex-col justify-between gap-16 md:my-24 md:flex-row" id="Contato">
-        <div className="flex flex-col gap-10">
-          <Text as="h2" styleOverride="h1">
-            ENTRE EM CONTATO
-            <br />
-            COM A
-            {' '}
-            <span className="text-primary">AGILITY</span>
-          </Text>
-          <div className="flex flex-col gap-3">
-            {SOCIAL_NETWORKS.map(item => (
-              <div key={item.title} className="flex items-center gap-2">
-                <item.icon className="text-sm text-primaryLighter " />
-                <a href={item.href} className="text-sm" target="_blank" rel="noopener noreferrer">
-                  <Text as="p" size="sm" className="hover:text-primaryLighter">{item.title}</Text>
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="md:p-5">
-          <ContactForm />
-        </div>
+        <ContactForm />
       </section>
 
     </>

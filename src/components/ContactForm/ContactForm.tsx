@@ -5,7 +5,9 @@ import { FaWhatsapp } from 'react-icons/fa';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import Text from '@/components/Text';
 import TextArea from '@/components/TextArea';
+import { SOCIAL_NETWORKS } from '@/utils/Constants';
 
 import { BrandLoading } from '../Loading';
 
@@ -80,54 +82,77 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <form
-      className="relative flex w-full flex-col items-stretch justify-center gap-2 md:min-w-96"
-      onSubmit={e => e.preventDefault()}
-    >
-      {isLoading && (
-        <BrandLoading size="full" label="Você será redirecionado para o WhatsApp em instantes..." />
-      )}
-      <div>
-        <Input
-          type="text"
-          placeholder="Antonio Araujo"
-          label="Nome e Sobrenome"
-          value={formData.name}
-          onChange={e => handleFormChange('name', e.target.value)}
-          required
-          isInvalid={!!errors.name}
-        />
+    <section className="container flex w-full flex-col justify-between gap-16 py-8 md:flex-row md:py-16">
+      <div className="flex flex-col gap-10">
+        <Text as="h2" styleOverride="h1">
+          ENTRE EM CONTATO
+          <br />
+          COM A
+          {' '}
+          <span className="text-primary">AGILITY</span>
+        </Text>
+        <div className="flex flex-col gap-3">
+          {SOCIAL_NETWORKS.map(item => (
+            <div key={item.title} className="flex items-center gap-2">
+              <item.icon className="text-sm text-primaryLighter " />
+              <a href={item.href} className="text-sm" target="_blank" rel="noopener noreferrer">
+                <Text as="p" size="sm" className="hover:text-primaryLighter">{item.title}</Text>
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
-      <div>
-        <Input
-          type="email"
-          placeholder="contato@araujocolchoes.com.br"
-          label="E-mail"
-          value={formData.email}
-          onChange={e => handleFormChange('email', e.target.value)}
-          required
-          isInvalid={!!errors.email}
-        />
+      <div className="md:p-5">
+        <form
+          className="relative flex w-full flex-col items-stretch justify-center gap-2 md:min-w-96"
+          onSubmit={e => e.preventDefault()}
+        >
+          {isLoading && (
+            <BrandLoading size="full" label="Você será redirecionado para o WhatsApp em instantes..." />
+          )}
+          <div>
+            <Input
+              type="text"
+              placeholder="Antonio Araujo"
+              label="Nome e Sobrenome"
+              value={formData.name}
+              onChange={e => handleFormChange('name', e.target.value)}
+              required
+              isInvalid={!!errors.name}
+            />
+          </div>
+          <div>
+            <Input
+              type="email"
+              placeholder="contato@araujocolchoes.com.br"
+              label="E-mail"
+              value={formData.email}
+              onChange={e => handleFormChange('email', e.target.value)}
+              required
+              isInvalid={!!errors.email}
+            />
+          </div>
+          <div>
+            <TextArea
+              placeholder="Conta pra gente como podemos ajudar seu projeto"
+              label="Sua mensagem"
+              value={formData.message}
+              onChange={e => handleFormChange('message', e.target.value)}
+              required
+              isInvalid={!!errors.message}
+            />
+          </div>
+          <div>
+            <Button style="outlined" size="lg" fullWidth onClick={handleSubmit}>
+              <span>Enviar mensagem</span>
+              <span className="ml-2">
+                <FaWhatsapp size={14} />
+              </span>
+            </Button>
+          </div>
+        </form>
       </div>
-      <div>
-        <TextArea
-          placeholder="Conta pra gente como podemos ajudar seu projeto"
-          label="Sua mensagem"
-          value={formData.message}
-          onChange={e => handleFormChange('message', e.target.value)}
-          required
-          isInvalid={!!errors.message}
-        />
-      </div>
-      <div>
-        <Button style="outlined" size="lg" fullWidth onClick={handleSubmit}>
-          <span>Enviar mensagem</span>
-          <span className="ml-2">
-            <FaWhatsapp size={14} />
-          </span>
-        </Button>
-      </div>
-    </form>
+    </section>
   );
 };
 

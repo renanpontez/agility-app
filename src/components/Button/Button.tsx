@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { SimpleLoading } from '../Loading';
 
 export type ButtonProps = {
-  style: 'primary' | 'secondary' | 'light' | 'dark' | 'link' | 'warning' | 'error' | 'success' | 'outlined' | 'outlined-light';
+  style: 'primary' | 'secondary' | 'light' | 'dark' | 'link' | 'warning' | 'error' | 'success' | 'outlined' | 'outlined-light' | 'basic';
   onClick?: () => void;
   children: React.ReactNode;
   icon?: React.ReactNode;
@@ -14,9 +14,21 @@ export type ButtonProps = {
   href?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
   fullWidth?: boolean;
+  className?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading, disabled, href, size = 'md', fullWidth = false }) => {
+const Button: React.FC<ButtonProps> = ({
+  style,
+  onClick,
+  children,
+  icon,
+  loading,
+  disabled,
+  href,
+  size = 'md',
+  fullWidth = false,
+  className,
+}) => {
   const Tag = href ? 'a' : 'button';
 
   const baseClasses = classNames(
@@ -38,6 +50,7 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
         'bg-success text-white hover:bg-successDark active:shadow': style === 'success',
         'bg-transparent text-primaryLight border border-primaryLight hover:bg-primary hover:text-white active:shadow': style === 'outlined',
         'bg-transparent text-white border border-white hover:bg-white hover:text-primary active:shadow-lg': style === 'outlined-light',
+        'bg-transparent text-white hover:text-primary active:shadow-none': style === 'basic',
         'opacity-50 cursor-not-allowed': disabled || loading,
       },
       {
@@ -48,6 +61,7 @@ const Button: React.FC<ButtonProps> = ({ style, onClick, children, icon, loading
         'text-md px-10 py-4': size === 'xlg',
       },
       { 'w-full': fullWidth },
+      className,
     ),
   );
 

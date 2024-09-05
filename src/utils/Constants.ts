@@ -40,34 +40,34 @@ export const SOCIAL_NETWORKS = [
 export const PORTFOLIO_ITEMS = [
   {
     id: 1,
-    imageSrc: '/assets/images/portfolio/dynotest_cover.png',
+    imageSrc: '/assets/images/portfolio/dynotest_cover.webp',
     title: 'Dynotest Performance Solutions',
     description: 'Site corporativo',
     // href: 'https://dynotest.com.br',
   },
   {
     id: 2,
-    imageSrc: '/assets/images/portfolio/cimbalo_cover.png',
+    imageSrc: '/assets/images/portfolio/cimbalo_cover.webp',
     title: 'Címbalo Comunicação',
     description: 'Site corporativo',
   },
   {
     id: 3,
-    imageSrc: '/assets/images/portfolio/easytolive_cover.png',
+    imageSrc: '/assets/images/portfolio/easytolive_cover.webp',
     title: 'Easy To Live',
     description: 'Aplicativo Web',
     // href: 'https://easytolive.com.br',
   },
   {
     id: 4,
-    imageSrc: '/assets/images/portfolio/agillock_cover.png',
+    imageSrc: '/assets/images/portfolio/agillock_cover.webp',
     title: 'ÁgilLock Gestão de Risco',
     description: 'Site corporativo',
     // href: 'https://agillock.com.br',
   },
   {
     id: 5,
-    imageSrc: '/assets/images/portfolio/academia_cover.png',
+    imageSrc: '/assets/images/portfolio/academia_cover.webp',
     title: 'Academia Cearense de Economia',
     description: 'Site institucional',
     // href: 'https://academiacearensedeeconomia.com.br',
@@ -75,7 +75,7 @@ export const PORTFOLIO_ITEMS = [
 
   {
     id: 6,
-    imageSrc: '/assets/images/portfolio/agillock_cover.png',
+    imageSrc: '/assets/images/portfolio/agillock_cover.webp',
     title: 'ÁgilLock Gestão de Risco',
     description: 'Site corporativo',
     // href: 'https://agillock.com.br',

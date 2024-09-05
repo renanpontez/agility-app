@@ -57,6 +57,7 @@ const Hero: React.FC<HeroProps> = ({
                 layout="fill"
                 objectFit="cover"
                 className="absolute left-0 top-0 z-0 size-full object-cover"
+                loading="lazy"
               />
             )
           : (

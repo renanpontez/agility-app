@@ -5,11 +5,12 @@ import { FaTimes } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa6';
 
 import Link from '@/components/Link';
+import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
+import useThrottle from '@/hooks/useThrottle';
 import { MENU_ITEMS } from '@/utils/Constants';
 
 import Button from '../Button';
-import { BrandLoading } from '../Loading';
 import HeaderLink from './HeaderLink';
 
 export type HeaderProps = {
@@ -21,19 +22,19 @@ const SidebarMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
   const [isLoading, setIsLoading] = React.useState(false);
   const linksWrapperRef = React.useRef<HTMLDivElement>(null);
 
-  // If the menu is open and any link is clicked, close the menu
+  const handleLinkClick = useThrottle((e: MouseEvent) => {
+    if (linksWrapperRef.current && linksWrapperRef.current.contains(e.target as Node)) {
+      setIsLoading(true);
+      onClose();
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    }
+  }, 150);
+
   useEffect(() => {
-    const handleLinkClick = (e: MouseEvent) => {
-      if (linksWrapperRef.current && linksWrapperRef.current.contains(e.target as Node)) {
-        setIsLoading(true);
-        onClose();
-
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1500);
-      }
-    };
-
+  // If the menu is open and any link is clicked, close the menu
     if (isOpen) {
       document.addEventListener('click', handleLinkClick);
     }
@@ -41,7 +42,7 @@ const SidebarMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
     return () => {
       document.removeEventListener('click', handleLinkClick);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, handleLinkClick]);
 
   return (
     <>
@@ -85,21 +86,22 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
   };
 
   const [isScrolled, setIsScrolled] = React.useState(false);
-  React.useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
 
+  const handleScroll = useThrottle(() => {
+    if (window.scrollY > 0) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  }, 500);
+
+  React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   const headerClasses = classNames(
     'fixed top-0 left-0 w-full z-50 transition-colors duration-300',

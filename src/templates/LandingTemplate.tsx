@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import { BrandLoading } from '@/components/Loading';
+
+const Header = React.lazy(() => import('@/components/Header'));
+const Footer = React.lazy(() => import('@/components/Footer'));
 
 const LandingTemplate = (props: {
   children: React.ReactNode;
@@ -10,9 +12,11 @@ const LandingTemplate = (props: {
   // app/layout.tsx or app/page.tsx
   return (
     <div className="relative bg-secondaryDarker">
-      <Header style="transparent" />
-      {props.children}
-      <Footer />
+      <Suspense fallback={<BrandLoading size="fullscreen" />}>
+        <Header style="transparent" />
+        {props.children}
+        <Footer />
+      </Suspense>
     </div>
   );
 };

@@ -21,6 +21,7 @@ type LogoProps = {
   showSlogan?: boolean;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; // New size prop for responsiveness
   className?: string;
+  showSymbol?: boolean;
 };
 
 const sizeMap = {
@@ -37,6 +38,7 @@ const Logo: React.FC<LogoProps> = ({
   nameSloganColor = 'primary',
   showName = false,
   showSlogan = false,
+  showSymbol = true,
   size = 'md',
   className,
 }) => {
@@ -70,7 +72,15 @@ const Logo: React.FC<LogoProps> = ({
 
   return (
     <div className={logoClasses}>
-      <Image src={SymbolSrc} alt="Logo Symbol" width={symbolSize} height={symbolSize} />
+      {showSymbol && (
+        <Image
+          src={SymbolSrc}
+          alt="Logo Symbol"
+          width={symbolSize}
+          height={symbolSize}
+        />
+      )}
+
       {showName && (
         <div
           className={classNames('flex items-center', {

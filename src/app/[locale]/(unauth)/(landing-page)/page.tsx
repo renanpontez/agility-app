@@ -1,16 +1,18 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
-import ContactForm from '@/components/ContactForm';
 import Hero from '@/components/Hero';
+import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
-import Portfolio from '@/components/Portfolio';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import Text from '@/components/Text';
 import { PORTFOLIO_ITEMS } from '@/utils/Constants';
+
+const ContactForm = React.lazy(() => import('@/components/ContactForm'));
+const Portfolio = React.lazy(() => import('@/components/Portfolio'));
 
 const LandingPage: React.FC = () => {
   return (
@@ -19,10 +21,10 @@ const LandingPage: React.FC = () => {
         mediaType="video"
         mediaSrc="https://cdn2.hubspot.net/hubfs/6436815/home-video.mp4"
         style="custom-height"
-        videoProps={{ autoPlay: true, loop: true, muted: true, poster: 'https://media.cleanshot.cloud/media/31388/419LxoWlUd6cNz0SXcYoiiMVSKjZR3BffGTVWHjK.jpeg?Expires=1725224290&Signature=WJQfDTU7kg7R6Y78mGl-ylDgJRjReocUGaMd~D9~xQpdHjcj4q8ztAz4oSLwhZeCy6Ki6IzFawTP1WQcpHKPkiD1u~lrBviIPNkffT6wz0tRKPJ0rMh3Pv-Jse53h4Nwf3zW5VdlsVewRx6RxKYyPyLT8NE3XyxWX6t5gdxLsx4m0MUM0Qc30kz1m-HY9SAl5klw96GTPodqrcFRMbleZ8TPRjmgB95OTsIRqBIn2tkWMIc0uTs5be-nCf3JM0sjoT7pBAy59zr6L2G-9MQxEcyzIh~yvIJ0GBFrNIKmQt1NTslbGE5GMMJmLJIB9OFC8vYzstpZuW7Qinakph4UiQ__&Key-Pair-Id=K269JMAT9ZF4GZ' }}
+        videoProps={{ autoPlay: true, loop: true, muted: true, poster: '/assets/images/video_cover.webp' }}
         content={(
           <div className="mx-auto -mt-16 flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
-            <Logo symbolColor="primary" className="mx-auto lg:invisible" size="sm" />
+            {/* <Logo showSymbol={false} showName showSlogan nameSloganColor="white" className="mx-auto lg:invisible" size="sm" style="standard" /> */}
             <Text as="h1" styleOverride="h1" className="xs:text-sm text-center text-lg font-light leading-normal tracking-wide text-white lg:text-left">
               TRANSFORMANDO IDEIAS EM
               <br />
@@ -123,7 +125,9 @@ const LandingPage: React.FC = () => {
         </Text>
 
         <div className="mt-10">
-          <Portfolio items={PORTFOLIO_ITEMS} />
+          <Suspense fallback={<BrandLoading />}>
+            <Portfolio items={PORTFOLIO_ITEMS} />
+          </Suspense>
         </div>
       </section>
 
@@ -178,7 +182,9 @@ const LandingPage: React.FC = () => {
       </section>
 
       <section className="container my-8 flex w-full flex-col justify-between gap-16 md:my-24 md:flex-row" id="Contato">
-        <ContactForm />
+        <Suspense fallback={<BrandLoading />}>
+          <ContactForm />
+        </Suspense>
       </section>
 
     </>

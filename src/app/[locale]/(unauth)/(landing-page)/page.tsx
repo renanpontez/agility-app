@@ -21,7 +21,13 @@ const LandingPage: React.FC = () => {
         mediaType="video"
         mediaSrc="https://cdn2.hubspot.net/hubfs/6436815/home-video.mp4"
         style="custom-height"
-        videoProps={{ autoPlay: true, loop: true, muted: true, poster: '/assets/images/video_cover.webp' }}
+        videoProps={{
+          autoPlay: true,
+          loop: true,
+          muted: true,
+          poster: '/assets/images/video_cover.webp',
+          controls: false,
+        }}
         content={(
           <div className="mx-auto -mt-16 flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
             {/* <Logo showSymbol={false} showName showSlogan nameSloganColor="white" className="mx-auto lg:invisible" size="sm" style="standard" /> */}

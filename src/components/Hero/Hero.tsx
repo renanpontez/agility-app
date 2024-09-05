@@ -6,6 +6,8 @@ import { twMerge } from 'tailwind-merge';
 import Button from '@/components/Button'; // Assuming you have a Button component
 import type { ButtonProps } from '@/components/Button/Button';
 
+import LazyVideo from './LazyVideo';
+
 type HeroProps = {
   mediaType: 'image' | 'video';
   mediaSrc: string;
@@ -61,11 +63,10 @@ const Hero: React.FC<HeroProps> = ({
               />
             )
           : (
-            // eslint-disable-next-line jsx-a11y/media-has-caption
-              <video
+              <LazyVideo
                 src={mediaSrc}
                 className="absolute left-0 top-0 z-0 size-full object-cover"
-                {...videoProps}
+                props={videoProps}
               />
             )}
       </div>

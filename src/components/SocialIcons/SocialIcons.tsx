@@ -11,6 +11,7 @@ const SocialIcons: React.FC = () => {
           key={item.title}
           href={item.href}
           className="text-secondaryLight transition-colors duration-300 hover:text-secondaryLighter"
+          aria-label={item.title}
         >
           <item.icon size={16} />
         </Link>

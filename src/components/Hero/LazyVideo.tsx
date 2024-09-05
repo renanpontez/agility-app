@@ -38,7 +38,6 @@ const LazyVideo = ({
   }, []);
 
   return (
-    // eslint-disable-next-line jsx-a11y/media-has-caption
     <video
       ref={videoRef}
       poster={poster}
@@ -46,10 +45,12 @@ const LazyVideo = ({
       playsInline
       preload="metadata" // Load only video metadata initially
       className={className}
+
       {...props}
     >
       {isLoaded && <source src={src} type="video/mp4" />}
       Your browser does not support the video tag.
+      <track kind="captions" srcLang="en" src="/assets/captions/hero.vtt" label="English" />
     </video>
   );
 };

@@ -15,7 +15,7 @@ const FooterLink = ({
   external?: boolean;
 }) => (
   <Link href={href}>
-    <Text as="p" className="text-xs text-secondaryLight hover:text-secondaryLighter">{text}</Text>
+    <Text as="p" className="text-xs text-secondaryLighter hover:text-white">{text}</Text>
   </Link>
 );
 
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         <div className="container flex flex-col justify-between gap-8 py-10 md:flex-row md:gap-0">
           <div className="flex flex-col gap-5">
             <Logo symbolColor="primary" showName showSlogan style="horizontal" size="sm" />
-            <Text as="p" className="w-2/3 text-xs text-secondaryLighter">
+            <Text as="p" className="w-2/3 text-xs text-secondaryLight">
               Soluções que inspiram.
               <br />
               Transformando ideias em experiências únicas e poderosas.

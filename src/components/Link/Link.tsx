@@ -8,7 +8,7 @@ export type LinkProps = {
   children: React.ReactNode;
 };
 
-const Link: React.FC<LinkProps> = ({ href, className, children }) => {
+const Link: React.FC<LinkProps> = ({ href, className, children, ...rest }) => {
   const isExternalUrl = /^https?:\/\//.test(href);
   const Tag = isExternalUrl ? 'a' : NextLink;
 
@@ -18,6 +18,7 @@ const Link: React.FC<LinkProps> = ({ href, className, children }) => {
       className={classNames('', className)}
       target={isExternalUrl ? '_blank' : '_self'}
       {...(isExternalUrl && { rel: 'noopener noreferrer' })}
+      {...rest}
     >
       {children}
     </Tag>

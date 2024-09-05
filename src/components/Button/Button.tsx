@@ -28,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({
   size = 'md',
   fullWidth = false,
   className,
+  ...rest
 }) => {
   const Tag = href ? 'a' : 'button';
 
@@ -71,6 +72,8 @@ const Button: React.FC<ButtonProps> = ({
       className={buttonClasses}
       onClick={onClick}
       disabled={disabled || loading}
+      role="button"
+      {...rest}
     >
       {loading
         ? (

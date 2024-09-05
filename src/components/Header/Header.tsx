@@ -57,7 +57,7 @@ const SidebarMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
       >
         <div className="flex size-full items-start justify-start ">
           <div className="absolute right-2 top-0 flex w-full justify-end pt-2">
-            <Button style="basic" onClick={onClose} size="sm" className="text-secondaryLighter">
+            <Button style="basic" onClick={onClose} size="sm" className="text-secondaryLighter" aria-label="Close menu">
               <FaTimes />
             </Button>
           </div>
@@ -139,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
             ))}
           </div>
           <div className="visible fixed left-0 top-3 md:invisible">
-            <Button style="link" onClick={toggleMenu}>
+            <Button style="link" onClick={toggleMenu} aria-label="Open menu">
               <span className="text-2xl text-white">
                 <FaBars />
               </span>

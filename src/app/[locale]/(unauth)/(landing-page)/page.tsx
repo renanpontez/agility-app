@@ -63,8 +63,10 @@ const LandingPage: React.FC = () => {
                 description: 'MENTES CRIATIVAS',
               }].map(item => (
                 <div key={item.title} className="flex flex-col items-center justify-center gap-2">
-                  <Text as="h5" styleOverride="h2" className="tracking-wider text-primary">{item.title}</Text>
-                  <Text as="small" className="text-center text-secondaryLighter">{item.description}</Text>
+                  <Text as="h2" className="tracking-wider text-primary">
+                    {item.title}
+                    <span className="text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
+                  </Text>
                 </div>
               ))
             }
@@ -91,7 +93,7 @@ const LandingPage: React.FC = () => {
               {/* <div className="-mb-4 -ml-6">
                   <BrandLoading size="xlg" />
                 </div> */}
-              <Text as="p" size="lg">
+              <Text as="h3" styleOverride="p" size="lg">
                 Nós acreditamos que organizando o
                 {' '}
                 <b>processo criativo</b>
@@ -100,7 +102,7 @@ const LandingPage: React.FC = () => {
                 {' '}
                 <b>parceria com o cliente</b>
               </Text>
-              <Text as="p" size="lg">
+              <Text as="h3" styleOverride="p" size="lg">
                 Conseguimos
                 {' '}
                 <b>maximizar os resultados</b>
@@ -119,7 +121,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       <section className="mx-auto max-w-[90%] py-16 text-center md:max-w-[50%] md:py-24" id="Portfolio">
-        <Text as="h2" styleOverride="h1">
+        <Text as="h4" styleOverride="h1">
           PROJETOS QUE FIZERAM A
           {' '}
           <span className="text-primary">DIFERENÇA</span>
@@ -146,7 +148,7 @@ const LandingPage: React.FC = () => {
           altText="An amazing hero image"
           content={(
             <div className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[35%]">
-              <Text as="h2">
+              <Text as="h4" styleOverride="h2">
                 MENTES CRIATIVAS E PROCESSOS ORGANIZADOS GERAM MAIS
                 {' '}
                 <span className="text-primaryLighter">RESULTADOS</span>

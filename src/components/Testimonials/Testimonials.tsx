@@ -16,7 +16,7 @@ const Testimonials: React.FC = () => {
           <Text as="p" className="tracking-wider">
             Nossa presença digital foi transformada com um site que superou expectativas. O resultado impulsionou nossos negócios, e a experiência com a equipe foi excepcional!
           </Text>
-          <Text as="em" className="text-secondaryLight">
+          <Text as="em" className="text-secondaryLighter">
             Leandro P | Agillock Gestão de Risco
           </Text>
         </div>

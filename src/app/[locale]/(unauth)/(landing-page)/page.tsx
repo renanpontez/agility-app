@@ -38,7 +38,7 @@ const LandingPage: React.FC = () => {
             </Text>
           </div>
         )}
-        className="h-[500px] md:h-[80vh]"
+        className="h-[400px] md:h-[80vh]"
       />
 
       <div className="relative mx-auto -mt-16 w-fit">

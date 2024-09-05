@@ -149,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
               nameSloganColor="white"
               style="horizontal"
               size="sm"
-              className="absolute right-4 top-4 size-8"
+              className="absolute right-4 top-4 size-8 md:invisible"
             />
           </Link>
         </nav>

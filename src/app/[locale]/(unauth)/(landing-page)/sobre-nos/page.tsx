@@ -87,12 +87,9 @@ const AboutUsPage: React.FC = () => {
           <div className="relative order-first flex h-64 justify-center lg:order-last lg:h-auto">
             <Image
               src="/assets/images/monitors.jpeg"
-              // width={450}
-              // height={400}
-              objectFit="cover"
               layout="fill"
               alt="Agility Creative"
-              className="aspect-square h-64  rounded-lg"
+              className="aspect-square h-64 rounded-lg object-cover"
             />
           </div>
         </div>
@@ -103,10 +100,9 @@ const AboutUsPage: React.FC = () => {
           <div className="relative flex justify-center">
             <Image
               src="/assets/images/monitors.jpeg"
-              objectFit="cover"
               layout="fill"
               alt="Agility Creative"
-              className="aspect-square w-full rounded-lg"
+              className="aspect-square w-full rounded-lg object-cover"
             />
           </div>
           <div className="flex flex-col gap-5">
@@ -189,10 +185,9 @@ const AboutUsPage: React.FC = () => {
                 <Link href={socials[0]?.href ?? '/'} aria-label="Agility Homepage">
                   <Image
                     src={photo}
-                    objectFit="cover"
                     layout="fill"
                     alt="Agility Creative"
-                    className="aspect-square"
+                    className="aspect-square object-cover"
                   />
                 </Link>
               </div>
@@ -218,10 +213,9 @@ const AboutUsPage: React.FC = () => {
             <div key={item} className="relative h-12 w-full text-center">
               <Image
                 src="/assets/images/clients/dynotest.png"
-                objectFit="contain"
                 layout="fill"
                 alt="Agility Creative"
-                className="aspect-square"
+                className="aspect-square object-contain"
               />
             </div>
           ))}

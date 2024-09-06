@@ -36,11 +36,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/assets/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
-      { url: '/assets/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
-      { url: '/assets/favicon.ico', type: 'image/x-icon' },
+      { url: '/assets/favicon/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/assets/favicon/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/assets/favicon/favicon.ico', type: 'image/x-icon' },
     ],
-    apple: '/assets/apple-touch-icon.png',
+    apple: '/assets/favicon/apple-touch-icon.png',
   },
 };
 

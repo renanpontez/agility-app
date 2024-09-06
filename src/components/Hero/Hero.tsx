@@ -1,12 +1,11 @@
 import classNames from 'classnames';
-import Image from 'next/image';
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '@/components/Button'; // Assuming you have a Button component
 import type { ButtonProps } from '@/components/Button/Button';
 
-import LazyVideo from './LazyVideo';
+import HeroMedia from './HeroMedia';
 
 type HeroProps = {
   mediaType: 'image' | 'video';
@@ -51,35 +50,12 @@ const Hero: React.FC<HeroProps> = ({
         <div className={twMerge('absolute left-0 top-0 z-0 size-full bg-gradient-to-r from-transparent to-black z-10', maskClassName)} />
       )}
       <div>
-        {mediaType === 'image'
-          ? (
-              <Image
-                src={mediaSrc}
-                alt={altText || 'Hero Image'}
-                layout="fill"
-                objectFit="cover"
-                className="absolute left-0 top-0 z-0 size-full object-cover"
-                loading="lazy"
-              />
-            )
-          : (
-              <>
-                {/* TODO: Change this to use a hook const { isMobile } = useBreakpoints() */}
-                <LazyVideo
-                  src={mediaSrc}
-                  className="absolute left-0 top-0 z-0 size-full object-cover md:visible"
-                  props={videoProps}
-                />
-                <Image
-                  src={videoProps?.poster ?? ''}
-                  alt={altText || 'Hero Image'}
-                  layout="fill"
-                  objectFit="cover"
-                  className="absolute left-0 top-0 z-0 size-full object-cover md:hidden"
-                  loading="lazy"
-                />
-              </>
-            )}
+        <HeroMedia
+          mediaType={mediaType}
+          mediaSrc={mediaSrc}
+          altText={altText}
+          videoProps={videoProps}
+        />
       </div>
       <div className="size-full items-center">
         <div className="container relative z-20 flex h-full flex-col items-start justify-center text-left">

@@ -63,11 +63,22 @@ const Hero: React.FC<HeroProps> = ({
               />
             )
           : (
-              <LazyVideo
-                src={mediaSrc}
-                className="absolute left-0 top-0 z-0 size-full object-cover"
-                props={videoProps}
-              />
+              <>
+                {/* TODO: Change this to use a hook const { isMobile } = useBreakpoints() */}
+                <LazyVideo
+                  src={mediaSrc}
+                  className="absolute left-0 top-0 z-0 size-full object-cover md:visible"
+                  props={videoProps}
+                />
+                <Image
+                  src={videoProps?.poster ?? ''}
+                  alt={altText || 'Hero Image'}
+                  layout="fill"
+                  objectFit="cover"
+                  className="absolute left-0 top-0 z-0 size-full object-cover md:hidden"
+                  loading="lazy"
+                />
+              </>
             )}
       </div>
       <div className="size-full items-center">

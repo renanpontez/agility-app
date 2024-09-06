@@ -33,13 +33,13 @@ const Footer: React.FC = () => {
             </Text>
           </div>
           <div className="flex flex-col gap-5">
-            <Text as="h5" styleOverride="h6" className=" text-white">Redes Sociais</Text>
+            <Text as="h4" styleOverride="h6" className=" text-white">Redes Sociais</Text>
             <div className="flex flex-row gap-3">
               <SocialIcons />
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <Text as="h5" styleOverride="h6" className="">Sitemap</Text>
+            <Text as="h4" styleOverride="h6" className="">Sitemap</Text>
             <div className="flex flex-col gap-2">
               <FooterLink text="Início" href="/" />
               <FooterLink text="Sobre nós" href="/sobre-nos" />
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <Text as="h5" styleOverride="h6" className=" text-white">Vamos voar juntos?</Text>
+            <Text as="h4" styleOverride="h6" className=" text-white">Vamos voar juntos?</Text>
             <div className="flex flex-col gap-2">
               <FooterLink text="hi@agilitycreative.com" href="mailto:hi@agilitycreative.com" />
               <FooterLink text="+55 85 99628-4730" href="tel:+5585996284730" />

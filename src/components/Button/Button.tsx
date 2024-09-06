@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
+import Link from '@/components/Link';
+
 import { SimpleLoading } from '../Loading';
 
 export type ButtonProps = {
@@ -30,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   ...rest
 }) => {
-  const Tag = href ? 'a' : 'button';
+  const Tag = href ? Link : 'button';
 
   const baseClasses = classNames(
     'px-6 py-2 font-semibold rounded-lg flex items-center justify-center text-sm tracking-wider',
@@ -67,6 +69,11 @@ const Button: React.FC<ButtonProps> = ({
   );
 
   return (
+  // TODO: Fix this typing issue
+  // It's not possible to use Link component with optional href
+  // Optional href btw is used to allow the button to be a button or a link
+
+  // @ts-expect-error href is optional
     <Tag
       type="button"
       className={buttonClasses}

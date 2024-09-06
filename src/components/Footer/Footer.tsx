@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         <div className="container flex flex-col justify-between gap-8 py-10 md:flex-row md:gap-0">
           <div className="flex flex-col gap-5">
             <Logo symbolColor="primary" showName showSlogan style="horizontal" size="sm" />
-            <Text as="p" className="w-2/3 text-xs text-secondaryLight">
+            <Text as="p" className="w-2/3 text-xs text-secondaryLighter">
               Soluções que inspiram.
               <br />
               Transformando ideias em experiências únicas e poderosas.
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="w-full border-t border-secondaryDarker bg-secondaryEvenDarker py-5 text-center text-xs">
-        <Text as="p" size="xs" className="text-secondary">© 2021 Agility Creative. Todos os direitos reservados.</Text>
+        <Text as="p" size="xs" className="text-secondaryLight">© 2021 Agility Creative. Todos os direitos reservados.</Text>
       </div>
     </footer>
 

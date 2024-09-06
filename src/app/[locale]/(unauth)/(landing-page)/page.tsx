@@ -63,9 +63,9 @@ const LandingPage: React.FC = () => {
                 description: 'MENTES CRIATIVAS',
               }].map(item => (
                 <div key={item.title} className="flex flex-col items-center justify-center gap-2">
-                  <Text as="h2" className="tracking-wider text-primary">
+                  <Text as="h2" className="text-center tracking-wider text-primary">
                     {item.title}
-                    <span className="text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
+                    <span className="block text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
                   </Text>
                 </div>
               ))

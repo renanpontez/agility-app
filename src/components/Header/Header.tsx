@@ -1,5 +1,6 @@
 'use client';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa6';
@@ -114,51 +115,57 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
   );
 
   return (
-    <header className={headerClasses}>
-      <div className="container flex items-center justify-between py-4 transition-colors duration-300">
-        <div className="invisible flex items-center lg:visible ">
-          <Link href="/" aria-label="Agility Homepage">
-            <Logo
-              showName
-              showSlogan
-              symbolColor="primary"
-              nameSloganColor="white"
-              style="horizontal"
-              size="sm"
-            />
-          </Link>
-        </div>
-        <nav className="">
-          <div className="invisible flex gap-10 md:visible">
-            {MENU_ITEMS.map(item => (
-              <HeaderLink
-                key={item.title + item.href}
-                href={item.href}
-                text={item.title}
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      <header className={headerClasses}>
+        <div className="container flex items-center justify-between py-4 transition-colors duration-300">
+          <div className="invisible flex items-center lg:visible ">
+            <Link href="/" aria-label="Agility Homepage">
+              <Logo
+                showName
+                showSlogan
+                symbolColor="primary"
+                nameSloganColor="white"
+                style="horizontal"
+                size="sm"
               />
-            ))}
+            </Link>
           </div>
-          <div className="visible fixed left-0 top-3 md:invisible">
-            <Button style="link" onClick={toggleMenu} aria-label="Open menu">
-              <span className="text-2xl text-white">
-                <FaBars />
-              </span>
-            </Button>
-          </div>
-          <Link href="/" aria-label="Agility Homepage">
-            <Logo
-              symbolColor="primary"
-              nameSloganColor="white"
-              style="horizontal"
-              size="sm"
-              className="absolute right-4 top-4 size-8 md:invisible"
-            />
-          </Link>
-        </nav>
-      </div>
+          <nav className="">
+            <div className="invisible flex gap-10 md:visible">
+              {MENU_ITEMS.map(item => (
+                <HeaderLink
+                  key={item.title + item.href}
+                  href={item.href}
+                  text={item.title}
+                />
+              ))}
+            </div>
+            <div className="visible fixed left-0 top-3 md:invisible">
+              <Button style="link" onClick={toggleMenu} aria-label="Open menu">
+                <span className="text-2xl text-white">
+                  <FaBars />
+                </span>
+              </Button>
+            </div>
+            <Link href="/" aria-label="Agility Homepage">
+              <Logo
+                symbolColor="primary"
+                nameSloganColor="white"
+                style="horizontal"
+                size="sm"
+                className="absolute right-4 top-4 size-8 md:invisible"
+              />
+            </Link>
+          </nav>
+        </div>
 
-      <SidebarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-    </header>
+        <SidebarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      </header>
+    </motion.div>
   );
 };
 

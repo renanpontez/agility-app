@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
 
@@ -24,7 +25,11 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
   const isMobile = isClient && window?.innerWidth < 768;
   const fallbackPoster = '/assets/images/video_cover.webp';
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
       {mediaType === 'image' || isMobile
         ? (
             <Image
@@ -52,7 +57,7 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
               />
             </>
           )}
-    </>
+    </motion.div>
   );
 };
 

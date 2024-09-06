@@ -117,7 +117,7 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
     <header className={headerClasses}>
       <div className="container flex items-center justify-between py-4 transition-colors duration-300">
         <div className="invisible flex items-center lg:visible ">
-          <Link href="/">
+          <Link href="/" aria-label="Agility Homepage">
             <Logo
               showName
               showSlogan
@@ -145,7 +145,7 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
               </span>
             </Button>
           </div>
-          <Link href="/">
+          <Link href="/" aria-label="Agility Homepage">
             <Logo
               symbolColor="primary"
               nameSloganColor="white"

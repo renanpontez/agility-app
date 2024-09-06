@@ -186,7 +186,7 @@ const AboutUsPage: React.FC = () => {
           }].map(({ photo, name, role, socials }) => (
             <div className="flex w-full flex-col items-center justify-start bg-secondaryDark" key={name + role}>
               <div className="relative aspect-square w-full opacity-50 transition hover:opacity-100">
-                <Link href={socials[0]?.href ?? '/'}>
+                <Link href={socials[0]?.href ?? '/'} aria-label="Agility Homepage">
                   <Image
                     src={photo}
                     objectFit="cover"

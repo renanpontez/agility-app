@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 type TextProps = {
   as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'blockquote' | 'small';
-  styleOverride?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'em' | 'blockquote' | 'small';
+  styleOverride?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'blockquote' | 'small';
   decoration?: 'italic' | 'bold' | 'strike';
   className?: string;
   children: ReactNode;

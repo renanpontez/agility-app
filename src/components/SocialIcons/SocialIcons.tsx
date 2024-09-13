@@ -1,6 +1,8 @@
+import {
+  Link,
+} from 'agility-wind';
 import React from 'react';
 
-import Link from '@/components/Link';
 import { SOCIAL_NETWORKS } from '@/utils/Constants';
 
 const SocialIcons: React.FC = () => {

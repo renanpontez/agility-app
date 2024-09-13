@@ -1,10 +1,9 @@
+import { Text } from 'agility-wind';
 import classNames from 'classnames';
 import Image from 'next/image';
 import React from 'react';
 
 import BrandLoader from '@/public/assets/gifs/loading_agility_3.gif';
-
-import Text from '../Text';
 
 type BrandLoadingProps = {
   className?: string;

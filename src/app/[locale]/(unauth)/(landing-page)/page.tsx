@@ -1,14 +1,16 @@
+import {
+  Button,
+  Card,
+  Hero,
+  Text,
+} from 'agility-wind';
 import classNames from 'classnames';
 import React, { Suspense } from 'react';
 import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
 
-import Button from '@/components/Button';
-import Card from '@/components/Card';
-import Hero from '@/components/Hero';
 import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
-import Testimonials from '@/components/Testimonials/Testimonials';
-import Text from '@/components/Text';
+import Testimonials from '@/components/Testimonials';
 import { PORTFOLIO_ITEMS } from '@/utils/Constants';
 
 const ContactForm = React.lazy(() => import('@/components/ContactForm'));

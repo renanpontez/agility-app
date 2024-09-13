@@ -1,15 +1,16 @@
 'use client';
 
+import {
+  Button,
+  Input,
+  Text,
+  TextArea,
+} from 'agility-wind';
 import React, { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import Text from '@/components/Text';
-import TextArea from '@/components/TextArea';
+import { BrandLoading } from '@/components/Loading';
 import { SOCIAL_NETWORKS } from '@/utils/Constants';
-
-import { BrandLoading } from '../Loading';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({

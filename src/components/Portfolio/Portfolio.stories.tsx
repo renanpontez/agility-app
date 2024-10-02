@@ -1,95 +1,36 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from 'agility-wind';
 
-const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+import PortfolioItem from '@/components/Portfolio/PortfolioItem';
+
+const meta: Meta<typeof PortfolioItem> = {
+  title: 'Components/PortfolioItem',
   tags: ['autodocs'],
-  component: Button,
+  component: PortfolioItem,
   argTypes: {
-    style: {
-      control: 'select',
-      options: ['primary', 'secondary', 'light', 'dark', 'link', 'warning', 'error'],
+    title: {
+      control: 'text',
     },
-    icon: { control: 'text' },
-    loading: { control: 'boolean' },
-    disabled: { control: 'boolean' },
-    children: { control: 'text' },
+    description: {
+      control: 'text',
+    },
+    href: {
+      control: 'text',
+    },
+    imageSrc: {
+      control: 'text',
+    },
   },
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof PortfolioItem>;
 
 export const Primary: Story = {
   args: {
-    style: 'primary',
-    children: 'Continue',
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    style: 'secondary',
-    children: 'Continue',
-  },
-};
-
-export const Light: Story = {
-  args: {
-    style: 'light',
-    children: 'Cancel',
-  },
-};
-
-export const Dark: Story = {
-  args: {
-    style: 'dark',
-    children: 'Cancel',
-  },
-};
-
-export const Link: Story = {
-  args: {
-    style: 'link',
-    children: 'Learn more',
-  },
-};
-
-export const Warning: Story = {
-  args: {
-    style: 'warning',
-    children: 'Warning',
-  },
-};
-
-export const Error: Story = {
-  args: {
-    style: 'error',
-    children: 'Error',
-  },
-};
-
-export const WithIcon: Story = {
-  args: {
-    style: 'primary',
-    children: 'Login with Email',
-    icon: '📧',
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    style: 'primary',
-    children: 'Loading...',
-    loading: true,
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    style: 'primary',
-    children: 'Disabled',
-    disabled: true,
+    title: 'Agility Creative',
+    description: 'Soluções digitais',
+    href: 'https://www.agilitycreative.com/',
+    imageSrc: 'https://www.agilitycreative.com/assets/images/logo/logo_symbol_primary.svg',
   },
 };

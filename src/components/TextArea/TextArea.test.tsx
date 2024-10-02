@@ -12,7 +12,7 @@ describe('Textarea Component', () => {
   });
 
   it('applies the invalid class when isInvalid is true', () => {
-    render(<TextArea isInvalid={true} />);
+    render(<TextArea isInvalid />);
     const textarea = screen.getByRole('textbox');
     if (!textarea) {
       throw new Error('Textarea not found');

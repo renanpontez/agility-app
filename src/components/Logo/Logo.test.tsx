@@ -9,8 +9,8 @@ describe('Logo Component', () => {
         style="horizontal"
         symbolColor="primary"
         nameSloganColor="white"
-        showName={true}
-        showSlogan={true}
+        showName
+        showSlogan
       />,
     );
     expect(screen.getByAltText('Logo Symbol')).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('Logo Component', () => {
         style="standard"
         symbolColor="primary"
         nameSloganColor="black"
-        showName={true}
+        showName
         showSlogan={false}
       />,
     );

@@ -1,10 +1,11 @@
+import {
+  Link,
+  Text,
+} from 'agility-wind';
 import React from 'react';
 
-import Link from '@/components/Link';
+import Logo from '@/components/Logo';
 import SocialIcons from '@/components/SocialIcons/SocialIcons';
-
-import Logo from '../Logo';
-import Text from '../Text';
 
 const FooterLink = ({
   href = '/',

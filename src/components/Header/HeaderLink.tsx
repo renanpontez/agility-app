@@ -1,7 +1,8 @@
+import {
+  Link,
+  Text,
+} from 'agility-wind';
 import React from 'react';
-
-import Link from '@/components/Link';
-import Text from '@/components/Text';
 
 type HeaderLinkProps = {
   href: string;

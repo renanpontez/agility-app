@@ -28,7 +28,7 @@ describe('Modal component', () => {
     render(
       <Modal
         title="Test Modal"
-        showCloseIcon={true}
+        showCloseIcon
         mainAction={{ text: 'Confirm' }}
         onClose={handleClose}
       >
@@ -50,7 +50,7 @@ describe('Modal component', () => {
         title="Test Modal"
         mainAction={{ text: 'Confirm' }}
         onClose={handleClose}
-        clickOutsideCloseModal={true}
+        clickOutsideCloseModal
       >
         Modal Body
       </Modal>,

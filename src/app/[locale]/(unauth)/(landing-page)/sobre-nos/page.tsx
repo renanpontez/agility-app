@@ -77,9 +77,9 @@ const AboutUsPage: React.FC = () => {
               Com a Agility, cada projeto é uma missão para inspirar. Estamos ao seu lado desde a concepção até a conclusão, abrindo novas possibilidades para o futuro.
             </Text>
 
-            <progress value="50" max="100"></progress>
+            {/* <progress value="50" max="100"></progress>
             <progress value="64" max="100"></progress>
-            <progress value="32" max="100"></progress>
+            <progress value="32" max="100"></progress> */}
 
           </div>
           <div className="relative order-first flex h-64 justify-center lg:order-last lg:h-auto">
@@ -121,7 +121,7 @@ const AboutUsPage: React.FC = () => {
       </section> */}
 
       {/* team section */}
-      <section className="container flex flex-col gap-16 p-16 sm:px-32 md:px-16">
+      <section className="container flex flex-col gap-16 p-16 sm:px-32 md:px-64">
         <Text
           as="h3"
           styleOverride="h2"
@@ -136,9 +136,9 @@ const AboutUsPage: React.FC = () => {
         </Text>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
           {[{
-            photo: '/assets/images/renan.jpeg',
+            photo: '/assets/images/user_avatar.png',
             name: 'Renan Martins',
-            role: 'Founder | Gerente de Projetos',
+            role: 'Founder | Project Manager',
             socials: [
               {
                 icon: FaLinkedin,
@@ -150,9 +150,9 @@ const AboutUsPage: React.FC = () => {
               },
             ],
           }, {
-            photo: '/assets/images/pedro.jpeg',
+            photo: '/assets/images/user_avatar.png',
             name: 'Pedro Lima',
-            role: 'Tech Lead | Front-End Developer',
+            role: 'Lead Developer',
             socials: [
               {
                 icon: FaLinkedin,
@@ -164,9 +164,9 @@ const AboutUsPage: React.FC = () => {
               },
             ],
           }, {
-            photo: '/assets/images/felipe.jpeg',
+            photo: '/assets/images/user_avatar.png',
             name: 'Felipe Macedo',
-            role: 'Web Developer',
+            role: 'Full-Stack Developer',
             socials: [
               {
                 icon: FaLinkedin,

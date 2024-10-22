@@ -5,6 +5,7 @@ import {
   Text,
 } from 'agility-wind';
 import classNames from 'classnames';
+import Head from 'next/head';
 import React, { Suspense } from 'react';
 import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
 
@@ -12,6 +13,7 @@ import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
 import Testimonials from '@/components/Testimonials';
 import { PORTFOLIO_ITEMS } from '@/utils/Constants';
+import { getBaseUrl } from '@/utils/Helpers';
 
 const ContactForm = React.lazy(() => import('@/components/ContactForm'));
 const Portfolio = React.lazy(() => import('@/components/Portfolio'));
@@ -19,6 +21,10 @@ const Portfolio = React.lazy(() => import('@/components/Portfolio'));
 const LandingPage: React.FC = () => {
   return (
     <>
+      <Head>
+        <meta http-equiv="refresh" content={`0; url=${getBaseUrl()}`} />
+      </Head>
+
       <Hero
         mediaType="video"
         mediaSrc="https://cdn2.hubspot.net/hubfs/6436815/home-video.mp4"

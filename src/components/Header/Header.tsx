@@ -1,17 +1,16 @@
 'use client';
-import {
-  Button,
-  Link,
-} from 'agility-wind';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa6';
 
+import Link from '@/components/Link';
+import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
 import useThrottle from '@/hooks/useThrottle';
 import { MENU_ITEMS } from '@/utils/Constants';
 
-import { BrandLoading } from '../Loading';
+import Button from '../Button';
 import HeaderLink from './HeaderLink';
 
 export type HeaderProps = {

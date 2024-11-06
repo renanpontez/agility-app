@@ -1,5 +1,6 @@
-import { Text } from 'agility-wind';
 import React from 'react';
+
+import Text from '@/components/Text';
 
 const Testimonials: React.FC = () => {
   return (

@@ -1,11 +1,13 @@
-import { Hero, Link, Text } from 'agility-wind';
 import Image from 'next/image';
 import React from 'react';
 import { FaEnvelope, FaLaptopCode, FaLinkedin } from 'react-icons/fa6';
 
 import ContactForm from '@/components/ContactForm';
+import Hero from '@/components/Hero';
+import Link from '@/components/Link';
 import SocialIcons from '@/components/SocialIcons/SocialIcons';
-import Testimonials from '@/components/Testimonials';
+import Testimonials from '@/components/Testimonials/Testimonials';
+import Text from '@/components/Text';
 
 export async function generateMetadata() {
   return {

@@ -1,4 +1,5 @@
 'use client';
+import { animated, useSpring } from '@react-spring/web';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
@@ -34,7 +35,7 @@ const SidebarMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
   }, 150);
 
   useEffect(() => {
-  // If the menu is open and any link is clicked, close the menu
+    // If the menu is open and any link is clicked, close the menu
     if (isOpen) {
       document.addEventListener('click', handleLinkClick);
     }
@@ -113,8 +114,19 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
     },
   );
 
+  const [springs, api] = useSpring(() => ({
+    from: { opacity: 0, y: -200 },
+  }));
+
+  useEffect(() => {
+    api.start({ opacity: 1, y: 0, delay: 0 });
+  }, [api]);
+
   return (
-    <header className={headerClasses}>
+    <animated.header
+      className={headerClasses}
+      style={springs}
+    >
       <div className="container flex items-center justify-between py-4 transition-colors duration-300">
         <div className="invisible flex items-center lg:visible ">
           <Link href="/" aria-label="Agility Homepage">
@@ -158,7 +170,7 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
       </div>
 
       <SidebarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-    </header>
+    </animated.header>
   );
 };
 

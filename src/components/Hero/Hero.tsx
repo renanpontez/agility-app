@@ -1,5 +1,8 @@
+'use client';
+
+import { animated, useSpring } from '@react-spring/web';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '@/components/Button'; // Assuming you have a Button component
@@ -32,8 +35,21 @@ const Hero: React.FC<HeroProps> = ({
   content,
   cta,
 }) => {
+  const [slideDown, slideDownApi] = useSpring(() => ({
+    from: { y: -200 },
+  }));
+
+  const [fadeIn, fadeInApi] = useSpring(() => ({
+    from: { opacity: 0 },
+  }));
+
+  useEffect(() => {
+    slideDownApi.start({ y: 0 });
+    fadeInApi.start({ opacity: 1 });
+  }, [slideDownApi, fadeInApi]);
+
   return (
-    <div
+    <animated.div
       className={classNames(
         'relative w-full bg-no-repeat bg-cover bg-center flex items-center justify-center',
         {
@@ -42,9 +58,13 @@ const Hero: React.FC<HeroProps> = ({
         },
         className,
       )}
-      {...(mediaType === 'image' && {
-        style: { backgroundImage: `url(${mediaSrc})` },
-      })}
+      style={{
+        ...fadeIn,
+        ...(mediaType === 'image' && mediaSrc && {
+          backgroundImage: `url(${mediaSrc})`,
+        }),
+      }}
+
     >
       {applyMask && (
         <div className={twMerge('absolute left-0 top-0 z-0 size-full bg-gradient-to-r from-transparent to-black z-10', maskClassName)} />
@@ -58,12 +78,12 @@ const Hero: React.FC<HeroProps> = ({
         />
       </div>
       <div className="size-full items-center">
-        <div className="container relative z-20 flex h-full flex-col items-start justify-center text-left">
+        <animated.div className="container relative z-20 flex h-full flex-col items-start justify-center text-left" style={{ ...slideDown }}>
           {content && <>{content}</>}
           {cta && <Button {...cta} />}
-        </div>
+        </animated.div>
       </div>
-    </div>
+    </animated.div>
   );
 };
 

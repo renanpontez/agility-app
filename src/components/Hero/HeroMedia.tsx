@@ -44,6 +44,7 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
               alt={altText || 'Hero Image'}
               layout="fill"
               className={mediaClassName}
+              loading="eager"
             />
           )}
     </>

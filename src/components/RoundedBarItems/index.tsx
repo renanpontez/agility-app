@@ -1,6 +1,6 @@
 'use client';
 
-import { animated, useSpring } from '@react-spring/web';
+import { useSpring } from '@react-spring/web';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 
@@ -17,12 +17,12 @@ const RoundedItem = ({ item, count }: { item: any; count: number }) => {
   }, [fadeInApi, count]);
 
   return (
-    <animated.div key={item.title} className="flex flex-col items-center justify-center gap-2" style={{ ...fadeIn }}>
+    <div key={item.title} className="flex flex-col items-center justify-center gap-2" style={{ ...fadeIn }}>
       <Text as="h2" className="text-center tracking-wider text-primary">
         {item.title}
         <span className="block text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
       </Text>
-    </animated.div>
+    </div>
   );
 };
 
@@ -50,7 +50,7 @@ const RoundedBarItems: React.FC = () => {
   }];
 
   return (
-    <animated.div style={{ ...fadeSlideIn }}>
+    <div style={{ ...fadeSlideIn }}>
       <Card className="mx-auto animate-pulseShadow bg-secondaryDarker">
         <div className={classNames(
           'flex flex-col items-center justify-between gap-16 px-10 py-4',
@@ -62,7 +62,7 @@ const RoundedBarItems: React.FC = () => {
           ))}
         </div>
       </Card>
-    </animated.div>
+    </div>
 
   );
 };

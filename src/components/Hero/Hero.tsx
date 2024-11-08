@@ -1,6 +1,6 @@
 'use client';
 
-import { animated, useSpring } from '@react-spring/web';
+import { useSpring } from '@react-spring/web';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
@@ -49,7 +49,7 @@ const Hero: React.FC<HeroProps> = ({
   }, [slideDownApi, fadeInApi]);
 
   return (
-    <animated.div
+    <div
       className={classNames(
         'relative w-full flex items-center justify-center',
         {
@@ -77,13 +77,13 @@ const Hero: React.FC<HeroProps> = ({
       <div className="items-center md:size-full">
 
         <div className="container relative z-20 flex flex-col items-start justify-center text-left md:h-full">
-          <animated.div style={{ ...slideDown }}>
+          <div style={{ ...slideDown }}>
             {content && <>{content}</>}
-          </animated.div>
+          </div>
           {cta && <Button {...cta} />}
         </div>
       </div>
-    </animated.div>
+    </div>
   );
 };
 

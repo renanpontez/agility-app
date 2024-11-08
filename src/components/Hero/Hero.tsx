@@ -1,8 +1,7 @@
 'use client';
 
-import { useSpring } from '@react-spring/web';
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '@/components/Button'; // Assuming you have a Button component
@@ -35,19 +34,6 @@ const Hero: React.FC<HeroProps> = ({
   content,
   cta,
 }) => {
-  const [slideDown, slideDownApi] = useSpring(() => ({
-    from: { y: -200 },
-  }));
-
-  const [fadeIn, fadeInApi] = useSpring(() => ({
-    from: { opacity: 0 },
-  }));
-
-  useEffect(() => {
-    slideDownApi.start({ y: 0 });
-    fadeInApi.start({ opacity: 1 });
-  }, [slideDownApi, fadeInApi]);
-
   return (
     <div
       className={classNames(
@@ -58,9 +44,6 @@ const Hero: React.FC<HeroProps> = ({
         },
         className,
       )}
-      style={{
-        ...fadeIn,
-      }}
 
     >
       {applyMask && (
@@ -77,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({
       <div className="items-center md:size-full">
 
         <div className="container relative z-20 flex flex-col items-start justify-center text-left md:h-full">
-          <div style={{ ...slideDown }}>
+          <div>
             {content && <>{content}</>}
           </div>
           {cta && <Button {...cta} />}

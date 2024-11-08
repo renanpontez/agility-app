@@ -1,23 +1,14 @@
 'use client';
 
-import { useSpring } from '@react-spring/web';
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Card from '@/components/Card';
 import Text from '@/components/Text';
 
-const RoundedItem = ({ item, count }: { item: any; count: number }) => {
-  const [fadeIn, fadeInApi] = useSpring(() => ({
-    from: { opacity: 0 },
-  }));
-
-  useEffect(() => {
-    fadeInApi.start({ opacity: 1, delay: count * 300 });
-  }, [fadeInApi, count]);
-
+const RoundedItem = ({ item }: { item: any; count: number }) => {
   return (
-    <div key={item.title} className="flex flex-col items-center justify-center gap-2" style={{ ...fadeIn }}>
+    <div key={item.title} className="flex flex-col items-center justify-center gap-2">
       <Text as="h2" className="text-center tracking-wider text-primary">
         {item.title}
         <span className="block text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
@@ -27,14 +18,6 @@ const RoundedItem = ({ item, count }: { item: any; count: number }) => {
 };
 
 const RoundedBarItems: React.FC = () => {
-  const [fadeSlideIn, fadeSlideInApi] = useSpring(() => ({
-    from: { opacity: 0, y: -500 },
-  }));
-
-  useEffect(() => {
-    fadeSlideInApi.start({ opacity: 1, y: 0, delay: 300 });
-  }, [fadeSlideInApi]);
-
   const EXPERIENCES = [{
     title: '11',
     description: 'ANOS DE EXPERIÊNCIA',
@@ -50,7 +33,7 @@ const RoundedBarItems: React.FC = () => {
   }];
 
   return (
-    <div style={{ ...fadeSlideIn }}>
+    <div>
       <Card className="mx-auto animate-pulseShadow bg-secondaryDarker">
         <div className={classNames(
           'flex flex-col items-center justify-between gap-16 px-10 py-4',

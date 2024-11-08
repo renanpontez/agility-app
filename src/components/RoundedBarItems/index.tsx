@@ -54,7 +54,7 @@ const RoundedBarItems: React.FC = () => {
       <Card className="mx-auto animate-pulseShadow bg-secondaryDarker">
         <div className={classNames(
           'flex flex-col items-center justify-between gap-16 px-10 py-4',
-          'md:flex-row md:gap-32',
+          'md:flex-row md:gap-16 lg:gap-24',
         )}
         >
           {EXPERIENCES.map((item, idx) => (

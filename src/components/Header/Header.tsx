@@ -8,6 +8,7 @@ import { FaBars } from 'react-icons/fa6';
 import Link from '@/components/Link';
 import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 import useThrottle from '@/hooks/useThrottle';
 import { MENU_ITEMS } from '@/utils/Constants';
 
@@ -122,50 +123,62 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
     api.start({ opacity: 1, y: 0, delay: 0 });
   }, [api]);
 
+  const { isMobile, isTablet } = useBreakpoint();
+
   return (
     <animated.header
       className={headerClasses}
       style={springs}
     >
       <div className="container flex items-center justify-between py-4 transition-colors duration-300">
-        <div className="invisible flex items-center lg:visible ">
-          <Link href="/" aria-label="Agility Homepage">
-            <Logo
-              showName
-              showSlogan
-              symbolColor="primary"
-              nameSloganColor="white"
-              style="horizontal"
-              size="sm"
-            />
-          </Link>
-        </div>
-        <nav className="">
-          <div className="invisible flex gap-10 md:visible">
-            {MENU_ITEMS.map(item => (
-              <HeaderLink
-                key={item.title + item.href}
-                href={item.href}
-                text={item.title}
+        {!isMobile && (
+          <div className="invisible flex items-center lg:visible ">
+            <Link href="/" aria-label="Agility Homepage">
+              <Logo
+                showName
+                showSlogan
+                symbolColor="primary"
+                nameSloganColor="white"
+                style="horizontal"
+                size="sm"
               />
-            ))}
+            </Link>
           </div>
-          <div className="visible fixed left-0 top-3 md:invisible">
-            <Button style="link" onClick={toggleMenu} aria-label="Open menu">
-              <span className="text-2xl text-white">
-                <FaBars />
-              </span>
-            </Button>
-          </div>
-          <Link href="/" aria-label="Agility Homepage">
-            <Logo
-              symbolColor="primary"
-              nameSloganColor="white"
-              style="horizontal"
-              size="sm"
-              className="absolute right-4 top-4 size-8 md:invisible"
-            />
-          </Link>
+        )}
+
+        <nav className="">
+          {isMobile || isTablet
+            ? (
+                <>
+                  <div className="visible fixed left-0 top-3 md:invisible">
+                    <Button style="link" onClick={toggleMenu} aria-label="Open menu">
+                      <span className="text-2xl text-white">
+                        <FaBars />
+                      </span>
+                    </Button>
+                  </div>
+                  <Link href="/" aria-label="Agility Homepage">
+                    <Logo
+                      symbolColor="primary"
+                      nameSloganColor="white"
+                      style="horizontal"
+                      size="sm"
+                      className="absolute right-4 top-4 size-8 md:invisible"
+                    />
+                  </Link>
+                </>
+              )
+            : (
+                <div className="flex gap-10">
+                  {MENU_ITEMS.map(item => (
+                    <HeaderLink
+                      key={item.title + item.href}
+                      href={item.href}
+                      text={item.title}
+                    />
+                  ))}
+                </div>
+              )}
         </nav>
       </div>
 

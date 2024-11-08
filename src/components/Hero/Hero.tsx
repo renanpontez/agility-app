@@ -51,7 +51,7 @@ const Hero: React.FC<HeroProps> = ({
   return (
     <animated.div
       className={classNames(
-        'relative w-full bg-no-repeat bg-cover bg-center flex items-center justify-center',
+        'relative w-full flex items-center justify-center',
         {
           'h-screen': style === 'full-height',
           'h-auto': style === 'auto-height',
@@ -60,9 +60,6 @@ const Hero: React.FC<HeroProps> = ({
       )}
       style={{
         ...fadeIn,
-        ...(mediaType === 'image' && mediaSrc && {
-          backgroundImage: `url(${mediaSrc})`,
-        }),
       }}
 
     >
@@ -77,11 +74,14 @@ const Hero: React.FC<HeroProps> = ({
           videoProps={videoProps}
         />
       </div>
-      <div className="size-full items-center">
-        <animated.div className="container relative z-20 flex h-full flex-col items-start justify-center text-left" style={{ ...slideDown }}>
-          {content && <>{content}</>}
+      <div className="items-center md:size-full">
+
+        <div className="container relative z-20 flex flex-col items-start justify-center text-left md:h-full">
+          <animated.div style={{ ...slideDown }}>
+            {content && <>{content}</>}
+          </animated.div>
           {cta && <Button {...cta} />}
-        </animated.div>
+        </div>
       </div>
     </animated.div>
   );

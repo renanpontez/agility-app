@@ -27,7 +27,7 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
   const { isMobile } = useBreakpoint();
 
   const imageSrc = mediaType === 'image' ? mediaSrc : videoProps?.poster ?? FALLBACK_POSTER;
-  const mediaClassName = 'absolute left-0 top-0 z-0 size-full object-cover;';
+  const mediaClassName = 'absolute left-0 top-0 z-0 size-full object-cover';
   return (
     <>
       {isMobile
@@ -37,7 +37,6 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
               alt={altText || 'Hero Image'}
               layout="fill"
               className={mediaClassName}
-              loading="lazy"
             />
           )
         : (

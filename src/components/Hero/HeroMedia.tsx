@@ -3,7 +3,11 @@
 import Image from 'next/image';
 import React from 'react';
 
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+
 import LazyVideo from './LazyVideo';
+
+const FALLBACK_POSTER = '/assets/images/video_cover.webp';
 
 type HeroMediaProps = {
   mediaType: string;
@@ -20,37 +24,28 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
   altText,
   videoProps,
 }) => {
-  const isClient = typeof window !== 'undefined';
-  const isMobile = isClient && window?.innerWidth < 768;
-  const fallbackPoster = '/assets/images/video_cover.webp';
+  const { isMobile } = useBreakpoint();
+
+  const imageSrc = mediaType === 'image' ? mediaSrc : videoProps?.poster ?? FALLBACK_POSTER;
+  const mediaClassName = 'absolute left-0 top-0 z-0 size-full object-cover;';
   return (
     <>
-      {mediaType === 'image' || isMobile
+      {isMobile
         ? (
             <Image
-              src={isMobile ? videoProps?.poster ?? fallbackPoster : mediaSrc}
+              src={imageSrc}
               alt={altText || 'Hero Image'}
               layout="fill"
-              className="absolute left-0 top-0 z-0 size-full object-cover"
+              className={mediaClassName}
               loading="lazy"
             />
           )
         : (
-            <>
-              {/* TODO: Change this to use a hook const { isMobile } = useBreakpoints() */}
-              <LazyVideo
-                src={mediaSrc}
-                className="absolute left-0 top-0 z-0 size-full object-cover md:visible"
-                props={videoProps}
-              />
-              <Image
-                src={videoProps?.poster ?? ''}
-                alt={altText || 'Hero Image'}
-                layout="fill"
-                className="absolute left-0 top-0 z-0 size-full object-cover md:hidden"
-                loading="lazy"
-              />
-            </>
+            <LazyVideo
+              src={mediaSrc}
+              className={mediaClassName}
+              props={videoProps}
+            />
           )}
     </>
   );

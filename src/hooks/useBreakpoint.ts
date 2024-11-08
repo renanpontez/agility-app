@@ -10,12 +10,11 @@ type BreakpointValues = {
 };
 
 const breakpoints: Record<BreakpointKeys, string> = {
-  isMobile: '(max-width: 639px)',
-  isTablet: '(min-width: 640px) and (max-width: 1023px)',
-  isDesktop: '(min-width: 1024px) and (max-width: 1279px)',
-  isWidescreen: '(min-width: 1280px)',
+  isMobile: `(max-width: 767px)`,
+  isTablet: `(min-width: 768px) and (max-width: 1023px)`,
+  isDesktop: `(min-width: 1024px) and (max-width: 1279px)`,
+  isWidescreen: `(min-width: 1280px)`,
 };
-
 export function useBreakpoint(): BreakpointValues {
   const [breakpointState, setBreakpointState] = useState<BreakpointValues>({
     isMobile: false,

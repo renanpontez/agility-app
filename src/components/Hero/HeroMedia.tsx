@@ -30,7 +30,7 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
   const mediaClassName = 'absolute left-0 top-0 z-0 size-full object-cover';
   return (
     <>
-      {isDesktop || isWidescreen
+      {(isDesktop || isWidescreen) && imageSrc === 'video'
         ? (
             <LazyVideo
               src={mediaSrc}

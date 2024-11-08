@@ -111,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
       'bg-white text-black': style === 'light',
       'bg-black text-white': style === 'dark',
       'bg-transparent text-white': style === 'transparent',
-      'shadow-2xl !bg-secondaryDarker bg-opacity-80': isScrolled,
+      'shadow-2xl !bg-secondaryDarker/90': isScrolled,
     },
   );
 
@@ -123,66 +123,68 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
     api.start({ opacity: 1, y: 0, delay: 0 });
   }, [api]);
 
-  const { isMobile, isTablet } = useBreakpoint();
+  const { isMobile, isTablet, isDesktop, isWidescreen } = useBreakpoint();
 
   return (
     <animated.header
       className={headerClasses}
       style={springs}
     >
-      <div className="container flex items-center justify-between py-4 transition-colors duration-300">
-        {!isMobile && (
-          <div className="invisible flex items-center lg:visible ">
-            <Link href="/" aria-label="Agility Homepage">
-              <Logo
-                showName
-                showSlogan
-                symbolColor="primary"
-                nameSloganColor="white"
-                style="horizontal"
-                size="sm"
-              />
-            </Link>
-          </div>
-        )}
+      <div className={headerClasses}>
+        <div className="container flex items-center justify-between py-4 transition-colors duration-300">
+          {(isDesktop || isWidescreen) && (
+            <div className=" flex items-center ">
+              <Link href="/" aria-label="Agility Homepage">
+                <Logo
+                  showName
+                  showSlogan
+                  symbolColor="primary"
+                  nameSloganColor="white"
+                  style="horizontal"
+                  size="sm"
+                />
+              </Link>
+            </div>
+          )}
 
-        <nav className="">
-          {isMobile || isTablet
-            ? (
-                <>
-                  <div className="visible fixed left-0 top-3 md:invisible">
-                    <Button style="link" onClick={toggleMenu} aria-label="Open menu">
-                      <span className="text-2xl text-white">
-                        <FaBars />
-                      </span>
-                    </Button>
+          <nav className="flex w-full flex-row justify-between lg:w-auto">
+            {isMobile || isTablet
+              ? (
+                  <>
+                    <div>
+                      <Button style="link" onClick={toggleMenu} aria-label="Open menu">
+                        <span className="text-2xl text-white">
+                          <FaBars />
+                        </span>
+                      </Button>
+                    </div>
+                    <Link href="/" aria-label="Agility Homepage">
+                      <Logo
+                        symbolColor="primary"
+                        nameSloganColor="white"
+                        style="horizontal"
+                        size="sm"
+                        className="size-8"
+                      />
+                    </Link>
+                  </>
+                )
+              : (
+                  <div className="flex gap-10">
+                    {MENU_ITEMS.map(item => (
+                      <HeaderLink
+                        key={item.title + item.href}
+                        href={item.href}
+                        text={item.title}
+                      />
+                    ))}
                   </div>
-                  <Link href="/" aria-label="Agility Homepage">
-                    <Logo
-                      symbolColor="primary"
-                      nameSloganColor="white"
-                      style="horizontal"
-                      size="sm"
-                      className="absolute right-4 top-4 size-8 md:invisible"
-                    />
-                  </Link>
-                </>
-              )
-            : (
-                <div className="flex gap-10">
-                  {MENU_ITEMS.map(item => (
-                    <HeaderLink
-                      key={item.title + item.href}
-                      href={item.href}
-                      text={item.title}
-                    />
-                  ))}
-                </div>
-              )}
-        </nav>
-      </div>
+                )}
+          </nav>
+        </div>
 
-      <SidebarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+        <SidebarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      </div>
     </animated.header>
   );
 };

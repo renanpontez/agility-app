@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "mr-advogados",
+    "name": "MR Advogados Associados",
+    "logo": "logo.png",
+    "introTitle": "O desafio foi ...",
+    "introDescription": "Lorem Ipsum is ...",
+    "projectImage1": "https:///",
+    "projectImage2": "https:///",
+    "projectImage3": "https:///",
+    "projectImage4": "https:///",
+    "metricValue1": "+20",
+    "metricTitle1": "Páginas criadas",
+    "metricValue2": "+20",
+    "metricTitle2": "Páginas criadas",
+    "metricValue3": "+20",
+    "metricTitle3": "Páginas criadas",
+    "squadMembers": [
+      "felipe-macedo",
+      "renan-martins"
+    ]
+  }
+]

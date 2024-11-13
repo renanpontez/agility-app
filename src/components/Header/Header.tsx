@@ -1,17 +1,18 @@
 'use client';
-import {
-  Button,
-  Link,
-} from 'agility-wind';
+import { animated, useSpring } from '@react-spring/web';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa6';
 
+import Link from '@/components/Link';
+import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 import useThrottle from '@/hooks/useThrottle';
 import { MENU_ITEMS } from '@/utils/Constants';
 
-import { BrandLoading } from '../Loading';
+import Button from '../Button';
 import HeaderLink from './HeaderLink';
 
 export type HeaderProps = {
@@ -35,7 +36,7 @@ const SidebarMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
   }, 150);
 
   useEffect(() => {
-  // If the menu is open and any link is clicked, close the menu
+    // If the menu is open and any link is clicked, close the menu
     if (isOpen) {
       document.addEventListener('click', handleLinkClick);
     }
@@ -110,56 +111,81 @@ const Header: React.FC<HeaderProps> = ({ style }) => {
       'bg-white text-black': style === 'light',
       'bg-black text-white': style === 'dark',
       'bg-transparent text-white': style === 'transparent',
-      'shadow-2xl !bg-secondaryDarker bg-opacity-80': isScrolled,
+      'shadow-2xl !bg-secondaryDarker/90': isScrolled,
     },
   );
 
-  return (
-    <header className={headerClasses}>
-      <div className="container flex items-center justify-between py-4 transition-colors duration-300">
-        <div className="invisible flex items-center lg:visible ">
-          <Link href="/" aria-label="Agility Homepage">
-            <Logo
-              showName
-              showSlogan
-              symbolColor="primary"
-              nameSloganColor="white"
-              style="horizontal"
-              size="sm"
-            />
-          </Link>
-        </div>
-        <nav className="">
-          <div className="invisible flex gap-10 md:visible">
-            {MENU_ITEMS.map(item => (
-              <HeaderLink
-                key={item.title + item.href}
-                href={item.href}
-                text={item.title}
-              />
-            ))}
-          </div>
-          <div className="visible fixed left-0 top-3 md:invisible">
-            <Button style="link" onClick={toggleMenu} aria-label="Open menu">
-              <span className="text-2xl text-white">
-                <FaBars />
-              </span>
-            </Button>
-          </div>
-          <Link href="/" aria-label="Agility Homepage">
-            <Logo
-              symbolColor="primary"
-              nameSloganColor="white"
-              style="horizontal"
-              size="sm"
-              className="absolute right-4 top-4 size-8 md:invisible"
-            />
-          </Link>
-        </nav>
-      </div>
+  const [springs, api] = useSpring(() => ({
+    from: { opacity: 0, y: -200 },
+  }));
 
-      <SidebarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-    </header>
+  useEffect(() => {
+    api.start({ opacity: 1, y: 0, delay: 0 });
+  }, [api]);
+
+  const { isMobile, isTablet, isDesktop, isWidescreen } = useBreakpoint();
+
+  return (
+    <animated.header
+      className={headerClasses}
+      style={springs}
+    >
+      <div className={headerClasses}>
+        <div className="container flex items-center justify-between py-4 transition-colors duration-300">
+          {(isDesktop || isWidescreen) && (
+            <div className=" flex items-center ">
+              <Link href="/" aria-label="Agility Homepage">
+                <Logo
+                  showName
+                  showSlogan
+                  symbolColor="primary"
+                  nameSloganColor="white"
+                  style="horizontal"
+                  size="sm"
+                />
+              </Link>
+            </div>
+          )}
+
+          <nav className="flex w-full flex-row justify-between lg:w-auto">
+            {isMobile || isTablet
+              ? (
+                  <>
+                    <div>
+                      <Button style="link" onClick={toggleMenu} aria-label="Open menu">
+                        <span className="text-2xl text-white">
+                          <FaBars />
+                        </span>
+                      </Button>
+                    </div>
+                    <Link href="/" aria-label="Agility Homepage">
+                      <Logo
+                        symbolColor="primary"
+                        nameSloganColor="white"
+                        style="horizontal"
+                        size="sm"
+                        className="size-8"
+                      />
+                    </Link>
+                  </>
+                )
+              : (
+                  <div className="flex gap-10">
+                    {MENU_ITEMS.map(item => (
+                      <HeaderLink
+                        key={item.title + item.href}
+                        href={item.href}
+                        text={item.title}
+                      />
+                    ))}
+                  </div>
+                )}
+          </nav>
+        </div>
+
+        <SidebarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      </div>
+    </animated.header>
   );
 };
 

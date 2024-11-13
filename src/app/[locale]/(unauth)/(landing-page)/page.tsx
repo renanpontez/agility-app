@@ -1,17 +1,17 @@
-import {
-  Button,
-  Card,
-  Hero,
-  Text,
-} from 'agility-wind';
-import classNames from 'classnames';
+import Head from 'next/head';
 import React, { Suspense } from 'react';
 import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
 
+import Button from '@/components/Button';
+import Card from '@/components/Card';
+import Hero from '@/components/Hero';
 import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
-import Testimonials from '@/components/Testimonials';
+import RoundedBarItems from '@/components/RoundedBarItems';
+import Testimonials from '@/components/Testimonials/Testimonials';
+import Text from '@/components/Text';
 import { PORTFOLIO_ITEMS } from '@/utils/Constants';
+import { getBaseUrl } from '@/utils/Helpers';
 
 const ContactForm = React.lazy(() => import('@/components/ContactForm'));
 const Portfolio = React.lazy(() => import('@/components/Portfolio'));
@@ -19,6 +19,10 @@ const Portfolio = React.lazy(() => import('@/components/Portfolio'));
 const LandingPage: React.FC = () => {
   return (
     <>
+      <Head>
+        <meta http-equiv="refresh" content={`0; url=${getBaseUrl()}`} />
+      </Head>
+
       <Hero
         mediaType="video"
         mediaSrc="https://cdn2.hubspot.net/hubfs/6436815/home-video.mp4"
@@ -40,40 +44,11 @@ const LandingPage: React.FC = () => {
             </Text>
           </div>
         )}
-        className="h-[400px] md:h-[80vh]"
+        className="h-[300px] md:h-[80vh]"
       />
 
       <div className="relative mx-auto -mt-16 w-fit">
-        <Card className="mx-auto animate-pulseShadow bg-secondaryDarker">
-          <div className={classNames(
-            'flex flex-col items-center justify-between gap-16 px-10 py-4',
-            'md:flex-row md:gap-32',
-          )}
-          >
-            {
-              [{
-                title: '11',
-                description: 'ANOS DE EXPERIÊNCIA',
-              }, {
-                title: '+50',
-                description: 'PROJETOS CONCLUÍDOS',
-              }, {
-                title: '+90%',
-                description: 'CLIENTES APROVAM',
-              }, {
-                title: '5',
-                description: 'MENTES CRIATIVAS',
-              }].map(item => (
-                <div key={item.title} className="flex flex-col items-center justify-center gap-2">
-                  <Text as="h2" className="text-center tracking-wider text-primary">
-                    {item.title}
-                    <span className="block text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
-                  </Text>
-                </div>
-              ))
-            }
-          </div>
-        </Card>
+        <RoundedBarItems />
       </div>
 
       <section className="mx-auto w-fit max-w-[70%] justify-center py-16 text-center md:max-w-[30%] md:py-32">

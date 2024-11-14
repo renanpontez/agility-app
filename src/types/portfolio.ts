@@ -1,3 +1,8 @@
+type metricAndValue = {
+  value: string;
+  metric: string;
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -8,18 +13,10 @@ export type Project = {
   projectImage2?: string;
   projectImage3?: string;
   projectImage4?: string;
-  metricValue1?: string;
-  metricTitle1?: string;
-  metricValue2?: string;
-  metricTitle2?: string;
-  metricValue3?: string;
-  metricTitle3?: string;
-  section2Title?: string;
-  section2Description?: string;
-  description1?: string;
-  description2?: string;
-  description3?: string;
-  description4?: string;
+  metricAndValue?: metricAndValue[];
+  qualityAndDeliveryDescription?: string;
+  developmentDescription?: string;
+  descriptions?: string[];
   squadMembers: string[];
 };
 

@@ -35,7 +35,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
           style="custom-height"
           applyMask
           content={(
-            <div className="mx-auto flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
+            <div className="mx-auto flex flex-col justify-end gap-10 md:mt-32 md:justify-end md:gap-20 lg:mx-0">
               <Text as="h1" styleOverride="h1" className="text-center text-xl font-normal !leading-snug tracking-wider text-white sm:text-3xl md:font-light lg:text-left lg:text-5xl">
                 Veja como foi a
                 <br />

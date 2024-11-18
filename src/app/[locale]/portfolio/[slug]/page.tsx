@@ -85,7 +85,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
           className="h-[300px] md:h-[60vh]"
         />
       </section>
-      <div className="container mt-16 text-white md:mt-32">
+      <div className="container my-16 text-white md:mb-20 md:mt-32">
 
         <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
           <Text as="h5" className="col-span-5 font-semibold">
@@ -162,9 +162,6 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
 
         </section>
 
-        {/*  ESPAÇADOR */}
-        <div className="mx-auto my-20 h-[0.5px] w-[70vw] rounded-full bg-white opacity-10 blur-[0.5xp]  md:w-160"></div>
-        {/*  ESPAÇADOR */}
       </div>
       <section>
         <Hero

@@ -31,12 +31,14 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
       <section>
         <Hero
           mediaType="image"
+          mediaClass="rounded-b-[60px]"
           mediaSrc="/assets/images/desk_working.png"
           style="custom-height"
           applyMask
+          maskClassName="rounded-b-[60px]"
           content={(
             <div className="mx-auto flex flex-col justify-end gap-10 md:mt-32 md:justify-end md:gap-20 lg:mx-0">
-              <Text as="h1" styleOverride="h1" className="text-center text-xl font-normal !leading-snug tracking-wider text-white sm:text-3xl md:font-light lg:text-left lg:text-5xl">
+              <Text as="h1" styleOverride="h1" className=" text-center text-xl font-normal !leading-snug tracking-wider text-white sm:text-3xl md:font-light lg:text-left lg:text-5xl">
                 Veja como foi a
                 <br />
                 construção do site

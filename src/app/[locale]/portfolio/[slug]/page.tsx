@@ -31,13 +31,13 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
       <section>
         <Hero
           mediaType="image"
-          mediaClass="rounded-b-xxxl"
+          mediaClass="rounded-b-xxl md:rounded-b-xxxl"
           mediaSrc="/assets/images/desk_working.png"
           style="custom-height"
           applyMask
-          maskClassName="rounded-b-xxxl"
+          maskClassName="rounded-b-xxl md:rounded-b-xxxl"
           content={(
-            <div className="mx-auto flex flex-col justify-end gap-10 md:mt-32 md:justify-end md:gap-20 lg:mx-0">
+            <div className="mx-auto mb-12 mt-16 flex flex-col justify-end gap-10 md:mt-32 md:justify-end md:gap-20 lg:mx-0">
               <Text as="h1" styleOverride="h1" className=" text-center text-xl font-normal !leading-snug tracking-wider text-white sm:text-3xl md:font-light lg:text-left lg:text-5xl">
                 Veja como foi a
                 <br />
@@ -49,7 +49,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
                   {selectedProject.name.toUpperCase()}
                 </span>
               </Text>
-              <div className="flex flex-wrap gap-2 md:gap-10">
+              <div className="flex flex-wrap justify-center gap-2 md:gap-10">
                 <Button
                   style="dark"
                   icon={(
@@ -82,7 +82,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
               </div>
             </div>
           )}
-          className="h-[300px] md:h-[60vh]"
+          className=" min-h-[300px] md:h-[60vh]"
         />
       </section>
       <div className="container my-16 text-white md:mb-20 md:mt-32">
@@ -116,13 +116,13 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
 
         <section className="relative flex flex-col flex-wrap gap-8 lg:grid lg:grid-cols-11">
           <div className="col-span-5 flex flex-wrap justify-center gap-10 md:flex-nowrap lg:justify-start">
-            <Image src="/assets/images/portfolio/mr-advogados/image2.png" alt="mr-adv-image2" width={178} height={400} className="pt-10"></Image>
-            <Image src="/assets/images/portfolio/mr-advogados/image3.png" alt="mr-adv-image3" width={178} height={400} className="pb-10"></Image>
+            <Image src="/assets/images/portfolio/mr-advogados/image2.png" alt="mr-adv-image2" width={178} height={400} className="lg:pt-10"></Image>
+            <Image src="/assets/images/portfolio/mr-advogados/image3.png" alt="mr-adv-image3" width={178} height={400} className="lg:pb-10"></Image>
           </div>
           <div className="col-span-6 ">
             <Text as="h5" className="mb-3 font-bold leading-snug tracking-wide"> DESENVOLVIMENTO</Text>
             <Text as="p" size="md" className="tracking-wider">{selectedProject.developmentDescription}</Text>
-            <div className="mt-6 flex flex-wrap justify-around text-center sm:mt-14 md:justify-between">
+            <div className="mt-6 flex flex-wrap justify-around gap-x-3 gap-y-4 text-center sm:mt-14 md:justify-between">
               {selectedProject.metricAndValue.map((item, index) => (
                 <div key={index}>
                   <Text as="p" size="md" className="text-5xl font-bold text-primary">
@@ -163,31 +163,25 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
         </section>
 
       </div>
-      <section>
+      <section className="w-full  text-center md:pt-8 ">
         <Hero
+          applyMask
           mediaType="image"
           mediaSrc="/assets/images/tablet_working.png"
-          style="custom-height"
+          style="auto-height"
+          altText="An amazing hero image"
           content={(
-            <div className="mx-auto flex flex-col items-center justify-center text-center">
-              <Text as="h1" className="text-xl font-medium leading-loose tracking-normal text-white md:text-3xl md:font-normal">
-                MENTES
-                <strong className="font-medium">CRIATIVAS</strong>
+            <div className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[70%]">
+              <Text as="h4" styleOverride="h2">
+                MENTES CRIATIVAS E PROCESSOS ORGANIZADOS GERAM MAIS
                 {' '}
-                E
-                {' '}
-                <strong className="font-medium">PROCESSOS</strong>
-                {' '}
-                ORGANIZADOS
-                <br />
-                GERAM MAIS
-                {' '}
-                <span className="font-bold tracking-wider text-primary">RESULTADOS</span>
+                <span className="text-primaryLighter">RESULTADOS</span>
               </Text>
-              <Button style="outlined-light" className="mt-6">CONHEÇA A AGILITY</Button>
+              <Button style="outlined-light" size="sm">
+                CONHEÇA A AGILITY
+              </Button>
             </div>
           )}
-          className="h-[300px] md:h-[35vh]"
         />
       </section>
       <section className="flex w-full flex-col justify-between gap-16 md:flex-row" id="Contato">

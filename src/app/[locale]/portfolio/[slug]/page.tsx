@@ -105,7 +105,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
         {/*  ESPAÇADOR */}
 
         <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
-          <Text as="h5" className="col-span-5 h-max font-semibold md:sticky md:top-20">
+          <Text as="h5" className="col-span-5 h-max font-semibold md:sticky md:top-24">
             SITE ENTREGUE
           </Text>
           <Image src="/assets/images/portfolio/mr-advogados/image1.png" alt="mr-adv-image1" width={701} height={1590} className="col-span-6"></Image>

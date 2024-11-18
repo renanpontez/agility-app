@@ -33,9 +33,10 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
           mediaType="image"
           mediaSrc="/assets/images/desk_working.png"
           style="custom-height"
+          applyMask
           content={(
             <div className="mx-auto flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
-              <Text as="h1" styleOverride="h1" className=" text-center text-3xl font-normal !leading-snug tracking-wider text-white md:text-5xl md:font-light lg:text-left">
+              <Text as="h1" styleOverride="h1" className="text-center text-xl font-normal !leading-snug tracking-wider text-white sm:text-3xl md:font-light lg:text-left lg:text-5xl">
                 Veja como foi a
                 <br />
                 construção do site
@@ -46,6 +47,37 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
                   {selectedProject.name.toUpperCase()}
                 </span>
               </Text>
+              <div className="flex flex-wrap gap-2 md:gap-10">
+                <Button
+                  style="dark"
+                  icon={(
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.05941 5.02041C3.87174 5.02041 3.69175 5.09512 3.55904 5.22812C3.42634 5.36112 3.35178 5.5415 3.35178 5.72958V12.8214C3.35178 13.0094 3.42634 13.1898 3.55904 13.3228C3.69175 13.4558 3.87174 13.5305 4.05941 13.5305H13.9662C14.1539 13.5305 14.3339 13.4558 14.4666 13.3228C14.5993 13.1898 14.6739 13.0094 14.6739 12.8214V5.72958C14.6739 5.5415 14.5993 5.36112 14.4666 5.22812C14.3339 5.09512 14.1539 5.02041 13.9662 5.02041H4.05941ZM2.5583 4.22519C2.95642 3.8262 3.49639 3.60205 4.05941 3.60205H13.9662C14.5293 3.60205 15.0692 3.8262 15.4673 4.22519C15.8655 4.62418 16.0891 5.16533 16.0891 5.72958V12.8214C16.0891 13.3856 15.8655 13.9268 15.4673 14.3257C15.0692 14.7247 14.5293 14.9489 13.9662 14.9489H4.05941C3.49639 14.9489 2.95642 14.7247 2.5583 14.3257C2.16018 13.9268 1.93652 13.3856 1.93652 12.8214V5.72958C1.93652 5.16533 2.16018 4.62418 2.5583 4.22519Z" fill="#BC01FD" />
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.05957 6.43867C4.05957 6.047 4.37639 5.72949 4.7672 5.72949H4.77428C5.16509 5.72949 5.48191 6.047 5.48191 6.43867C5.48191 6.83034 5.16509 7.14785 4.77428 7.14785H4.7672C4.37639 7.14785 4.05957 6.83034 4.05957 6.43867Z" fill="#BC01FD" />
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M6.18262 6.43867C6.18262 6.047 6.49943 5.72949 6.89025 5.72949H6.89732C7.28814 5.72949 7.60495 6.047 7.60495 6.43867C7.60495 6.83034 7.28814 7.14785 6.89732 7.14785H6.89025C6.49943 7.14785 6.18262 6.83034 6.18262 6.43867Z" fill="#BC01FD" />
+                    </svg>
+                  )}
+                >
+                  Sites e Landing pages
+                </Button>
+                <Button
+                  style="dark"
+                  icon={(
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_600_2510)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.83651 5.17527C8.95304 4.83511 10.1782 5.06573 11.042 5.75936L7.83651 5.17527ZM11.9273 4.65236C10.684 3.65425 8.96962 3.34743 7.42407 3.81841L7.42384 3.81848C6.05531 4.23602 4.9608 5.22267 4.48999 6.49842C2.55107 6.75246 1.02246 8.35992 1.02246 10.3511C1.02246 12.5007 2.80277 14.2028 4.958 14.239C4.98103 14.2412 5.00439 14.2424 5.02802 14.2424H13.4385C15.1889 14.2424 16.6 12.8144 16.6 11.0603C16.6 9.33538 15.2344 7.92543 13.5242 7.88007C13.5238 6.64513 12.9424 5.46546 11.9273 4.65236ZM5.09178 12.824H13.4385C14.3986 12.824 15.1839 12.0394 15.1839 11.0603C15.1839 10.082 14.3986 9.2973 13.4392 9.2973H12.7382C12.5234 9.2973 12.3202 9.19964 12.1858 9.0318C12.0514 8.86397 12.0004 8.64411 12.047 8.43411C12.2619 7.46664 11.8999 6.44654 11.0427 5.7599L11.042 5.75936M5.09178 12.824C5.07078 12.8222 5.04951 12.8212 5.02802 12.8212C3.57225 12.8212 2.4386 11.6902 2.4386 10.3511C2.4386 9.01291 3.57215 7.88178 5.02802 7.88178C5.35968 7.88178 5.6469 7.6512 5.71911 7.32698C5.93601 6.35299 6.72187 5.51544 7.83628 5.17534" fill="#BC01FD" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_600_2510">
+                          <rect width="16.9937" height="17.0203" fill="white" transform="translate(0.314453 0.765137)" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  )}
+                >
+                  Hosting e Domínio
+                </Button>
+              </div>
             </div>
           )}
           className="h-[300px] md:h-[60vh]"

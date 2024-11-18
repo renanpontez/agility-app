@@ -5,6 +5,7 @@ import Button from '@/components/Button';
 import ContactForm from '@/components/ContactForm';
 import Hero from '@/components/Hero';
 import { BrandLoading } from '@/components/Loading';
+import Tag from '@/components/Tag';
 import Text from '@/components/Text';
 import portfolioData from '@/data/portfolio.json';
 import type { Project } from '@/types/portfolio';
@@ -37,7 +38,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
           applyMask
           maskClassName="rounded-b-xxl md:rounded-b-xxxl"
           content={(
-            <div className="mx-auto mb-12 mt-16 flex flex-col justify-end gap-10 md:mt-32 md:justify-end md:gap-20 lg:mx-0">
+            <div className="mx-auto mb-8 mt-16 flex flex-col justify-end gap-10 md:mt-40 md:justify-end md:gap-20 lg:mx-0">
               <Text as="h1" styleOverride="h1" className=" text-center text-xl font-normal !leading-snug tracking-wider text-white sm:text-3xl md:font-light lg:text-left lg:text-5xl">
                 Veja como foi a
                 <br />
@@ -50,7 +51,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
                 </span>
               </Text>
               <div className="flex flex-wrap justify-center gap-2 md:gap-10">
-                <Button
+                <Tag
                   style="dark"
                   icon={(
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,8 +62,8 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
                   )}
                 >
                   Sites e Landing pages
-                </Button>
-                <Button
+                </Tag>
+                <Tag
                   style="dark"
                   icon={(
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +79,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
                   )}
                 >
                   Hosting e Domínio
-                </Button>
+                </Tag>
               </div>
             </div>
           )}

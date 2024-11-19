@@ -1,0 +1,64 @@
+[
+  {
+    "slug": "felipe",
+    "name": "Felipe Macedo Gomes",
+    "yearsOfExperience": "3",
+    "image": "123",
+    "email": "femacedogomes@gmail.com",
+    "tel": "(85)981654701",
+    "personalDescription": "Natural de Fortaleza, Ceará. Tenho 31 anos de idade e 7 anos de experiência no mercado de design gráfico e ilustração digital.",
+    "workDescription": "Formado na universidade de Fortaleza em arquitetura e urbanismo,  me encontrei como designer gráfico e me dediquei a soluções tecnológicas como Designer de experiencia do usuário e interfaces de usuário.",
+    "skills": [
+      {
+        "icon": "",
+        "name": "Front-End",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "icon": "",
+        "name": "Back-End",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "icon": "",
+        "name": "Web e App",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      }
+    ],
+    "portfolio": [
+      {
+        "image": "",
+        "name": "Front-End",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "image": "",
+        "name": "Back-End",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "image": "",
+        "name": "Web e App",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      }
+    ],
+    "recommendations": [
+      {
+        "image": "/",
+        "text": "O Pedro me ajudou em todas as etapas do projeto e foi super fácil chegar ao resultado ideal",
+        "author": "Jalin Habei | Jalin Corporations"
+      },
+      {
+        "image": "/",
+        "text": "O Pedro me ajudou em todas as etapas do projeto e foi super fácil chegar ao resultado ideal",
+        "author": "Jalin Habei | Jalin Corporations"
+      },
+      {
+        "image": "/",
+        "text": "O Pedro me ajudou em todas as etapas do projeto e foi super fácil chegar ao resultado ideal",
+        "author": "Jalin Habei | Jalin Corporations"
+      }
+    ]
+
+  }
+]

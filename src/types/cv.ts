@@ -20,6 +20,7 @@ export type UserProfile = {
   slug: string;
   name: string;
   yearsOfExperience: string;
+  jobs: string[];
   image: string;
   email: string;
   tel: string;

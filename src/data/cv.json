@@ -2,6 +2,7 @@
   {
     "slug": "felipe",
     "name": "Felipe Macedo Gomes",
+    "jobs": ["Designer gráfico", "Designer UI/UX"],
     "yearsOfExperience": "3",
     "image": "123",
     "email": "femacedogomes@gmail.com",
@@ -10,17 +11,17 @@
     "workDescription": "Formado na universidade de Fortaleza em arquitetura e urbanismo,  me encontrei como designer gráfico e me dediquei a soluções tecnológicas como Designer de experiencia do usuário e interfaces de usuário.",
     "skills": [
       {
-        "icon": "",
+        "icon": "@/public/assets/imagesicons/engine-icon.svg",
         "name": "Front-End",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       },
       {
-        "icon": "",
+        "icon": "@/public/assets/imagesicons/engine-icon.svg",
         "name": "Back-End",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       },
       {
-        "icon": "",
+        "icon": "@/public/assets/imagesicons/engine-icon.svg",
         "name": "Web e App",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       }

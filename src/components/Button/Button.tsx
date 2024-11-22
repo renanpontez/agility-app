@@ -9,6 +9,7 @@ export type ButtonProps = {
   onClick?: () => void;
   children: React.ReactNode;
   icon?: React.ReactNode;
+  iconRight?: boolean; // Nova prop para controlar a posição do ícone
   loading?: boolean;
   disabled?: boolean;
   href?: string;
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
   icon,
+  iconRight = false, // Valor padrão como falso
   loading,
   disabled,
   href,
@@ -82,8 +84,9 @@ const Button: React.FC<ButtonProps> = ({
           )
         : (
             <>
-              {icon && <span className="mr-2">{icon}</span>}
+              {!iconRight && icon && <span className="mr-2">{icon}</span>}
               {children}
+              {iconRight && icon && <span className="ml-2">{icon}</span>}
             </>
           )}
     </Tag>

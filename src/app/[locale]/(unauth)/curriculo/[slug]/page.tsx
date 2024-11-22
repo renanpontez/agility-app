@@ -100,7 +100,7 @@ const CVPage = async ({ params }: { params: Params }) => {
               <Card key={index} style="outlined-gray" className="flex min-w-40 flex-col justify-start space-y-2 pt-20">
                 <Image src={skill.icon} alt="skill-icon" width={10} height={10} className="size-4"></Image>
                 <Text as="p">{skill.name}</Text>
-                <Text as="p" size="xs" className=" text-xxs text-secondaryLighter">{skill.description}</Text>
+                <Text as="p" size="xxs" className=" text-secondaryLighter">{skill.description}</Text>
               </Card>
             ),
             )}
@@ -151,7 +151,7 @@ const CVPage = async ({ params }: { params: Params }) => {
                     {recommendation.text}
                     "
                   </Text>
-                  <Text as="p" size="xs" className="text-xxs font-thin text-secondaryLighter">{recommendation.author}</Text>
+                  <Text as="p" size="xxs" className="font-thin text-secondaryLighter">{recommendation.author}</Text>
                 </div>
               </div>
             ),

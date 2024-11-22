@@ -9,7 +9,7 @@ type TextProps = {
   decoration?: 'italic' | 'bold' | 'strike';
   className?: string;
   children: ReactNode;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
 };
 
 const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, children, size }) => {
@@ -37,6 +37,7 @@ const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, c
   };
 
   const sizeClasses: Record<string, string> = {
+    'xxs': 'text-xxs',
     'xs': 'text-xs',
     'sm': 'text-sm',
     'md': 'text-base',

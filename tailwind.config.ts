@@ -36,6 +36,7 @@ export default {
         base: ['16px', '24px'], // Default font size
         lg: ['18px', '28px'], // Larger font size for headings
         xl: ['24px', '32px'], // Extra-large for major headings
+        xxs: ['10px', '14px'],
       },
       spacing: {
         72: '18rem', // Large padding/margin value

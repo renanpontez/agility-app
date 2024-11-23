@@ -72,14 +72,14 @@ const CVPage = async ({ params }: { params: Params }) => {
               </div>
 
             </div>
-            <Text as="p" className="text-secondaryLighter md:max-w-114 md:pt-4 ">{selectedCV.personalDescription}</Text>
+            <Text as="p" className="pt-1 text-secondaryLighter md:max-w-114 md:pt-4 ">{selectedCV.personalDescription}</Text>
             <Text as="p" className="text-secondaryLighter md:max-w-114 ">{selectedCV.workDescription}</Text>
             <div className="flex flex-wrap justify-center gap-3 pt-4 md:justify-start">
               <Button
                 iconRight
                 style="outlined-gray"
                 className="font-light"
-                size="lg"
+                size="md"
                 icon={(
                   <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4.51203 4.83217C4.51191 4.83204 4.51171 4.83205 4.51159 4.83217C4.38844 4.96748 4.22157 5.04348 4.04758 5.04348C3.87349 5.04348 3.70652 4.96739 3.58335 4.83193L1.1054 2.1044C0.982224 1.9687 0.913045 1.78468 0.913086 1.59281C0.913127 1.40095 0.982384 1.21697 1.10562 1.08133C1.22886 0.945696 1.39598 0.869523 1.57023 0.869568C1.74447 0.869613 1.91156 0.945874 2.03474 1.08157C3.11368 2.26961 4.98148 2.26961 6.06042 1.08157C6.18426 0.949742 6.35017 0.876744 6.52242 0.878302C6.69467 0.87986 6.85947 0.955849 6.98133 1.0899C7.10318 1.22396 7.17235 1.40535 7.17393 1.59501C7.17551 1.78467 7.10937 1.96743 6.98976 2.10392L4.51247 4.83217C4.51235 4.8323 4.51215 4.8323 4.51203 4.83217Z" fill="white" />
@@ -91,7 +91,7 @@ const CVPage = async ({ params }: { params: Params }) => {
               <Button
                 style="primary"
                 iconRight
-                size="lg"
+                size="md"
                 className="font-light"
                 icon={(
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

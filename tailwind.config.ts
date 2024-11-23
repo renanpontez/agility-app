@@ -27,6 +27,9 @@ export default {
         dark: '#1A202C',
         darkLight: '#2D3748',
       },
+      maxWidth: {
+        114: '440px',
+      },
       fontFamily: {
         poppins: ['Poppins', ...fontFamily.sans],
         serif: ['Sorts Mill Goudy', ...fontFamily.serif],

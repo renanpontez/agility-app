@@ -24,9 +24,39 @@
         "icon": "/assets/images/icons/engine-icon.svg",
         "name": "Web e App",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "icon": "/assets/images/icons/engine-icon.svg",
+        "name": "Front-End",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "icon": "/assets/images/icons/engine-icon.svg",
+        "name": "Back-End",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        "icon": "/assets/images/icons/engine-icon.svg",
+        "name": "Web e App",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       }
     ],
     "portfolio": [
+      {
+        "image": "/assets/images/cv/felipe/job1.png",
+        "name": "Front-End",
+        "description": "UI/UX Design | Sites Corporativos"
+      },
+      {
+        "image": "/assets/images/cv/felipe/job1.png",
+        "name": "Back-End",
+        "description": "UI/UX Design | Sites Corporativos"
+      },
+      {
+        "image": "/assets/images/cv/felipe/job1.png",
+        "name": "Web e App",
+        "description": "UI/UX Design | Sites Corporativos"
+      },
       {
         "image": "/assets/images/cv/felipe/job1.png",
         "name": "Front-End",

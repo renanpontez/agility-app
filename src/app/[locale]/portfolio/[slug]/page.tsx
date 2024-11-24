@@ -8,8 +8,8 @@ import Hero from '@/components/Hero';
 import { BrandLoading } from '@/components/Loading';
 import Text from '@/components/Text';
 import portfolioData from '@/data/portfolio.json';
-import HostingAndDom from '@/public/assets/images/tags/hosting-and-dominio.svg';
-import SiteAndLP from '@/public/assets/images/tags/sites-and-lp.svg';
+import HostingAndDom from '@/public/assets/images/tags/hosting-and-dominio.png';
+import SiteAndLP from '@/public/assets/images/tags/sites-and-lp.png';
 import type { Project } from '@/types/portfolio';
 
 type Params = {

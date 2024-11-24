@@ -27,7 +27,7 @@ const PortfolioHeroContent: React.FC<PortfolioHeroContentProps> = ({ projectName
           {projectName.toUpperCase()}
         </span>
       </Text>
-      <div className="flex flex-wrap justify-center gap-2 md:gap-10">
+      <div className="flex flex-wrap justify-center gap-2 md:justify-start md:gap-8">
         {tags
         && tags.map((tag, index) => (
           <Image

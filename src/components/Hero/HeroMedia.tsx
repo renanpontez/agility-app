@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
@@ -11,6 +12,7 @@ const FALLBACK_POSTER = '/assets/images/video_cover.webp';
 
 type HeroMediaProps = {
   mediaType: string;
+  mediaClass?: string;
   mediaSrc: string;
   altText?: string;
   videoProps?: {
@@ -20,6 +22,7 @@ type HeroMediaProps = {
 
 const HeroMedia: React.FC<HeroMediaProps> = ({
   mediaType,
+  mediaClass,
   mediaSrc,
   altText,
   videoProps,
@@ -43,7 +46,7 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
               src={imageSrc}
               alt={altText || 'Hero Image'}
               layout="fill"
-              className={mediaClassName}
+              className={twMerge(mediaClassName, mediaClass)}
               loading="eager"
             />
           )}

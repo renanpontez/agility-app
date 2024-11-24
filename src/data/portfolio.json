@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "mr-advogados",
+    "name": "MR Advogados",
+    "logo": "logo.png",
+    "introTitle": "O desafio foi construir um site moderno que identificasse com a nova marca.",
+    "introDescription": ["O desafio foi desenvolver um site moderno que representasse a nova marca Monteiro & Rolim Advocacia e Consultoria. Apostamos em um design que combinasse estética e funcionalidade, entregando uma plataforma responsiva e alinhada às necessidades do escritório."],
+    "projectImage1": "/assets/images/portfolio/mr-advogados/image1.png",
+    "projectImage2": "/assets/images/portfolio/mr-advogados/image2.svg",
+    "projectImage3": "/assets/images/portfolio/mr-advogados/image3.svg",
+    "projectImage4": "/assets/images/portfolio/mr-advogados/image4.svg",
+    "metricAndValue": [{ "value": "+8", "metric": "Páginas criadas" }, { "value": "+30%", "metric": "Mais rápido" }, { "value": "600+", "metric": "Linhas de código" }],
+    "developmentDescription": "O site foi desenvolvido com uma plataforma robusta e flexível, aproveitando os recursos avançados do WordPress. Essa abordagem garantiu uma estrutura responsiva, navegação intuitiva e integração de ferramentas para otimizar o desempenho e a gestão do conteúdo.",
+    "qualityAndDeliveryDescription": "O projeto foi entregue com excelência, focado no desempenho técnico, design moderno e experiência do usuário. Cada etapa do desenvolvimento priorizou resultados de alta qualidade, alinhados às expectativas do cliente.",
+    "descriptions": ["Plataforma WordPress para máxima flexibilidade e gestão.", "Design responsivo, otimizado para desempenho e SEO.", "Navegação intuitiva com foco na experiência do usuário.", "Desenvolvimento eficiente, alinhado às melhores práticas digitais."],
+
+    "squadMembers": [
+      "felipe-macedo",
+      "renan-martins"
+    ]
+  }
+]

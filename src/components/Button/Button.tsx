@@ -81,8 +81,8 @@ const Button: React.FC<ButtonProps> = ({
           )
         : (
             <>
+              {icon && <span className="mr-2">{icon}</span>}
               {children}
-              {icon && <span className="ml-2">{icon}</span>}
             </>
           )}
     </Tag>

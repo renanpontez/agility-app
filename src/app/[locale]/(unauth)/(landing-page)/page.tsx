@@ -166,7 +166,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="container my-8 flex w-full flex-col justify-between gap-16 md:my-24 md:flex-row" id="Contato">
+      <section className="container my-8 mb-32 flex w-full flex-col justify-between gap-16 md:my-24 md:mb-64 md:flex-row" id="Contato">
         <Suspense fallback={<BrandLoading />}>
           <ContactForm />
         </Suspense>

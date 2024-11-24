@@ -21,6 +21,7 @@ type HeroProps = {
   cta?: ButtonProps; // Button props for the CTA
   applyMask?: boolean; // Apply a gradient mask over the media
   maskClassName?: string; // Additional class names for the mask
+  mediaClass?: string;
 };
 
 const Hero: React.FC<HeroProps> = ({
@@ -33,6 +34,7 @@ const Hero: React.FC<HeroProps> = ({
   altText,
   videoProps,
   content,
+  mediaClass,
   cta,
 }) => {
   const [slideDown, slideDownApi] = useSpring(() => ({
@@ -65,10 +67,11 @@ const Hero: React.FC<HeroProps> = ({
 
     >
       {applyMask && (
-        <div className={twMerge('absolute left-0 top-0 z-0 size-full bg-gradient-to-r from-transparent to-black z-10', maskClassName)} />
+        <div className={twMerge('absolute left-0 top-0 z-10 size-full bg-gradient-to-r from-transparent to-black', maskClassName)} />
       )}
       <div>
         <HeroMedia
+          mediaClass={mediaClass}
           mediaType={mediaType}
           mediaSrc={mediaSrc}
           altText={altText}

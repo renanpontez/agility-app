@@ -64,6 +64,7 @@ export default {
         lg: '12px',
         xl: '16px',
         xxl: '32px',
+        xxxl: '60px',
         full: '100%', // Full border radius for circles
       },
       boxShadow: {

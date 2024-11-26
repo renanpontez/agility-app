@@ -48,6 +48,11 @@ export default {
         128: '32rem',
         160: '40rem',
       },
+      margin: {
+        'fluid-sm': 'calc((100vw - 544px)/2)', // Para telas pequenas
+        'fluid-md': 'calc((100vw - 768px)/2)', // Para telas médias
+        'fluid-lg': 'auto', // Para telas grandes
+      },
       container: {
         center: true, // Center the container for a clean look
         padding: '2rem',

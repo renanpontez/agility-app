@@ -53,7 +53,7 @@ const Button: React.FC<ButtonProps> = ({
         'bg-success text-white hover:bg-successDark active:shadow': style === 'success',
         'bg-transparent text-primaryLight border border-primaryLight hover:bg-primary hover:text-white active:shadow': style === 'outlined',
         'bg-transparent text-white border border-white hover:bg-white hover:text-primary active:shadow-lg': style === 'outlined-light',
-        'bg-transparent text-secondaryLighter border border-secondaryDark hover:bg-secondaryLighter hover:text-secondaryLighter active:shadow-lg': style === 'outlined-gray',
+        'bg-transparent text-secondaryLighter border border-secondaryDark hover:border-white hover:text-white active:shadow-lg': style === 'outlined-gray',
         'bg-transparent text-white hover:text-primary active:shadow-none': style === 'basic',
         'opacity-50 cursor-not-allowed': disabled || loading,
       },

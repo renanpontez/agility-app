@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import WppButton from '@/components/atoms/WppButton';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import Text from '@/components/Text';
@@ -29,7 +30,7 @@ const CVPage = async ({ params }: { params: Params }) => {
       <section className="container flex justify-between pt-5">
         <Button
           iconRight
-          size="xs"
+          size="sm"
           style="outlined-gray"
           icon={(
             <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,22 +49,21 @@ const CVPage = async ({ params }: { params: Params }) => {
         >
         </Image>
       </section>
-      <div className="container space-y-20 pt-6">
-        <section className="grid-cols-2 gap-10 space-y-6 md:grid">
-          <div className="col-start-2 flex items-center justify-center">
-            <Image src={selectedCV.image} alt="user-cv-image" width={440} height={440} className="h-auto max-w-40 flex-1 md:w-full md:max-w-114"></Image>
+      <div className="space-y-20 lg:pt-14">
+        <section className="container flex-row-reverse justify-between space-y-6 lg:flex">
+          <div className="flex h-auto w-full basis-4/12 items-center justify-center lg:justify-end">
+            <Image src={selectedCV.image} alt="user-cv-image" width={800} height={450} className=" w-full max-w-52 object-contain lg:max-w-none"></Image>
           </div>
-
-          <div className="col-start-1 row-start-1 space-y-3">
+          <div className="space-y-3">
             <div>
-              <Text as="h5" size="3xl" className="mb-2 text-center md:text-start">
-                <span className="font-bold">{firstWord}</span>
+              <Text as="h2" className="mb-2 text-center lg:text-start">
+                {firstWord}
                 {' '}
-                {rest.join(' ')}
+                <span className="font-normal">{rest.join(' ')}</span>
               </Text>
-              <div className="flex border-separate items-center justify-center gap-1 font-thin opacity-35 md:justify-start md:font-normal">
+              <div className="flex border-separate items-center justify-center gap-1 font-thin opacity-35 lg:justify-start">
                 {selectedCV.jobs.map((job, index) => (
-                  <Text as="p" size="xs" key={index} className="md:text-lg md:font-medium ">
+                  <Text as="p" size="xs" key={index}>
                     {job.toUpperCase()}
                     {index < selectedCV.jobs.length - 1 && ` |`}
                   </Text>
@@ -72,9 +72,9 @@ const CVPage = async ({ params }: { params: Params }) => {
               </div>
 
             </div>
-            <Text as="p" className="pt-1 text-secondaryLighter md:max-w-114 md:pt-4 ">{selectedCV.personalDescription}</Text>
-            <Text as="p" className="text-secondaryLighter md:max-w-114 ">{selectedCV.workDescription}</Text>
-            <div className="flex flex-wrap justify-center gap-3 pt-4 md:justify-start">
+            <Text as="p" className="pt-1 text-secondaryLighter md:pt-4 lg:max-w-96 ">{selectedCV.personalDescription}</Text>
+            <Text as="p" className="text-secondaryLighter lg:max-w-96 ">{selectedCV.workDescription}</Text>
+            <div className="flex justify-center gap-3 pt-4 lg:justify-start">
               <Button
                 iconRight
                 style="outlined-gray"
@@ -88,19 +88,7 @@ const CVPage = async ({ params }: { params: Params }) => {
               >
                 Ver meu portfolio
               </Button>
-              <Button
-                style="primary"
-                iconRight
-                size="md"
-                className="font-light"
-                icon={(
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.5666 2.61373C10.9897 2.03101 10.3026 1.56899 9.54528 1.25462C8.78797 0.940243 7.97564 0.779804 7.15568 0.782661C3.72006 0.782661 0.919968 3.58275 0.919968 7.01837C0.919968 7.90034 1.10565 8.76213 1.45762 9.55523C1.62594 9.9345 1.68927 10.3581 1.58023 10.7584C1.26429 11.9184 2.32205 12.9856 3.48475 12.6799L3.5567 12.661C3.9526 12.557 4.36982 12.6166 4.74733 12.7749C5.50655 13.0933 6.32515 13.2604 7.15568 13.2604C10.5913 13.2604 13.3914 10.4603 13.3914 7.02466C13.3914 5.35719 12.7433 3.7904 11.5666 2.61373ZM7.15568 12.2033C6.22441 12.2033 5.31202 11.9516 4.51289 11.4796C4.39218 11.4072 4.24736 11.3865 4.11121 11.4223L3.88576 11.4816C3.20803 11.6597 2.59161 11.0374 2.77618 10.3614L2.82204 10.1934C2.86095 10.0509 2.83742 9.89855 2.75733 9.77441C2.23994 8.94821 1.96521 7.9932 1.9645 7.01837C1.9645 4.16165 4.29266 1.83348 7.14938 1.83348C8.5337 1.83348 9.83621 2.37462 10.8115 3.35623C11.2945 3.83694 11.6772 4.40872 11.9375 5.03844C12.1978 5.66815 12.3305 6.34327 12.328 7.02466C12.3406 9.88138 10.0124 12.2033 7.15568 12.2033ZM9.99981 8.32718C9.8425 8.25167 9.07484 7.87413 8.93641 7.8175C8.79168 7.76716 8.69101 7.74199 8.58404 7.893C8.47707 8.05031 8.18133 8.40268 8.09324 8.50336C8.00514 8.61033 7.91076 8.62292 7.75345 8.54111C7.59614 8.46561 7.09275 8.29571 6.50127 7.76716C6.03564 7.35186 5.72732 6.84218 5.63293 6.68487C5.54484 6.52757 5.62035 6.44577 5.70215 6.36397C5.77136 6.29475 5.85945 6.18149 5.93496 6.09339C6.01047 6.0053 6.04193 5.93609 6.09227 5.83541C6.14261 5.72844 6.11744 5.64035 6.07969 5.56484C6.04193 5.48933 5.72731 4.72167 5.60147 4.40705C5.47562 4.10502 5.34348 4.14277 5.2491 4.13648H4.94706C4.84009 4.13648 4.67649 4.17423 4.53177 4.33154C4.39334 4.48885 3.99063 4.86639 3.99063 5.63405C3.99063 6.40172 4.55065 7.14422 4.62616 7.24489C4.70166 7.35186 5.72732 8.92495 7.28782 9.59823C7.65906 9.76183 7.94851 9.85621 8.17503 9.92543C8.54628 10.045 8.88607 10.0261 9.15664 9.98835C9.45867 9.94431 10.0816 9.61081 10.2075 9.24586C10.3396 8.8809 10.3396 8.57258 10.2956 8.50336C10.2515 8.43415 10.1571 8.40268 9.99981 8.32718Z" fill="white" />
-                  </svg>
-                )}
-              >
-                Enviar mensagem
-              </Button>
+              <WppButton className="font-light" cellPhone={selectedCV.tel} message={`Olá, ${selectedCV.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
               {' '}
 
             </div>
@@ -109,13 +97,13 @@ const CVPage = async ({ params }: { params: Params }) => {
         </section>
 
         <section className="space-y-4">
-          <span className="flex items-center gap-2">
-            <Image src="/assets/images/icons/agility-rotated.png" className="size-4" alt="agility-logo-rotated" width={11} height={10}></Image>
-            <Text as="h5">
+          <span className="container flex items-center gap-2">
+            <Image src="/assets/images/icons/agility-rotated.png" className="size-6" alt="agility-logo-rotated" width={24} height={24}></Image>
+            <Text as="h4">
               Habilidades
             </Text>
           </span>
-          <div className="flex gap-3 overflow-x-auto scroll-smooth md:flex-wrap md:overflow-hidden">
+          <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container sm:ml-fluid-sm sm:pl-0 md:ml-fluid-md lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
             {selectedCV.skills.map((skill, index) => (
               <Card key={index} style="outlined-gray" className="flex min-w-40 flex-1 flex-col justify-start space-y-2 pt-20">
                 <Image src={skill.icon} alt="skill-icon" width={10} height={10} className="size-4"></Image>
@@ -127,78 +115,65 @@ const CVPage = async ({ params }: { params: Params }) => {
           </div>
 
         </section>
-        <section className="space-y-4">
-          <span className="flex items-center gap-2">
-            <Image src="/assets/images/icons/agility-rotated.png" className="size-4" alt="agility-logo-rotated" width={11} height={10}></Image>
-            <Text as="h5">
-              Portfolio
-            </Text>
-          </span>
-
-          <div className="flex gap-2 overflow-x-auto scroll-smooth lg:flex-wrap lg:gap-4 lg:overflow-hidden">
-            {selectedCV.portfolio.map((project, index) => (
-              <Card key={index} backgroundImage={project.image} className="flex h-auto min-h-72 min-w-72 flex-1 flex-col justify-end space-y-1">
-                <Text as="p">{project.name}</Text>
-                <Text as="p" size="xs" className="text-secondaryLighter">{project.description}</Text>
-              </Card>
-            ),
-            )}
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <span className="flex items-center gap-2">
-            <Image
-              width={11}
-              height={10}
-              className="size-4"
-              src="/assets/images/icons/agility-rotated.png"
-              alt="agility-logo-rotated"
-            >
-            </Image>
-            <Text as="h5">
-              Recomendações
-            </Text>
-          </span>
-
-          <div className="flex items-center gap-2 overflow-x-auto scroll-smooth lg:flex-wrap lg:gap-7 lg:overflow-hidden">
-            {selectedCV.recommendations.map((recommendation, index) => (
-              <div key={index} className="flex min-w-96 flex-1 grow items-center justify-start gap-3 bg-transparent lg:max-w-128">
-                <Image src={recommendation.image} alt="recommendation-icon" width={36} height={36} className="size-12 rounded-full lg:size-24"></Image>
-                <div className="space-y-1">
-                  <Text as="p" size="xs" decoration="italic" className="lg:text-base">
-                    "
-                    {recommendation.text}
-                    "
-                  </Text>
-                  <Text as="p" size="xxs" className="font-thin text-secondaryLighter">{recommendation.author}</Text>
-                </div>
-              </div>
-            ),
-            )}
-          </div>
-        </section>
-
       </div>
+      <section className="relative mt-20 space-y-4">
+        <span className="container flex items-center gap-2">
+          <Image src="/assets/images/icons/agility-rotated.png" className="size-6" alt="agility-logo-rotated" width={24} height={24}></Image>
+          <Text as="h4">
+            Portfolio
+          </Text>
+        </span>
+
+        <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container sm:ml-fluid-sm sm:pl-0 md:ml-fluid-md lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
+          {selectedCV.portfolio.map((project, index) => (
+            <Card key={index} backgroundImage={project.image} className="flex h-auto min-h-72 min-w-72 flex-1 flex-col justify-end space-y-1">
+              <Text as="p">{project.name}</Text>
+              <Text as="p" size="xs" className="text-secondaryLighter">{project.description}</Text>
+            </Card>
+          ),
+          )}
+        </div>
+      </section>
+      <section className="mt-20 space-y-4">
+        <span className="container flex items-center gap-2">
+          <Image
+            width={24}
+            height={24}
+            className="size-6"
+            src="/assets/images/icons/agility-rotated.png"
+            alt="agility-logo-rotated"
+          >
+          </Image>
+          <Text as="h4">
+            Recomendações
+          </Text>
+        </span>
+
+        <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container sm:ml-fluid-sm sm:pl-0 md:ml-fluid-md lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
+          {selectedCV.recommendations.map((recommendation, index) => (
+            <div key={index} className="flex min-w-96 flex-1 grow items-center justify-start gap-3 bg-transparent lg:max-w-128">
+              <Image src={recommendation.image} alt="recommendation-icon" width={36} height={36} className="size-12 rounded-full lg:size-24"></Image>
+              <div className="space-y-1">
+                <Text as="p" size="xs" className="lg:text-base">
+                  "
+                  {recommendation.text}
+                  "
+                </Text>
+                <Text as="p" size="xxs" className="font-thin text-secondaryLighter">{recommendation.author}</Text>
+              </div>
+            </div>
+          ),
+          )}
+        </div>
+      </section>
+
       <section className="mt-20 bg-secondaryEvenDarker py-10 md:pb-36">
         <div className="container flex flex-col space-y-4 md:space-y-9">
-          <Text as="h3" className="px-10 text-center leading-normal"> Conte-me sobre seu próximo projeto!</Text>
+          <Text as="h3" className="px-7 text-center leading-normal"> Conte-me sobre seu próximo projeto!</Text>
           <Text as="p" className="mx-auto max-w-128 px-16 pb-6 text-center text-secondaryLighter">
             Veja como eu posso te ajudar a transformar ideias em realidade de um jeito mágico e prático.
           </Text>
-          <Button
-            style="primary"
-            iconRight
-            size="lg"
-            className="mx-auto mt-6"
-            icon={(
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.5666 2.61373C10.9897 2.03101 10.3026 1.56899 9.54528 1.25462C8.78797 0.940243 7.97564 0.779804 7.15568 0.782661C3.72006 0.782661 0.919968 3.58275 0.919968 7.01837C0.919968 7.90034 1.10565 8.76213 1.45762 9.55523C1.62594 9.9345 1.68927 10.3581 1.58023 10.7584C1.26429 11.9184 2.32205 12.9856 3.48475 12.6799L3.5567 12.661C3.9526 12.557 4.36982 12.6166 4.74733 12.7749C5.50655 13.0933 6.32515 13.2604 7.15568 13.2604C10.5913 13.2604 13.3914 10.4603 13.3914 7.02466C13.3914 5.35719 12.7433 3.7904 11.5666 2.61373ZM7.15568 12.2033C6.22441 12.2033 5.31202 11.9516 4.51289 11.4796C4.39218 11.4072 4.24736 11.3865 4.11121 11.4223L3.88576 11.4816C3.20803 11.6597 2.59161 11.0374 2.77618 10.3614L2.82204 10.1934C2.86095 10.0509 2.83742 9.89855 2.75733 9.77441C2.23994 8.94821 1.96521 7.9932 1.9645 7.01837C1.9645 4.16165 4.29266 1.83348 7.14938 1.83348C8.5337 1.83348 9.83621 2.37462 10.8115 3.35623C11.2945 3.83694 11.6772 4.40872 11.9375 5.03844C12.1978 5.66815 12.3305 6.34327 12.328 7.02466C12.3406 9.88138 10.0124 12.2033 7.15568 12.2033ZM9.99981 8.32718C9.8425 8.25167 9.07484 7.87413 8.93641 7.8175C8.79168 7.76716 8.69101 7.74199 8.58404 7.893C8.47707 8.05031 8.18133 8.40268 8.09324 8.50336C8.00514 8.61033 7.91076 8.62292 7.75345 8.54111C7.59614 8.46561 7.09275 8.29571 6.50127 7.76716C6.03564 7.35186 5.72732 6.84218 5.63293 6.68487C5.54484 6.52757 5.62035 6.44577 5.70215 6.36397C5.77136 6.29475 5.85945 6.18149 5.93496 6.09339C6.01047 6.0053 6.04193 5.93609 6.09227 5.83541C6.14261 5.72844 6.11744 5.64035 6.07969 5.56484C6.04193 5.48933 5.72731 4.72167 5.60147 4.40705C5.47562 4.10502 5.34348 4.14277 5.2491 4.13648H4.94706C4.84009 4.13648 4.67649 4.17423 4.53177 4.33154C4.39334 4.48885 3.99063 4.86639 3.99063 5.63405C3.99063 6.40172 4.55065 7.14422 4.62616 7.24489C4.70166 7.35186 5.72732 8.92495 7.28782 9.59823C7.65906 9.76183 7.94851 9.85621 8.17503 9.92543C8.54628 10.045 8.88607 10.0261 9.15664 9.98835C9.45867 9.94431 10.0816 9.61081 10.2075 9.24586C10.3396 8.8809 10.3396 8.57258 10.2956 8.50336C10.2515 8.43415 10.1571 8.40268 9.99981 8.32718Z" fill="white" />
-              </svg>
-            )}
-          >
-            Enviar mensagem
-          </Button>
+          <WppButton className="mx-auto max-w-52 font-light" cellPhone={selectedCV.tel} message={`Olá, ${selectedCV.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
         </div>
 
       </section>

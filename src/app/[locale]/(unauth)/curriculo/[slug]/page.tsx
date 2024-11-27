@@ -2,9 +2,12 @@ import Image from 'next/image';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
+import DropDown from '@/components/Mols/DropDown';
 import WppButton from '@/components/Mols/WppButton';
 import Text from '@/components/Text';
 import CVData from '@/data/cv.json';
+import BrasilBrand from '@/public/assets/images/brands/brasil-brand.png';
+import EUABrand from '@/public/assets/images/brands/eua-brand.png';
 import type { UserProfile } from '@/types/cv';
 
 type Params = {
@@ -24,6 +27,11 @@ const CVPage = async ({ params }: { params: Params }) => {
   }
   const [firstWord, ...rest] = selectedCV.name.toUpperCase().split(' ');
 
+  const dropDownOption = [
+    { image: BrasilBrand },
+    { image: EUABrand },
+  ];
+
   return (
 
     <div>
@@ -40,16 +48,12 @@ const CVPage = async ({ params }: { params: Params }) => {
         >
           CV
         </Button>
-        <Image
-          alt="br-brand"
-          src="/assets/images/icons/brasil-brand.png"
-          className="h-4 w-6"
-          width={24}
-          height={17}
-        >
-        </Image>
+        <DropDown
+          options={dropDownOption}
+          isImageDropdown
+        />
       </section>
-      <div className="space-y-20 lg:pt-14">
+      <div className="space-y-20 lg:pt-24">
         <section className="container flex-row-reverse justify-between space-y-6 lg:flex">
           <div className="flex h-auto w-full basis-4/12 items-center justify-center lg:justify-end">
             <Image src={selectedCV.image} alt="user-cv-image" width={800} height={450} className=" w-full max-w-52 object-contain lg:max-w-none"></Image>

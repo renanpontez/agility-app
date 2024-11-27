@@ -44,7 +44,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, isImageDropdown }) => {
       <button
         type="button"
         onClick={toggleDropdown}
-        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:border-secondaryLighter lg:px-4 lg:py-3"
+        className="flex items-center gap-2 rounded-md px-3 text-sm hover:border-secondaryLighter lg:px-4"
       >
         {/* Ícone ArrowBottom */}
         <Image

@@ -19,6 +19,7 @@ export type Recommendation = {
 export type UserProfile = {
   slug: string;
   name: string;
+  cvLink: string;
   yearsOfExperience: string;
   jobs: string[];
   image: string;

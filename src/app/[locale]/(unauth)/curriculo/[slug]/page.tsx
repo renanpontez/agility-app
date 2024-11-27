@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
-import DropDown from '@/components/Mols/DropDown';
-import WppButton from '@/components/Mols/WppButton';
+import DropDownButton from '@/components/DropDownButton';
 import Text from '@/components/Text';
+import WppButton from '@/components/WppButton';
 import CVData from '@/data/cv.json';
 import BrasilBrand from '@/public/assets/images/brands/brasil-brand.png';
 import EUABrand from '@/public/assets/images/brands/eua-brand.png';
@@ -48,7 +48,7 @@ const CVPage = async ({ params }: { params: Params }) => {
         >
           CV
         </Button>
-        <DropDown
+        <DropDownButton
           options={dropDownOption}
           isImageDropdown
         />

@@ -15,7 +15,7 @@ type DropdownProps = {
   isImageDropdown: boolean; // Define se o dropdown é de imagens
 };
 
-const DropDown: React.FC<DropdownProps> = ({ options, isImageDropdown }) => {
+const DropDownButton: React.FC<DropdownProps> = ({ options, isImageDropdown }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<DropdownOption | null>();
   const [reorderedOptions, setReorderedOptions] = useState<DropdownOption[]>([]);
@@ -103,4 +103,4 @@ const DropDown: React.FC<DropdownProps> = ({ options, isImageDropdown }) => {
   );
 };
 
-export default DropDown;
+export default DropDownButton;

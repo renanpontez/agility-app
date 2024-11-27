@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
-import WppButton from '@/components/mols/WppButton';
+import WppButton from '@/components/Mols/WppButton';
 import Text from '@/components/Text';
 import CVData from '@/data/cv.json';
 import type { UserProfile } from '@/types/cv';

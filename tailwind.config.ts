@@ -49,9 +49,16 @@ export default {
         160: '40rem',
       },
       margin: {
-        'fluid-sm': 'calc((100vw - 544px)/2)', // Para telas pequenas
-        'fluid-md': 'calc((100vw - 768px)/2)', // Para telas médias
+        'fluid-xxs': 'calc((100vw - 512px)/2)', // Para telas pequenas
+        'fluid-xs': 'calc((100vw - 614px)/2)', // Para telas pequenas
+        'fluid-sm': 'calc((100vw - 640px)/2)', // Para telas pequenas
+        'fluid-mdlg': 'calc((100vw - 819px)/2)', // Para telas médias
         'fluid-lg': 'auto', // Para telas grandes
+      },
+      screens: {
+        xxs: '512px',
+        xs: '614.4px',
+        mdlg: '819.2px',
       },
       container: {
         center: true, // Center the container for a clean look

@@ -103,7 +103,7 @@ const CVPage = async ({ params }: { params: Params }) => {
               Habilidades
             </Text>
           </span>
-          <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container sm:ml-fluid-sm sm:pl-0 md:ml-fluid-md lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
+          <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container xxs:ml-fluid-xxs xs:ml-fluid-xs sm:ml-fluid-sm mdlg:ml-fluid-mdlg lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
             {selectedCV.skills.map((skill, index) => (
               <Card key={index} style="outlined-gray" className="flex min-w-40 flex-1 flex-col justify-start space-y-2 pt-20">
                 <Image src={skill.icon} alt="skill-icon" width={10} height={10} className="size-4"></Image>
@@ -124,7 +124,7 @@ const CVPage = async ({ params }: { params: Params }) => {
           </Text>
         </span>
 
-        <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container sm:ml-fluid-sm sm:pl-0 md:ml-fluid-md lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
+        <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container xxs:ml-fluid-xxs xs:ml-fluid-xs sm:ml-fluid-sm mdlg:ml-fluid-mdlg lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
           {selectedCV.portfolio.map((project, index) => (
             <Card key={index} backgroundImage={project.image} className="flex h-auto min-h-72 min-w-72 flex-1 flex-col justify-end space-y-1">
               <Text as="p">{project.name}</Text>
@@ -149,7 +149,7 @@ const CVPage = async ({ params }: { params: Params }) => {
           </Text>
         </span>
 
-        <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container sm:ml-fluid-sm sm:pl-0 md:ml-fluid-md lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
+        <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container xxs:ml-fluid-xxs xs:ml-fluid-xs sm:ml-fluid-sm mdlg:ml-fluid-mdlg lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
           {selectedCV.recommendations.map((recommendation, index) => (
             <div key={index} className="flex min-w-96 flex-1 grow items-center justify-start gap-3 bg-transparent lg:max-w-128">
               <Image src={recommendation.image} alt="recommendation-icon" width={36} height={36} className="size-12 rounded-full lg:size-24"></Image>

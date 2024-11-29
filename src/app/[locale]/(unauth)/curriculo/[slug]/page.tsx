@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
-import DropDownButton from '@/components/DropDownButton';
+import DropDownImage from '@/components/DropDownImage/DropDownImage';
 import Text from '@/components/Text';
 import WppButton from '@/components/WppButton';
 import CVData from '@/data/cv.json';
@@ -35,7 +35,7 @@ const CVPage = async ({ params }: { params: Params }) => {
   return (
 
     <div>
-      <section className="container flex justify-between pt-5">
+      <section className="container flex items-center justify-between pt-5">
         <Button
           iconRight
           size="sm"
@@ -48,9 +48,8 @@ const CVPage = async ({ params }: { params: Params }) => {
         >
           CV
         </Button>
-        <DropDownButton
+        <DropDownImage
           options={dropDownOption}
-          isImageDropdown
         />
       </section>
       <div className="space-y-20 lg:pt-24">

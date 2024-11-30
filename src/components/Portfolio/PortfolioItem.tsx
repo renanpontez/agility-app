@@ -1,19 +1,21 @@
 import React from 'react';
 
 type PortfolioItemProps = {
-  imageSrc: string;
+  imageSrc?: string;
   title: string;
   description?: string;
   href?: string;
+  linkPropsOverride?: Record<string, string>;
 };
 
-const PortfolioItem: React.FC<PortfolioItemProps> = ({ imageSrc, title, description, href }) => {
+const PortfolioItem: React.FC<PortfolioItemProps> = ({ imageSrc, title, description, href, linkPropsOverride }) => {
   const Tag = href ? 'a' : 'div';
 
   const linkProps = {
     target: '_blank',
     rel: 'noopener noreferrer',
     href,
+    ...linkPropsOverride,
   };
 
   return (

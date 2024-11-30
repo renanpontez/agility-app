@@ -9,6 +9,7 @@ export type Project = {
   logo: string;
   introTitle: string;
   introDescription: string[];
+  thumbnailImage?: string;
   projectImage1?: string;
   projectImage2?: string;
   projectImage3?: string;

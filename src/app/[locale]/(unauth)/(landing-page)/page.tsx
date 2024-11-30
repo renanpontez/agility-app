@@ -10,7 +10,7 @@ import Logo from '@/components/Logo';
 import RoundedBarItems from '@/components/RoundedBarItems';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import Text from '@/components/Text';
-import { PORTFOLIO_ITEMS } from '@/utils/Constants';
+import portfolioData from '@/data/portfolio.json';
 import { getBaseUrl } from '@/utils/Helpers';
 
 const ContactForm = React.lazy(() => import('@/components/ContactForm'));
@@ -37,7 +37,7 @@ const LandingPage: React.FC = () => {
         content={(
           <div className="mx-auto -mt-16 flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
             {/* <Logo showSymbol={false} showName showSlogan nameSloganColor="white" className="mx-auto lg:invisible" size="sm" style="standard" /> */}
-            <Text as="h1" styleOverride="h1" className="xs:text-sm text-center text-lg font-light leading-normal tracking-wide text-white lg:text-left">
+            <Text as="h1" styleOverride="h1" className="text-center text-lg font-light leading-normal tracking-wide text-white xs:text-sm lg:text-left">
               TRANSFORMANDO IDEIAS EM
               <br />
               <span className="font-bold tracking-wider">SOLUÇÕES QUE INSPIRAM</span>
@@ -111,7 +111,7 @@ const LandingPage: React.FC = () => {
 
         <div className="mt-10">
           <Suspense fallback={<BrandLoading />}>
-            <Portfolio items={PORTFOLIO_ITEMS} />
+            <Portfolio items={portfolioData} />
           </Suspense>
         </div>
       </section>

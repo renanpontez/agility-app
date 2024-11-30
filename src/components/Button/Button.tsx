@@ -5,10 +5,11 @@ import { twMerge } from 'tailwind-merge';
 import { SimpleLoading } from '../Loading';
 
 export type ButtonProps = {
-  style: 'primary' | 'secondary' | 'light' | 'dark' | 'link' | 'warning' | 'error' | 'success' | 'outlined' | 'outlined-light' | 'basic';
+  style: 'primary' | 'secondary' | 'light' | 'dark' | 'link' | 'warning' | 'error' | 'success' | 'outlined' | 'outlined-light' | 'basic' | 'outlined-gray';
   onClick?: () => void;
   children: React.ReactNode;
   icon?: React.ReactNode;
+  iconRight?: boolean; // Nova prop para controlar a posição do ícone
   loading?: boolean;
   disabled?: boolean;
   href?: string;
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
   icon,
+  iconRight = false, // Valor padrão como falso
   loading,
   disabled,
   href,
@@ -51,6 +53,7 @@ const Button: React.FC<ButtonProps> = ({
         'bg-success text-white hover:bg-successDark active:shadow': style === 'success',
         'bg-transparent text-primaryLight border border-primaryLight hover:bg-primary hover:text-white active:shadow': style === 'outlined',
         'bg-transparent text-white border border-white hover:bg-white hover:text-primary active:shadow-lg': style === 'outlined-light',
+        'bg-transparent text-secondaryLighter border border-secondaryDark hover:border-white hover:text-white active:shadow-lg': style === 'outlined-gray',
         'bg-transparent text-white hover:text-primary active:shadow-none': style === 'basic',
         'opacity-50 cursor-not-allowed': disabled || loading,
       },
@@ -81,8 +84,9 @@ const Button: React.FC<ButtonProps> = ({
           )
         : (
             <>
-              {icon && <span className="mr-2">{icon}</span>}
+              {!iconRight && icon && <span className="mr-2">{icon}</span>}
               {children}
+              {iconRight && icon && <span className="ml-2">{icon}</span>}
             </>
           )}
     </Tag>

@@ -4,13 +4,21 @@ import { twMerge } from 'tailwind-merge';
 
 export type CardProps = {
   radius?: 'sm' | 'md' | 'lg'; // Allows different border-radius options
-  shadow?: 'sm' | 'md' | 'lg'; // Allows different border-radius options
+  shadow?: 'sm' | 'md' | 'lg'; // Allows different shadow options
   className?: string; // Additional class names
   children?: React.ReactNode; // Content inside the card
-  style?: 'dark' | 'light'; // Style of the card
+  style?: 'dark' | 'light' | 'outlined-light' | 'outlined-gray'; // Style of the card
+  backgroundImage?: string; // URL for the background image
 };
 
-const Card: React.FC<CardProps> = ({ radius = 'lg', className, children, shadow = 'sm', style = 'dark' }) => {
+const Card: React.FC<CardProps> = ({
+  radius = 'lg',
+  shadow = 'sm',
+  className,
+  children,
+  style = 'dark',
+  backgroundImage,
+}) => {
   // Define the border-radius classes based on the prop
   const radiusClasses = {
     sm: 'rounded-sm',
@@ -26,18 +34,29 @@ const Card: React.FC<CardProps> = ({ radius = 'lg', className, children, shadow 
 
   const cardClassNames = twMerge(
     classNames(
-      'p-4', // Shared styles
-      { 'bg-secondaryDark text-white': style === 'dark' }, // Default dark background and padding
-      { 'bg-white text-dark': style === 'light' }, // Default dark background and padding
+      'p-4 relative', // Shared styles
+      { 'bg-secondaryDark text-white': style === 'dark' && !backgroundImage }, // Default dark background
+      { 'bg-white text-dark': style === 'light' && !backgroundImage }, // Default light background
+      { 'bg-transparent border border-white': style === 'outlined-light' },
+      { 'bg-transparent border border-2 border-secondaryDark': style === 'outlined-gray' },
       radiusClasses, // Apply the radius class
       shadowClasses, // Apply the shadow class
       className, // Allow for additional custom classes
     ),
   );
 
+  const backgroundStyle = backgroundImage
+    ? {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : undefined;
+
   return (
     <div
       className={cardClassNames}
+      style={backgroundStyle} // Inline styles for background image
     >
       {children}
     </div>

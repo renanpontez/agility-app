@@ -70,7 +70,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
           <Text as="h5" className="col-span-5 h-max font-semibold md:sticky md:top-24">
             SITE ENTREGUE
           </Text>
-          <Image src="/assets/images/portfolio/mr-advogados/image1.png" alt="mr-adv-image1" width={701} height={1590} className="col-span-6"></Image>
+          <Image src={selectedProject.projectImage1} alt="image1" width={701} height={1590} className="col-span-6"></Image>
         </section>
 
         {/*  ESPAÇADOR */}
@@ -79,8 +79,8 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
 
         <section className="relative flex flex-col flex-wrap gap-8 lg:grid lg:grid-cols-11">
           <div className="col-span-5 flex flex-wrap justify-center gap-10 md:flex-nowrap lg:justify-start">
-            <Image src="/assets/images/portfolio/mr-advogados/image2.png" alt="mr-adv-image2" width={178} height={400} className="lg:pt-10"></Image>
-            <Image src="/assets/images/portfolio/mr-advogados/image3.png" alt="mr-adv-image3" width={178} height={400} className="lg:pb-10"></Image>
+            <Image src={selectedProject.projectImage2} alt="image2" width={178} height={400} className="lg:pt-10"></Image>
+            <Image src={selectedProject.projectImage3} alt="image3" width={178} height={400} className="lg:pb-10"></Image>
           </div>
           <div className="col-span-6 ">
             <Text as="h5" className="mb-3 font-bold leading-snug tracking-wide"> DESENVOLVIMENTO</Text>
@@ -120,7 +120,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
                 </div>
               ))}
             </div>
-            <Image src="/assets/images/portfolio/mr-advogados/image4.png" alt="mr-adv-image1" width={600} height={312}></Image>
+            <Image src={selectedProject.projectImage4} alt="image4" width={600} height={312}></Image>
           </div>
 
         </section>

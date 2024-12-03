@@ -7,7 +7,7 @@ import Text from '@/components/Text';
 import WppButton from '@/components/WppButton';
 import CVData from '@/data/cv.json';
 import BrasilBrand from '@/public/assets/images/brands/brasil-brand.png';
-import EUABrand from '@/public/assets/images/brands/eua-brand.png';
+// import EUABrand from '@/public/assets/images/brands/eua-brand.png'; TODO: Translate all text to English and use DropDownImage to change.
 import type { UserProfile } from '@/types/cv';
 
 type Params = {
@@ -29,13 +29,12 @@ const CVPage = async ({ params }: { params: Params }) => {
 
   const dropDownOption = [
     { image: BrasilBrand },
-    { image: EUABrand },
   ];
 
   return (
 
     <div>
-      <section className="container flex items-center justify-between pt-5">
+      <section className="container flex max-h-12 items-center justify-between pt-5">
         <Button
           iconRight
           size="sm"

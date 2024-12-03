@@ -50,7 +50,7 @@ const DropDownImage: React.FC<DropdownProps> = ({ options }) => {
         <Image
           src={isOpen ? ArrowRigth : ArrowBottom}
           alt="arrow-indicator"
-          className={classNames({ 'h-2 w-auto lg:h-3 top-7 left-1': isOpen, 'top-6 -left-2 h-auto w-2 lg:w-3': !isOpen }, 'absolute')}
+          className={classNames({ 'h-3 w-auto top-5 lg:top-6 left-1': isOpen, 'left-0 top-4 lg:top-5 lg:-left-2 h-auto w-2 lg:w-3': !isOpen }, 'absolute')}
         />
         {selected?.image && !isOpen
           ? (
@@ -59,7 +59,7 @@ const DropDownImage: React.FC<DropdownProps> = ({ options }) => {
                 alt="selected-image"
                 width={50}
                 height={50}
-                className="size-5 rounded-md lg:size-9 "
+                className="h-auto w-7 rounded-md lg:w-9"
               />
             )
           : (
@@ -81,7 +81,7 @@ const DropDownImage: React.FC<DropdownProps> = ({ options }) => {
                           alt={`option-${index}`}
                           width={50}
                           height={50}
-                          className="size-5 rounded-md lg:size-9"
+                          className="h-auto w-7 rounded-md lg:w-9"
                         />
                       )}
                     </button>

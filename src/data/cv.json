@@ -3,94 +3,68 @@
     "slug": "felipe",
     "name": "Felipe Macedo",
     "cvLink": "www.google.com",
-    "jobs": ["Designer gráfico", "Designer UI/UX"],
+    "jobs": ["Front-end Developer"],
     "yearsOfExperience": "3",
     "image": "/assets/images/cv/felipe/profileImg.png",
     "email": "femacedogomes@gmail.com",
     "tel": "+5585981654701",
-    "personalDescription": "Natural de Fortaleza, Ceará. Tenho 31 anos de idade e 7 anos de experiência no mercado de design gráfico e ilustração digital.",
-    "workDescription": "Formado na universidade de Fortaleza em arquitetura e urbanismo,  me encontrei como designer gráfico e me dediquei a soluções tecnológicas como Designer de experiencia do usuário e interfaces de usuário.",
+    "personalDescription": "Sou natural de Fortaleza, Ceará, tenho 28 anos e três anos de experiência no desenvolvimento de sites e aplicativos. Trabalho com as ferramentas e tecnologias mais modernas do mercado para criar soluções eficientes e inovadoras.",
+    "workDescription": "Sou formado e mestre em Engenharia Civil pela Unichristus. Após conhecer a área da tecnologia, me apaixonei pelo campo e decidi mudar de carreira. Atualmente, estou cursando Análise e Desenvolvimento de Sistemas e atuo no desenvolvimento de sites e aplicativos, unindo criatividade e inovação para entregar soluções de alta qualidade.",
     "skills": [
       {
         "icon": "/assets/images/icons/engine-icon.svg",
-        "name": "Front-End",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        "name": "JavaScript",
+        "description": "Linguagem de programação versátil usada tanto no front-end quanto no back-end para criar aplicações dinâmicas e interativas."
       },
       {
         "icon": "/assets/images/icons/engine-icon.svg",
-        "name": "Back-End",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        "name": "React",
+        "description": "Biblioteca JavaScript para construir interfaces de usuário reutilizáveis e performáticas, com foco em componentes."
       },
       {
         "icon": "/assets/images/icons/engine-icon.svg",
-        "name": "Web e App",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        "name": "Next.js",
+        "description": "Framework React que oferece renderização no lado do servidor (SSR), geração estática (SSG) e funcionalidades avançadas para aplicações web modernas."
       },
       {
         "icon": "/assets/images/icons/engine-icon.svg",
-        "name": "Front-End",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        "name": "React Native",
+        "description": "Framework para desenvolvimento de aplicativos móveis nativos usando JavaScript e React, permitindo criar apps para Android e iOS."
       },
       {
         "icon": "/assets/images/icons/engine-icon.svg",
-        "name": "Back-End",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-      },
-      {
-        "icon": "/assets/images/icons/engine-icon.svg",
-        "name": "Web e App",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        "name": "Node.js",
+        "description": "Ambiente de execução JavaScript no lado do servidor, usado para construir aplicações escaláveis e performáticas, como APIs e servidores web."
       }
     ],
     "portfolio": [
       {
         "image": "/assets/images/cv/felipe/job1.png",
-        "name": "Front-End",
-        "description": "UI/UX Design | Sites Corporativos"
+        "name": "ACE",
+        "description": "Desenvolvimento do site da Academia Cearense de Economia"
       },
       {
         "image": "/assets/images/cv/felipe/job1.png",
-        "name": "Back-End",
-        "description": "UI/UX Design | Sites Corporativos"
+        "name": "MR Advogados",
+        "description": "Desenvolvimento do site da Monteiro & Rolim Advocacia e Consultoria"
       },
       {
         "image": "/assets/images/cv/felipe/job1.png",
-        "name": "Web e App",
-        "description": "UI/UX Design | Sites Corporativos"
+        "name": "Agility Creative Solution",
+        "description": "Atuei no desenvolvimento como front-end do site da Agility"
       },
       {
         "image": "/assets/images/cv/felipe/job1.png",
-        "name": "Front-End",
-        "description": "UI/UX Design | Sites Corporativos"
-      },
-      {
-        "image": "/assets/images/cv/felipe/job1.png",
-        "name": "Back-End",
-        "description": "UI/UX Design | Sites Corporativos"
-      },
-      {
-        "image": "/assets/images/cv/felipe/job1.png",
-        "name": "Web e App",
-        "description": "UI/UX Design | Sites Corporativos"
+        "name": "Easy To Live",
+        "description": "Atuei como front-end no desenvolvimento do webApp da Easy To live"
       }
     ],
     "recommendations": [
       {
         "image": "/assets/images/cv/felipe/job1.png",
-        "text": "O Pedro me ajudou em todas as etapas do projeto e foi super fácil chegar ao resultado ideal",
-        "author": "Jalin Habei | Jalin Corporations"
-      },
-      {
-        "image": "/assets/images/cv/felipe/job1.png",
-        "text": "O Pedro me ajudou em todas as etapas do projeto e foi super fácil chegar ao resultado ideal",
-        "author": "Jalin Habei | Jalin Corporations"
-      },
-      {
-        "image": "/assets/images/cv/felipe/job1.png",
-        "text": "O Pedro me ajudou em todas as etapas do projeto e foi super fácil chegar ao resultado ideal",
-        "author": "Jalin Habei | Jalin Corporations"
+        "text": "Felipe é um jovem desenvolvedor com muita paixão por aprender e um desejo forte de entregar resultados. Com pouco tempo de experiência já demonstra um bom conhecimento em tecnologias mais atuais de Front-End.",
+        "author": "Renan Martins | Senior Front-End developer"
       }
     ]
-
   }
 ]

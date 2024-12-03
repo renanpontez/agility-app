@@ -44,8 +44,8 @@ const Footer: React.FC = () => {
               <FooterLink text="Início" href="/" />
               <FooterLink text="Sobre nós" href="/sobre-nos" />
               <FooterLink text="Nossos serviços" href="/sobre-nos#Servicos" />
-              <FooterLink text="Portfolio" href="/portfolio" />
-              <FooterLink text="Entre em contato" href="/contato" />
+              <FooterLink text="Portfolio" href="/#Portfolio" />
+              <FooterLink text="Entre em contato" href="/#Contato" />
             </div>
           </div>
           <div className="flex flex-col gap-5">

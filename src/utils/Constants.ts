@@ -28,7 +28,7 @@ export const SOCIAL_NETWORKS = [
   {
     icon: FaLinkedin,
     title: '/agilitycreative',
-    href: 'https://www.linkedin.com/company/agilitycreative',
+    href: 'https://www.linkedin.com/company/agility-creative/',
   },
   {
     icon: FaMessage,

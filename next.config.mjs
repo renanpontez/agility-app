@@ -25,6 +25,16 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@electric-sql/pglite'],
   },
+  images: {
+    // Allow external image sources
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co', // Replace with the actual domain
+        pathname: '/**', // Adjust path as needed, or use '/**' to allow all paths
+      },
+    ],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/, // Apply this rule to .svg files

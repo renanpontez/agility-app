@@ -4,6 +4,14 @@ export type Skill = {
   description: string;
 };
 
+export type TypeBlock = {
+  _key: string;
+  markDefs: any[];
+  children: { _key: string; text: string; _type: string; marks: string[] }[];
+  _type: string;
+  style: string;
+};
+
 export type TeamMember = {
   slug: string;
   name: string;
@@ -13,7 +21,7 @@ export type TeamMember = {
   image: string;
   email: string;
   tel: number;
-  personalDescription: any[]; // 'block' type for rich text
-  workDescription: any[]; // 'block' type for rich text
+  personalDescription: TypeBlock;
+  workDescription: TypeBlock;
   skills: Skill[];
 };

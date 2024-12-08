@@ -1,5 +1,6 @@
+import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
-import { getAllTeamMembersInfo } from 'sanityClient';
+import { getAllTeamMembersInfo, getTeamMemberInfo } from 'sanityClient';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
@@ -19,14 +20,15 @@ type Params = {
 export async function generateStaticParams() {
   // Você pode retornar slugs dinâmicos do Sanity se necessário.
   const teamMembers = await getAllTeamMembersInfo(); // Implementar função para buscar os slugs.
-  return teamMembers.map((member: any) => ({ slug: member.slug }));
+  return teamMembers.filter((member: any) => typeof member.slug === 'string')
+    .map((member: any) => ({ slug: member.slug }));
 }
 
 const CVPage = async ({ params }: { params: Params }) => {
-  const teamMember: TeamMember = await getAllTeamMembersInfo();
+  const teamMember: TeamMember = await getTeamMemberInfo(params.slug);
   const selectedCV = CVData.find((item: UserProfile) => item.slug === params.slug);
 
-  if (!selectedCV) {
+  if (!teamMember || !selectedCV) {
     return <p>Currículo virtual não encontrado</p>;
   }
   const [firstWord, ...rest] = teamMember.name.toUpperCase().split(' ');
@@ -78,8 +80,10 @@ const CVPage = async ({ params }: { params: Params }) => {
               </div>
 
             </div>
-            <Text as="p" className="pt-1 text-secondaryLighter md:pt-4 lg:max-w-96 ">{teamMember.personalDescription}</Text>
-            <Text as="p" className="text-secondaryLighter lg:max-w-96 ">{teamMember.workDescription}</Text>
+            <Text as="p" className="pt-1 text-secondaryLighter md:pt-4 lg:max-w-96 ">
+              <PortableText value={teamMember.personalDescription} />
+            </Text>
+            <Text as="p" className="text-secondaryLighter lg:max-w-96 "><PortableText value={teamMember.workDescription}></PortableText></Text>
             <div className="flex justify-center gap-3 pt-4 lg:justify-start">
               <Button
                 iconRight

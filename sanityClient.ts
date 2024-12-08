@@ -26,52 +26,48 @@ export async function getAllTeamMembersInfoBase() {
 
 export async function getAllTeamMembersInfo() {
   const query = `
-  *[_type == "teamMember"]{
-    slug,
-    name,
-    cvLink,
-    jobs,
-    yearsOfExperience,
-    image {
-      asset->url
-    },
-    email,
-    tel,
-    personalDescription,
-    workDescription,
-    skills[]{
-      icon,
+    *[_type == "teamMember"]{
+      slug,
       name,
-      description
+      cvLink,
+      jobs,
+      yearsOfExperience,
+      image: image.asset->url,
+      email,
+      tel,
+      personalDescription,
+      workDescription,
+      skills[]{
+        icon: icon.asset->url,
+        name,
+        description
+      }
     }
-  }
-`;
+  `;
   const posts = await client.fetch(query);
   return posts;
 };
 
 export async function getTeamMemberInfo(slug: string) {
   const query = `
-  *[_type == "teamMember" && slug == $slug]{
-    slug,
-    name,
-    cvLink,
-    jobs,
-    yearsOfExperience,
-    image {
-      asset->url
-    },
-    email,
-    tel,
-    personalDescription,
-    workDescription,
-    skills[]{
-      icon,
+    *[_type == "teamMember" && slug == $slug]{
+      slug,
       name,
-      description
+      cvLink,
+      jobs,
+      yearsOfExperience,
+      image: image.asset->url,
+      email,
+      tel,
+      personalDescription,
+      workDescription,
+      skills[]{
+        icon: icon.asset->url,
+        name,
+        description
+      }
     }
-  }
-`;
+  `;
   const params = { slug };
   const posts = await client.fetch(query, params);
   return posts[0];

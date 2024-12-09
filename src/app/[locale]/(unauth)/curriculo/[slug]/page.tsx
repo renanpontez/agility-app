@@ -57,10 +57,10 @@ const CVPage = async ({ params }: { params: Params }) => {
           options={dropDownOption}
         />
       </section>
-      <div className="space-y-20 lg:pt-24">
+      <div className="space-y-20 pt-8 lg:pt-24">
         <section className="container flex-row-reverse justify-between space-y-6 lg:flex">
           <div className="flex h-auto w-full basis-4/12 items-center justify-center lg:justify-end">
-            <Image src={teamMember.image} alt="user-cv-image" width={800} height={450} className=" w-full max-w-52 object-contain lg:max-w-none"></Image>
+            <Image src={teamMember.image} alt="user-cv-image" width={800} height={450} className="max-h-52 max-w-52 rounded-full object-cover lg:max-h-114 lg:max-w-114"></Image>
           </div>
           <div className="space-y-3">
             <div>

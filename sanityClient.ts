@@ -26,23 +26,7 @@ export async function getAllTeamMembersInfoBase() {
 
 export async function getAllTeamMembersInfo() {
   const query = `
-    *[_type == "teamMember"]{
-      slug,
-      name,
-      cvLink,
-      jobs,
-      yearsOfExperience,
-      image: image.asset->url,
-      email,
-      tel,
-      personalDescription,
-      workDescription,
-      skills[]{
-        icon: icon.asset->url,
-        name,
-        description
-      }
-    }
+    *[_type == "teamMember"]
   `;
   const posts = await client.fetch(query);
   return posts;
@@ -50,23 +34,24 @@ export async function getAllTeamMembersInfo() {
 
 export async function getTeamMemberInfo(slug: string) {
   const query = `
-    *[_type == "teamMember" && slug == $slug]{
-      slug,
-      name,
-      cvLink,
-      jobs,
-      yearsOfExperience,
-      image: image.asset->url,
-      email,
-      tel,
-      personalDescription,
-      workDescription,
-      skills[]{
-        icon: icon.asset->url,
-        name,
-        description
-      }
-    }
+  *[_type == "teamMember"  && slug == $slug]{
+  "id": _id,
+  slug,
+  name,
+  cvLink,
+  jobs,
+  yearsOfExperience,
+  "image": image.asset->url,
+  email,
+  tel,
+  personalDescription,
+  workDescription,
+  skills[] {
+    "icon": icon.asset->url,
+    name,
+    description
+  }
+}
   `;
   const params = { slug };
   const posts = await client.fetch(query, params);

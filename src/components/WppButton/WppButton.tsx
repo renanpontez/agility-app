@@ -3,7 +3,7 @@ import Button from '@/components/Button';
 import { redirectToWpp } from '@/utils/redirectToWpp';
 
 type WppButtonProps = Partial<React.ComponentProps<typeof Button>> & {
-  cellPhone: string;
+  cellPhone: string | number;
   message?: string;
   label?: string;
   className?: string;

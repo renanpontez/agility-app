@@ -1,4 +1,6 @@
+import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
+import { getAllTeamMembersInfo, getTeamMemberInfo } from 'sanityClient';
 
 import Button from '@/components/Button';
 import Card from '@/components/Card';
@@ -9,23 +11,27 @@ import CVData from '@/data/cv.json';
 import BrasilBrand from '@/public/assets/images/brands/brasil-brand.png';
 // import EUABrand from '@/public/assets/images/brands/eua-brand.png'; TODO: Translate all text to English and use DropDownImage to change.
 import type { UserProfile } from '@/types/cv';
+import type { TeamMember } from '@/types/sanity';
 
 type Params = {
   slug: string;
 };
 
 export async function generateStaticParams() {
-  return CVData.map((item: UserProfile) => ({
-    slug: item.slug,
-  }));
+  // Você pode retornar slugs dinâmicos do Sanity se necessário.
+  const teamMembers = await getAllTeamMembersInfo(); // Implementar função para buscar os slugs.
+  return teamMembers.filter((member: any) => typeof member.slug === 'string')
+    .map((member: any) => ({ slug: member.slug }));
 }
 
 const CVPage = async ({ params }: { params: Params }) => {
+  const teamMember: TeamMember = await getTeamMemberInfo(params.slug);
   const selectedCV = CVData.find((item: UserProfile) => item.slug === params.slug);
-  if (!selectedCV) {
+
+  if (!teamMember || !selectedCV) {
     return <p>Currículo virtual não encontrado</p>;
   }
-  const [firstWord, ...rest] = selectedCV.name.toUpperCase().split(' ');
+  const [firstWord, ...rest] = teamMember.name.toUpperCase().split(' ');
 
   const dropDownOption = [
     { image: BrasilBrand },
@@ -51,10 +57,10 @@ const CVPage = async ({ params }: { params: Params }) => {
           options={dropDownOption}
         />
       </section>
-      <div className="space-y-20 lg:pt-24">
+      <div className="space-y-20 pt-8 lg:pt-24">
         <section className="container flex-row-reverse justify-between space-y-6 lg:flex">
           <div className="flex h-auto w-full basis-4/12 items-center justify-center lg:justify-end">
-            <Image src={selectedCV.image} alt="user-cv-image" width={800} height={450} className=" w-full max-w-52 object-contain lg:max-w-none"></Image>
+            <Image src={teamMember.image} alt="user-cv-image" width={800} height={450} className="max-h-52 max-w-52 rounded-full object-cover lg:max-h-114 lg:max-w-114"></Image>
           </div>
           <div className="space-y-3">
             <div>
@@ -64,18 +70,20 @@ const CVPage = async ({ params }: { params: Params }) => {
                 <span className="font-normal">{rest.join(' ')}</span>
               </Text>
               <div className="flex border-separate items-center justify-center gap-1 font-thin opacity-35 lg:justify-start">
-                {selectedCV.jobs.map((job, index) => (
+                {teamMember.jobs.map((job, index) => (
                   <Text as="p" size="xs" key={index}>
                     {job.toUpperCase()}
-                    {index < selectedCV.jobs.length - 1 && ` |`}
+                    {index < teamMember.jobs.length - 1 && ` |`}
                   </Text>
                 ))}
 
               </div>
 
             </div>
-            <Text as="p" className="pt-1 text-secondaryLighter md:pt-4 lg:max-w-96 ">{selectedCV.personalDescription}</Text>
-            <Text as="p" className="text-secondaryLighter lg:max-w-96 ">{selectedCV.workDescription}</Text>
+            <Text as="p" className="pt-1 text-secondaryLighter md:pt-4 lg:max-w-96 ">
+              <PortableText value={teamMember.personalDescription} />
+            </Text>
+            <Text as="p" className="text-secondaryLighter lg:max-w-96 "><PortableText value={teamMember.workDescription}></PortableText></Text>
             <div className="flex justify-center gap-3 pt-4 lg:justify-start">
               <Button
                 iconRight
@@ -90,7 +98,7 @@ const CVPage = async ({ params }: { params: Params }) => {
               >
                 Ver meu portfolio
               </Button>
-              <WppButton className="font-light" cellPhone={selectedCV.tel} message={`Olá, ${selectedCV.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
+              <WppButton className="font-light" cellPhone={teamMember.tel} message={`Olá, ${teamMember.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
               {' '}
 
             </div>
@@ -106,7 +114,7 @@ const CVPage = async ({ params }: { params: Params }) => {
             </Text>
           </span>
           <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container xxs:ml-fluid-xxs xs:ml-fluid-xs sm:ml-fluid-sm mdlg:ml-fluid-mdlg lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
-            {selectedCV.skills.map((skill, index) => (
+            {teamMember.skills.map((skill, index) => (
               <Card key={index} style="outlined-gray" className="flex min-w-40 flex-1 flex-col justify-start space-y-2 pt-20">
                 <Image src={skill.icon} alt="skill-icon" width={10} height={10} className="size-4"></Image>
                 <Text as="p">{skill.name}</Text>
@@ -175,7 +183,7 @@ const CVPage = async ({ params }: { params: Params }) => {
           <Text as="p" className="mx-auto max-w-128 px-16 pb-6 text-center text-secondaryLighter">
             Veja como eu posso te ajudar a transformar ideias em realidade de um jeito mágico e prático.
           </Text>
-          <WppButton className="mx-auto max-w-52 font-light" cellPhone={selectedCV.tel} message={`Olá, ${selectedCV.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
+          <WppButton className="mx-auto max-w-52 font-light" cellPhone={teamMember.tel} message={`Olá, ${teamMember.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
         </div>
 
       </section>

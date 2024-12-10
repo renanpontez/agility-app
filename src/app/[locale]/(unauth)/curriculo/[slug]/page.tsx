@@ -2,6 +2,7 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import { getAllTeamMembersInfo, getTeamMemberInfo } from 'sanityClient';
 
+import IconPickerClient from '@/components/Atoms/IconPickerClient/IconPickerClient';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import DropDownImage from '@/components/DropDownImage/DropDownImage';
@@ -43,6 +44,8 @@ const CVPage = async ({ params }: { params: Params }) => {
       <section className="container flex max-h-12 items-center justify-between pt-5">
         <Button
           iconRight
+          target="_blank"
+          href={teamMember.cvLink}
           size="sm"
           style="outlined-gray"
           icon={(
@@ -83,10 +86,11 @@ const CVPage = async ({ params }: { params: Params }) => {
             <Text as="p" className="pt-1 text-secondaryLighter md:pt-4 lg:max-w-96 ">
               <PortableText value={teamMember.personalDescription} />
             </Text>
-            <Text as="p" className="text-secondaryLighter lg:max-w-96 "><PortableText value={teamMember.workDescription}></PortableText></Text>
             <div className="flex justify-center gap-3 pt-4 lg:justify-start">
               <Button
                 iconRight
+                href={teamMember.cvLink}
+                target="_blank"
                 style="outlined-gray"
                 className="font-light"
                 size="md"
@@ -116,7 +120,7 @@ const CVPage = async ({ params }: { params: Params }) => {
           <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container xxs:ml-fluid-xxs xs:ml-fluid-xs sm:ml-fluid-sm mdlg:ml-fluid-mdlg lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
             {teamMember.skills.map((skill, index) => (
               <Card key={index} style="outlined-gray" className="flex min-w-40 flex-1 flex-col justify-start space-y-2 pt-20">
-                <Image src={skill.icon} alt="skill-icon" width={10} height={10} className="size-4"></Image>
+                {skill.icon.name && <IconPickerClient iconName={skill.icon.name} />}
                 <Text as="p">{skill.name}</Text>
                 <Text as="p" size="xxs" className=" text-secondaryLighter">{skill.description}</Text>
               </Card>

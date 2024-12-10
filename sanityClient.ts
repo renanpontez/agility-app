@@ -47,7 +47,7 @@ export async function getTeamMemberInfo(slug: string) {
   personalDescription,
   workDescription,
   skills[] {
-    "icon": icon.asset->url,
+    icon,
     name,
     description
   }

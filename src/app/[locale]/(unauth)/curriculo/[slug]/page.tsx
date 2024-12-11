@@ -12,7 +12,7 @@ import CVData from '@/data/cv.json';
 import BrasilBrand from '@/public/assets/images/brands/brasil-brand.png';
 // import EUABrand from '@/public/assets/images/brands/eua-brand.png'; TODO: Translate all text to English and use DropDownImage to change.
 import type { UserProfile } from '@/types/cv';
-import type { TeamMember } from '@/types/sanity';
+import type { ITeamMember } from '@/types/sanity';
 
 type Params = {
   slug: string;
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 }
 
 const CVPage = async ({ params }: { params: Params }) => {
-  const teamMember: TeamMember = await getTeamMemberInfo(params.slug);
+  const teamMember: ITeamMember = await getTeamMemberInfo(params.slug);
   const selectedCV = CVData.find((item: UserProfile) => item.slug === params.slug);
 
   if (!teamMember || !selectedCV) {
@@ -164,9 +164,9 @@ const CVPage = async ({ params }: { params: Params }) => {
         </span>
 
         <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container xxs:ml-fluid-xxs xs:ml-fluid-xs sm:ml-fluid-sm mdlg:ml-fluid-mdlg lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
-          {selectedCV.recommendations.map((recommendation, index) => (
+          {teamMember.recommendations.map((recommendation, index) => (
             <div key={index} className="flex min-w-96 flex-1 grow items-center justify-start gap-3 bg-transparent lg:max-w-128">
-              <Image src={recommendation.image} alt="recommendation-icon" width={36} height={36} className="size-12 rounded-full lg:size-24"></Image>
+              <Image src={recommendation.image} alt="recommendation-icon" width={96} height={96} className="size-12 rounded-full lg:size-24"></Image>
               <div className="space-y-1">
                 <Text as="p" size="xs" className="lg:text-base">
                   "

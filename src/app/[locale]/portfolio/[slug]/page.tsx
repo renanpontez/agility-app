@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
 
+import BreadCrumb from '@/components/Atoms/BreadCrumb';
+import type { BreadCrumbItemsProps } from '@/components/Atoms/BreadCrumb/BreadCrumb';
 import PortfolioHeroContent from '@/components/Atoms/PortfolioHeroContent/PortfolioHeroContent';
 import Button from '@/components/Button';
 import ContactForm from '@/components/ContactForm';
@@ -24,6 +26,13 @@ export async function generateStaticParams() {
 
 const PortfolioPage = async ({ params }: { params: Params }) => {
   const selectedProject = portfolioData.find((item: Project) => item.slug === params.slug);
+  const BreadCrumpItems: BreadCrumbItemsProps[] = [
+    { name: 'home', href: '/',
+    },
+    { name: 'portfolio', href: '/portfolio' },
+    { name: params.slug, href: '',
+    },
+  ];
 
   if (!selectedProject) {
     return <p>Projeto não encontrado</p>;
@@ -48,7 +57,10 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
           className=" min-h-[300px] md:h-[60vh]"
         />
       </section>
-      <div className="container my-16 text-white md:mb-20 md:mt-32">
+      <div className="container pt-4">
+        <BreadCrumb items={BreadCrumpItems} />
+      </div>
+      <div className="container my-16 text-white md:mb-20 md:mt-28">
 
         <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
           <Text as="h5" className="col-span-5 font-semibold">

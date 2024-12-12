@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
@@ -9,12 +10,34 @@ export type BreadCrumbItemsProps = {
 
 type BreadCrumbProps = {
   items: BreadCrumbItemsProps[];
-  classNames?: string;
+  className?: string;
+  style?: 'primary' | 'secondary' | 'white' | 'dark';
+  size?: 'xs' | 'md' | 'lg';
 };
 
-const BreadCrumb: React.FC<BreadCrumbProps> = ({ items, classNames }) => {
+const BreadCrumb: React.FC<BreadCrumbProps> = ({ items, className, style = 'white', size = 'xs' }) => {
+  const textStyle = twMerge(
+    classNames(
+      'hover:underline',
+      {
+        'text-white': style === 'white',
+        'text-primary': style === 'primary',
+        'text-secondary': style === 'secondary',
+        'text-secondaryDark': style === 'dark',
+      },
+      classNames,
+    ),
+  );
+
+  const textSize = twMerge(classNames({
+    className,
+    'text-xs': size === 'xs',
+    'text-md': size === 'md',
+    'text-lg': size === 'lg',
+  }));
+
   return (
-    <nav aria-label="Breadcrumb" className={twMerge('text-sm', classNames)}>
+    <nav aria-label="Breadcrumb" className={textSize}>
       <ol className="flex space-x-2">
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
@@ -23,12 +46,12 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({ items, classNames }) => {
             )}
             {item.href
               ? (
-                  <Link href={item.href} target="_self" className="text-white hover:underline">
+                  <Link href={item.href} target="_self" className={textStyle}>
                     {item.name}
                   </Link>
                 )
               : (
-                  <span className="text-gray-500">{item.name}</span>
+                  <span className="opacity-50">{item.name}</span>
                 )}
           </li>
         ))}

@@ -7,7 +7,7 @@ export type ISkill = {
 };
 
 export type IRecommendations = {
-  image: string;
+  authorImage: string;
   text: string;
   author: string;
 };
@@ -29,11 +29,11 @@ export type ITypeBlock = {
 export type ITeamMember = {
   slug: string;
   name: string;
-  cvLink: string;
-  jobs: string[];
-  image: string;
+  resumeDownloadURL: string;
+  headline: string[];
+  userImage: string;
   email: string;
-  tel: number;
+  phone: number;
   recommendations: IRecommendations[];
   personalDescription: ITypeBlock;
   skills: ISkill[];

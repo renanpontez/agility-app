@@ -2,10 +2,10 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import { getAllTeamMembersInfo, getTeamMemberInfo } from 'sanityClient';
 
-import IconPickerClient from '@/components/Atoms/IconPickerClient/IconPickerClient';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import DropDownImage from '@/components/DropDownImage/DropDownImage';
+import IconPickerClient from '@/components/IconPickerClient/IconPickerClient';
 import Text from '@/components/Text';
 import WppButton from '@/components/WppButton';
 import CVData from '@/data/cv.json';
@@ -45,7 +45,7 @@ const CVPage = async ({ params }: { params: Params }) => {
         <Button
           iconRight
           target="_blank"
-          href={teamMember.cvLink}
+          href={teamMember.resumeDownloadURL}
           size="sm"
           style="outlined-gray"
           icon={(
@@ -63,7 +63,7 @@ const CVPage = async ({ params }: { params: Params }) => {
       <div className="space-y-20 pt-8 lg:pt-24">
         <section className="container flex-row-reverse justify-between space-y-6 lg:flex">
           <div className="flex h-auto w-full basis-4/12 items-center justify-center lg:justify-end">
-            <Image src={teamMember.image} alt="user-cv-image" width={800} height={450} className="max-h-52 max-w-52 rounded-full object-cover lg:max-h-114 lg:max-w-114"></Image>
+            <Image src={teamMember.userImage} alt="user-cv-image" width={800} height={450} className="max-h-52 max-w-52 rounded-full object-cover lg:max-h-114 lg:max-w-114"></Image>
           </div>
           <div className="space-y-3">
             <div>
@@ -73,10 +73,10 @@ const CVPage = async ({ params }: { params: Params }) => {
                 <span className="font-normal">{rest.join(' ')}</span>
               </Text>
               <div className="flex border-separate items-center justify-center gap-1 font-thin opacity-35 lg:justify-start">
-                {teamMember.jobs.map((job, index) => (
+                {teamMember.headline.map((headlineItem, index) => (
                   <Text as="p" size="xs" key={index}>
-                    {job.toUpperCase()}
-                    {index < teamMember.jobs.length - 1 && ` |`}
+                    {headlineItem.toUpperCase()}
+                    {index < teamMember.headline.length - 1 && ` |`}
                   </Text>
                 ))}
 
@@ -89,7 +89,7 @@ const CVPage = async ({ params }: { params: Params }) => {
             <div className="flex justify-center gap-3 pt-4 lg:justify-start">
               <Button
                 iconRight
-                href={teamMember.cvLink}
+                href={teamMember.resumeDownloadURL}
                 target="_blank"
                 style="outlined-gray"
                 className="font-light"
@@ -102,7 +102,7 @@ const CVPage = async ({ params }: { params: Params }) => {
               >
                 Ver meu portfolio
               </Button>
-              <WppButton className="font-light" cellPhone={teamMember.tel} message={`Olá, ${teamMember.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
+              <WppButton className="font-light" cellPhone={teamMember.phone} message={`Olá, ${teamMember.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
               {' '}
 
             </div>
@@ -166,7 +166,7 @@ const CVPage = async ({ params }: { params: Params }) => {
         <div className="flex gap-2 overflow-x-auto scroll-smooth pb-4 pl-8 lg:container xxs:ml-fluid-xxs xs:ml-fluid-xs sm:ml-fluid-sm mdlg:ml-fluid-mdlg lg:ml-auto lg:flex-wrap lg:gap-4 lg:overflow-hidden lg:pl-8">
           {teamMember.recommendations.map((recommendation, index) => (
             <div key={index} className="flex min-w-96 flex-1 grow items-center justify-start gap-3 bg-transparent lg:max-w-128">
-              <Image src={recommendation.image} alt="recommendation-icon" width={96} height={96} className="size-12 rounded-full lg:size-24"></Image>
+              <Image src={recommendation.authorImage} alt="recommendation-icon" width={96} height={96} className="size-12 rounded-full lg:size-24"></Image>
               <div className="space-y-1">
                 <Text as="p" size="xs" className="lg:text-base">
                   "
@@ -187,7 +187,7 @@ const CVPage = async ({ params }: { params: Params }) => {
           <Text as="p" className="mx-auto max-w-128 px-16 pb-6 text-center text-secondaryLighter">
             Veja como eu posso te ajudar a transformar ideias em realidade de um jeito mágico e prático.
           </Text>
-          <WppButton className="mx-auto max-w-52 font-light" cellPhone={teamMember.tel} message={`Olá, ${teamMember.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
+          <WppButton className="mx-auto max-w-52 font-light" cellPhone={teamMember.phone} message={`Olá, ${teamMember.name}! Encontrei seu currículo na Agility Creative Solution e gostaria de saber mais sobre seu trabalho.`}></WppButton>
         </div>
 
       </section>

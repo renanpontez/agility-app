@@ -1,8 +1,8 @@
 import { createClient } from '@sanity/client';
 
 export const client = createClient({
-  projectId: '0bz33x6i',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATA_SET,
   useCdn: true, // set to `false` to bypass the edge cache
   apiVersion: '2022-03-07', // use current date (YYYY-MM-DD) to target the latest API version
   // token: process.env.SANITY_SECRET_TOKEN // Needed for certain operations like updating content or accessing previewDrafts perspective
@@ -13,10 +13,8 @@ export async function getAllTeamMembersInfoBase() {
   *[_type == "teamMember"]{
     slug,
     name,
-    jobs,
-    image {
-      asset->url
-    },
+    headline,
+    "userImage": userImage.asset->url,
     email,
   }
 `;
@@ -38,16 +36,14 @@ export async function getTeamMemberInfo(slug: string) {
   "id": _id,
   slug,
   name,
-  cvLink,
-  jobs,
-  yearsOfExperience,
-  "image": image.asset->url,
+  resumeDownloadURL,
+  headline,
+  "userImage": userImage.asset->url,
   email,
-  tel,
+  phone,
   personalDescription,
-  workDescription,
   recommendations[] {
-    "image": image.asset->url,
+    "userImage": userImage.asset->url,
     author,
     text,
   },

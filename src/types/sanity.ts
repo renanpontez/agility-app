@@ -1,24 +1,23 @@
-import type * as Icons from 'react-icons/fa';
-
-export type ISkill = {
-  icon: IiconPicker;
+export type Skill = {
+  icon: IconPicker;
   name: string;
   description: string;
 };
 
-export type IRecommendations = {
+export type Recommendations = {
   authorImage: string;
   text: string;
   author: string;
 };
 
-export type IiconPicker = {
+export type IconPicker = {
   provider: string;
   _type: string;
-  name: keyof typeof Icons;
+  svg: string;
+  name: string;
 };
 
-export type ITypeBlock = {
+export type TypeBlock = {
   _key: string;
   markDefs: any[];
   children: { _key: string; text: string; _type: string; marks: string[] }[];
@@ -26,7 +25,7 @@ export type ITypeBlock = {
   style: string;
 };
 
-export type ITeamMember = {
+export type TeamMember = {
   slug: string;
   name: string;
   resumeDownloadURL: string;
@@ -34,7 +33,7 @@ export type ITeamMember = {
   userImage: string;
   email: string;
   phone: number;
-  recommendations: IRecommendations[];
-  personalDescription: ITypeBlock;
-  skills: ISkill[];
+  recommendations: Recommendations[];
+  personalDescription: TypeBlock;
+  skills: Skill[];
 };

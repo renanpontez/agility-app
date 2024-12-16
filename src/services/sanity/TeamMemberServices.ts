@@ -35,7 +35,7 @@ export async function getTeamMemberInfo(slug: string) {
   phone,
   personalDescription,
   recommendations[] {
-    "userImage": userImage.asset->url,
+    "authorImage": authorImage.asset->url,
     author,
     text,
   },

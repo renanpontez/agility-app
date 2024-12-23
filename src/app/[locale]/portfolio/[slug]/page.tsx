@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
 
-import PortfolioHeroContent from '@/components/Atoms/PortfolioHeroContent/PortfolioHeroContent';
 import Button from '@/components/Button';
 import ContactForm from '@/components/ContactForm';
 import Hero from '@/components/Hero';
 import { BrandLoading } from '@/components/Loading';
+import PortfolioHeroContent from '@/components/PortfolioHeroContent/PortfolioHeroContent';
 import Text from '@/components/Text';
 import portfolioData from '@/data/portfolio.json';
 import HostingAndDom from '@/public/assets/images/tags/hosting-and-dominio.png';

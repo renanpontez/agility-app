@@ -7,6 +7,7 @@ import { SimpleLoading } from '../Loading';
 export type ButtonProps = {
   style: 'primary' | 'secondary' | 'light' | 'dark' | 'link' | 'warning' | 'error' | 'success' | 'outlined' | 'outlined-light' | 'basic' | 'outlined-gray';
   onClick?: () => void;
+  target?: React.HTMLAttributeAnchorTarget;
   children: React.ReactNode;
   icon?: React.ReactNode;
   iconRight?: boolean; // Nova prop para controlar a posição do ícone
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   style,
   onClick,
   children,
+  target,
   icon,
   iconRight = false, // Valor padrão como falso
   loading,
@@ -71,6 +73,8 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <Tag
+      href={href}
+      target={target}
       type="button"
       className={buttonClasses}
       onClick={onClick}

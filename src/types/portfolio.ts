@@ -1,4 +1,4 @@
-type metricAndValue = {
+type MetricAndValue = {
   value: string;
   metric: string;
 };
@@ -14,7 +14,7 @@ export type Project = {
   projectImage2?: string;
   projectImage3?: string;
   projectImage4?: string;
-  metricAndValue?: metricAndValue[];
+  metricAndValue?: MetricAndValue[];
   qualityAndDeliveryDescription?: string;
   developmentDescription?: string;
   descriptions?: string[];

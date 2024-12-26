@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
             <Text as="h4" styleOverride="h6" className=" text-white">Vamos voar juntos?</Text>
             <div className="flex flex-col gap-2">
               <FooterLink text="hi@agilitycreative.com" href="mailto:hi@agilitycreative.com" />
-              <FooterLink text="+55 85 99628-4730" href="tel:+5585996284730" />
+              <FooterLink text="+55 85 99628-4730" href="phone:+5585996284730" />
             </div>
           </div>
         </div>

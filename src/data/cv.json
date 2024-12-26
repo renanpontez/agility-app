@@ -2,12 +2,12 @@
   {
     "slug": "felipe",
     "name": "Felipe Macedo",
-    "cvLink": "www.google.com",
-    "jobs": ["Designer gráfico", "Designer UI/UX"],
+    "resumeDownloadURL": "www.google.com",
+    "headline": ["Designer gráfico", "Designer UI/UX"],
     "yearsOfExperience": "3",
     "image": "/assets/images/cv/felipe/profileImg.png",
     "email": "femacedogomes@gmail.com",
-    "tel": "+5585981654701",
+    "phone": "+5585981654701",
     "personalDescription": "Natural de Fortaleza, Ceará. Tenho 31 anos de idade e 7 anos de experiência no mercado de design gráfico e ilustração digital.",
     "workDescription": "Formado na universidade de Fortaleza em arquitetura e urbanismo,  me encontrei como designer gráfico e me dediquei a soluções tecnológicas como Designer de experiencia do usuário e interfaces de usuário.",
     "skills": [
@@ -93,7 +93,7 @@
     ]
 
   },
-   {
+  {
     "slug": "renan",
     "name": "Renan Martins",
     "cvLink": "www.linkedin.com/in/renanmartins",

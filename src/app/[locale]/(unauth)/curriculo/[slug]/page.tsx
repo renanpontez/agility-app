@@ -10,7 +10,6 @@ import CVData from '@/data/cv.json';
 import BrasilBrand from '@/public/assets/images/brands/brasil-brand.png';
 import { getAllTeamMembersInfo, getTeamMemberInfo } from '@/services/sanity/TeamMemberServices';
 // import EUABrand from '@/public/assets/images/brands/eua-brand.png'; TODO: Translate all text to English and use DropDownImage to change.
-import type { UserProfile } from '@/types/cv';
 import type { TeamMember } from '@/types/sanity';
 
 type Params = {
@@ -26,7 +25,7 @@ export async function generateStaticParams() {
 
 const CVPage = async ({ params }: { params: Params }) => {
   const teamMember: TeamMember = await getTeamMemberInfo(params.slug);
-  const selectedCV = CVData.find((item: UserProfile) => item.slug === params.slug);
+  const selectedCV = CVData.find((item: any) => item.slug === params.slug);
 
   if (!teamMember || !selectedCV) {
     return <p>Currículo virtual não encontrado</p>;

@@ -92,5 +92,83 @@
       }
     ]
 
+  },
+  {
+    "slug": "renan",
+    "name": "Renan Martins",
+    "cvLink": "www.linkedin.com/in/renanmartins",
+    "jobs": ["Desenvolvedor Front-End", "Product Manager"],
+    "yearsOfExperience": "12",
+    "image": "/assets/images/cv/renan/profileImg.png",
+    "email": "renanpontez@gmail.com",
+    "tel": "+5585996284730",
+    "personalDescription": "Natural de Fortaleza, Ceará, sou apaixonado por tecnologia e soluções digitais. Tenho 10 anos de experiência desenvolvendo produtos digitais, com foco em front-end e gestão de produtos.",
+    "workDescription": "Especialista em React, Next.js e TypeScript, com experiência em liderar equipes e entregar soluções inovadoras. Meu trabalho se concentra em criar experiências digitais que conectem empresas a seus clientes de maneira eficiente e escalável.",
+    "skills": [
+      {
+        "icon": "/assets/images/icons/react-icon.svg",
+        "name": "React",
+        "description": "Desenvolvimento de interfaces modernas e escaláveis utilizando React."
+      },
+      {
+        "icon": "/assets/images/icons/typescript-icon.svg",
+        "name": "TypeScript",
+        "description": "Código robusto e tipado para maior confiabilidade e escalabilidade."
+      },
+      {
+        "icon": "/assets/images/icons/nextjs-icon.svg",
+        "name": "Next.js",
+        "description": "Aplicações web rápidas e otimizadas para SEO com Next.js."
+      },
+      {
+        "icon": "/assets/images/icons/sanity-icon.svg",
+        "name": "Sanity CMS",
+        "description": "Criação de soluções headless personalizadas e integradas."
+      },
+      {
+        "icon": "/assets/images/icons/uiux-icon.svg",
+        "name": "UI/UX",
+        "description": "Design focado na experiência do usuário e interfaces intuitivas."
+      },
+      {
+        "icon": "/assets/images/icons/project-icon.svg",
+        "name": "Gestão de Produtos",
+        "description": "Coordenação de projetos e equipes para entrega de soluções digitais."
+      }
+    ],
+    "portfolio": [
+      {
+        "image": "/assets/images/cv/renan/job1.png",
+        "name": "California Pizza Kitchen",
+        "description": "Reestruturação digital com foco em aumento de retenção de usuários."
+      },
+      {
+        "image": "/assets/images/cv/renan/job2.png",
+        "name": "The Wall Street Journal - Buyside",
+        "description": "Melhoria de engajamento e personalização de conteúdo."
+      },
+      {
+        "image": "/assets/images/cv/renan/job3.png",
+        "name": "Agility Wind",
+        "description": "Criação de um pacote de componentes reutilizáveis em React."
+      }
+    ],
+    "recommendations": [
+      {
+        "image": "/assets/images/cv/renan/testimonial1.png",
+        "text": "O Renan transformou nosso site, elevando a experiência do usuário e aumentando as conversões.",
+        "author": "Leandro P | Agillock"
+      },
+      {
+        "image": "/assets/images/cv/renan/testimonial2.png",
+        "text": "Trabalhar com o Renan foi um prazer! Ele liderou o projeto com precisão e resultados excepcionais.",
+        "author": "Sergio M | Academia Cearense de Economia"
+      },
+      {
+        "image": "/assets/images/cv/renan/testimonial3.png",
+        "text": "O Renan trouxe eficiência e inovação para nosso projeto. Recomendo fortemente!",
+        "author": "Marília M | MR Advogados"
+      }
+    ]
   }
 ]

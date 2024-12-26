@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
 
+import BreadCrumb from '@/components/BreadCrumb';
+import type { BreadcrumbItemsProps } from '@/components/BreadCrumb/BreadCrumb';
 import Button from '@/components/Button';
 import ContactForm from '@/components/ContactForm';
 import Hero from '@/components/Hero';
@@ -24,6 +26,13 @@ export async function generateStaticParams() {
 
 const PortfolioPage = async ({ params }: { params: Params }) => {
   const selectedProject = portfolioData.find((item: Project) => item.slug === params.slug);
+  const breadcrumbItems: BreadcrumbItemsProps[] = [
+    { name: 'home', href: '/',
+    },
+    { name: 'portfolio', href: '/portfolio' },
+    { name: params.slug,
+    },
+  ];
 
   if (!selectedProject) {
     return <p>Projeto não encontrado</p>;
@@ -48,7 +57,8 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
           className=" min-h-[300px] md:h-[60vh]"
         />
       </section>
-      <div className="container my-16 text-white md:mb-20 md:mt-32">
+      <BreadCrumb items={breadcrumbItems} />
+      <div className="container my-16 text-white md:mb-20 md:mt-28">
 
         <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
           <Text as="h5" className="col-span-5 font-semibold">

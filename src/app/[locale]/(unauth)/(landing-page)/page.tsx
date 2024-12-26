@@ -7,6 +7,7 @@ import Card from '@/components/Card';
 import Hero from '@/components/Hero';
 import { BrandLoading } from '@/components/Loading';
 import Logo from '@/components/Logo';
+import Parallax from '@/components/Parallax/Parallax';
 import RoundedBarItems from '@/components/RoundedBarItems';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import Text from '@/components/Text';
@@ -56,45 +57,40 @@ const LandingPage: React.FC = () => {
       </section>
 
       <section>
-        <Hero
+        <Parallax
           applyMask
           maskClassName="bg-gradient-to-l"
-          mediaType="image"
           mediaSrc="/assets/images/desk_working.png"
-          style="auto-height"
-          altText="A desk containing a laptop, a notebook, and a cup of coffee"
-
-          content={(
-            <div className="flex w-full flex-col items-start gap-10 py-20 pr-12 text-left md:w-[30%]">
-              <Logo symbolColor="primary" />
-              {/* <div className="-mb-4 -ml-6">
+        >
+          <div className="flex w-full flex-col items-start gap-10 py-20 pr-12 text-left md:w-[30%]">
+            <Logo symbolColor="primary" />
+            {/* <div className="-mb-4 -ml-6">
                   <BrandLoading size="xlg" />
                 </div> */}
-              <Text as="h3" styleOverride="p" size="lg">
-                Nós acreditamos que organizando o
-                {' '}
-                <b>processo criativo</b>
-                {' '}
-                e trabalhando em
-                {' '}
-                <b>parceria com o cliente</b>
-              </Text>
-              <Text as="h3" styleOverride="p" size="lg">
-                Conseguimos
-                {' '}
-                <b>maximizar os resultados</b>
-                {' '}
-                do seu projeto de maneira
-                {' '}
-                <span className="text-primaryLighter">ágil e confiável</span>
-              </Text>
+            <Text as="h3" styleOverride="p" size="lg">
+              Nós acreditamos que organizando o
+              {' '}
+              <b>processo criativo</b>
+              {' '}
+              e trabalhando em
+              {' '}
+              <b>parceria com o cliente</b>
+            </Text>
+            <Text as="h3" styleOverride="p" size="lg">
+              Conseguimos
+              {' '}
+              <b>maximizar os resultados</b>
+              {' '}
+              do seu projeto de maneira
+              {' '}
+              <span className="text-primaryLighter">ágil e confiável</span>
+            </Text>
 
-              <Button style="outlined-light" size="sm">
-                NOSSOS PROJETOS
-              </Button>
-            </div>
-          )}
-        />
+            <Button style="outlined-light" size="sm">
+              NOSSOS PROJETOS
+            </Button>
+          </div>
+        </Parallax>
       </section>
 
       <section className="mx-auto max-w-[90%] py-16 text-center md:max-w-[50%] md:py-24" id="Portfolio">
@@ -117,25 +113,21 @@ const LandingPage: React.FC = () => {
       </section>
 
       <section className="w-full py-16 text-center md:py-24">
-        <Hero
+        <Parallax
           applyMask
-          mediaType="image"
           mediaSrc="/assets/images/tablet_working.png"
-          style="auto-height"
-          altText="An amazing hero image"
-          content={(
-            <div className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[35%]">
-              <Text as="h4" styleOverride="h2">
-                MENTES CRIATIVAS E PROCESSOS ORGANIZADOS GERAM MAIS
-                {' '}
-                <span className="text-primaryLighter">RESULTADOS</span>
-              </Text>
-              <Button style="outlined-light" size="sm">
-                CONHEÇA A AGILITY
-              </Button>
-            </div>
-          )}
-        />
+        >
+          <div className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[35%]">
+            <Text as="h4" styleOverride="h2">
+              MENTES CRIATIVAS E PROCESSOS ORGANIZADOS GERAM MAIS
+              {' '}
+              <span className="text-primaryLighter">RESULTADOS</span>
+            </Text>
+            <Button style="outlined-light" size="sm">
+              CONHEÇA A AGILITY
+            </Button>
+          </div>
+        </Parallax>
       </section>
 
       <section className="container pb-24">

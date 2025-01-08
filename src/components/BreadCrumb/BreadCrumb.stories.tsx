@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import BreadCrumb from '@/components/Atoms/BreadCrumb';
+import BreadCrumb from '@/components/BreadCrumb';
 
 const meta: Meta<typeof BreadCrumb> = {
   title: 'Components/BreadCrumb',

@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
 
-import BreadCrumb from '@/components/Atoms/BreadCrumb';
-import type { BreadcrumbItemsProps } from '@/components/Atoms/BreadCrumb/BreadCrumb';
-import PortfolioHeroContent from '@/components/Atoms/PortfolioHeroContent/PortfolioHeroContent';
+import BreadCrumb from '@/components/BreadCrumb';
+import type { BreadcrumbItemsProps } from '@/components/BreadCrumb/BreadCrumb';
 import Button from '@/components/Button';
 import ContactForm from '@/components/ContactForm';
 import Hero from '@/components/Hero';
 import { BrandLoading } from '@/components/Loading';
+import PortfolioHeroContent from '@/components/PortfolioHeroContent/PortfolioHeroContent';
 import Text from '@/components/Text';
 import portfolioData from '@/data/portfolio.json';
 import HostingAndDom from '@/public/assets/images/tags/hosting-and-dominio.png';

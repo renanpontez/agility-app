@@ -1,4 +1,4 @@
-export const redirectToWpp = (phoneNumber: string, message?: string) => {
+export const redirectToWhatsApp = (phoneNumber: string | number, message?: string) => {
   if (message) {
     const encondedMessage = encodeURIComponent(message);
     const url = `https://wa.me/${phoneNumber}?text=${encondedMessage}`;

@@ -19,12 +19,12 @@ export type Recommendation = {
 export type UserProfile = {
   slug: string;
   name: string;
-  cvLink: string;
+  resumeDownloadURL: string;
   yearsOfExperience: string;
-  jobs: string[];
+  headline: string[];
   image: string;
   email: string;
-  tel: string;
+  phone: string;
   personalDescription: string;
   workDescription: string;
   skills: Skill[];

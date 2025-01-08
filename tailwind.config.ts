@@ -27,6 +27,9 @@ export default {
         dark: '#1A202C',
         darkLight: '#2D3748',
       },
+      maxHeight: {
+        114: '440px',
+      },
       maxWidth: {
         114: '440px',
       },

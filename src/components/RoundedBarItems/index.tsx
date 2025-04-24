@@ -1,34 +1,52 @@
 'use client';
 
 import classNames from 'classnames';
-import React from 'react';
+import { animate, motion, useMotionValue, useTransform } from 'motion/react';
+import React, { useEffect } from 'react';
 
 import Card from '@/components/Card';
 import Text from '@/components/Text';
 
 const RoundedItem = ({ item }: { item: any; count: number }) => {
+  const startValue = useMotionValue(0);
+  const rounded = useTransform(() => Math.round(startValue.get()));
+
+  useEffect(() => {
+    const controls = animate(startValue, item.title, { duration: 1 });
+    return () => controls.stop();
+  }, []);
+
   return (
-    <div key={item.title} className="flex flex-col items-center justify-center gap-2">
-      <Text as="h2" className="text-center tracking-wider text-primary">
-        {item.title}
-        <span className="block text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
+    <motion.div
+      key={item.title}
+      className="flex flex-col items-center justify-center gap-2"
+    >
+      <Text as="h2" className="flex text-center tracking-wider text-primary">
+        {item.prefix}
+        <motion.pre>{rounded}</motion.pre>
+        {item.refix}
       </Text>
-    </div>
+      <span className="block text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
+
+    </motion.div>
   );
 };
 
 const RoundedBarItems: React.FC = () => {
   const EXPERIENCES = [{
-    title: '11',
+    title: 11,
     description: 'ANOS DE EXPERIÊNCIA',
   }, {
-    title: '+50',
+    prefix: '+',
+    title: 50,
     description: 'PROJETOS CONCLUÍDOS',
   }, {
-    title: '+90%',
+    prefix: '+',
+    refix: '%',
+    title: 90,
     description: 'CLIENTES APROVAM',
   }, {
-    title: '5',
+    title: 5,
     description: 'MENTES CRIATIVAS',
   }];
 

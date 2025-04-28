@@ -1,3 +1,5 @@
+'use client';
+import { motion } from 'motion/react';
 import Head from 'next/head';
 import React, { Suspense } from 'react';
 import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
@@ -117,7 +119,7 @@ const LandingPage: React.FC = () => {
           applyMask
           mediaSrc="/assets/images/tablet_working.png"
         >
-          <div className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[35%]">
+          <motion.div transition={{ delay: 0.5 }} initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[35%]">
             <Text as="h4" styleOverride="h2">
               MENTES CRIATIVAS E PROCESSOS ORGANIZADOS GERAM MAIS
               {' '}
@@ -126,7 +128,7 @@ const LandingPage: React.FC = () => {
             <Button style="outlined-light" size="sm">
               CONHEÇA A AGILITY
             </Button>
-          </div>
+          </motion.div>
         </Parallax>
       </section>
 
@@ -145,8 +147,12 @@ const LandingPage: React.FC = () => {
             title: 'Qualidade e suporte',
             description: 'Comprometidos com a excelência, garantimos a qualidade em cada etapa. Além disso, oferecemos suporte contínuo para garantir o sucesso contínuo do seu projeto.',
           }].map(item => (
-            <Card key={item.title} className="flex w-full flex-col items-center justify-center gap-5 bg-secondaryDark p-10 text-center md:w-[33%]" shadow="lg">
-              <div className="flex items-center justify-center">
+            <Card
+              key={item.title}
+              className="group flex w-full flex-col items-center justify-center gap-5 bg-secondaryDark p-10 text-center md:w-[33%]"
+              shadow="lg"
+            >
+              <div className="flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                 <item.icon className="text-primaryLighter" size={36} />
               </div>
               <div className="flex flex-col gap-3">

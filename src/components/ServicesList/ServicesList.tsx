@@ -2,7 +2,9 @@
 
 import { motion } from 'framer-motion';
 import React from 'react';
-import { FaChartColumn, FaComputer, FaEnvelopesBulk } from 'react-icons/fa6';
+import { CgWebsite } from 'react-icons/cg';
+import { IoCartOutline, IoPhonePortraitOutline } from 'react-icons/io5';
+import { TbDeviceAnalytics } from 'react-icons/tb';
 
 import Card from '../Card';
 import Text from '../Text';
@@ -23,22 +25,22 @@ const ServicesList: React.FC = () => {
 
   const services = [
     {
-      icon: FaComputer,
-      title: 'Sites/Landing Pages',
+      icon: CgWebsite,
+      title: `Sites/\nLanding Pages`,
       description: 'Sites que realmente entregam resultados para seu projeto',
     },
     {
-      icon: FaEnvelopesBulk,
-      title: 'Aplicativos/Jogos Digitais',
+      icon: IoPhonePortraitOutline,
+      title: 'Aplicativos/\nJogos Digitais',
       description: 'Apps e jogos personalizados transformados em realidade',
     },
     {
-      icon: FaChartColumn,
-      title: 'Lojas Virtuais/E-commerce',
+      icon: IoCartOutline,
+      title: 'Lojas Virtuais/\nE-commerce',
       description: 'Aproveite a expansão do mercado com vendas online',
     },
     {
-      icon: FaChartColumn,
+      icon: TbDeviceAnalytics,
       title: 'Consultoria Dev Tecnologia',
       description: 'Foco total em otimizar os resultados do seu projeto',
     },
@@ -53,10 +55,18 @@ const ServicesList: React.FC = () => {
     >
 
       <Text as="h3" className="mb-10">
-        <b>SERVIÇOS</b>
+        <b>
+          <span className="relative inline-block">
+            <span className="before:absolute before:left-0 before:top-8 before:h-0.5 before:w-full before:bg-primary">
+              SER
+            </span>
+          </span>
+          VIÇOS
+        </b>
         {' '}
         MAIS POPULARES
       </Text>
+      <span className="h-1 w-8 bg-white" />
       <div className="flex flex-col justify-between gap-8 md:flex-row">
 
         {services.map((item, index) => (
@@ -70,13 +80,13 @@ const ServicesList: React.FC = () => {
               whileInView="visible"
               variants={cardVariants}
             >
-              <Card className="flex w-full flex-col gap-5 border border-secondaryDark bg-transparent p-6">
+              <Card className="group flex w-full flex-col gap-5 border border-secondaryDark bg-transparent" radius="md">
                 <div className="flex flex-col gap-6">
-                  <Text as="h5" className="w-36">{item.title}</Text>
-                  <div className="mt-6 flex">
-                    <item.icon className="text-white hover:text-primary" size={36} />
+                  <Text as="h5" className="whitespace-pre-line">{item.title}</Text>
+                  <div className="mt-5 flex">
+                    <item.icon className=" text-white group-hover:text-primary" size={36} />
                   </div>
-                  <Text as="p" className="text-secondaryLighter">{item.description}</Text>
+                  <Text as="p" styleOverride="small" className="text-secondaryLighter">{item.description}</Text>
                 </div>
               </Card>
             </motion.div>

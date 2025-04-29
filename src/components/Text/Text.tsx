@@ -26,12 +26,12 @@ const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, c
   const elementStyles: Record<TextProps['as'], string> = {
     h1: classNames(baseClasses, 'text-3xl md:text-4xl font-bold'),
     h2: classNames(baseClasses, 'text-3xl font-semibold'),
-    h3: classNames(baseClasses, 'text-2xl font-semibold'),
-    h4: classNames(baseClasses, 'text-xl font-semibold'),
-    h5: classNames(baseClasses, 'text-lg font-normal'),
-    h6: classNames(baseClasses, 'text-sm font-semibold uppercase'),
+    h3: classNames(baseClasses, 'text-2xl font-light'),
+    h4: classNames(baseClasses, 'text-xl font-light'),
+    h5: classNames(baseClasses, 'text-lg font-light'),
+    h6: classNames(baseClasses, 'text-sm font-light uppercase'),
     p: classNames(baseClasses, 'text-sm leading-relaxed'),
-    small: classNames(baseClasses, 'text-xs leading-relaxed'),
+    small: classNames(baseClasses, 'text-xs font-light leading-relaxed'),
     em: classNames(baseClasses, 'italic text-xs font-regular tracking-normal'),
     blockquote: classNames(baseClasses, 'border-l-4 pl-4 text-lg italic text-muted-foreground'),
   };

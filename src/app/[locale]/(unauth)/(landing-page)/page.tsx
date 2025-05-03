@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import React, { Suspense } from 'react';
 
+import AboutUs from '@/components/AboutUs';
 import Button from '@/components/Button';
 import Hero from '@/components/Hero';
+import HorizontalBanner from '@/components/HorizontalBanner';
 import { BrandLoading } from '@/components/Loading';
-import Logo from '@/components/Logo';
 import Parallax from '@/components/Parallax/Parallax';
 import RoundedBarItems from '@/components/RoundedBarItems';
 import ServicesList from '@/components/ServicesList';
-import Testimonials from '@/components/Testimonials/Testimonials';
 import Text from '@/components/Text';
 import portfolioData from '@/data/portfolio.json';
 import { getBaseUrl } from '@/utils/Helpers';
@@ -57,8 +57,16 @@ const LandingPage: React.FC = () => {
           <ServicesList />
         </section>
 
+        <section className="container pb-24">
+          <AboutUs />
+        </section>
+
+        <section>
+          <HorizontalBanner />
+        </section>
+
         <section className="mx-auto max-w-[90%] py-16 text-center md:max-w-[50%] md:py-24" id="Portfolio">
-          <Text as="h4" styleOverride="h1">
+          <Text as="h4" styleOverride="h2">
             PROJETOS QUE FIZERAM A
             {' '}
             <span className="text-primary">DIFERENÇA</span>
@@ -76,45 +84,33 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        <section>
+        <section className="w-full">
           <Parallax
             applyMask
-            maskClassName="bg-gradient-to-l"
-            mediaSrc="/assets/images/desk_working.png"
+            maskClassName="bg-gradient-to-l from-black/30 to-black/90"
+            mediaSrc="/assets/images/agility-team-working.jpg"
+            height="h-[40vh]"
+            intensity={200}
           >
-            <div className="flex w-full flex-col items-start gap-10 py-20 pr-12 text-left md:w-[30%]">
-              <Logo symbolColor="primary" />
-              {/* <div className="-mb-4 -ml-6">
-                    <BrandLoading size="xlg" />
-                  </div> */}
-              <Text as="h3" styleOverride="p" size="lg">
-                Nós acreditamos que organizando o
-                {' '}
-                <b>processo criativo</b>
-                {' '}
-                e trabalhando em
-                {' '}
-                <b>parceria com o cliente</b>
-              </Text>
-              <Text as="h3" styleOverride="p" size="lg">
-                Conseguimos
-                {' '}
-                <b>maximizar os resultados</b>
-                {' '}
-                do seu projeto de maneira
-                {' '}
-                <span className="text-primaryLighter">ágil e confiável</span>
-              </Text>
-
-              <Button style="outlined-light" size="sm">
-                NOSSOS PROJETOS
-              </Button>
+            <div className="container flex h-full items-center">
+              <div className="flex w-full flex-col items-start gap-10 py-20 pr-12 text-left md:w-[50%]">
+                <Text as="h3">
+                  Mentes
+                  {' '}
+                  <b className="font-bold">criativas</b>
+                  {' '}
+                  e processos
+                  {' '}
+                  <b className="font-bold">organizados</b>
+                  {' '}
+                  geram mais resultados para qualquer projeto digital
+                </Text>
+                <Button style="outlined-light" size="sm">
+                  CONHEÇA A AGILITY
+                </Button>
+              </div>
             </div>
           </Parallax>
-        </section>
-
-        <section className="mx-auto w-fit max-w-[70%] justify-center py-16 text-center md:max-w-[30%] md:py-32">
-          <Testimonials />
         </section>
 
         <section className="container mb-32 flex w-full flex-col justify-between gap-16 md:my-24 md:mb-64 md:flex-row" id="Contato">

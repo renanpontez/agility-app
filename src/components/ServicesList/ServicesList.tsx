@@ -41,7 +41,7 @@ const ServicesList: React.FC = () => {
     },
     {
       icon: TbDeviceAnalytics,
-      title: 'Consultoria Dev Tecnologia',
+      title: 'Consultoria Dev\nTecnologia',
       description: 'Foco total em otimizar os resultados do seu projeto',
     },
   ];
@@ -54,15 +54,18 @@ const ServicesList: React.FC = () => {
       transition={{ delay: 0.5 }}
     >
 
-      <Text as="h3" className="mb-10">
-        <b>
-          <span className="relative inline-block">
-            <span className="before:absolute before:left-0 before:top-8 before:h-0.5 before:w-full before:bg-primary">
-              SER
+      <Text as="h3" className="mb-8">
+        <span className="font-bold">
+          <b>
+            <span className="relative inline-block">
+              <span className="before:absolute before:left-0 before:top-8 before:h-[3px] before:w-full before:bg-primary">
+                SER
+              </span>
             </span>
-          </span>
-          VIÇOS
-        </b>
+            VIÇOS
+          </b>
+
+        </span>
         {' '}
         MAIS POPULARES
       </Text>

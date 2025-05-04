@@ -68,7 +68,7 @@ const Parallax: React.FC<PropsWithChildren<ParallaxProps>> = ({
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          height: '150%',
+          height: `calc(100% + ${intensity * 2}px)`,
           transform: `translateY(-${offsetY}px)`,
           willChange: 'transform',
         }}

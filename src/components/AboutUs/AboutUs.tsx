@@ -40,47 +40,91 @@ const AboutUs = () => {
 
       </div>
       <div className="relative w-1/2">
-        <span>
-          <span className="h-16 w-56 rotate-45 bg-transparent"></span>
-          <span className="h-16 w-72 rotate-45 bg-transparent"></span>
-          <span className="h-16 w-64 rotate-45 bg-transparent"></span>
-          <span className="h-16 w-44 rotate-45 bg-transparent"></span>
-
-        </span>
         <div className="relative">
-          <div className="relative z-0 m-auto h-auto w-1/2">
+          <div className="relative z-0 m-auto h-[400px] w-full p-10">
             {/* Imagem animada que fica por baixo */}
             <motion.div
               animate={{
-                scale: [1, 1.05, 1],
+                y: [-5, 15, -5],
               }}
               transition={{
-                duration: 3,
+                duration: 10,
                 ease: 'easeInOut',
                 repeat: Infinity,
                 repeatType: 'loop',
               }}
-              className="absolute inset-0 z-0"
+              className="absolute right-5 top-32 z-0"
             >
               <Image
-                src="/assets/images/about-us-img.svg"
+                src="/assets/images/rec1.svg"
                 alt="agility team background"
                 width={500}
                 height={400}
                 className="h-auto w-full object-cover"
               />
             </motion.div>
-
-            {/* Máscara fixa que fica por cima */}
-            <div className="relative z-10">
+            <motion.div
+              animate={{
+                y: [-3, 10, -3],
+              }}
+              transition={{
+                duration: 8,
+                ease: 'easeInOut',
+                repeat: Infinity,
+                repeatType: 'loop',
+                delay: 0.5,
+              }}
+              className="absolute left-32 top-0 z-0"
+            >
               <Image
-                src="/assets/images/about-us-mask.svg"
-                alt="agility team mask"
+                src="/assets/images/rec2.svg"
+                alt="agility team background"
                 width={500}
                 height={400}
                 className="h-auto w-full object-cover"
               />
-            </div>
+            </motion.div>
+            <motion.div
+              animate={{
+                y: [-4, 12, -4],
+              }}
+              transition={{
+                duration: 10,
+                ease: 'easeInOut',
+                repeat: Infinity,
+                repeatType: 'loop',
+                delay: 0.8,
+              }}
+              className="absolute left-12 top-4 z-0"
+            >
+              <Image
+                src="/assets/images/rec3.svg"
+                alt="agility team background"
+                width={500}
+                height={400}
+                className="h-auto w-full object-cover"
+              />
+            </motion.div>
+            <motion.div
+              animate={{
+                y: [-5, 15, -5],
+              }}
+              transition={{
+                duration: 10,
+                ease: 'easeInOut',
+                repeat: Infinity,
+                repeatType: 'loop',
+              }}
+              className="absolute -bottom-8 right-0 z-0"
+            >
+              <Image
+                src="/assets/images/rec4.svg"
+                alt="agility team background"
+                width={200}
+                height={200}
+                className="h-auto w-full object-cover"
+              />
+            </motion.div>
           </div>
         </div>
       </div>

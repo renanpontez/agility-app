@@ -8,7 +8,7 @@ import Text from '../Text';
 const AboutUs = () => {
   return (
     <div className="flex flex-wrap">
-      <div className="w-full md:w-1/2">
+      <div className="w-full lg:w-1/2">
         <Text as="h3" className="mb-8">
           <span className="font-bold">
             <b>
@@ -39,9 +39,9 @@ const AboutUs = () => {
         <Button style="outlined-light" className="mt-10"> Saiba mais</Button>
 
       </div>
-      <div className="relative mb-20 w-full sm:mb-0 md:w-1/2">
+      <div className="relative mb-20 w-full sm:mb-0 lg:w-1/2">
         <div className="relative">
-          <div className="relative z-0 m-auto h-[400px] w-full p-10">
+          <div className="relative z-0 m-auto h-[400px] w-full max-w-[568px] p-10">
 
             <motion.div
               animate={{
@@ -54,7 +54,7 @@ const AboutUs = () => {
                 repeatType: 'loop',
                 delay: 0.8,
               }}
-              className="absolute -left-9 top-0 z-0 sm:left-4 lg:left-12 lg:top-4"
+              className="absolute -left-9 top-0 z-0 sm:left-4 lg:-top-10 lg:left-0"
             >
               <Image
                 src="/assets/images/rec3.svg"
@@ -75,7 +75,7 @@ const AboutUs = () => {
                 repeatType: 'loop',
                 delay: 0.5,
               }}
-              className="absolute -left-8 top-0 z-0 sm:left-14 md:left-8 lg:left-32"
+              className="absolute -left-8 top-0 z-0 sm:left-14 md:left-12 lg:-top-10 lg:left-8 xl:left-14"
             >
               <Image
                 src="/assets/images/rec2.svg"
@@ -95,7 +95,7 @@ const AboutUs = () => {
                 repeat: Infinity,
                 repeatType: 'loop',
               }}
-              className="absolute -bottom-4 -right-10 z-0 sm:right-10 md:right-3 md:top-20 lg:right-5 lg:top-32"
+              className="absolute -bottom-4 -right-10 z-0 sm:right-10 md:right-14 md:top-20 lg:right-5 lg:top-20 xl:right-20"
             >
               <Image
                 src="/assets/images/rec1.svg"
@@ -115,7 +115,7 @@ const AboutUs = () => {
                 repeat: Infinity,
                 repeatType: 'loop',
               }}
-              className="absolute -right-6 bottom-0 z-0 sm:right-6 lg:-bottom-8 lg:right-0"
+              className="absolute -right-6 bottom-0 z-0 sm:right-6 md:right-16 lg:-bottom-0 lg:right-4 xl:right-16"
             >
               <Image
                 src="/assets/images/rec4.svg"

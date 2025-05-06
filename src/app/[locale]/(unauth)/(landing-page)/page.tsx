@@ -90,10 +90,13 @@ const LandingPage: React.FC = () => {
             maskClassName="bg-gradient-to-l from-black/30 to-black/90"
             mediaSrc="/assets/images/agility-team-working.jpg"
             height="h-[40vh]"
-            intensity={200}
+            intensity={300}
           >
             <div className="container flex h-full items-center">
-              <div className="flex w-full flex-col items-start gap-10 py-20 pr-12 text-left md:w-[50%]">
+              <div className="flex w-full flex-col items-start gap-10 py-20 pr-12 text-left md:w-3/5">
+                <Button style="outlined-light" size="sm">
+                  CONHEÇA A AGILITY
+                </Button>
                 <Text as="h3">
                   Mentes
                   {' '}
@@ -105,9 +108,7 @@ const LandingPage: React.FC = () => {
                   {' '}
                   geram mais resultados para qualquer projeto digital
                 </Text>
-                <Button style="outlined-light" size="sm">
-                  CONHEÇA A AGILITY
-                </Button>
+
               </div>
             </div>
           </Parallax>

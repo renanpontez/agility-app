@@ -7,8 +7,8 @@ import Text from '../Text';
 
 const AboutUs = () => {
   return (
-    <div className="flex">
-      <div className="w-1/2">
+    <div className="flex flex-wrap">
+      <div className="w-full md:w-1/2">
         <Text as="h3" className="mb-8">
           <span className="font-bold">
             <b>
@@ -39,24 +39,25 @@ const AboutUs = () => {
         <Button style="outlined-light" className="mt-10"> Saiba mais</Button>
 
       </div>
-      <div className="relative w-1/2">
+      <div className="relative mb-20 w-full sm:mb-0 md:w-1/2">
         <div className="relative">
           <div className="relative z-0 m-auto h-[400px] w-full p-10">
-            {/* Imagem animada que fica por baixo */}
+
             <motion.div
               animate={{
-                y: [-5, 15, -5],
+                y: [-4, 12, -4],
               }}
               transition={{
                 duration: 10,
                 ease: 'easeInOut',
                 repeat: Infinity,
                 repeatType: 'loop',
+                delay: 0.8,
               }}
-              className="absolute right-5 top-32 z-0"
+              className="absolute -left-9 top-0 z-0 lg:left-12 lg:top-4"
             >
               <Image
-                src="/assets/images/rec1.svg"
+                src="/assets/images/rec3.svg"
                 alt="agility team background"
                 width={500}
                 height={400}
@@ -74,31 +75,10 @@ const AboutUs = () => {
                 repeatType: 'loop',
                 delay: 0.5,
               }}
-              className="absolute left-32 top-0 z-0"
+              className="absolute -left-8 top-0 z-0 md:left-8 lg:left-32"
             >
               <Image
                 src="/assets/images/rec2.svg"
-                alt="agility team background"
-                width={500}
-                height={400}
-                className="h-auto w-full object-cover"
-              />
-            </motion.div>
-            <motion.div
-              animate={{
-                y: [-4, 12, -4],
-              }}
-              transition={{
-                duration: 10,
-                ease: 'easeInOut',
-                repeat: Infinity,
-                repeatType: 'loop',
-                delay: 0.8,
-              }}
-              className="absolute left-12 top-4 z-0"
-            >
-              <Image
-                src="/assets/images/rec3.svg"
                 alt="agility team background"
                 width={500}
                 height={400}
@@ -115,7 +95,27 @@ const AboutUs = () => {
                 repeat: Infinity,
                 repeatType: 'loop',
               }}
-              className="absolute -bottom-8 right-0 z-0"
+              className="absolute -bottom-4 -right-10 z-0 md:right-3 md:top-20 lg:right-5 lg:top-32"
+            >
+              <Image
+                src="/assets/images/rec1.svg"
+                alt="agility team background"
+                width={500}
+                height={400}
+                className="h-auto w-full object-cover"
+              />
+            </motion.div>
+            <motion.div
+              animate={{
+                y: [-5, 15, -5],
+              }}
+              transition={{
+                duration: 10,
+                ease: 'easeInOut',
+                repeat: Infinity,
+                repeatType: 'loop',
+              }}
+              className="absolute -right-6 bottom-0 z-0 sm:-bottom-14 sm:-right-6 lg:-bottom-8 lg:right-0"
             >
               <Image
                 src="/assets/images/rec4.svg"

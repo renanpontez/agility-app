@@ -54,7 +54,7 @@ const AboutUs = () => {
                 repeatType: 'loop',
                 delay: 0.8,
               }}
-              className="absolute -left-9 top-0 z-0 lg:left-12 lg:top-4"
+              className="absolute -left-9 top-0 z-0 sm:left-4 lg:left-12 lg:top-4"
             >
               <Image
                 src="/assets/images/rec3.svg"
@@ -75,7 +75,7 @@ const AboutUs = () => {
                 repeatType: 'loop',
                 delay: 0.5,
               }}
-              className="absolute -left-8 top-0 z-0 md:left-8 lg:left-32"
+              className="absolute -left-8 top-0 z-0 sm:left-14 md:left-8 lg:left-32"
             >
               <Image
                 src="/assets/images/rec2.svg"
@@ -95,7 +95,7 @@ const AboutUs = () => {
                 repeat: Infinity,
                 repeatType: 'loop',
               }}
-              className="absolute -bottom-4 -right-10 z-0 md:right-3 md:top-20 lg:right-5 lg:top-32"
+              className="absolute -bottom-4 -right-10 z-0 sm:right-10 md:right-3 md:top-20 lg:right-5 lg:top-32"
             >
               <Image
                 src="/assets/images/rec1.svg"
@@ -115,7 +115,7 @@ const AboutUs = () => {
                 repeat: Infinity,
                 repeatType: 'loop',
               }}
-              className="absolute -right-6 bottom-0 z-0 sm:-bottom-14 sm:-right-6 lg:-bottom-8 lg:right-0"
+              className="absolute -right-6 bottom-0 z-0 sm:right-6 lg:-bottom-8 lg:right-0"
             >
               <Image
                 src="/assets/images/rec4.svg"

@@ -58,7 +58,7 @@ const ServicesList: React.FC = () => {
         <span className="font-bold">
           <b>
             <span className="relative inline-block">
-              <span className="before:absolute before:left-0 before:top-8 before:h-[3px] before:w-full before:bg-primary">
+              <span className="underline decoration-primary underline-offset-8">
                 SER
               </span>
             </span>

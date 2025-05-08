@@ -88,7 +88,7 @@ const LandingPage: React.FC = () => {
           <Parallax
             applyMask
             maskClassName="bg-gradient-to-l from-black/30 to-black/90"
-            mediaSrc="/assets/images/agility-team-working.jpg"
+            mediaSrc="/assets/images/agility-team-working.jpeg"
             height="h-[40vh]"
             intensity={300}
           >

@@ -18,7 +18,7 @@ const RoundedItem = ({ item }: { item: any; count: number }) => {
   return (
     <motion.div
       key={item.title}
-      className="flex flex-col items-center justify-center gap-2 py-16"
+      className="flex flex-col items-center justify-center gap-2 py-2 md:py-16"
       initial={{ opacity: 0, y: -20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: item.count * 0.2 + 0.5 }}
@@ -63,8 +63,8 @@ const RoundedBarItems: React.FC = () => {
   return (
     <div className="mx-auto bg-secondaryDarker">
       <div className={classNames(
-        'flex flex-col items-center justify-between gap-16 px-10 py-4',
-        'md:flex-row md:gap-16 lg:gap-24',
+        'grid grid-cols-2 items-center justify-between gap-16 px-10 py-4',
+        'lg:grid-cols-4 md:gap-16 lg:gap-24',
       )}
       >
         {EXPERIENCES.map((item, idx) => (

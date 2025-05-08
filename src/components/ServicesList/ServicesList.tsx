@@ -70,11 +70,10 @@ const ServicesList: React.FC = () => {
         MAIS POPULARES
       </Text>
       <span className="h-1 w-8 bg-white" />
-      <div className="flex flex-col justify-between gap-8 md:flex-row">
+      <div className="grid grid-cols-1 justify-between gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
         {services.map((item, index) => (
           <div
-            className="w-full"
             key={item.title}
           >
             <motion.div
@@ -82,8 +81,9 @@ const ServicesList: React.FC = () => {
               initial="hidden"
               whileInView="visible"
               variants={cardVariants}
+              className="size-full"
             >
-              <Card className="group flex w-full flex-col gap-5 border border-secondaryDark bg-transparent" radius="md">
+              <Card className="group flex size-full flex-col gap-5 border border-secondaryDark bg-transparent" radius="md">
                 <div className="flex flex-col gap-6">
                   <Text as="h5" className="whitespace-pre-line">{item.title}</Text>
                   <div className="mt-5 flex">

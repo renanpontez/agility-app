@@ -134,7 +134,7 @@ const ContactForm: React.FC = () => {
           </div>
           <div>
             <TextArea
-              placeholder="Conta pra gente como podemos ajudar seu projeto"
+              placeholder="Olá, me chamo renan (renanpontez@gmail.com) e estou entrando em contato pelo site da Agility."
               label="Sua mensagem"
               value={formData.message}
               onChange={e => handleFormChange('message', e.target.value)}

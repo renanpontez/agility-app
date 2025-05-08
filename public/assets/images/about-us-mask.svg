@@ -1,0 +1,15 @@
+<svg width="974" height="682" viewBox="0 0 974 682" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="mask">
+      <!-- Fundo branco: mostra a imagem -->
+      <rect width="974" height="682" fill="white" />
+      <!-- As faixas diagonais são pretas: recortadas -->
+      <rect x="-150" y="0" width="400" height="1000" rx="200" ry="200" transform="rotate(-45 0 0)" fill="black" />
+      <rect x="200" y="0" width="400" height="1000" rx="200" ry="200" transform="rotate(-45 0 0)" fill="black" />
+      <rect x="550" y="0" width="400" height="1000" rx="200" ry="200" transform="rotate(-45 0 0)" fill="black" />
+    </mask>
+  </defs>
+
+  <!-- Fundo escuro com máscara aplicada -->
+  <rect width="974" height="682" fill="#151515" mask="url(#mask)" />
+</svg>

@@ -1,3 +1,5 @@
+/* eslint-disable ts/no-require-imports */
+
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
@@ -116,7 +118,7 @@ export default {
     },
   },
   plugins: [
-    // eslint-disable-next-line ts/no-require-imports
     require('@tailwindcss/typography'),
+    require('@designbycode/tailwindcss-text-stroke'),
   ],
 } satisfies Config;

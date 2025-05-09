@@ -24,18 +24,10 @@ const LandingPage: React.FC = () => {
       </Head>
 
       <Hero
-        mediaType="video"
-        mediaSrc="https://cdn2.hubspot.net/hubfs/6436815/home-video.mp4"
+        mediaType="particles"
         style="custom-height"
-        videoProps={{
-          autoPlay: true,
-          loop: true,
-          muted: true,
-          poster: '/assets/images/video_cover.webp',
-          controls: false,
-        }}
         content={(
-          <div className="mx-auto -mt-16 flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
+          <div className="mx-auto flex flex-col justify-center gap-10 md:justify-start lg:mx-0">
             {/* <Logo showSymbol={false} showName showSlogan nameSloganColor="white" className="mx-auto lg:invisible" size="sm" style="standard" /> */}
             <Text as="h1" styleOverride="h1" className="text-center text-lg font-light leading-normal tracking-wide text-white xs:text-sm lg:text-left">
               TRANSFORMANDO IDEIAS EM

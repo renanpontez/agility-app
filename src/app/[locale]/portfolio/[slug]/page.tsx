@@ -81,33 +81,33 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
         {/*  ESPAÇADOR */}
         <div className="mx-auto my-20 h-[0.5px] w-[70vw] rounded-full bg-white opacity-10 blur-[0.5xp]  md:w-160"></div>
         {/*  ESPAÇADOR */}
-
-        <section className="relative flex flex-col flex-wrap gap-8 lg:grid lg:grid-cols-11">
-          <div className="col-span-5 flex flex-wrap justify-center gap-10 md:flex-nowrap lg:justify-start">
-            <Image src={selectedProject.projectImage2} alt="image2" width={178} height={400} className="lg:pt-10"></Image>
-            <Image src={selectedProject.projectImage3} alt="image3" width={178} height={400} className="lg:pb-10"></Image>
-          </div>
-          <div className="col-span-6 ">
-            <Text as="h5" className="mb-3 font-bold leading-snug tracking-wide"> DESENVOLVIMENTO</Text>
-            <Text as="p" size="md" className="tracking-wider">{selectedProject.developmentDescription}</Text>
-            <div className="mt-6 flex flex-wrap justify-around gap-x-3 gap-y-4 text-center sm:mt-14 md:justify-between">
-              {selectedProject.metricAndValue.map((item, index) => (
-                <div key={index}>
-                  <Text as="p" size="md" className="text-5xl font-bold text-primary">
-                    {item.value}
-                  </Text>
-                  <Text as="p" className="pt-1">
-                    {item.metric.toUpperCase()}
-                  </Text>
-                </div>
-              ))}
+        <section className="relative flex flex-col flex-wrap gap-8  lg:grid lg:grid-cols-11">
+          {(selectedProject.projectImage2 && selectedProject.projectImage3) && (
+            <div className="col-span-5 flex flex-wrap justify-center gap-10 md:flex-nowrap lg:justify-start">
+              <Image src={selectedProject.projectImage2} alt="image2" width={178} height={400} className="lg:pt-10"></Image>
+              <Image src={selectedProject.projectImage3} alt="image3" width={178} height={400} className="lg:pb-10"></Image>
             </div>
-          </div>
-        </section>
+          )}
+          {selectedProject.developmentDescription && (
+            <div className="col-span-6 ">
+              <Text as="h5" className="mb-3 font-bold leading-snug tracking-wide"> DESENVOLVIMENTO</Text>
+              <Text as="p" size="md" className="tracking-wider">{selectedProject.developmentDescription}</Text>
+              <div className="mt-6 flex flex-wrap justify-around gap-x-3 gap-y-4 text-center sm:mt-14 md:justify-between">
+                {selectedProject.metricAndValue.map((item, index) => (
+                  <div key={index}>
+                    <Text as="p" size="md" className="text-5xl font-bold text-primary">
+                      {item.value}
+                    </Text>
+                    <Text as="p" className="pt-1">
+                      {item.metric.toUpperCase()}
+                    </Text>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
-        {/*  ESPAÇADOR */}
-        <div className="mx-auto my-20 h-[0.5px] w-[70vw] rounded-full bg-white opacity-10 blur-[0.5xp]  md:w-160"></div>
-        {/*  ESPAÇADOR */}
+        </section>
 
         <section>
           <Text as="h5" className="sticky top-0 col-span-5 mb-4 text-center font-semibold md:text-start">

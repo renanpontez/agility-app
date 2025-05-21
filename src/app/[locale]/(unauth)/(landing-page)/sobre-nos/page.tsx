@@ -40,8 +40,9 @@ const AboutUsPage: React.FC = () => {
               <span className="font-bold">AGILITY CREATIVE</span>
             </Text>
             <Text as="p">
-              Acreditamos que a organização do processo criativo e o trabalho feito com a parceria do cliente é capaz de multiplicar os resultados de qualquer projeto.
-              A nossa meta é entregar sempre mais do que o esperado, para que possamos te levar cada vez mais perto do seu sucesso!
+              Somos mais que uma empresa. Somos profissionais apaixonados por soluções.
+              Acreditamos em um futuro onde a tecnologia se integra de forma harmoniosa à vida das
+              pessoas.
             </Text>
           </div>
         )}
@@ -136,7 +137,7 @@ const AboutUsPage: React.FC = () => {
         </Text>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
           {[{
-            photo: '/assets/images/user_avatar.png',
+            photo: '/assets/images/renan_compressed.jpg',
             name: 'Renan Martins',
             role: 'Founder | Project Manager',
             socials: [
@@ -150,9 +151,9 @@ const AboutUsPage: React.FC = () => {
               },
             ],
           }, {
-            photo: '/assets/images/user_avatar.png',
+            photo: '/assets/images/felipe_compressed.jpg',
             name: 'Pedro Lima',
-            role: 'Lead Developer',
+            role: 'Web Developer',
             socials: [
               {
                 icon: FaLinkedin,
@@ -164,9 +165,9 @@ const AboutUsPage: React.FC = () => {
               },
             ],
           }, {
-            photo: '/assets/images/user_avatar.png',
+            photo: '/assets/images/pedro.jpeg',
             name: 'Felipe Macedo',
-            role: 'Full-Stack Developer',
+            role: 'Mobile Developer',
             socials: [
               {
                 icon: FaLinkedin,

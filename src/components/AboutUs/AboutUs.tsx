@@ -25,16 +25,15 @@ const AboutUs = () => {
           SOMOS
         </Text>
         <Text as="p" styleOverride="h5">
-          A gente acredita que organizando o processo criativo e trabalhando em parceria com o cliente, conseguimos
+          Acreditamos que a organização do processo criativo e o trabalho feito com a parceria do cliente é capaz de
           {' '}
           <b className="text-primaryLighter">multiplicar os resultados</b>
           {' '}
-          do seu projeto.
+          de qualquer projeto
         </Text>
         <br />
         <Text as="p" styleOverride="h5">
-          A Agility tem como meta entregar sempre mais do que o esperado. Nós seremos uma parceria leve que vai te levar para mais perto do sucesso do seu projeto!
-
+          A nossa meta é entregar sempre mais do que o esperado, para que possamos te levar cada vez mais perto do seu sucesso!
         </Text>
         <Button style="outlined-light" className="mt-10"> Saiba mais</Button>
 

@@ -31,8 +31,7 @@ const AboutUsPage: React.FC = () => {
             <Text
               as="h1"
               styleOverride="h1"
-              className="font-light leading-normal tracking-wide text-white
-          "
+              className="font-light leading-normal tracking-wide text-white"
             >
               CONHEÇA A
               {' '}
@@ -41,9 +40,8 @@ const AboutUsPage: React.FC = () => {
               <span className="font-bold">AGILITY CREATIVE</span>
             </Text>
             <Text as="p">
-              Somos mais que uma empresa. Somos profissionais apaixonados por soluções.
-              Acreditamos em um futuro onde a tecnologia se integra de forma harmoniosa à vida das
-              pessoas.
+              Acreditamos que a organização do processo criativo e o trabalho feito com a parceria do cliente é capaz de multiplicar os resultados de qualquer projeto.
+              A nossa meta é entregar sempre mais do que o esperado, para que possamos te levar cada vez mais perto do seu sucesso!
             </Text>
           </div>
         )}

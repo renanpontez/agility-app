@@ -3,6 +3,8 @@ import Link from 'next/link';
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
+import Text from '../Text';
+
 export type BreadcrumbItemsProps = {
   name: string;
   href?: string;
@@ -35,10 +37,12 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className, style = 'whit
     'text-lg': size === 'lg',
   }));
 
+  const breadcrumbItems = [{ name: 'Início', href: '/' }, ...items];
+
   return (
     <nav aria-label="Breadcrumb" className={textSize}>
       <ol className="flex space-x-2">
-        {items.map((item, index) => (
+        {breadcrumbItems.map((item, index) => (
           <li key={index} className="flex items-center">
             {index !== 0 && (
               <span className="mx-2 text-gray-400">/</span>
@@ -50,7 +54,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className, style = 'whit
                   </Link>
                 )
               : (
-                  <span className="opacity-50">{item.name}</span>
+                  <Text as="span" className="opacity-50">{item.name}</Text>
                 )}
           </li>
         ))}

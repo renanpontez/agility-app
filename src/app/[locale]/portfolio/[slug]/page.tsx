@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
 
-import BreadCrumb from '@/components/BreadCrumb';
+import Breadcrumb from '@/components/BreadCrumb';
 import type { BreadcrumbItemsProps } from '@/components/BreadCrumb/BreadCrumb';
 import Button from '@/components/Button';
 import ContactForm from '@/components/ContactForm';
@@ -27,11 +27,8 @@ export async function generateStaticParams() {
 const PortfolioPage = async ({ params }: { params: Params }) => {
   const selectedProject = portfolioData.find((item: Project) => item.slug === params.slug);
   const breadcrumbItems: BreadcrumbItemsProps[] = [
-    { name: 'home', href: '/',
-    },
-    { name: 'portfolio', href: '/portfolio' },
-    { name: params.slug,
-    },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: selectedProject?.name || '' },
   ];
 
   if (!selectedProject) {
@@ -43,21 +40,19 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
       <section>
         <Hero
           mediaType="image"
-          mediaClass="rounded-b-xxl md:rounded-b-xxxl"
-          mediaSrc="/assets/images/desk_working.png"
+          mediaSrc="/assets/images/agility-team-working.jpeg"
           style="custom-height"
           applyMask
-          maskClassName="rounded-b-xxl md:rounded-b-xxxl"
           content={(
             <PortfolioHeroContent
               projectName={selectedProject.name}
               tags={[SiteAndLP, HostingAndDom]}
             />
           )}
-          className=" min-h-[300px] md:h-[60vh]"
+          className="min-h-[300px] md:min-h-[60vh]"
         />
       </section>
-      <BreadCrumb items={breadcrumbItems} />
+      <Breadcrumb items={breadcrumbItems} />
       <div className="container my-16 text-white md:mb-20 md:mt-28">
 
         <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
@@ -78,7 +73,7 @@ const PortfolioPage = async ({ params }: { params: Params }) => {
 
         <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
           <Text as="h5" className="col-span-5 h-max font-semibold md:sticky md:top-24">
-            SITE ENTREGUE
+            PROJETO ENTREGUE
           </Text>
           <Image src={selectedProject.projectImage1} alt="image1" width={701} height={1590} className="col-span-6"></Image>
         </section>

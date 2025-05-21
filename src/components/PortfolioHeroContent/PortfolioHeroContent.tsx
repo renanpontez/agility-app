@@ -11,17 +11,14 @@ type PortfolioHeroContentProps = {
 
 const PortfolioHeroContent: React.FC<PortfolioHeroContentProps> = ({ projectName, tags }) => {
   return (
-    <div className="mx-auto mb-8 mt-16 flex flex-col justify-end gap-10 md:mt-40 md:justify-end md:gap-20 lg:mx-0">
+    <div className="mb-8 mt-28 flex h-full flex-col gap-10 md:justify-center md:gap-10 lg:mx-auto">
       <Text
         as="h1"
-        styleOverride="h1"
-        className="text-center text-xl font-normal !leading-snug tracking-wider text-white sm:text-3xl md:font-light lg:text-left lg:text-5xl"
+        styleOverride="h2"
+        className="text-center font-normal !leading-snug tracking-wider text-white md:font-light lg:text-left"
       >
-        Veja como foi a
+        Resumo do Projeto:
         <br />
-        construção do site
-        <br />
-        da
         {' '}
         <span className="font-semibold">
           {projectName.toUpperCase()}

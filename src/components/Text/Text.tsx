@@ -4,7 +4,7 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type TextProps = {
-  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'blockquote' | 'small';
+  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'blockquote' | 'small' | 'span';
   styleOverride?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'em' | 'blockquote' | 'small';
   decoration?: 'italic' | 'bold' | 'strike';
   className?: string;
@@ -34,6 +34,7 @@ const Text: FC<TextProps> = ({ as = 'p', styleOverride, decoration, className, c
     small: classNames(baseClasses, 'text-xs font-light leading-relaxed'),
     em: classNames(baseClasses, 'italic text-xs font-regular tracking-normal'),
     blockquote: classNames(baseClasses, 'border-l-4 pl-4 text-lg italic text-muted-foreground'),
+    span: classNames(baseClasses, 'text-sm leading-relaxed'),
   };
 
   const sizeClasses: Record<string, string> = {

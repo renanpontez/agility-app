@@ -79,31 +79,35 @@ const Hero: React.FC<HeroProps> = ({
 
     >
       {applyMask && (
-        <div className={twMerge('absolute left-0 top-0 z-10 size-full bg-gradient-to-r from-transparent to-black', maskClassName)} />
+        <div className="absolute left-0 top-0 z-10 size-full bg-black bg-opacity-70">
+          <div className={twMerge('absolute left-0 top-0 z-10 size-full bg-gradient-to-r from-transparent to-black', maskClassName)} />
+        </div>
       )}
 
-      {(!!mediaSrc && mediaType !== 'particles')
-        ? (
-            <HeroMedia
-              mediaClass={mediaClass}
-              mediaType={mediaType}
-              mediaSrc={mediaSrc}
-              altText={altText}
-              videoProps={videoProps}
-            />
+      {
+        (!!mediaSrc && mediaType !== 'particles')
+          ? (
+              <HeroMedia
+                mediaClass={mediaClass}
+                mediaType={mediaType}
+                mediaSrc={mediaSrc}
+                altText={altText}
+                videoProps={videoProps}
+              />
 
-          )
-        : (
-            <>
-              {init && (
-                <Particles
-                  id="tsparticles"
-                  options={particlesConfig}
-                  className="absolute left-0 top-0 z-0 size-full border-2 border-x-0 border-t-0 border-b-secondaryDark"
-                />
-              )}
-            </>
-          )}
+            )
+          : (
+              <>
+                {init && (
+                  <Particles
+                    id="tsparticles"
+                    options={particlesConfig}
+                    className="absolute left-0 top-0 z-0 size-full border-2 border-x-0 border-t-0 border-b-secondaryDark"
+                  />
+                )}
+              </>
+            )
+      }
 
       <div className="items-center md:size-full">
         <div className="container relative z-20 flex flex-col items-start justify-center text-left md:h-full">

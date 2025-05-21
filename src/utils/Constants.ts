@@ -11,7 +11,7 @@ export const MENU_ITEMS = [
   },
   {
     title: 'PORTFOLIO',
-    href: '/#Portfolio',
+    href: '/portfolio',
   },
   {
     title: 'FALE COM A GENTE',

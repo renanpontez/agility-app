@@ -1,5 +1,6 @@
 'use client';
 
+import type { Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { CgWebsite } from 'react-icons/cg';
@@ -10,7 +11,7 @@ import Card from '../Card';
 import Text from '../Text';
 
 const ServicesList: React.FC = () => {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
       opacity: 1,
@@ -18,7 +19,7 @@ const ServicesList: React.FC = () => {
       transition: {
         delay: i * 0.4, // Delay each card by 0.2s
         duration: 0.5,
-        ease: 'easeOut',
+        ease: 'easeOut', // Use string aqui
       },
     }),
   };

@@ -16,14 +16,14 @@ export const Header = () => {
   return (
     <div className="relative left-0 top-0 mx-auto w-full max-w-7xl px-4 py-10 md:py-16">
       <h1 className="text-2xl font-bold md:text-7xl dark:text-white">
-        O portfólio
+        PROJETOS QUE FIZERAM
         {' '}
         <br />
         {' '}
-        que faz a diferença
+        A DIFERENÇA NA NOSSA HISTÓRIA
       </h1>
       <p className="mt-8 max-w-2xl text-base md:text-xl dark:text-neutral-200">
-        Conheça alguns dos projetos que marcaram nossa história e ajudaram nossos clientes a crescer.
+        Conheça os cases de sucesso que nos inspiram a cada dia.
       </p>
     </div>
   );

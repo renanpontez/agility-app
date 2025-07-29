@@ -24,11 +24,11 @@ const RoundedItem = ({ item }: { item: any; count: number }) => {
       transition={{ duration: 0.5, delay: item.count * 0.2 + 0.5 }}
       viewport={{ once: true }}
     >
-      <Text as="h2" className="flex items-center text-center text-4xl tracking-wider text-transparent text-stroke-[#565656] hover:text-stroke-[#565656] hover:text-stroke-fill-primary">
+      <Text as="h2" className="flex items-center text-center text-4xl tracking-wider text-white hover:text-stroke-fill-primary">
         <div className="text-stroke text-stroke-inherit hover:text-stroke-inherit">
           {item.prefix}
         </div>
-        <motion.pre className="text-stroke text-transparent ">
+        <motion.pre className="text-stroke text-white">
           {rounded}
         </motion.pre>
 

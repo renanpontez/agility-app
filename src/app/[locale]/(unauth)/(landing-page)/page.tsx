@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 import HorizontalBanner from '@/components/HorizontalBanner';
 import { BrandLoading } from '@/components/Loading';
 import Parallax from '@/components/Parallax/Parallax';
+import { PortfolioParallax } from '@/components/PortfollioParallax';
 import RoundedBarItems from '@/components/RoundedBarItems';
 import ServicesList from '@/components/ServicesList';
 import Text from '@/components/Text';
@@ -14,7 +15,12 @@ import portfolioData from '@/data/portfolio.json';
 import { getBaseUrl } from '@/utils/Helpers';
 
 const ContactForm = React.lazy(() => import('@/components/ContactForm'));
-const Portfolio = React.lazy(() => import('@/components/Portfolio'));
+
+const products = portfolioData.map(item => ({
+  title: item.name,
+  link: `/portfolio/${item.slug}`,
+  thumbnail: item.thumbnailImage,
+}));
 
 const LandingPage: React.FC = () => {
   return (
@@ -57,23 +63,8 @@ const LandingPage: React.FC = () => {
           <HorizontalBanner />
         </section>
 
-        <section className="mx-auto max-w-[90%] py-16 text-center md:max-w-[50%] md:py-24" id="Portfolio">
-          <Text as="h4" styleOverride="h2">
-            PROJETOS QUE FIZERAM A
-            {' '}
-            <span className="text-primary">DIFERENÇA</span>
-            {' '}
-            NA NOSSA HISTÓRIA
-          </Text>
-          <Text as="em">
-            Conheça os cases de sucesso que nos inspiram a cada dia.
-          </Text>
-
-          <div className="mt-10">
-            <Suspense fallback={<BrandLoading />}>
-              <Portfolio items={portfolioData} />
-            </Suspense>
-          </div>
+        <section className="w-full" id="Portfolio">
+          <PortfolioParallax products={products} />
         </section>
 
         <section className="w-full">

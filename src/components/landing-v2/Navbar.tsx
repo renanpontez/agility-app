@@ -15,7 +15,7 @@ type V2NavbarProps = {
 };
 
 const DEFAULT_LINKS: NavLink[] = [
-  { label: 'Home', href: '/#Home' },
+  { label: 'Home', href: '/' },
   { label: 'Sobre', href: '/sobre-nos' },
   { label: 'Serviços', href: '/#Servicos' },
   { label: 'Portfólio', href: '/portfolio' },
@@ -31,7 +31,7 @@ const V2Navbar = ({
   return (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
       <div className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-white/10 bg-black/10 px-5 py-3 shadow-sm backdrop-blur-md">
-        <a href="#Home" className="flex items-center gap-2.5">
+        <a href="/" className="flex items-center gap-2.5">
           <Image src="/assets/images/logo/logo_symbol_white.svg" alt="Agility" width={28} height={28} />
           <Image src="/assets/images/logo/logo_name_white.svg" alt="Agility" width={90} height={24} className="hidden sm:block" />
         </a>

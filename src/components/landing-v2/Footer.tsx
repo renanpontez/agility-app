@@ -17,7 +17,7 @@ type V2FooterProps = {
 };
 
 const DEFAULT_LINKS: FooterLink[] = [
-  { label: 'Home', href: '/#Home' },
+  { label: 'Home', href: '/' },
   { label: 'Sobre', href: '/sobre-nos' },
   { label: 'Serviços', href: '/#Servicos' },
   { label: 'Portfólio', href: '/portfolio' },

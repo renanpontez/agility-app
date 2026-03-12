@@ -18,13 +18,13 @@ const RoundedItem = ({ item }: { item: any; count: number }) => {
   return (
     <motion.div
       key={item.title}
-      className="flex flex-col items-center justify-center gap-2 py-2 md:py-16"
-      initial={{ opacity: 0, y: -20 }}
+      className="flex flex-col items-center justify-center gap-1 py-4 md:gap-2 md:py-6"
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: item.count * 0.2 + 0.5 }}
+      transition={{ duration: 0.5, delay: item.count * 0.15 + 0.3 }}
       viewport={{ once: true }}
     >
-      <Text as="h2" className="flex items-center text-center text-4xl tracking-wider text-white hover:text-stroke-fill-primary">
+      <Text as="h2" className="flex items-center text-center text-2xl tracking-wider text-white hover:text-stroke-fill-primary md:text-4xl">
         <div className="text-stroke text-stroke-inherit hover:text-stroke-inherit">
           {item.prefix}
         </div>
@@ -36,13 +36,16 @@ const RoundedItem = ({ item }: { item: any; count: number }) => {
           {item.refix}
         </div>
       </Text>
-      <span className="block text-center text-xs font-normal text-secondaryLighter">{item.description}</span>
-
+      <span className="block text-center text-xxs font-normal uppercase tracking-wider text-secondaryLighter md:text-xs">{item.description}</span>
     </motion.div>
   );
 };
 
-const RoundedBarItems: React.FC = () => {
+type RoundedBarItemsProps = {
+  variant?: 'default' | 'overlay';
+};
+
+const RoundedBarItems: React.FC<RoundedBarItemsProps> = ({ variant = 'default' }) => {
   const EXPERIENCES = [{
     title: 10,
     description: 'ANOS DE EXPERIÊNCIA',
@@ -61,10 +64,17 @@ const RoundedBarItems: React.FC = () => {
   }];
 
   return (
-    <div className="mx-auto bg-secondaryDarker">
+    <div className={classNames(
+      'w-full',
+      {
+        'bg-secondaryDarker': variant === 'default',
+        'border-t border-white/10 bg-black/40 backdrop-blur-sm': variant === 'overlay',
+      },
+    )}
+    >
       <div className={classNames(
-        'grid grid-cols-2 items-center justify-between gap-16 px-10 py-4',
-        'lg:grid-cols-4 md:gap-16 lg:gap-24',
+        'container grid grid-cols-2 items-center justify-between gap-6 py-2',
+        'lg:grid-cols-4 md:gap-12 lg:gap-16',
       )}
       >
         {EXPERIENCES.map((item, idx) => (

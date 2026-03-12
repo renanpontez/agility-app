@@ -114,5 +114,24 @@
       "felipe-macedo",
       "renan-martins"
     ]
+  },
+  {
+    "slug": "dra-barbarela-freire",
+    "name": "Dra. Barbarela Freire",
+    "logo": "dra-barbarela-freire-logo.png",
+    "introTitle": "Site profissional para uma médica psiquiatra focada em saúde mental.",
+    "introDescription": ["Desenvolvemos um site elegante e acolhedor para a Dra. Barbarela Freire, psiquiatra especializada em saúde mental. O projeto foi pensado para transmitir confiança, profissionalismo e empatia, com foco em agendamento de consultas e presença digital."],
+    "thumbnailImage": "/assets/images/portfolio/dra-barbarela-freire/thumbnail.webp",
+    "projectImage1": "/assets/images/portfolio/dra-barbarela-freire/image1.png",
+    "projectImage2": "/assets/images/portfolio/dra-barbarela-freire/image2.png",
+    "projectImage3": "/assets/images/portfolio/dra-barbarela-freire/image3.png",
+    "projectImage4": "/assets/images/portfolio/dra-barbarela-freire/image4.png",
+    "metricAndValue": [{ "value": "+5", "metric": "Páginas criadas" }, { "value": "~1.2s", "metric": "Tempo de carregamento" }, { "value": "100%", "metric": "Responsivo" }],
+    "developmentDescription": "O site foi desenvolvido com design clean e tons terrosos que transmitem acolhimento e profissionalismo. Integração com WhatsApp para agendamento direto de consultas, seções sobre saúde mental e blog para conteúdo educativo.",
+    "qualityAndDeliveryDescription": "O projeto foi entregue com foco em experiência do paciente, design acessível e performance. Cada detalhe foi pensado para refletir a abordagem humanizada da Dra. Barbarela em saúde mental.",
+    "descriptions": ["Design acolhedor com paleta de cores que transmite confiança", "Integração com WhatsApp para agendamento de consultas", "Seções informativas sobre saúde mental e serviços", "Responsivo e otimizado para todos os dispositivos"],
+    "squadMembers": [
+      "renan-martins"
+    ]
   }
 ]

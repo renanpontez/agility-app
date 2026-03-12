@@ -18,12 +18,13 @@ type HeroProps = {
   mediaSrc?: string;
   style: 'full-height' | 'auto-height' | 'custom-height';
   className?: string;
-  altText?: string; // Alt text for images
-  videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>; // Additional video props
-  content?: React.ReactNode; // Accepts React children for the title
-  cta?: ButtonProps; // Button props for the CTA
-  applyMask?: boolean; // Apply a gradient mask over the media
-  maskClassName?: string; // Additional class names for the mask
+  altText?: string;
+  videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>;
+  content?: React.ReactNode;
+  bottomContent?: React.ReactNode;
+  cta?: ButtonProps;
+  applyMask?: boolean;
+  maskClassName?: string;
   mediaClass?: string;
 };
 
@@ -37,6 +38,7 @@ const Hero: React.FC<HeroProps> = ({
   altText,
   videoProps,
   content,
+  bottomContent,
   mediaClass,
   cta,
 }) => {
@@ -79,8 +81,8 @@ const Hero: React.FC<HeroProps> = ({
 
     >
       {applyMask && (
-        <div className="absolute left-0 top-0 z-10 size-full bg-black bg-opacity-70">
-          <div className={twMerge('absolute left-0 top-0 z-10 size-full bg-gradient-to-r from-transparent to-black', maskClassName)} />
+        <div className="absolute left-0 top-0 z-10 size-full bg-white bg-opacity-70">
+          <div className={twMerge('absolute left-0 top-0 z-10 size-full', maskClassName)} />
         </div>
       )}
 
@@ -109,13 +111,18 @@ const Hero: React.FC<HeroProps> = ({
             )
       }
 
-      <div className="items-center md:size-full">
-        <div className="container relative z-20 flex flex-col items-start justify-center text-left md:h-full">
+      <div className="relative z-20 flex size-full flex-col">
+        <div className="container flex grow flex-col items-start justify-center text-left">
           <animated.div style={{ ...slideDown }}>
             {content && <>{content}</>}
           </animated.div>
           {cta && <Button {...cta} />}
         </div>
+        {bottomContent && (
+          <div className="relative z-20 w-full">
+            {bottomContent}
+          </div>
+        )}
       </div>
     </animated.div>
   );

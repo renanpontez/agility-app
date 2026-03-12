@@ -16,3 +16,14 @@ body {
 html {
   scroll-padding-top: 50px;
 }
+
+/* Float animation for MouseParallax (inline style needs global @keyframes) */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}

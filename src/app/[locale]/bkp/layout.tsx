@@ -1,6 +1,6 @@
 import { unstable_setRequestLocale } from 'next-intl/server';
 
-import LandingV2Template from '@/templates/LandingV2Template';
+import LandingTemplate from '@/templates/LandingTemplate';
 
 export default function Layout(props: {
   children: React.ReactNode;
@@ -8,8 +8,8 @@ export default function Layout(props: {
 }) {
   unstable_setRequestLocale(props.params.locale);
   return (
-    <LandingV2Template>
-      {props.children}
-    </LandingV2Template>
+    <LandingTemplate>
+      <div>{props.children}</div>
+    </LandingTemplate>
   );
 }

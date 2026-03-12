@@ -48,7 +48,7 @@ const HorizontalBanner = () => {
           className="whitespace-nowrap "
         >
           <h2 className="px-12 text-7xl tracking-wider text-transparent text-stroke-2 text-stroke-[#373737] sm:text-9xl">
-            CRIATIVIDADE ● DIGITAL ● INOVAÇÃO
+            CREATIVE ● DIGITAL ● INNOVATION
           </h2>
         </motion.div>
       </div>

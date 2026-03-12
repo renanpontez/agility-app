@@ -86,7 +86,7 @@ export default {
         xl: '16px',
         xxl: '32px',
         xxxl: '60px',
-        full: '100%', // Full border radius for circles
+        full: '9999px', // Pill-shaped rounded corners
       },
       boxShadow: {
         soft: '0 4px 8px rgba(0, 0, 0, 0.05)', // Light shadow for depth
@@ -110,6 +110,14 @@ export default {
           '100%': {
             boxShadow: '0 0 15px rgba(0, 0, 0, 0.3)',
           },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-33.333%)' },
         },
       },
       animation: {

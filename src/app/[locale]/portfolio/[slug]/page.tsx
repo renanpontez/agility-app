@@ -1,17 +1,7 @@
 import Image from 'next/image';
-import { Suspense } from 'react';
 
-import Breadcrumb from '@/components/BreadCrumb';
-import type { BreadcrumbItemsProps } from '@/components/BreadCrumb/BreadCrumb';
-import Button from '@/components/Button';
-import ContactForm from '@/components/ContactForm';
-import Hero from '@/components/Hero';
-import { BrandLoading } from '@/components/Loading';
-import PortfolioHeroContent from '@/components/PortfolioHeroContent/PortfolioHeroContent';
-import Text from '@/components/Text';
+import { ContactSection, RevealOnScroll } from '@/components/landing-v2';
 import portfolioData from '@/data/portfolio.json';
-import HostingAndDom from '@/public/assets/images/tags/hosting-and-dominio.png';
-import SiteAndLP from '@/public/assets/images/tags/sites-and-lp.png';
 import type { Project } from '@/types/portfolio';
 
 type Params = {
@@ -24,141 +14,183 @@ export async function generateStaticParams() {
   }));
 }
 
-const PortfolioPage = async ({ params }: { params: Params }) => {
+const PortfolioDetailPage = async ({ params }: { params: Params }) => {
   const selectedProject = portfolioData.find((item: Project) => item.slug === params.slug);
-  const breadcrumbItems: BreadcrumbItemsProps[] = [
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: selectedProject?.name || '' },
-  ];
 
   if (!selectedProject) {
-    return <p>Projeto não encontrado</p>;
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center pt-28">
+        <p className="text-lg text-white/50">Projeto não encontrado</p>
+      </div>
+    );
   }
 
   return (
-    <>
-      <section>
-        <Hero
-          mediaType="image"
-          mediaSrc="/assets/images/agility-team-working.jpeg"
-          style="custom-height"
-          applyMask
-          content={(
-            <PortfolioHeroContent
-              projectName={selectedProject.name}
-              tags={[SiteAndLP, HostingAndDom]}
-            />
-          )}
-          className="min-h-[300px] md:min-h-[60vh]"
-        />
+    <div className="pt-28">
+      {/* Hero section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/images/agility-team-working.jpeg"
+            alt={selectedProject.name}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-[#050505]" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+          <RevealOnScroll>
+            <nav className="mb-8 flex items-center gap-2 text-sm text-white/40">
+              <a href="/portfolio" className="transition-colors hover:text-white">Portfolio</a>
+              <span>/</span>
+              <span className="text-white/70">{selectedProject.name}</span>
+            </nav>
+            <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">
+              {selectedProject.name}
+            </h1>
+          </RevealOnScroll>
+        </div>
       </section>
-      <Breadcrumb items={breadcrumbItems} />
-      <div className="container my-16 text-white md:mb-20 md:mt-28">
 
-        <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
-          <Text as="h5" className="col-span-5 font-semibold">
-            INTRODUÇÃO
-          </Text>
-          <div className="col-span-6">
-            <Text as="h3" className="mb-5 text-3xl font-medium leading-snug">
-              {selectedProject.introTitle}
-            </Text>
-            {selectedProject.introDescription.map((text, index) => <Text as="p" size="md" className="mt-3 tracking-wider" key={index}>{text}</Text>)}
-          </div>
-        </section>
-
-        {/*  ESPAÇADOR */}
-        <div className="mx-auto my-20 h-[0.5px] w-[70vw] rounded-full bg-white opacity-10 blur-[0.5xp]  md:w-160"></div>
-        {/*  ESPAÇADOR */}
-
-        <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
-          <Text as="h5" className="col-span-5 h-max font-semibold md:sticky md:top-24">
-            PROJETO ENTREGUE
-          </Text>
-          <Image src={selectedProject.projectImage1} alt="image1" width={701} height={1590} className="col-span-6"></Image>
-        </section>
-
-        {/*  ESPAÇADOR */}
-        <div className="mx-auto my-20 h-[0.5px] w-[70vw] rounded-full bg-white opacity-10 blur-[0.5xp]  md:w-160"></div>
-        {/*  ESPAÇADOR */}
-        <section className="relative flex flex-col flex-wrap gap-8  lg:grid lg:grid-cols-11">
-          {(selectedProject.projectImage2 && selectedProject.projectImage3) && (
-            <div className="col-span-5 flex flex-wrap justify-center gap-10 md:flex-nowrap lg:justify-start">
-              <Image src={selectedProject.projectImage2} alt="image2" width={178} height={400} className="lg:pt-10"></Image>
-              <Image src={selectedProject.projectImage3} alt="image3" width={178} height={400} className="lg:pb-10"></Image>
+      {/* Content */}
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+        {/* Introduction */}
+        <RevealOnScroll>
+          <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
+            <h2 className="col-span-5 text-xs font-semibold uppercase tracking-widest text-primary/70">
+              Introdução
+            </h2>
+            <div className="col-span-6">
+              <h3 className="mb-5 text-3xl font-medium leading-snug">
+                {selectedProject.introTitle}
+              </h3>
+              {selectedProject.introDescription.map((text, index) => (
+                <p key={index} className="mt-3 text-base leading-relaxed tracking-wider text-white/60">
+                  {text}
+                </p>
+              ))}
             </div>
-          )}
-          {selectedProject.developmentDescription && (
-            <div className="col-span-6 ">
-              <Text as="h5" className="mb-3 font-bold leading-snug tracking-wide"> DESENVOLVIMENTO</Text>
-              <Text as="p" size="md" className="tracking-wider">{selectedProject.developmentDescription}</Text>
-              <div className="mt-6 flex flex-wrap justify-around gap-x-3 gap-y-4 text-center sm:mt-14 md:justify-between">
-                {selectedProject.metricAndValue.map((item, index) => (
-                  <div key={index}>
-                    <Text as="p" size="md" className="text-5xl font-bold text-primary">
-                      {item.value}
-                    </Text>
-                    <Text as="p" className="pt-1">
-                      {item.metric.toUpperCase()}
-                    </Text>
+          </section>
+        </RevealOnScroll>
+
+        <div className="mx-auto my-20 h-px w-[70vw] max-w-2xl rounded-full bg-white/10" />
+
+        {/* Project delivered */}
+        <RevealOnScroll>
+          <section className="flex flex-col gap-8 md:grid md:grid-cols-11">
+            <h2 className="col-span-5 text-xs font-semibold uppercase tracking-widest text-primary/70">
+              Projeto entregue
+            </h2>
+            <div className="col-span-6 overflow-hidden rounded-2xl border border-white/[0.06]">
+              <Image src={selectedProject.projectImage1} alt="Projeto" width={701} height={1590} className="w-full" />
+            </div>
+          </section>
+        </RevealOnScroll>
+
+        <div className="mx-auto my-20 h-px w-[70vw] max-w-2xl rounded-full bg-white/10" />
+
+        {/* Development */}
+        <RevealOnScroll>
+          <section className="relative flex flex-col flex-wrap gap-8 lg:grid lg:grid-cols-11">
+            {(selectedProject.projectImage2 && selectedProject.projectImage3) && (
+              <div className="col-span-5 flex flex-wrap justify-center gap-10 md:flex-nowrap lg:justify-start">
+                <Image src={selectedProject.projectImage2} alt="Mobile view" width={178} height={400} className="rounded-2xl border border-white/[0.06] lg:pt-10" />
+                <Image src={selectedProject.projectImage3} alt="Mobile view" width={178} height={400} className="rounded-2xl border border-white/[0.06] lg:pb-10" />
+              </div>
+            )}
+            {selectedProject.developmentDescription && (
+              <div className="col-span-6">
+                <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary/70">
+                  Desenvolvimento
+                </h2>
+                <p className="tracking-wider text-white/60">{selectedProject.developmentDescription}</p>
+                <div className="mt-6 flex flex-wrap justify-around gap-x-3 gap-y-4 text-center sm:mt-14 md:justify-between">
+                  {selectedProject.metricAndValue.map((item, index) => (
+                    <div key={index}>
+                      <p className="text-5xl font-bold text-primary">
+                        {item.value}
+                      </p>
+                      <p className="pt-1 text-sm text-white/60">
+                        {item.metric.toUpperCase()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        </RevealOnScroll>
+
+        <div className="mx-auto my-20 h-px w-[70vw] max-w-2xl rounded-full bg-white/10" />
+
+        {/* Quality */}
+        <RevealOnScroll>
+          <section>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-primary/70">
+              Qualidade e entrega
+            </h2>
+            <p className="mb-8 text-base leading-relaxed text-white/60 lg:max-w-[44%]">
+              {selectedProject.qualityAndDeliveryDescription}
+            </p>
+            <div className="relative flex grid-cols-2 flex-col gap-8 tracking-wider md:grid">
+              <div className="flex flex-col items-start justify-between gap-4">
+                {selectedProject.descriptions.map((description, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <svg className="mt-0.5 size-5 shrink-0 text-primary/60" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <p className="text-sm tracking-wide text-white/60">{description}</p>
                   </div>
                 ))}
               </div>
+              <div className="overflow-hidden rounded-2xl border border-white/[0.06]">
+                <Image src={selectedProject.projectImage4} alt="Quality" width={600} height={312} className="w-full" />
+              </div>
             </div>
-          )}
-
-        </section>
-
-        <section>
-          <Text as="h5" className="sticky top-0 col-span-5 mb-4 text-center font-semibold md:text-start">
-            QUALIDADE E ENTREGA
-          </Text>
-          <Text as="p" size="md" className="mb-8 text-start lg:max-w-[44%]">
-            {selectedProject.qualityAndDeliveryDescription}
-          </Text>
-          <div className="relative flex grid-cols-2 flex-col gap-8 tracking-wider md:grid">
-            <div className="flex flex-col items-start justify-between">
-              {selectedProject.descriptions.map((description, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <Image src="/assets/images/icons/check.svg" alt="check-icon" width={24} height={24} className="opacity-20"></Image>
-                  <Text as="p" size="md" className="tracking-wide">{description}</Text>
-                </div>
-              ))}
-            </div>
-            <Image src={selectedProject.projectImage4} alt="image4" width={600} height={312}></Image>
-          </div>
-
-        </section>
-
+          </section>
+        </RevealOnScroll>
       </div>
-      <section className="w-full  text-center md:pt-8 ">
-        <Hero
-          applyMask
-          mediaType="image"
-          mediaSrc="/assets/images/tablet_working.png"
-          style="auto-height"
-          altText="An amazing hero image"
-          content={(
-            <div className="mx-auto flex max-w-full flex-col items-center gap-5 py-24 text-center md:max-w-[70%]">
-              <Text as="h4" styleOverride="h2">
-                MENTES CRIATIVAS E PROCESSOS ORGANIZADOS GERAM MAIS
+
+      {/* CTA */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/images/agility-team-working.jpeg"
+            alt="Agility team"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32">
+          <RevealOnScroll>
+            <div className="mx-auto max-w-xl text-center">
+              <h2 className="mb-6 text-3xl font-bold tracking-tight md:text-4xl">
+                Mentes
                 {' '}
-                <span className="text-primaryLighter">RESULTADOS</span>
-              </Text>
-              <Button style="outlined-light" size="sm">
+                <span className="text-primary">criativas</span>
+                {' '}
+                e processos
+                {' '}
+                <span className="text-primary">organizados</span>
+                {' '}
+                geram mais resultados
+              </h2>
+              <a
+                href="#Contato"
+                className="inline-flex rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
+              >
                 CONHEÇA A AGILITY
-              </Button>
+              </a>
             </div>
-          )}
-        />
+          </RevealOnScroll>
+        </div>
       </section>
-      <section className="flex w-full flex-col justify-between gap-16 md:flex-row" id="Contato">
-        <Suspense fallback={<BrandLoading />}>
-          <ContactForm />
-        </Suspense>
-      </section>
-    </>
+
+      {/* Contact */}
+      <ContactSection />
+    </div>
   );
 };
 
-export default PortfolioPage;
+export default PortfolioDetailPage;

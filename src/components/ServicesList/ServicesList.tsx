@@ -16,7 +16,7 @@ const ServicesList: React.FC = () => {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.4, // Delay each card by 0.2s
+        delay: i * 0.4,
         duration: 0.5,
         ease: 'easeOut',
       },
@@ -53,29 +53,12 @@ const ServicesList: React.FC = () => {
       viewport={{ once: true }}
       transition={{ delay: 0.5 }}
     >
-
-      <Text as="h3" className="mb-8">
-        <span className="font-bold">
-          <b>
-            <span className="relative inline-block">
-              <span className="underline decoration-primary underline-offset-8">
-                SER
-              </span>
-            </span>
-            VIÇOS
-          </b>
-
-        </span>
-        {' '}
-        MAIS POPULARES
+      <Text as="h3" className="mb-8 text-[28px] font-semibold">
+        Serviços mais populares
       </Text>
-      <span className="h-1 w-8 bg-white" />
       <div className="grid grid-cols-1 justify-between gap-8 sm:grid-cols-2 lg:grid-cols-4">
-
         {services.map((item, index) => (
-          <div
-            key={item.title}
-          >
+          <div key={item.title}>
             <motion.div
               custom={index}
               initial="hidden"
@@ -83,21 +66,28 @@ const ServicesList: React.FC = () => {
               variants={cardVariants}
               className="size-full"
             >
-              <Card className="group flex size-full flex-col gap-5 border border-secondaryDark bg-transparent" radius="md">
+              <Card className="group flex size-full flex-col justify-between gap-5 rounded-3xl border-0 bg-secondaryDarker">
                 <div className="flex flex-col gap-6">
                   <Text as="h5" className="whitespace-pre-line">{item.title}</Text>
                   <div className="mt-5 flex">
-                    <item.icon className=" text-white group-hover:text-primary" size={36} />
+                    <item.icon className="text-white group-hover:text-primary" size={36} />
                   </div>
                   <Text as="p" styleOverride="small" className="text-secondaryLighter">{item.description}</Text>
                 </div>
+                <Text as="span" className="mt-4 text-xs font-semibold text-white">
+                  Conhecer mais &gt;
+                </Text>
               </Card>
             </motion.div>
           </div>
         ))}
       </div>
+      <div className="mt-8 flex justify-end">
+        <a href="/#Servicos" className="text-xs font-semibold text-secondaryLight hover:text-white">
+          Mais serviços &gt;
+        </a>
+      </div>
     </motion.div>
-
   );
 };
 

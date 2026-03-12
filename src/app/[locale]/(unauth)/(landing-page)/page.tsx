@@ -52,6 +52,14 @@ const PORTFOLIO_FILTERS = ['Todos', 'Site', 'Landing Page', 'App', 'Design'] as 
 
 const PORTFOLIO: PortfolioItem[] = [
   {
+    name: 'Dra. Barbarela Freire',
+    category: 'Site Profissional',
+    type: 'Site',
+    description: 'Site elegante e acolhedor para psiquiatra, com foco em agendamento de consultas e presença digital em saúde mental.',
+    image: '/assets/images/portfolio/dra-barbarela-freire/thumbnail.png',
+    slug: 'dra-barbarela-freire',
+  },
+  {
     name: 'MR Advogados',
     category: 'Site Corporativo',
     type: 'Site',
@@ -98,14 +106,6 @@ const PORTFOLIO: PortfolioItem[] = [
     description: 'Site para posicionamento de marca com integração WhatsApp para contato direto e aumento de conversões.',
     image: '/assets/images/portfolio/dynotest_cover.webp',
     slug: 'dynotest',
-  },
-  {
-    name: 'Dra. Barbarela Freire',
-    category: 'Site Profissional',
-    type: 'Site',
-    description: 'Site elegante e acolhedor para psiquiatra, com foco em agendamento de consultas e presença digital em saúde mental.',
-    image: '/assets/images/portfolio/dra-barbarela-freire/thumbnail.png',
-    slug: 'dra-barbarela-freire',
   },
 ];
 

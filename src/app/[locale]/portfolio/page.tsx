@@ -61,7 +61,7 @@ const PORTFOLIO: PortfolioItem[] = [
     category: 'Site Profissional',
     type: 'Site',
     description: 'Site elegante e acolhedor para psiquiatra, com foco em agendamento de consultas e presença digital em saúde mental.',
-    image: '/assets/images/portfolio/dra-barbarela-freire/thumbnail.webp',
+    image: '/assets/images/portfolio/dra-barbarela-freire/thumbnail.png',
     slug: 'dra-barbarela-freire',
   },
 ];

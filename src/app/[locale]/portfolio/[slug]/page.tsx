@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { ContactSection, RevealOnScroll } from '@/components/landing-v2';
+import { ContactSection, PageHero, RevealOnScroll } from '@/components/landing-v2';
 import portfolioData from '@/data/portfolio.json';
 import type { Project } from '@/types/portfolio';
 
@@ -44,31 +44,13 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
 
   return (
     <div>
-      {/* 1. Hero — minimal with fixed bg */}
-      <section className="relative overflow-hidden">
-        <div className="fixed inset-0 -z-10">
-          <Image
-            src="/assets/images/agility-team-working.jpeg"
-            alt="Agility team"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/70" />
-        </div>
-        <div className="mx-auto max-w-6xl px-4 pb-16 pt-40 sm:px-6 md:pb-20 md:pt-48">
-          <RevealOnScroll>
-            <nav className="mb-8 flex items-center gap-2 text-sm text-white/40">
-              <a href="/portfolio" className="transition-colors hover:text-white">Portfolio</a>
-              <span>/</span>
-              <span className="text-white/70">{selectedProject.name}</span>
-            </nav>
-            <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-              {selectedProject.name}
-            </h1>
-          </RevealOnScroll>
-        </div>
-      </section>
+      <PageHero
+        title={selectedProject.name}
+        breadcrumbs={[
+          { label: 'Portfolio', href: '/portfolio' },
+          { label: selectedProject.name },
+        ]}
+      />
 
       {/* Opaque wrapper so content sits above the fixed hero bg */}
       <div className="relative z-10 bg-[#050505]">

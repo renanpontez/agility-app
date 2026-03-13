@@ -7,6 +7,10 @@ export type Project = {
   slug: string;
   name: string;
   logo: string;
+  type?: string;
+  date?: string;
+  clientName?: string;
+  url?: string;
   introTitle: string;
   introDescription: string[];
   thumbnailImage?: string;

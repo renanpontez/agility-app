@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
 import { CgWebsite } from 'react-icons/cg';
@@ -9,15 +10,16 @@ import { TbDeviceAnalytics } from 'react-icons/tb';
 
 import type { FaqItem, PortfolioItem, ServiceCardData } from '@/components/landing-v2';
 import {
-  ContactSection,
-  FaqAccordion,
   PortfolioCard,
   RevealOnScroll,
-  ScrollBanner,
   ServiceCard,
   TechTicker,
   V2Hero,
 } from '@/components/landing-v2';
+
+const ScrollBanner = dynamic(() => import('@/components/landing-v2/ScrollBanner'));
+const FaqAccordion = dynamic(() => import('@/components/landing-v2/FaqAccordion'));
+const ContactSection = dynamic(() => import('@/components/landing-v2/ContactSection'));
 
 /* ───────────────────────────── DATA ───────────────────────────── */
 

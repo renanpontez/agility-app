@@ -1,12 +1,14 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import {
-  ContactSection,
   PageHero,
   RevealOnScroll,
-  ServicesGrid,
-  TeamGrid,
 } from '@/components/landing-v2';
+
+const TeamGrid = dynamic(() => import('@/components/landing-v2/TeamGrid'));
+const ServicesGrid = dynamic(() => import('@/components/landing-v2/ServicesGrid'));
+const ContactSection = dynamic(() => import('@/components/landing-v2/ContactSection'));
 
 /* ───────────────────────────── DATA ───────────────────────────── */
 

@@ -9,6 +9,22 @@ const PORTFOLIO_FILTERS = ['Todos', 'Site', 'Landing Page', 'App', 'Design'] as 
 
 const PORTFOLIO: PortfolioItem[] = [
   {
+    name: 'Circle Picks',
+    category: 'Plataforma Social',
+    type: 'App',
+    description: 'Plataforma social para descobrir restaurantes e bares através de recomendações de pessoas que você confia.',
+    image: 'https://placehold.co/800x600/1a1a2e/FD512E/png?text=Circle+Picks',
+    slug: 'circlepicks',
+  },
+  {
+    name: 'myhouz',
+    category: 'SaaS & App',
+    type: 'App',
+    description: 'SaaS de gestão doméstica para casais, roommates e famílias. Um lugar para tudo que precisa ser rastreado ou feito.',
+    image: 'https://placehold.co/800x600/1a1a2e/4F46E5/png?text=myhouz',
+    slug: 'myhouz',
+  },
+  {
     name: 'Dra. Barbarela Freire',
     category: 'Site Profissional',
     type: 'Site',

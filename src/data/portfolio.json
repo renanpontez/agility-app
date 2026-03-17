@@ -1,5 +1,51 @@
 [
   {
+    "slug": "circlepicks",
+    "name": "Circle Picks",
+    "logo": "circlepicks-logo.png",
+    "type": "App",
+    "date": "2025",
+    "clientName": "Circle Picks",
+    "url": "https://circlepicks.com",
+    "introTitle": "Plataforma social para descobrir restaurantes e bares através de pessoas que você confia.",
+    "introDescription": ["Encontrar um bom restaurante ficou mais difícil do que deveria. Plataformas de avaliação estão cheias de reviews falsos, conteúdos patrocinados e notas que não dizem nada útil. As melhores recomendações já acontecem em conversas entre amigos — mas se perdem em centenas de mensagens não lidas.", "O Circle Picks resolve isso criando uma infraestrutura social onde pessoas seguem amigos e descobrem lugares através de recomendações reais. Sem reviews falsos, sem conteúdo patrocinado, sem algoritmo tentando adivinhar o que você quer."],
+    "thumbnailImage": "https://placehold.co/800x600/1a1a2e/FD512E/png?text=Circle+Picks",
+    "projectImage1": "https://placehold.co/1400x900/1a1a2e/FD512E/png?text=Circle+Picks+Web",
+    "projectImage2": "https://placehold.co/220x440/1a1a2e/FD512E/png?text=Mobile+iOS",
+    "projectImage3": "https://placehold.co/220x440/1a1a2e/FD512E/png?text=Mobile+Android",
+    "projectImage4": "https://placehold.co/600x400/1a1a2e/FD512E/png?text=Feed+Social",
+    "metricAndValue": [{ "value": "3", "metric": "Plataformas (Web, iOS, Android)" }, { "value": "~15s", "metric": "Tempo para adicionar um pick" }, { "value": "2", "metric": "Idiomas (PT, EN)" }],
+    "developmentDescription": "Aplicação full-stack com Next.js 16 no web e React Native com Expo no mobile, compartilhando a mesma camada de API. Supabase com Row Level Security garante privacidade no nível do banco de dados. Compressão de imagens no client-side, atualizações em tempo real via Supabase subscriptions e sistema de deduplicação de lugares com múltiplos níveis de matching.",
+    "qualityAndDeliveryDescription": "Construído com desenvolvimento assistido por IA usando Claude Code como ferramenta principal. O projeto foi estruturado em torno de arquivos de contexto detalhados que serviram como fonte única de verdade, garantindo consistência e qualidade em todo o codebase.",
+    "descriptions": ["Feed social cronológico com picks de pessoas que você segue", "Quick Add em ~15 segundos com detecção GPS e Google Places", "Controles de visibilidade (público ou apenas amigos) com RLS", "Sistema de deduplicação multi-nível para lugares", "Painel admin de moderação com notificações", "Internacionalização completa em PT e EN"],
+    "squadMembers": [
+      "renan-martins"
+    ]
+  },
+  {
+    "slug": "myhouz",
+    "name": "myhouz",
+    "logo": "myhouz-logo.png",
+    "type": "App",
+    "date": "2025",
+    "clientName": "myhouz",
+    "url": "https://myhouz.app",
+    "introTitle": "SaaS de gestão doméstica para casais, roommates e famílias.",
+    "introDescription": ["Lares compartilhados funcionam com uma pilha frágil de gambiarras: um grupo no WhatsApp para coisas urgentes, um app de notas com uma lista de compras de três semanas atrás, uma anotação mental sobre a torneira vazando que deveria ter sido consertada no mês passado.", "O myhouz dá a cada lar um espaço único e organizado. Um lugar para tudo que precisa ser rastreado, feito ou consertado — com todos os moradores na mesma página."],
+    "thumbnailImage": "https://placehold.co/800x600/1a1a2e/4F46E5/png?text=myhouz",
+    "projectImage1": "https://placehold.co/1400x900/1a1a2e/4F46E5/png?text=myhouz+Dashboard",
+    "projectImage2": "https://placehold.co/220x440/1a1a2e/4F46E5/png?text=Mobile+iOS",
+    "projectImage3": "https://placehold.co/220x440/1a1a2e/4F46E5/png?text=Mobile+Android",
+    "projectImage4": "https://placehold.co/600x400/1a1a2e/4F46E5/png?text=Rotinas",
+    "metricAndValue": [{ "value": "3", "metric": "Plataformas (Web, iOS, Android)" }, { "value": "6", "metric": "Módulos de gestão" }, { "value": "$6/mês", "metric": "Plano Plus" }],
+    "developmentDescription": "Arquitetura monorepo com Turbo, compartilhando lógica de auth, tipos de banco e primitivas de UI entre web e mobile. App React Native com arquitetura MVVM, Supabase RLS para isolamento multi-tenant no nível do banco, UI otimista com React Query e NativeWind para styling consistente cross-platform.",
+    "qualityAndDeliveryDescription": "Projeto co-fundado com divisão deliberada: Renan Martins cuida de tech e produto, Andressa Hora cuida de marketing, posicionamento e pesquisa com usuários. Decisões de produto são feitas em conjunto, garantindo que o produto serve usuários reais.",
+    "descriptions": ["Gestão de itens com foto, estimativa de preço e link de compra", "Checklists de rotina com tracking de streaks", "Lembretes com visualização de pendentes e atrasados", "Problemas urgentes com alerta para todos os moradores", "Convite de membros com controle de acesso por papel", "Dashboard inteligente com visão diária de pendências"],
+    "squadMembers": [
+      "renan-martins"
+    ]
+  },
+  {
     "slug": "dra-barbarela-freire",
     "name": "Dra. Barbarela Freire",
     "logo": "dra-barbarela-freire-logo.png",

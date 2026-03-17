@@ -36,9 +36,8 @@ export default {
         114: '440px',
       },
       fontFamily: {
-        poppins: ['Poppins', ...fontFamily.sans],
-        serif: ['Sorts Mill Goudy', ...fontFamily.serif],
-
+        poppins: ['var(--font-poppins)', ...fontFamily.sans],
+        serif: ['var(--font-sorts-mill-goudy)', ...fontFamily.serif],
       },
       fontSize: {
         base: ['16px', '24px'], // Default font size

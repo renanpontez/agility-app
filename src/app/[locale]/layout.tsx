@@ -1,10 +1,26 @@
 import '@/styles/global.css';
 
 import type { Metadata } from 'next';
+import { Poppins, Sorts_Mill_Goudy } from 'next/font/google';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 import { AppConfig } from '@/utils/AppConfig';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
+
+const sortsMillGoudy = Sorts_Mill_Goudy({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-sorts-mill-goudy',
+});
 
 export const metadata: Metadata = {
   title: 'Agility Creative - Soluções que inspiram.',
@@ -58,19 +74,7 @@ export default function RootLayout(props: {
   const messages = useMessages();
 
   return (
-    <html lang={props.params.locale}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang={props.params.locale} className={`${poppins.variable} ${sortsMillGoudy.variable}`}>
       <body>
         <NextIntlClientProvider
           locale={props.params.locale}

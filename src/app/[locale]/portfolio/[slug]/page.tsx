@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 
-import { ContactSection, PageHero, RevealOnScroll } from '@/components/landing-v2';
+import { ContactSection, LaptopMockup, PageHero, PhoneMockup, RevealOnScroll } from '@/components/landing-v2';
 import portfolioData from '@/data/portfolio.json';
 import type { Project } from '@/types/portfolio';
 
@@ -15,23 +16,24 @@ export async function generateStaticParams() {
 }
 
 const PortfolioDetailPage = async ({ params }: { params: Params }) => {
+  const t = await getTranslations('PortfolioDetail');
   const selectedProject = portfolioData.find((item: Project) => item.slug === params.slug);
 
   if (!selectedProject) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center pt-28">
-        <p className="text-lg text-white/50">Projeto não encontrado</p>
+        <p className="text-lg text-white/50">{t('notFound')}</p>
       </div>
     );
   }
 
   const summaryItems = [
-    { label: 'Cliente', value: selectedProject.clientName },
-    { label: 'Tipo', value: selectedProject.type },
-    { label: 'Ano', value: selectedProject.date },
+    { label: t('client'), value: selectedProject.clientName },
+    { label: t('type'), value: selectedProject.type },
+    { label: t('year'), value: selectedProject.date },
     ...(selectedProject.url
       ? [{
-          label: 'Website',
+          label: t('website'),
           value: selectedProject.url.replace(/^https?:\/\//, ''),
           href: selectedProject.url,
         }]
@@ -93,7 +95,7 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
         <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-28">
           <RevealOnScroll>
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-primary/70">
-              O Desafio
+              {t('challenge')}
             </p>
             <h2 className="mb-6 text-2xl font-semibold leading-snug md:text-3xl">
               {selectedProject.introTitle}
@@ -110,7 +112,7 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
         {selectedProject.projectImage1 && (
           <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 md:pb-28">
             <RevealOnScroll>
-              <div className="overflow-hidden rounded-2xl border border-white/[0.06] shadow-2xl shadow-black/40">
+              <LaptopMockup>
                 <Image
                   src={selectedProject.projectImage1}
                   alt={`${selectedProject.name} — visão geral`}
@@ -118,7 +120,7 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
                   height={900}
                   className="w-full"
                 />
-              </div>
+              </LaptopMockup>
             </RevealOnScroll>
           </section>
         )}
@@ -130,7 +132,7 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
               <div className="flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:gap-16">
                 <div>
                   <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-primary/70">
-                    Nossa Abordagem
+                    {t('approach')}
                   </p>
                   {selectedProject.developmentDescription && (
                     <p className="mb-8 text-base leading-relaxed text-white/60">
@@ -151,7 +153,7 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
                   )}
                 </div>
                 {selectedProject.projectImage4 && (
-                  <div className="overflow-hidden rounded-2xl border border-white/[0.06]">
+                  <LaptopMockup>
                     <Image
                       src={selectedProject.projectImage4}
                       alt={`${selectedProject.name} — abordagem`}
@@ -159,7 +161,7 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
                       height={400}
                       className="size-full object-cover"
                     />
-                  </div>
+                  </LaptopMockup>
                 )}
               </div>
             </RevealOnScroll>
@@ -170,24 +172,28 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
         {hasDetailViews && (
           <section className="mx-auto max-w-4xl px-4 pb-20 sm:px-6 md:pb-28">
             <RevealOnScroll>
-              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-                <div className="pt-8">
-                  <Image
-                    src={selectedProject.projectImage2!}
-                    alt={`${selectedProject.name} — detalhe 1`}
-                    width={220}
-                    height={440}
-                    className="rounded-2xl border border-white/[0.06] shadow-xl shadow-black/30"
-                  />
+              <div className="flex flex-col items-center justify-center gap-8 sm:flex-row md:gap-12" style={{ perspective: '1200px' }}>
+                <div className="pt-8 sm:pt-12" style={{ transform: 'rotateY(8deg) rotateX(-2deg)' }}>
+                  <PhoneMockup>
+                    <Image
+                      src={selectedProject.projectImage2!}
+                      alt={`${selectedProject.name} — detalhe 1`}
+                      width={220}
+                      height={440}
+                      className="w-full"
+                    />
+                  </PhoneMockup>
                 </div>
-                <div className="pb-8">
-                  <Image
-                    src={selectedProject.projectImage3!}
-                    alt={`${selectedProject.name} — detalhe 2`}
-                    width={220}
-                    height={440}
-                    className="rounded-2xl border border-white/[0.06] shadow-xl shadow-black/30"
-                  />
+                <div className="pb-8 sm:pb-12" style={{ transform: 'rotateY(-8deg) rotateX(-2deg)' }}>
+                  <PhoneMockup>
+                    <Image
+                      src={selectedProject.projectImage3!}
+                      alt={`${selectedProject.name} — detalhe 2`}
+                      width={220}
+                      height={440}
+                      className="w-full"
+                    />
+                  </PhoneMockup>
                 </div>
               </div>
               {selectedProject.qualityAndDeliveryDescription && (
@@ -205,7 +211,7 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
             <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 md:py-28">
               <RevealOnScroll>
                 <p className="mb-10 text-center text-xs font-semibold uppercase tracking-widest text-primary/70">
-                  Resultados
+                  {t('results')}
                 </p>
                 <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.06] sm:grid-cols-3">
                   {selectedProject.metricAndValue!.map((item, index) => (
@@ -239,21 +245,17 @@ const PortfolioDetailPage = async ({ params }: { params: Params }) => {
             <RevealOnScroll>
               <div className="mx-auto max-w-xl text-center">
                 <h2 className="mb-6 text-3xl font-bold tracking-tight md:text-4xl">
-                  Mentes
-                  {' '}
-                  <span className="text-primary">criativas</span>
-                  {' '}
-                  e processos
-                  {' '}
-                  <span className="text-primary">organizados</span>
-                  {' '}
-                  geram mais resultados
+                  {t('ctaTitle', { highlight1: '|||1', highlight2: '|||2' }).split('|||1')[0]}
+                  <span className="text-primary">{t('ctaHighlight1')}</span>
+                  {t('ctaTitle', { highlight1: '|||1', highlight2: '|||2' }).split('|||1')[1]?.split('|||2')[0]}
+                  <span className="text-primary">{t('ctaHighlight2')}</span>
+                  {t('ctaTitle', { highlight1: '|||1', highlight2: '|||2' }).split('|||2')[1]}
                 </h2>
                 <a
                   href="#Contato"
                   className="inline-flex rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
                 >
-                  CONHEÇA A AGILITY
+                  {t('ctaButton')}
                 </a>
               </div>
             </RevealOnScroll>

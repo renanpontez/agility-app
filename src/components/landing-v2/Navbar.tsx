@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export type NavLink = {
@@ -14,19 +15,21 @@ type V2NavbarProps = {
   ctaHref?: string;
 };
 
-const DEFAULT_LINKS: NavLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Sobre', href: '/sobre-nos' },
-  { label: 'Serviços', href: '/#Servicos' },
-  { label: 'Portfólio', href: '/portfolio' },
-];
-
 const V2Navbar = ({
-  links = DEFAULT_LINKS,
-  ctaLabel = 'Fale conosco',
+  links,
+  ctaLabel,
   ctaHref = '#Contato',
 }: V2NavbarProps) => {
+  const t = useTranslations('Navbar');
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const resolvedLinks = links ?? [
+    { label: t('home'), href: '/' },
+    { label: t('about'), href: '/sobre-nos' },
+    { label: t('services'), href: '/#Servicos' },
+    { label: t('portfolio'), href: '/portfolio' },
+  ];
+  const resolvedCtaLabel = ctaLabel ?? t('cta');
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
@@ -37,7 +40,7 @@ const V2Navbar = ({
         </a>
         <div className="flex gap-4">
           <div className="hidden items-center gap-8 md:flex">
-            {links.map(link => (
+            {resolvedLinks.map(link => (
               <a
                 key={link.href}
                 href={link.href}
@@ -51,12 +54,12 @@ const V2Navbar = ({
           <div className="flex items-center gap-3">
             <a
               href={ctaHref}
-              className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
+              className="rounded-full bg-primaryDark px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
             >
-              {ctaLabel}
+              {resolvedCtaLabel}
             </a>
             <button
-              className="flex size-9 items-center justify-center rounded-full border border-white/10 text-white/70 md:hidden"
+              className="flex size-9 items-center justify-center rounded-full border border-white/10 text-white md:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
               type="button"
               aria-label="Menu"
@@ -69,7 +72,7 @@ const V2Navbar = ({
 
       {menuOpen && (
         <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-white/10 bg-black/90 p-4 backdrop-blur-lg md:hidden">
-          {links.map(link => (
+          {resolvedLinks.map(link => (
             <a
               key={link.href}
               href={link.href}

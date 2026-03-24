@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { FaLinkedin } from 'react-icons/fa6';
 
 import RevealOnScroll from './RevealOnScroll';
@@ -40,18 +41,20 @@ const TEAM = [
 ];
 
 const TeamGrid = () => {
+  const t = useTranslations('TeamGrid');
+
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:px-0">
         <RevealOnScroll>
           <div className="mb-14 text-center">
             <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-widest text-primary/70">
-              Nosso time
+              {t('badge')}
             </span>
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-              Mentes criativas que movem a
+              {t('title')}
               {' '}
-              <span className="text-primary">Agility</span>
+              <span className="text-primary">{t('titleHighlight')}</span>
             </h2>
           </div>
         </RevealOnScroll>
@@ -89,7 +92,7 @@ const TeamGrid = () => {
                     <h3 className="text-base font-semibold">{member.name}</h3>
                     {member.isPartner && (
                       <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
-                        Parceiro
+                        {t('partner')}
                       </span>
                     )}
                   </div>

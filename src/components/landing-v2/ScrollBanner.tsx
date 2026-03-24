@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef } from 'react';
 
 type ScrollBannerProps = {
@@ -8,9 +9,11 @@ type ScrollBannerProps = {
 };
 
 const ScrollBanner = ({
-  text = 'CREATIVE • DIGITAL • INNOVATION •',
+  text,
   multiplier = 4,
 }: ScrollBannerProps) => {
+  const t = useTranslations('ScrollBanner');
+  const resolvedText = text ?? t('text');
   const ref = useRef<HTMLDivElement>(null);
   const pos = useRef(0);
   const target = useRef(0);
@@ -48,9 +51,9 @@ const ScrollBanner = ({
           <span
             key={i}
             className="mx-6 text-5xl font-bold tracking-wider text-transparent sm:mx-8 sm:text-7xl"
-            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.08)' }}
+            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.2)' }}
           >
-            {text}
+            {resolvedText}
           </span>
         ))}
       </div>

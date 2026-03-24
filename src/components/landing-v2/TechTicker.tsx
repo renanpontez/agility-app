@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 export type TechLogo = {
   name: string;
   icon: string;
@@ -23,12 +25,14 @@ const DEFAULT_LOGOS: TechLogo[] = [
 
 const TechTicker = ({
   logos = DEFAULT_LOGOS,
-  label = 'Tecnologias e plataformas que trabalhamos',
+  label,
 }: TechTickerProps) => {
+  const t = useTranslations('TechTicker');
+  const resolvedLabel = label ?? t('label');
   return (
     <section className="py-10">
-      <p className="mb-6 text-center text-xs font-medium uppercase tracking-widest text-white/30">
-        {label}
+      <p className="mb-6 text-center text-xs font-medium uppercase tracking-widest text-white/60">
+        {resolvedLabel}
       </p>
       <div
         className="relative overflow-hidden"

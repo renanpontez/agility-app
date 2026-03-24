@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 
 import {
   PageHero,
@@ -10,34 +11,34 @@ const TeamGrid = dynamic(() => import('@/components/landing-v2/TeamGrid'));
 const ServicesGrid = dynamic(() => import('@/components/landing-v2/ServicesGrid'));
 const ContactSection = dynamic(() => import('@/components/landing-v2/ContactSection'));
 
-/* ───────────────────────────── DATA ───────────────────────────── */
-
-const PROCESS_STEPS = [
-  { step: '01', title: 'Reunião de Briefing', description: 'Entendemos suas necessidades, objetivos e expectativas para o projeto.' },
-  { step: '02', title: 'Descoberta do Projeto', description: 'Pesquisa de mercado, análise de concorrentes e definição de escopo.' },
-  { step: '03', title: 'Montagem da Proposta', description: 'Criamos uma proposta detalhada com cronograma, escopo e investimento.' },
-  { step: '04', title: 'Desenvolvimento e Testes', description: 'Desenvolvimento em sprints com entregas parciais e testes contínuos.' },
-  { step: '05', title: 'Revisão e Suporte', description: 'Ajustes finais, deploy e suporte contínuo para garantir o sucesso.' },
-];
-
 /* ───────────────────────────── PAGE ───────────────────────────── */
 
-const AboutUsPage = () => {
+const AboutUsPage = async () => {
+  const t = await getTranslations('AboutPage');
+
+  const PROCESS_STEPS = [
+    { step: '01', title: t('step1_title'), description: t('step1_description') },
+    { step: '02', title: t('step2_title'), description: t('step2_description') },
+    { step: '03', title: t('step3_title'), description: t('step3_description') },
+    { step: '04', title: t('step4_title'), description: t('step4_description') },
+    { step: '05', title: t('step5_title'), description: t('step5_description') },
+  ];
+
   return (
     <>
       {/* ─── HERO ─── */}
       <PageHero
-        badge="Sobre nós"
+        badge={t('badge')}
         title={(
           <>
-            Conheça a
+            {t('title')}
             {' '}
             <span className="bg-gradient-to-r from-primary via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Agility Creative
+              {t('titleHighlight')}
             </span>
           </>
         )}
-        subtitle="Somos mais que uma empresa. Somos profissionais apaixonados por soluções. Acreditamos em um futuro onde a tecnologia se integra de forma harmoniosa à vida das pessoas."
+        subtitle={t('subtitle')}
       />
 
       {/* Opaque wrapper so content sits above the fixed hero bg */}
@@ -49,17 +50,19 @@ const AboutUsPage = () => {
             <RevealOnScroll>
               <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 backdrop-blur-sm sm:p-12">
                 <span className="mb-6 inline-block text-xs font-semibold uppercase tracking-widest text-primary/70">
-                  O que nossos clientes falam
+                  {t('testimonialBadge')}
                 </span>
                 <blockquote className="relative">
                   <span className="absolute -left-2 -top-4 font-serif text-6xl text-primary/30">&ldquo;</span>
                   <p className="relative z-10 text-lg leading-relaxed text-white/70">
-                    Nossa presença digital foi transformada com um site que superou expectativas. O resultado impulsionou nossos negócios, e a experiência com a equipe foi excepcional!
+                    {t('testimonialQuote')}
                   </p>
                   <footer className="mt-6 text-sm text-white/40">
-                    <strong className="text-white/60">Leandro P</strong>
+                    <strong className="text-white/60">{t('testimonialAuthor')}</strong>
                     {' '}
-                    — Agillock Gestão de Risco
+                    —
+                    {' '}
+                    {t('testimonialCompany')}
                   </footer>
                 </blockquote>
               </div>
@@ -73,18 +76,18 @@ const AboutUsPage = () => {
             <div className="flex flex-col gap-16 lg:flex-row lg:gap-20">
               <RevealOnScroll className="flex-1">
                 <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-widest text-primary/70">
-                  Nossa metodologia
+                  {t('processBadge')}
                 </span>
                 <h2 className="mb-6 text-3xl font-bold leading-tight tracking-tight md:text-4xl">
-                  Como transformamos ideias em
+                  {t('processTitle')}
                   {' '}
-                  <span className="text-primary">soluções que inspiram?</span>
+                  <span className="text-primary">{t('processTitleHighlight')}</span>
                 </h2>
                 <p className="text-lg leading-relaxed text-white/60">
-                  Na Agility, cada projeto começa com uma visão clara, transformada em realidade por uma equipe apaixonada por inovação. Usamos um método comprovado que excede as expectativas.
+                  {t('processP1')}
                 </p>
                 <p className="mt-4 text-lg leading-relaxed text-white/60">
-                  Nossa abordagem transparente permite que clientes acompanhem o desenvolvimento, construindo confiança e garantindo personalização.
+                  {t('processP2')}
                 </p>
               </RevealOnScroll>
 
@@ -126,18 +129,18 @@ const AboutUsPage = () => {
             <RevealOnScroll>
               <div className="max-w-xl">
                 <h2 className="mb-6 text-3xl font-bold leading-tight md:text-4xl">
-                  Com a Agility, cada projeto é uma missão para
+                  {t('ctaTitle')}
                   {' '}
-                  <span className="text-primary">inspirar</span>
+                  <span className="text-primary">{t('ctaHighlight')}</span>
                 </h2>
                 <p className="mb-8 text-lg text-white/60">
-                  Estamos ao seu lado desde a concepção até a conclusão, abrindo novas possibilidades para o futuro.
+                  {t('ctaDescription')}
                 </p>
                 <a
                   href="#Contato"
                   className="inline-flex rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
                 >
-                  Fale com a gente
+                  {t('ctaButton')}
                 </a>
               </div>
             </RevealOnScroll>

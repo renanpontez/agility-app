@@ -1,4 +1,215 @@
 {
+  "Navbar": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "cta": "Contact us"
+  },
+  "Footer": {
+    "tagline": "Solutions that inspire. Transforming ideas into unique and powerful experiences.",
+    "navigation": "Navigation",
+    "services": "Services",
+    "contact": "Contact",
+    "copyright": "All rights reserved.",
+    "service_sites": "Websites & Landing Pages",
+    "service_apps": "Apps & Games",
+    "service_ecommerce": "Online Stores & E-commerce",
+    "service_consulting": "Consulting & Technology"
+  },
+  "Hero": {
+    "titlePrefix": "Transforming ideas into",
+    "highlight": "solutions that inspire",
+    "subtitle": "We organize the creative process and work in partnership with clients to multiply the results of your project.",
+    "cta1": "Schedule a call",
+    "cta2": "Our services",
+    "pill1": "Optimized solutions",
+    "pill2": "Specialized support",
+    "pill3": "Fast delivery",
+    "card1": "Websites & Apps",
+    "card2": "E-commerce",
+    "card3": "Consulting",
+    "projectsCount": "30+ projects"
+  },
+  "TechTicker": {
+    "label": "Technologies and platforms we work with"
+  },
+  "ScrollBanner": {
+    "text": "CREATIVE • DIGITAL • INNOVATION •"
+  },
+  "ServicesGrid": {
+    "badge": "Our services",
+    "title": "Services with",
+    "titleHighlight": "Agility quality",
+    "service1_title": "Websites & Landing Pages",
+    "service1_description": "Websites that truly deliver results for your project. Modern design focused on performance and conversion.",
+    "service2_title": "Apps & Games",
+    "service2_description": "Custom apps and games brought to life. From concept to app store publication.",
+    "service3_title": "Online Stores & E-commerce",
+    "service3_description": "Take advantage of market expansion with online sales. Platforms optimized to convert visitors into customers.",
+    "service4_title": "Consulting & Technology",
+    "service4_description": "Total focus on optimizing your project results. Specialized consulting to scale your business."
+  },
+  "TeamGrid": {
+    "badge": "Our team",
+    "title": "Creative minds that drive",
+    "titleHighlight": "Agility",
+    "partner": "Partner"
+  },
+  "ContactSection": {
+    "badge": "Get in touch",
+    "title": "Want to talk to us?",
+    "titleHighlight": "Say hello!",
+    "description": "Want to discuss a project or learn more about Agility? Send us a message.",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "John Smith",
+    "emailLabel": "Email",
+    "emailPlaceholder": "contact@company.com",
+    "messageLabel": "Your message",
+    "messagePlaceholder": "Hi, I'd like to know more about...",
+    "submit": "Send message",
+    "whatsappMessage": "Hi Agility, my name is {name} ({email}). Here is my message:\n{message}"
+  },
+  "HomePage": {
+    "aboutBadge": "About us",
+    "aboutTitle": "Building solutions that transform the future.",
+    "aboutP1": "We believe that by organizing the creative process and working in partnership with clients, we can multiply the results of your project.",
+    "aboutP2": "Agility's goal is to always deliver more than expected. We will be a light partnership that brings you closer to the success of your project!",
+    "aboutCta": "Learn more",
+    "projectsDelivered": "Projects delivered",
+    "aboutImgAlt": "About Agility",
+    "aboutWorkAlt": "Work environment",
+    "servicesBadge": "Our services",
+    "servicesTitle": "We find the {highlight} solution for your project",
+    "servicesTitleHighlight": "most efficient",
+    "servicesDescription": "Discover how we can boost your business with technology, design, and strategy.",
+    "service1_title": "Websites & Landing Pages",
+    "service1_description": "Websites that truly deliver results for your project. Modern design focused on performance and conversion.",
+    "service2_title": "Apps & Games",
+    "service2_description": "Custom apps and games brought to life. From concept to app store publication.",
+    "service3_title": "Online Stores & E-commerce",
+    "service3_description": "Take advantage of market expansion with online sales. Platforms optimized to convert visitors into customers.",
+    "service4_title": "Consulting & Technology",
+    "service4_description": "Total focus on optimizing your project results. Specialized consulting to scale your business.",
+    "portfolioBadge": "Portfolio",
+    "portfolioTitle": "Projects that made a {highlight} in our history",
+    "portfolioTitleHighlight": "difference",
+    "portfolioDescription": "Discover some of the many projects we've developed for our clients.",
+    "filterAll": "All",
+    "filterSite": "Website",
+    "filterLanding": "Landing Page",
+    "filterApp": "App",
+    "filterDesign": "Design",
+    "portfolio_dra_category": "Professional Website",
+    "portfolio_dra_description": "Elegant and welcoming website for a psychiatrist, focused on appointment scheduling and mental health digital presence.",
+    "portfolio_mr_category": "Corporate Website",
+    "portfolio_mr_description": "Modern website built with WordPress for Monteiro & Rolim Law Firm, with responsive design and performance focus.",
+    "portfolio_easy_category": "Web App & Design",
+    "portfolio_easy_description": "App design focused on practical and beautiful MVP, with intuitive UI/UX and positive client feedback.",
+    "portfolio_academia_category": "Institutional Website",
+    "portfolio_academia_description": "Institutional website to modernize the academy's digital presence, with member area and event management.",
+    "portfolio_agillock_category": "Landing Page",
+    "portfolio_agillock_description": "Modern and dynamic landing page built with Next.js, focused on online presence and lead capture.",
+    "portfolio_agility_category": "Branding & Design",
+    "portfolio_agility_description": "Complete brand identity modernization — logo, typography, and color palette to reposition the brand.",
+    "portfolio_dynotest_category": "Corporate Website",
+    "portfolio_dynotest_description": "Website for brand positioning with WhatsApp integration for direct contact and increased conversions.",
+    "ctaTitle": "{highlight1} minds and {highlight2} processes generate more results",
+    "ctaHighlight1": "Creative",
+    "ctaHighlight2": "organized",
+    "ctaDescription": "For any digital project, having an experienced team makes all the difference.",
+    "ctaButton": "MEET AGILITY",
+    "faqBadge": "FAQ",
+    "faqTitle": "Frequently asked questions",
+    "faq1_q": "How long does it take to develop a project?",
+    "faq1_a": "The timeline depends on project complexity. Landing pages can be ready in 1-2 weeks, while more complex apps can take 2 to 4 months. We always set a clear schedule before starting.",
+    "faq2_q": "Do you work with companies of any size?",
+    "faq2_a": "Yes! We serve everyone from startups and individual entrepreneurs to mid-sized companies. We adapt our solutions to meet each client's needs and budget.",
+    "faq3_q": "How does the work process function?",
+    "faq3_a": "We start with a conversation to understand your needs. Then we create a detailed scope, develop the project in sprints with partial deliveries, and finalize with tests and adjustments. You follow everything closely.",
+    "faq4_q": "Do you offer support after delivery?",
+    "faq4_a": "Yes, we offer post-delivery support to ensure everything works perfectly. We also provide ongoing maintenance plans for updates and improvements.",
+    "finalCtaTitle": "Ready to transform your project?",
+    "finalCtaDescription": "Let's talk about how we can help take your business to the next level.",
+    "finalCtaButton": "Talk to Agility",
+    "finalCtaWhatsapp": "Direct WhatsApp",
+    "finalCtaPill1": "No commitment",
+    "finalCtaPill2": "Response within 24h",
+    "finalCtaPill3": "Specialized team"
+  },
+  "AboutPage": {
+    "badge": "About us",
+    "title": "Meet",
+    "titleHighlight": "Agility Creative",
+    "subtitle": "We are more than a company. We are professionals passionate about solutions. We believe in a future where technology integrates seamlessly into people's lives.",
+    "testimonialBadge": "What our clients say",
+    "testimonialQuote": "Our digital presence was transformed with a website that exceeded expectations. The result boosted our business, and the experience with the team was exceptional!",
+    "testimonialAuthor": "Leandro P",
+    "testimonialCompany": "Agillock Risk Management",
+    "processBadge": "Our methodology",
+    "processTitle": "How do we transform ideas into",
+    "processTitleHighlight": "solutions that inspire?",
+    "processP1": "At Agility, every project starts with a clear vision, brought to life by a team passionate about innovation. We use a proven method that exceeds expectations.",
+    "processP2": "Our transparent approach allows clients to follow the development, building trust and ensuring customization.",
+    "step1_title": "Briefing Meeting",
+    "step1_description": "We understand your needs, goals, and expectations for the project.",
+    "step2_title": "Project Discovery",
+    "step2_description": "Market research, competitor analysis, and scope definition.",
+    "step3_title": "Proposal Assembly",
+    "step3_description": "We create a detailed proposal with timeline, scope, and investment.",
+    "step4_title": "Development & Testing",
+    "step4_description": "Development in sprints with partial deliveries and continuous testing.",
+    "step5_title": "Review & Support",
+    "step5_description": "Final adjustments, deployment, and ongoing support to ensure success.",
+    "ctaTitle": "With Agility, every project is a mission to",
+    "ctaHighlight": "inspire",
+    "ctaDescription": "We are by your side from conception to completion, opening new possibilities for the future.",
+    "ctaButton": "Talk to us"
+  },
+  "PortfolioPage": {
+    "badge": "Portfolio",
+    "titlePrefix": "Our",
+    "titleHighlight": "projects",
+    "subtitle": "Discover some of the many projects we've developed for our clients.",
+    "portfolio_circlepicks_category": "Social Platform",
+    "portfolio_circlepicks_description": "Social platform for discovering restaurants and bars through recommendations from people you trust.",
+    "portfolio_myhouz_category": "SaaS & App",
+    "portfolio_myhouz_description": "Home management SaaS for couples, roommates, and families. One place for everything that needs to be tracked or done.",
+    "portfolio_dra_category": "Professional Website",
+    "portfolio_dra_description": "Elegant and welcoming website for a psychiatrist, focused on appointment scheduling and mental health digital presence.",
+    "portfolio_mr_category": "Corporate Website",
+    "portfolio_mr_description": "Modern website built with WordPress for Monteiro & Rolim Law Firm, with responsive design and performance focus.",
+    "portfolio_easy_category": "Web App & Design",
+    "portfolio_easy_description": "App design focused on practical and beautiful MVP, with intuitive UI/UX and positive client feedback.",
+    "portfolio_academia_category": "Institutional Website",
+    "portfolio_academia_description": "Institutional website to modernize the academy's digital presence, with member area and event management.",
+    "portfolio_agillock_category": "Landing Page",
+    "portfolio_agillock_description": "Modern and dynamic landing page built with Next.js, focused on online presence and lead capture.",
+    "portfolio_agility_category": "Branding & Design",
+    "portfolio_agility_description": "Complete brand identity modernization — logo, typography, and color palette to reposition the brand.",
+    "portfolio_dynotest_category": "Corporate Website",
+    "portfolio_dynotest_description": "Website for brand positioning with WhatsApp integration for direct contact and increased conversions."
+  },
+  "PortfolioDetail": {
+    "notFound": "Project not found",
+    "client": "Client",
+    "type": "Type",
+    "year": "Year",
+    "website": "Website",
+    "challenge": "The Challenge",
+    "approach": "Our Approach",
+    "results": "Results",
+    "ctaTitle": "{highlight1} minds and {highlight2} processes generate more results",
+    "ctaHighlight1": "Creative",
+    "ctaHighlight2": "organized",
+    "ctaButton": "MEET AGILITY"
+  },
+  "Metadata": {
+    "title": "Agility Creative - Solutions that inspire.",
+    "description": "Agility Creative offers innovative digital solutions, including website development, apps, branding, and digital marketing.",
+    "ogTitle": "Agility Creative - Intelligent Digital Solutions",
+    "ogDescription": "Explore Agility Creative's digital solutions, including web development, branding, and digital marketing."
+  },
   "RootLayout": {
     "home_link": "Home",
     "about_link": "About",
@@ -7,13 +218,33 @@
     "sign_in_link": "Sign in",
     "sign_up_link": "Sign up"
   },
+  "Dashboard": {
+    "meta_title": "Dashboard",
+    "hello_message": "Hello {email}!"
+  },
+  "DashboardLayout": {
+    "dashboard_link": "Dashboard",
+    "user_profile_link": "Manage your account",
+    "sign_out": "Sign out"
+  },
+  "SignIn": {
+    "meta_title": "Sign in",
+    "meta_description": "Seamlessly sign in to your account with our user-friendly login process."
+  },
+  "SignUp": {
+    "meta_title": "Sign up",
+    "meta_description": "Effortlessly create an account through our intuitive sign-up process."
+  },
+  "UserProfile": {
+    "meta_title": "User Profile"
+  },
   "BaseTemplate": {
     "description": "Starter code for your Nextjs Boilerplate with Tailwind CSS",
     "made_with": "Made with"
   },
   "Index": {
     "meta_title": "Next.js Boilerplate Presentation",
-    "meta_description": "Next js Boilerplate is the perfect starter code for your project. Build your React application with the Next.js framework.",
+    "meta_description": "Next js Boilerplate is the perfect starter code for your project.",
     "sponsors_title": "Sponsors"
   },
   "Guestbook": {
@@ -31,13 +262,13 @@
   "About": {
     "meta_title": "About",
     "meta_description": "About page description",
-    "about_paragraph": "Welcome to our About page! We are a team of passionate individuals dedicated to creating amazing software.",
+    "about_paragraph": "Welcome to our About page!",
     "translation_powered_by": "Translation powered by"
   },
   "Portfolio": {
     "meta_title": "Portfolio",
     "meta_description": "Welcome to my portfolio page!",
-    "presentation": "Welcome to my portfolio page! Here you will find a carefully curated collection of my work and accomplishments. Through this portfolio, I'm to showcase my expertise, creativity, and the value I can bring to your projects.",
+    "presentation": "Welcome to my portfolio page!",
     "portfolio_name": "Portfolio {name}",
     "error_reporting_powered_by": "Error reporting powered by",
     "coverage_powered_by": "Code coverage powered by"
@@ -46,27 +277,7 @@
     "meta_title": "Portfolio {slug}",
     "meta_description": "Portfolio {slug} description",
     "header": "Portfolio {slug}",
-    "content": "Created a set of promotional materials and branding elements for a corporate event. Crafted a visually unified theme, encompassing a logo, posters, banners, and digital assets. Integrated the client's brand identity while infusing it with a contemporary and innovative approach. Garnered favorable responses from event attendees, resulting in a successful event with heightened participant engagement and increased brand visibility.",
+    "content": "Created a set of promotional materials and branding elements for a corporate event.",
     "log_management_powered_by": "Log management powered by"
-  },
-  "SignIn": {
-    "meta_title": "Sign in",
-    "meta_description": "Seamlessly sign in to your account with our user-friendly login process."
-  },
-  "SignUp": {
-    "meta_title": "Sign up",
-    "meta_description": "Effortlessly create an account through our intuitive sign-up process."
-  },
-  "Dashboard": {
-    "meta_title": "Dashboard",
-    "hello_message": "Hello {email}!"
-  },
-  "UserProfile": {
-    "meta_title": "User Profile"
-  },
-  "DashboardLayout": {
-    "dashboard_link": "Dashboard",
-    "user_profile_link": "Manage your account",
-    "sign_out": "Sign out"
   }
 }

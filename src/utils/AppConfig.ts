@@ -1,8 +1,8 @@
 const localePrefix: any = 'as-needed';
 
 export const AppConfig = {
-  name: 'Nextjs Starter',
-  locales: ['en', 'fr'],
-  defaultLocale: 'en',
+  name: 'Agility Creative',
+  locales: ['pt-BR', 'en'],
+  defaultLocale: 'pt-BR',
   localePrefix,
 };

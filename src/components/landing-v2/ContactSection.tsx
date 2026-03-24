@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { IoLogoInstagram, IoMailOutline } from 'react-icons/io5';
@@ -7,10 +8,11 @@ import { IoLogoInstagram, IoMailOutline } from 'react-icons/io5';
 import RevealOnScroll from './RevealOnScroll';
 
 const ContactSection = () => {
+  const t = useTranslations('ContactSection');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const goToWhatsapp = () => {
-    const msg = `Olá Agility, me chamo ${formData.name} (${formData.email}). Escrevi a seguinte mensagem:\n${formData.message}`;
+    const msg = t('whatsappMessage', { name: formData.name, email: formData.email, message: formData.message });
     window.open(`https://wa.me/+5585996284730?text=${encodeURIComponent(msg)}`);
   };
 
@@ -20,15 +22,15 @@ const ContactSection = () => {
         <div className="flex flex-col gap-16 lg:flex-row lg:gap-20">
           <RevealOnScroll className="flex-1">
             <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-widest text-primary/70">
-              Entre em contato
+              {t('badge')}
             </span>
             <h2 className="mb-6 text-3xl font-bold tracking-tight md:text-4xl">
-              Quer falar com a gente?
+              {t('title')}
               {' '}
-              <span className="text-primary">Manda um oi!</span>
+              <span className="text-primary">{t('titleHighlight')}</span>
             </h2>
             <p className="mb-8 max-w-md text-lg text-white/50">
-              Quer conversar sobre um projeto ou conhecer mais a Agility? Manda uma mensagem pra gente.
+              {t('description')}
             </p>
 
             <div className="flex flex-col gap-4">
@@ -66,12 +68,12 @@ const ContactSection = () => {
               >
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-white/70" htmlFor="v2-name">
-                    Nome e Sobrenome
+                    {t('nameLabel')}
                   </label>
                   <input
                     id="v2-name"
                     type="text"
-                    placeholder="Antonio Araujo"
+                    placeholder={t('namePlaceholder')}
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30"
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
@@ -80,12 +82,12 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-white/70" htmlFor="v2-email">
-                    E-mail
+                    {t('emailLabel')}
                   </label>
                   <input
                     id="v2-email"
                     type="email"
-                    placeholder="contato@empresa.com.br"
+                    placeholder={t('emailPlaceholder')}
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30"
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -94,12 +96,12 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-white/70" htmlFor="v2-message">
-                    Sua mensagem
+                    {t('messageLabel')}
                   </label>
                   <textarea
                     id="v2-message"
                     rows={5}
-                    placeholder="Olá, gostaria de saber mais sobre..."
+                    placeholder={t('messagePlaceholder')}
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/25 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30"
                     value={formData.message}
                     onChange={e => setFormData({ ...formData, message: e.target.value })}
@@ -110,7 +112,7 @@ const ContactSection = () => {
                   type="submit"
                   className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
                 >
-                  Enviar mensagem
+                  {t('submit')}
                   <FaWhatsapp size={16} />
                 </button>
               </form>

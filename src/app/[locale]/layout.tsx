@@ -2,8 +2,8 @@ import '@/styles/global.css';
 
 import type { Metadata } from 'next';
 import { Poppins, Sorts_Mill_Goudy } from 'next/font/google';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -72,7 +72,7 @@ export default async function RootLayout(props: {
   setRequestLocale(locale);
 
   // Using internationalization in Client Components
-  const messages = useMessages();
+  const messages = await getMessages();
 
   return (
     <html lang={locale} className={`${poppins.variable} ${sortsMillGoudy.variable}`}>

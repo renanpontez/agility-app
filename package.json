@@ -38,7 +38,7 @@
     "@sanity/client": "^6.24.1",
     "@sentry/nextjs": "10.55.0",
     "@spotlightjs/spotlight": "^2.3.1",
-    "@t3-oss/env-nextjs": "^0.11.0",
+    "@t3-oss/env-nextjs": "0.13.11",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "@types/react-dom": "^19.2.3",

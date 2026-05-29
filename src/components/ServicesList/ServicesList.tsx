@@ -18,7 +18,7 @@ const ServicesList: React.FC = () => {
       transition: {
         delay: i * 0.4,
         duration: 0.5,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     }),
   };

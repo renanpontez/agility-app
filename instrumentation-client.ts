@@ -31,6 +31,9 @@ Sentry.init({
   ],
 });
 
+// Required for Sentry v9+ App Router navigation instrumentation
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
+
 if (process.env.NODE_ENV === 'development') {
   Spotlight.init();
 }

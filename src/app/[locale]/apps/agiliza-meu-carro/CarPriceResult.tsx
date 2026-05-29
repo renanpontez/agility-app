@@ -13,9 +13,9 @@ const CarPriceResult = ({ result }: { result?: Result }) => {
 
   const formattedRetailPrice = retailPrice
     ? retailPrice.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    })
+        style: 'currency',
+        currency: 'BRL',
+      })
     : null;
 
   return (

@@ -1,6 +1,6 @@
 import '@/styles/global.css';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Poppins, Sorts_Mill_Goudy } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -27,7 +27,6 @@ export const metadata: Metadata = {
   description: 'Agility Creative oferece soluções digitais inovadoras, incluindo desenvolvimento de sites, aplicativos, branding e marketing digital.',
   keywords: 'Agility Creative, soluções digitais, desenvolvimento web, branding, marketing digital',
   authors: [{ name: 'Agility Creative' }],
-  viewport: 'width=device-width, initial-scale=1.0',
   robots: {
     index: true,
     follow: true,
@@ -58,6 +57,11 @@ export const metadata: Metadata = {
     ],
     apple: '/assets/favicon/apple-touch-icon.png',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export function generateStaticParams() {

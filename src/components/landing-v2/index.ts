@@ -1,4 +1,5 @@
 export { default as ContactSection } from './ContactSection';
+export { LaptopMockup, PhoneMockup } from './DeviceMockup';
 export type { FaqItem } from './FaqAccordion';
 export { default as FaqAccordion } from './FaqAccordion';
 export { default as V2Footer } from './Footer';

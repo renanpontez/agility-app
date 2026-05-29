@@ -51,6 +51,14 @@ test.describe('Migration smoke', () => {
     await expect(page.locator('body')).not.toBeEmpty();
   });
 
+  // The two tests below need real Clerk credentials to pass. They are skipped
+  // when CLERK_SECRET_KEY looks like a dummy placeholder (e.g. in CI without
+  // production secrets), and run for real against preview/prod environments.
+  const hasRealClerk = !!process.env.CLERK_SECRET_KEY
+    && !process.env.CLERK_SECRET_KEY.includes('xxxxxxxxxxx');
+
+  test.skip(!hasRealClerk, 'Real Clerk secret required');
+
   test('sign-in route mounts Clerk component', async ({ page }) => {
     const response = await page.goto('/sign-in');
     // Clerk may redirect to its hosted page (3xx) or render inline (200).

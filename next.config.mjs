@@ -17,12 +17,14 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    dirs: ['.'],
-  },
   poweredByHeader: false,
   reactStrictMode: true,
   serverExternalPackages: ['@electric-sql/pglite'],
+  turbopack: {
+    // Disambiguate the workspace root for Next 16 turbopack when a stray
+    // package-lock.json exists in a parent directory.
+    root: fileURLToPath(new URL('.', import.meta.url)),
+  },
   images: {
     // Allow external image sources
     remotePatterns: [
@@ -66,8 +68,11 @@ export default withSentryConfig(
     widenClientFileUpload: true,
     tunnelRoute: '/monitoring',
     hideSourceMaps: true,
-    disableLogger: true,
-    automaticVercelMonitors: true,
     telemetry: false,
+    webpack: {
+      // Sentry v10 moved these out of the top level into webpack.*
+      automaticVercelMonitors: true,
+      treeshake: { removeDebugLogging: true },
+    },
   },
 );

@@ -12,9 +12,8 @@ test.describe('Migration smoke', () => {
       await page.goto('/');
       // pt-BR is the default locale, served at root with localePrefix: 'as-needed'.
       await expect(page).toHaveURL(/\/(pt-BR)?\/?$/);
-      await expect(page.getByText('Transformando ideias em')).toBeVisible();
-      // 'soluções que inspiram' appears in both the hero highlight and the footer
-      // tagline — first() picks the hero, which is what we care about.
+      // Hero copy also appears in the footer; first() picks the hero heading.
+      await expect(page.getByText('Transformando ideias em').first()).toBeVisible();
       await expect(page.getByText('soluções que inspiram').first()).toBeVisible();
     });
 
@@ -29,8 +28,8 @@ test.describe('Migration smoke', () => {
 
     test('landing page renders translated hero copy', async ({ page }) => {
       await page.goto('/en');
-      await expect(page.getByText('Transforming ideas into')).toBeVisible();
-      // Multiple instances of "solutions that inspire" exist (hero + footer).
+      // Both hero heading and footer tagline contain "Transforming ideas into".
+      await expect(page.getByText('Transforming ideas into').first()).toBeVisible();
       await expect(page.getByText('solutions that inspire').first()).toBeVisible();
     });
 

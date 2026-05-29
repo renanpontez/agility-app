@@ -2,9 +2,9 @@ import { getTranslations } from 'next-intl/server';
 
 import { Hello } from '@/components/Hello';
 
-export async function generateMetadata(props: { params: { locale: string } }) {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
   const t = await getTranslations({
-    locale: props.params.locale,
+    locale: (await props.params).locale,
     namespace: 'Dashboard',
   });
 

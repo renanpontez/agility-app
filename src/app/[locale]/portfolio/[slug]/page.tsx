@@ -15,7 +15,8 @@ export async function generateStaticParams() {
   }));
 }
 
-const PortfolioDetailPage = async ({ params }: { params: Params }) => {
+const PortfolioDetailPage = async (props: { params: Promise<Params> }) => {
+  const params = await props.params;
   const t = await getTranslations('PortfolioDetail');
   const selectedProject = portfolioData.find((item: Project) => item.slug === params.slug);
 

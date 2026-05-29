@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import React from 'react';
 import { CgWebsite } from 'react-icons/cg';
 import { IoCartOutline, IoPhonePortraitOutline } from 'react-icons/io5';
@@ -83,9 +84,9 @@ const ServicesList: React.FC = () => {
         ))}
       </div>
       <div className="mt-8 flex justify-end">
-        <a href="/#Servicos" className="text-xs font-semibold text-secondaryLight hover:text-white">
+        <Link href="/#Servicos" className="text-xs font-semibold text-secondaryLight hover:text-white">
           Mais serviços &gt;
-        </a>
+        </Link>
       </div>
     </motion.div>
   );

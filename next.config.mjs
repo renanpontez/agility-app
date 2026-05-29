@@ -22,9 +22,7 @@ const nextConfig = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
-  experimental: {
-    serverComponentsExternalPackages: ['@electric-sql/pglite'],
-  },
+  serverExternalPackages: ['@electric-sql/pglite'],
   images: {
     // Allow external image sources
     remotePatterns: [

@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
@@ -19,7 +18,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 const Portfolio = async (props: { params: Promise<{ locale: string }> }) => {
   const { locale } = await props.params;
   setRequestLocale(locale);
-  const t = useTranslations('Portfolio');
+  const t = await getTranslations('Portfolio');
 
   return (
     <>

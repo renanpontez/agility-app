@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 import { BaseTemplate } from '@/templates/boilerplate/BaseTemplate';
@@ -11,7 +10,7 @@ export default async function Layout(props: {
 }) {
   const { locale } = await props.params;
   setRequestLocale(locale);
-  const t = useTranslations('RootLayout');
+  const t = await getTranslations('RootLayout');
 
   return (
     <BaseTemplate

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { AppConfig } from '@/utils/AppConfig';
@@ -35,7 +34,7 @@ export async function generateMetadata(props: IPortfolioDetailProps) {
 const PortfolioDetail = async (props: IPortfolioDetailProps) => {
   const { locale, slug } = await props.params;
   setRequestLocale(locale);
-  const t = useTranslations('PortfolioSlug');
+  const t = await getTranslations('PortfolioSlug');
 
   return (
     <>

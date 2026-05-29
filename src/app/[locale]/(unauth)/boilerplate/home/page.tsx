@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { Sponsors } from '@/components/Sponsors';
@@ -19,7 +18,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 export default async function Index(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
   setRequestLocale(locale);
-  const t = useTranslations('Index');
+  const t = await getTranslations('Index');
 
   return (
     <>

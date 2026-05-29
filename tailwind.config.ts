@@ -1,7 +1,35 @@
 /* eslint-disable ts/no-require-imports */
 
 import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme';
+
+// Default font-family stacks inlined from Tailwind's `defaultTheme` —
+// the legacy `tailwindcss/defaultTheme` export was removed in v4 and
+// the project still loads this JS config via `@config` for backwards-compat.
+const defaultSans = [
+  'ui-sans-serif',
+  'system-ui',
+  '-apple-system',
+  'BlinkMacSystemFont',
+  '"Segoe UI"',
+  'Roboto',
+  '"Helvetica Neue"',
+  'Arial',
+  '"Noto Sans"',
+  'sans-serif',
+  '"Apple Color Emoji"',
+  '"Segoe UI Emoji"',
+  '"Segoe UI Symbol"',
+  '"Noto Color Emoji"',
+];
+
+const defaultSerif = [
+  'ui-serif',
+  'Georgia',
+  'Cambria',
+  '"Times New Roman"',
+  'Times',
+  'serif',
+];
 
 export default {
   content: ['./src/**/*.{js,ts,jsx,tsx,html}'],
@@ -36,8 +64,8 @@ export default {
         114: '440px',
       },
       fontFamily: {
-        poppins: ['var(--font-poppins)', ...fontFamily.sans],
-        serif: ['var(--font-sorts-mill-goudy)', ...fontFamily.serif],
+        poppins: ['var(--font-poppins)', ...defaultSans],
+        serif: ['var(--font-sorts-mill-goudy)', ...defaultSerif],
       },
       fontSize: {
         base: ['16px', '24px'], // Default font size

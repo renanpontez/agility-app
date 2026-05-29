@@ -31,7 +31,7 @@ const BrandLoading: React.FC<BrandLoadingProps> = ({ className, size = 'fullscre
         size === 'fullscreen' && 'fixed inset-0 bg-secondaryEvenDarker bg-opacity-75 z-80',
       )}
     >
-      <Image src={BrandLoader} className={classNames(sizeClasses[size], className)} alt="Brand Loading Spinner" />
+      <Image src={BrandLoader} width={128} height={128} className={classNames(sizeClasses[size], className)} alt="Brand Loading Spinner" />
       {label && <Text as="em" size="xs" className="w-1/2 text-center text-secondaryLight">{label}</Text>}
     </div>
   );

@@ -3,13 +3,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
 import { GuestbookValidation } from '@/validations/GuestbookValidation';
 
-type IGuestbookFormProps =
-  | {
+type IGuestbookFormProps
+  = | {
     edit: true;
     id: number;
     defaultValues: z.infer<typeof GuestbookValidation>;

@@ -26,15 +26,15 @@ const PortfolioHeroContent: React.FC<PortfolioHeroContentProps> = ({ projectName
       </Text>
       <div className="flex flex-wrap justify-center gap-2 md:justify-start md:gap-8">
         {tags
-        && tags.map((tag, index) => (
-          <Image
-            key={index}
-            src={tag}
-            alt={`Tag-${index}`}
-            width={190}
-            height={42}
-          />
-        ))}
+          && tags.map((tag, index) => (
+            <Image
+              key={index}
+              src={tag}
+              alt={`Tag-${index}`}
+              width={190}
+              height={42}
+            />
+          ))}
       </div>
     </div>
   );

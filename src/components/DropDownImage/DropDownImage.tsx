@@ -1,6 +1,7 @@
 'use client';
 import classNames from 'classnames';
-import Image, { type StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 import ArrowBottom from '@/public/assets/images/icons/arrow-bottom.png';

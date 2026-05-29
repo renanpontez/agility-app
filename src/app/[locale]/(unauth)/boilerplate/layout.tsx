@@ -5,11 +5,12 @@ import { setRequestLocale } from 'next-intl/server';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 import { BaseTemplate } from '@/templates/boilerplate/BaseTemplate';
 
-export default function Layout(props: {
+export default async function Layout(props: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  setRequestLocale(props.params.locale);
+  const { locale } = await props.params;
+  setRequestLocale(locale);
   const t = useTranslations('RootLayout');
 
   return (

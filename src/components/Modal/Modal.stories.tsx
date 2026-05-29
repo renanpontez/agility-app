@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Button from '@/components/Button';
 import Text from '@/components/Text';

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -34,10 +35,10 @@ const V2Navbar = ({
   return (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
       <div className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-white/10 bg-black/10 px-5 py-3 shadow-sm backdrop-blur-md">
-        <a href="/" className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
           <Image src="/assets/images/logo/logo_symbol_white.svg" alt="Agility" width={28} height={28} />
           <Image src="/assets/images/logo/logo_name_white.svg" alt="Agility" width={90} height={24} className="hidden sm:block" />
-        </a>
+        </Link>
         <div className="flex gap-4">
           <div className="hidden items-center gap-8 md:flex">
             {resolvedLinks.map(link => (

@@ -23,7 +23,8 @@ export async function generateStaticParams() {
     .map((member: any) => ({ slug: member.slug }));
 }
 
-const CVPage = async ({ params }: { params: Params }) => {
+const CVPage = async (props: { params: Promise<Params> }) => {
+  const params = await props.params;
   const teamMember: TeamMember = await getTeamMemberInfo(params.slug);
   const selectedCV = CVData.find((item: any) => item.slug === params.slug);
 

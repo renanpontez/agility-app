@@ -2,7 +2,7 @@ import CVTemplate from '@/templates/CVTemplate';
 
 export default function Layout(props: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   return (
     <CVTemplate>

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type TextProps = {

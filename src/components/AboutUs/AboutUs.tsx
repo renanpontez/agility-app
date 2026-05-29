@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import Text from '../Text';
 
 const AboutUs = () => {
@@ -24,9 +26,9 @@ const AboutUs = () => {
           do seu projeto!
         </Text>
 
-        <a href="/sobre-nos" className="w-fit text-xs font-semibold text-primaryLight hover:underline">
+        <Link href="/sobre-nos" className="w-fit text-xs font-semibold text-primaryLight hover:underline">
           Saiba mais
-        </a>
+        </Link>
       </div>
     </div>
   );

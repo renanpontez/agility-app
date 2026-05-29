@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import type { ChangeEvent, FC, FocusEvent } from 'react';
-import React from 'react';
 
 import InputErrorLabel from './InputErrorLabel';
 

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { NextIntlClientProvider } from 'next-intl';
-import React from 'react';
 import { userEvent, within } from 'storybook/test';
 
 import messages from '@/locales/en.json';

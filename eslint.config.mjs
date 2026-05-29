@@ -82,5 +82,10 @@ export default antfu({
     'react-dom/no-unsafe-target-blank': 'off',
     'antfu/no-top-level-await': 'off',
     'playwright/no-skipped-test': 'off',
+    // eslint-plugin-tailwindcss v3 doesn't understand Tailwind v4's custom theme
+    // tokens or the new utility ordering. Silence its noise; re-enable when a
+    // v4-compatible version of the plugin ships.
+    'tailwindcss/no-custom-classname': 'off',
+    'tailwindcss/classnames-order': 'off',
   },
 });

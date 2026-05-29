@@ -13,7 +13,7 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,jsx,ts,tsx}', '**/*.d.ts'],
       reporter: ['html'],
     },
-    environmentMatchGlobs: [['**/*.test.tsx', 'jsdom']],
+    environment: 'jsdom',
     setupFiles: ['./vitest-setup.ts'],
     env: loadEnv('', process.cwd(), ''),
   },

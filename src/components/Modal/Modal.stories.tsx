@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import type { Meta, StoryFn, StoryObj } from '@storybook/nextjs-vite';
 import { useState } from 'react';
 
 import Button from '@/components/Button';

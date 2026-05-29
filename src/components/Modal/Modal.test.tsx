@@ -14,8 +14,8 @@ describe('Modal component', () => {
         Modal Body
       </Modal>,
     );
-    const titleElement = screen.getByText(/Test Modal/i);
-    const subtitleElement = screen.getByText(/This is a test modal/i);
+    const titleElement = screen.getByText('Test Modal');
+    const subtitleElement = screen.getByText('This is a test modal');
     expect(titleElement).toBeInTheDocument();
     expect(subtitleElement).toBeInTheDocument();
   });
@@ -55,8 +55,9 @@ describe('Modal component', () => {
         Modal Body
       </Modal>,
     );
-    const overlay = screen.getByRole('dialog').parentElement;
-    fireEvent.click(overlay!);
+    // The backdrop is the role="button" element rendered by Modal.
+    const overlay = screen.getByRole('button', { name: '' });
+    fireEvent.click(overlay);
     expect(closed).toBe(true);
   });
 
@@ -75,8 +76,9 @@ describe('Modal component', () => {
         Modal Body
       </Modal>,
     );
-    const overlay = screen.getByRole('dialog').parentElement;
-    fireEvent.click(overlay!);
+    // The backdrop is the role="button" element rendered by Modal.
+    const overlay = screen.getByRole('button', { name: '' });
+    fireEvent.click(overlay);
     expect(closed).toBe(false);
   });
 

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import type { ChangeEvent, FC, FocusEvent } from 'react';
+import { useId } from 'react';
 
 import InputErrorLabel from './InputErrorLabel';
 
@@ -14,6 +15,7 @@ type InputProps = {
   style?: 'light' | 'dark';
   label?: string;
   required?: boolean;
+  id?: string;
 };
 
 const Input: FC<InputProps> = ({
@@ -27,7 +29,10 @@ const Input: FC<InputProps> = ({
   style = 'dark',
   label,
   required,
+  id,
 }) => {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
   const inputClass = classNames(
     'rounded-md px-3 py-3 text-sm placeholder-secondaryLight w-full transition duration-300 ease-in-out', // Basic styles
     'focus:outline-none focus:shadow-md focus:outline-secondaryDark', // Remove default focus styles
@@ -43,8 +48,9 @@ const Input: FC<InputProps> = ({
 
   return (
     <div>
-      {label && <label className="mb-2 block pl-3 text-sm font-medium text-white">{label}</label>}
+      {label && <label htmlFor={inputId} className="mb-2 block pl-3 text-sm font-medium text-white">{label}</label>}
       <input
+        id={inputId}
         type={type}
         className={inputClass}
         onChange={onChange}

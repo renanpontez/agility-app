@@ -12,7 +12,7 @@ describe('Card Component', () => {
 
     const card = screen.getByText('This is a card');
     expect(card).toBeInTheDocument();
-    expect(card.closest('div')).toHaveClass('bg-gray-800');
+    expect(card.closest('div')).toHaveClass('bg-secondaryDark');
     expect(card.closest('div')).toHaveClass('rounded-lg');
   });
 

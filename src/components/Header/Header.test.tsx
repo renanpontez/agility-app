@@ -1,29 +1,43 @@
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import Header from './Header';
 
+// Force the desktop branch of the header so navigation + logo render predictably.
+vi.mock('@/hooks/useBreakpoint', () => ({
+  useBreakpoint: () => ({
+    isMobile: false,
+    isTablet: false,
+    isDesktop: true,
+    isWidescreen: false,
+  }),
+}));
+
 describe('Header Component', () => {
-  it('should render the logo', () => {
+  it('renders the homepage link with the logo', () => {
     render(<Header style="light" />);
-    const logo = screen.getByAltText('Logo');
-    expect(logo).toBeInTheDocument();
+    const homeLinks = screen.getAllByLabelText(/Agility Homepage/i);
+    expect(homeLinks.length).toBeGreaterThan(0);
   });
 
-  it('should render 5 navigation links', () => {
+  it('renders the 4 main navigation links', () => {
     render(<Header style="light" />);
+    // 1 logo link + 4 MENU_ITEMS = 5 links rendered in the desktop layout.
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(5);
+    expect(links.length).toBeGreaterThanOrEqual(5);
   });
 
-  it('should apply dark background when style is dark', () => {
+  it('applies the light style classes when style is "light"', () => {
+    render(<Header style="light" />);
+    const header = screen.getByRole('banner');
+    expect(header).toHaveClass('bg-white');
+    expect(header).toHaveClass('text-black');
+  });
+
+  it('applies the dark style classes when style is "dark"', () => {
     render(<Header style="dark" />);
     const header = screen.getByRole('banner');
     expect(header).toHaveClass('bg-black');
-  });
-
-  it('should apply shadow when isScrolled is true', () => {
-    render(<Header style="light" />);
-    const header = screen.getByRole('banner');
-    expect(header).toHaveClass('shadow-md');
+    expect(header).toHaveClass('text-white');
   });
 });

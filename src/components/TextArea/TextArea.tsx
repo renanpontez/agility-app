@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useId } from 'react';
 
 import InputErrorLabel from '../Input/InputErrorLabel';
 
@@ -13,6 +13,7 @@ export type TextAreaProps = {
   style?: 'light' | 'dark';
   label?: string;
   required?: boolean;
+  id?: string;
 };
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -25,11 +26,15 @@ const TextArea: React.FC<TextAreaProps> = ({
   style = 'dark',
   label,
   required,
+  id,
 }) => {
+  const generatedId = useId();
+  const textareaId = id ?? generatedId;
   return (
     <div>
-      {label && <label className="mb-2 block pl-3 text-sm font-medium text-white">{label}</label>}
+      {label && <label htmlFor={textareaId} className="mb-2 block pl-3 text-sm font-medium text-white">{label}</label>}
       <textarea
+        id={textareaId}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

@@ -7,14 +7,15 @@ describe('Input component', () => {
     render(<Input placeholder="Enter text..." />);
     const inputElement = screen.getByPlaceholderText(/Enter text.../i);
     expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveClass('border-gray-300');
+    expect(inputElement).toHaveClass('bg-secondaryDark');
+    expect(inputElement).toHaveClass('text-white');
   });
 
   it('should apply invalid styles', () => {
     render(<Input isInvalid placeholder="Invalid input..." />);
     const inputElement = screen.getByPlaceholderText(/Invalid input.../i);
     expect(inputElement).toBeInTheDocument();
-    expect(inputElement).toHaveClass('border-red-500');
+    expect(inputElement).toHaveClass('border-error');
   });
 
   it('should update value when typing', () => {

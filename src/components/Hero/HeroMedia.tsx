@@ -45,7 +45,7 @@ const HeroMedia: React.FC<HeroMediaProps> = ({
             <Image
               src={imageSrc}
               alt={altText || 'Hero Image'}
-              layout="fill"
+              fill
               className={twMerge(mediaClassName, mediaClass)}
               loading="eager"
             />

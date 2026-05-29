@@ -47,7 +47,7 @@ const ScrollBanner = ({
   return (
     <section className="overflow-hidden py-10">
       <div ref={ref} className="flex whitespace-nowrap will-change-transform">
-        {[...Array(multiplier)].map((_, i) => (
+        {Array.from({ length: multiplier }).map((_, i) => (
           <span
             key={i}
             className="mx-6 text-5xl font-bold tracking-wider text-transparent sm:mx-8 sm:text-7xl"

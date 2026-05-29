@@ -1,3 +1,4 @@
+// import EUABrand from '@/public/assets/images/brands/eua-brand.png'; TODO: Translate all text to English and use DropDownImage to change.
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 
@@ -9,7 +10,6 @@ import WppButton from '@/components/WppButton';
 import CVData from '@/data/cv.json';
 import BrasilBrand from '@/public/assets/images/brands/brasil-brand.png';
 import { getAllTeamMembersInfo, getTeamMemberInfo } from '@/services/sanity/TeamMemberServices';
-// import EUABrand from '@/public/assets/images/brands/eua-brand.png'; TODO: Translate all text to English and use DropDownImage to change.
 import type { TeamMember } from '@/types/sanity';
 
 type Params = {

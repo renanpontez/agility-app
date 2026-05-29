@@ -25,7 +25,7 @@ const Portfolio = async (props: { params: Promise<{ locale: string }> }) => {
       <p>{t('presentation')}</p>
 
       <div className="grid grid-cols-1 justify-items-start gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {Array.from(Array(6).keys()).map(elt => (
+        {Array.from(Array.from({ length: 6 }).keys()).map(elt => (
           <Link
             className="hover:text-blue-700"
             key={elt}

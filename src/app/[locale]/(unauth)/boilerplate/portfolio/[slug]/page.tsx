@@ -10,7 +10,7 @@ type IPortfolioDetailProps = {
 export function generateStaticParams() {
   return AppConfig.locales
     .map(locale =>
-      Array.from(Array(6).keys()).map(elt => ({
+      Array.from(Array.from({ length: 6 }).keys()).map(elt => ({
         slug: `${elt}`,
         locale,
       })),

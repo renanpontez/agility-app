@@ -27,22 +27,15 @@ npm test --silent
 
 echo "▸ Production build…"
 # Use dummy creds so the build doesn't fail on env validation.
-# Reach the linting/typecheck stage; static-data fetch may still fail if Sanity
-# isn't reachable, which is fine — CI builds against real env vars anyway.
 CLERK_SECRET_KEY="${CLERK_SECRET_KEY:-sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}" \
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:-pk_test_cmVsYXhlZC10dXJrZXktNjcuY2xlcmsuYWNjb3VudHMuZGV2JA}" \
 NEXT_PUBLIC_CLERK_SIGN_IN_URL="${NEXT_PUBLIC_CLERK_SIGN_IN_URL:-/sign-in}" \
 NEXT_TELEMETRY_DISABLED=1 \
 npm run build --silent > /tmp/agility-prepush-build.log 2>&1 || {
-  # Only fail the push on real code errors (compile/typecheck/lint). Sanity
-  # 'Dataset not found' is environmental and acceptable when devs lack creds.
-  if grep -qE 'Type error|Failed to compile|Cannot find module|Module not found|SyntaxError' /tmp/agility-prepush-build.log; then
-    echo ""
-    echo "✘ Production build failed (see /tmp/agility-prepush-build.log)"
-    tail -30 /tmp/agility-prepush-build.log
-    exit 1
-  fi
-  echo "  (build halted on env data fetch — code OK)"
+  echo ""
+  echo "✘ Production build failed (see /tmp/agility-prepush-build.log)"
+  tail -30 /tmp/agility-prepush-build.log
+  exit 1
 }
 
 echo "✓ pre-push checks passed"

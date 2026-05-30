@@ -1,18 +1,54 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
 import { ContactSection, LaptopMockup, PageHero, PhoneMockup, RevealOnScroll } from '@/components/landing-v2';
 import portfolioData from '@/data/portfolio.json';
 import type { Project } from '@/types/portfolio';
+import { AppConfig } from '@/utils/AppConfig';
+import { getBaseUrl } from '@/utils/Helpers';
+import { buildAlternates, ogAlternateLocales, ogLocale } from '@/utils/seo';
 
 type Params = {
   slug: string;
+  locale: string;
 };
 
 export async function generateStaticParams() {
   return portfolioData.map((item: Project) => ({
     slug: item.slug,
   }));
+}
+
+export async function generateMetadata(props: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { slug, locale } = await props.params;
+  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
+    ? (locale as (typeof AppConfig.locales)[number])
+    : AppConfig.defaultLocale;
+  const project = portfolioData.find((item: Project) => item.slug === slug);
+  const alternates = buildAlternates(safeLocale, `/portfolio/${slug}`);
+  const title = project?.clientName ?? project?.introTitle ?? slug;
+  const description = project?.introDescription?.[0] ?? '';
+  const ogImage = project?.thumbnailImage ?? project?.projectImage1;
+
+  return {
+    metadataBase: new URL(getBaseUrl()),
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: AppConfig.name,
+      locale: ogLocale(safeLocale),
+      alternateLocale: ogAlternateLocales(safeLocale),
+      type: 'article',
+      images: ogImage ? [{ url: ogImage, alt: title }] : undefined,
+    },
+  };
 }
 
 const PortfolioDetailPage = async (props: { params: Promise<Params> }) => {

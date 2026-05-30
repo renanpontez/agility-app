@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
@@ -6,10 +7,43 @@ import {
   PageHero,
   RevealOnScroll,
 } from '@/components/landing-v2';
+import { AppConfig } from '@/utils/AppConfig';
+import { getBaseUrl } from '@/utils/Helpers';
+import { buildAlternates, ogAlternateLocales, ogLocale } from '@/utils/seo';
 
 const TeamGrid = dynamic(() => import('@/components/landing-v2/TeamGrid'));
 const ServicesGrid = dynamic(() => import('@/components/landing-v2/ServicesGrid'));
 const ContactSection = dynamic(() => import('@/components/landing-v2/ContactSection'));
+
+const ABOUT_PATH = '/sobre-nos';
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await props.params;
+  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
+    ? (locale as (typeof AppConfig.locales)[number])
+    : AppConfig.defaultLocale;
+  const t = await getTranslations({ locale: safeLocale, namespace: 'AboutPage' });
+  const alternates = buildAlternates(safeLocale, ABOUT_PATH);
+  const title = `${t('title')} ${t('titleHighlight')}`.trim();
+
+  return {
+    metadataBase: new URL(getBaseUrl()),
+    title,
+    description: t('subtitle'),
+    alternates,
+    openGraph: {
+      title,
+      description: t('subtitle'),
+      url: alternates.canonical,
+      siteName: AppConfig.name,
+      locale: ogLocale(safeLocale),
+      alternateLocale: ogAlternateLocales(safeLocale),
+      type: 'website',
+    },
+  };
+}
 
 /* ───────────────────────────── PAGE ───────────────────────────── */
 

@@ -3,9 +3,11 @@ import '@/styles/global.css';
 import type { Metadata, Viewport } from 'next';
 import { Poppins, Sorts_Mill_Goudy } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { AppConfig } from '@/utils/AppConfig';
+import { getBaseUrl } from '@/utils/Helpers';
+import { buildAlternates, ogAlternateLocales, ogLocale } from '@/utils/seo';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -22,42 +24,56 @@ const sortsMillGoudy = Sorts_Mill_Goudy({
   variable: '--font-sorts-mill-goudy',
 });
 
-export const metadata: Metadata = {
-  title: 'Agility Creative - Soluções que inspiram.',
-  description: 'Agility Creative oferece soluções digitais inovadoras, incluindo desenvolvimento de sites, aplicativos, branding e marketing digital.',
-  keywords: 'Agility Creative, soluções digitais, desenvolvimento web, branding, marketing digital',
-  authors: [{ name: 'Agility Creative' }],
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: 'https://www.agilitycreative.com',
-  },
-  openGraph: {
-    title: 'Agility Creative - Soluções Digitais Inteligentes',
-    description: 'Explore as soluções digitais da Agility Creative, incluindo desenvolvimento web, branding e marketing digital.',
-    url: 'https://www.agilitycreative.com',
-    siteName: 'Agility Creative',
-    images: [
-      {
-        url: 'https://www.agilitycreative.com/assets/images/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Agility Creative Open Graph Image',
-      },
-    ],
-    type: 'website',
-  },
-  icons: {
-    icon: [
-      { url: '/assets/favicon/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
-      { url: '/assets/favicon/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
-      { url: '/assets/favicon/favicon.ico', type: 'image/x-icon' },
-    ],
-    apple: '/assets/favicon/apple-touch-icon.png',
-  },
-};
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await props.params;
+  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
+    ? (locale as (typeof AppConfig.locales)[number])
+    : AppConfig.defaultLocale;
+  const t = await getTranslations({ locale: safeLocale, namespace: 'Metadata' });
+  const alternates = buildAlternates(safeLocale, '/');
+
+  return {
+    metadataBase: new URL(getBaseUrl()),
+    title: {
+      default: t('title'),
+      template: `%s | ${AppConfig.name}`,
+    },
+    description: t('description'),
+    authors: [{ name: AppConfig.name }],
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates,
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      url: alternates.canonical,
+      siteName: AppConfig.name,
+      locale: ogLocale(safeLocale),
+      alternateLocale: ogAlternateLocales(safeLocale),
+      images: [
+        {
+          url: '/assets/images/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: AppConfig.name,
+        },
+      ],
+      type: 'website',
+    },
+    icons: {
+      icon: [
+        { url: '/assets/favicon/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+        { url: '/assets/favicon/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+        { url: '/assets/favicon/favicon.ico', type: 'image/x-icon' },
+      ],
+      apple: '/assets/favicon/apple-touch-icon.png',
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: 'device-width',

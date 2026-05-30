@@ -1,9 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+
+import LocaleSwitcher from '@/components/LocaleSwitcher';
+import { Link } from '@/libs/i18nNavigation';
 
 export type NavLink = {
   label: string;
@@ -14,6 +16,31 @@ type V2NavbarProps = {
   links?: NavLink[];
   ctaLabel?: string;
   ctaHref?: string;
+};
+
+const isHashOrExternal = (href: string) => href.startsWith('#') || href.startsWith('http') || href.includes('#');
+
+const NavLinkItem = ({ href, className, onClick, children }: {
+  href: string;
+  className: string;
+  onClick?: () => void;
+  children: React.ReactNode;
+}) => {
+  // Hash / cross-section anchors must stay native <a> — next-intl's Link rewrites
+  // them with the active locale and breaks scroll behaviour. Internal routes go
+  // through the locale-aware Link so navigation preserves the active language.
+  if (isHashOrExternal(href)) {
+    return (
+      <a href={href} className={className} onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className} onClick={onClick}>
+      {children}
+    </Link>
+  );
 };
 
 const V2Navbar = ({
@@ -39,26 +66,27 @@ const V2Navbar = ({
           <Image src="/assets/images/logo/logo_symbol_white.svg" alt="Agility" width={28} height={28} />
           <Image src="/assets/images/logo/logo_name_white.svg" alt="Agility" width={90} height={24} className="hidden sm:block" />
         </Link>
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
           <div className="hidden items-center gap-8 md:flex">
             {resolvedLinks.map(link => (
-              <a
+              <NavLinkItem
                 key={link.href}
                 href={link.href}
                 className="text-sm font-medium text-white/60 transition-colors hover:text-white"
               >
                 {link.label}
-              </a>
+              </NavLinkItem>
             ))}
           </div>
 
           <div className="flex items-center gap-3">
-            <a
+            <LocaleSwitcher className="hidden sm:flex" />
+            <NavLinkItem
               href={ctaHref}
               className="rounded-full bg-primaryDark px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
             >
               {resolvedCtaLabel}
-            </a>
+            </NavLinkItem>
             <button
               className="flex size-9 items-center justify-center rounded-full border border-white/10 text-white md:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -74,15 +102,18 @@ const V2Navbar = ({
       {menuOpen && (
         <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-white/10 bg-black/90 p-4 backdrop-blur-lg md:hidden">
           {resolvedLinks.map(link => (
-            <a
+            <NavLinkItem
               key={link.href}
               href={link.href}
               className="block rounded-lg px-4 py-3 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
-            </a>
+            </NavLinkItem>
           ))}
+          <div className="mt-3 flex justify-center border-t border-white/10 pt-3">
+            <LocaleSwitcher />
+          </div>
         </div>
       )}
     </nav>

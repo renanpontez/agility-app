@@ -30,15 +30,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co', // Replace with the actual domain
-        pathname: '/**', // Adjust path as needed, or use '/**' to allow all paths
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io', // Replace with the actual domain
+        hostname: 'placehold.co',
+        pathname: '/**',
       },
     ],
-
   },
   webpack(config) {
     config.module.rules.push({

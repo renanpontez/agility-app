@@ -44,12 +44,9 @@ jobs:
       CLERK_SECRET_KEY: sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_cmVsYXhlZC10dXJrZXktNjcuY2xlcmsuYWNjb3VudHMuZGV2JA
       NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
-      SANITY_PROJECT_ID: dummy
-      SANITY_DATA_SET: production
       NEXT_TELEMETRY_DISABLED: '1'
-      # Use the dev server, not the prod start command (which would need a real Sanity
-      # dataset for static page generation). Playwright sees CI=true by default, so we
-      # override the webServer command directly via PLAYWRIGHT_WEB_SERVER_COMMAND.
+      # Use the dev server, not the prod start command. Playwright sees CI=true
+      # by default, so we override the webServer command via PLAYWRIGHT_WEB_SERVER_COMMAND.
       PLAYWRIGHT_WEB_SERVER_COMMAND: npm run dev:next
     steps:
       - uses: actions/checkout@v4

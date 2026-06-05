@@ -91,9 +91,14 @@ Produza estes campos:
   rótulo todo dia para não criar categorias quase-duplicadas.
 - `tags`: 3–6 palavras simples, sem `#`.
 - `author`: `{ "name": "Equipe Agility", "role": "Editorial" }`.
-- `coverImage`: por enquanto use placeholder:
-  `https://placehold.co/1600x900/0a0a0a/4F46E5/png?text=<tema-curto-url-encoded>`
-- `coverAlt`: descrição curta da capa.
+- `coverImage`: use uma foto do Unsplash (já liberada em `next.config.mjs`). Escolha
+  uma foto real que combine com o tema do artigo no https://unsplash.com e use o ID dela
+  no formato:
+  `https://images.unsplash.com/photo-<photo-id>?w=1600&q=80&auto=format&fit=crop`
+  Exemplos já validados: `1522071820081-009f0129c71c` (time/colaboração),
+  `1517292987719-0369a794ec0f` (caderno/sketches), `1559028012-481c04fa702d` (design/UI),
+  `1517245386807-bb43f82c33c4` (código em tela). Evite `placehold.co` — fica amador.
+- `coverAlt`: descrição curta e descritiva da capa (português, sem "foto de").
 - `body`: **array de blocos tipados** (NÃO markdown). Tipos válidos: `paragraph`,
   `heading` (level 2 ou 3), `list` (`items[]`, `ordered?`), `quote` (`text`, `cite?`),
   `image` (`src`, `alt`, `caption?`), `code` (`code`, `language?`).

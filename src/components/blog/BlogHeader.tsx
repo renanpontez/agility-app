@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import LocaleSwitcher from '@/components/LocaleSwitcher';
 import { Link } from '@/libs/i18nNavigation';
 
 const HIDE_AFTER = 120;
@@ -55,7 +54,6 @@ const BlogHeader = () => {
           >
             {t('home')}
           </Link>
-          <LocaleSwitcher theme="light" className="ml-1" />
           <Link
             href="/#Contato"
             className="ml-1.5 hidden items-center gap-1.5 rounded-full bg-stone-900 px-4 py-2 text-[13px] font-medium tracking-tight text-stone-50 shadow-[0_1px_2px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all hover:bg-stone-800 hover:shadow-[0_4px_12px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)] sm:inline-flex"

@@ -9,7 +9,7 @@ import { Link } from '@/libs/i18nNavigation';
 import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
 import { getBaseUrl } from '@/utils/Helpers';
-import { buildAlternates, localizedUrl, ogAlternateLocales, ogLocale } from '@/utils/seo';
+import { buildDefaultLocaleAlternates, localizedUrl, ogLocale } from '@/utils/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,13 +21,10 @@ type Params = {
 export async function generateMetadata(props: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { slug, locale } = await props.params;
-  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
-    ? (locale as (typeof AppConfig.locales)[number])
-    : AppConfig.defaultLocale;
+  const { slug } = await props.params;
   const posts = await getPostsSafe();
   const post = posts.find(item => item.slug === slug);
-  const alternates = buildAlternates(safeLocale, `/blog/${slug}`);
+  const alternates = buildDefaultLocaleAlternates(`/blog/${slug}`);
   const title = post?.title ?? slug;
   const description = post?.excerpt ?? '';
   const ogImage = post?.coverImage;
@@ -44,8 +41,7 @@ export async function generateMetadata(props: {
       description,
       url: alternates.canonical,
       siteName: AppConfig.name,
-      locale: ogLocale(safeLocale),
-      alternateLocale: ogAlternateLocales(safeLocale),
+      locale: ogLocale(AppConfig.defaultLocale),
       type: 'article',
       publishedTime: post?.publishedAt,
       modifiedTime: post?.updatedAt ?? post?.publishedAt,
@@ -63,11 +59,10 @@ export async function generateMetadata(props: {
 }
 
 const BlogArticlePage = async (props: { params: Promise<Params> }) => {
-  const { slug, locale } = await props.params;
-  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
-    ? (locale as (typeof AppConfig.locales)[number])
-    : AppConfig.defaultLocale;
-  const t = await getTranslations('BlogDetail');
+  const { slug } = await props.params;
+  // Blog is pt-BR only — pin locale regardless of `[locale]` segment.
+  const safeLocale = AppConfig.defaultLocale;
+  const t = await getTranslations({ locale: safeLocale, namespace: 'BlogDetail' });
   const posts = await getPostsSafe();
   const existing = posts.find(item => item.slug === slug);
   // Real 404 (not a soft 200 with a "not found" message) for both missing

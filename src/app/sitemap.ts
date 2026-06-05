@@ -18,9 +18,9 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/', changeFrequency: 'weekly', priority: 1 },
   { path: '/sobre-nos', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/portfolio', changeFrequency: 'weekly', priority: 0.9 },
-  { path: '/blog', changeFrequency: 'daily', priority: 0.8 },
 ];
 
+// Pages that have localized variants — both pt-BR and /en URLs exist.
 const buildLanguageAlternates = (path: string) => {
   const languages: Record<string, string> = {};
   for (const locale of AppConfig.locales) {
@@ -28,6 +28,16 @@ const buildLanguageAlternates = (path: string) => {
   }
   languages['x-default'] = localizedUrl(AppConfig.defaultLocale, path);
   return languages;
+};
+
+// Pages that only exist in the default locale (blog, etc.) — every hreflang
+// points at the same URL so search engines don't go looking for translations.
+const buildDefaultOnlyAlternates = (path: string) => {
+  const url = localizedUrl(AppConfig.defaultLocale, path);
+  return {
+    [AppConfig.defaultLocale]: url,
+    'x-default': url,
+  };
 };
 
 export const dynamic = 'force-dynamic';
@@ -76,35 +86,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Blog article pages, one row per locale, lastModified from the post itself.
-  // Drafts (status: 'draft') stay out of the sitemap.
+  // Blog is pt-BR only — emit a single canonical row per published post and
+  // mark hreflang pt-BR + x-default at the same URL so /en/blog* doesn't get
+  // crawled (middleware redirects it back here anyway).
   const blogPosts = (await getPostsSafe()).filter(isPublished);
+  entries.push({
+    url: localizedUrl(AppConfig.defaultLocale, '/blog'),
+    lastModified: now,
+    changeFrequency: 'daily',
+    priority: 0.8,
+    alternates: { languages: buildDefaultOnlyAlternates('/blog') },
+  });
   for (const post of blogPosts) {
     const blogPath = `/blog/${post.slug}`;
-    const lastModified = new Date(post.updatedAt ?? post.publishedAt);
-    for (const locale of AppConfig.locales) {
-      entries.push({
-        url: localizedUrl(locale, blogPath),
-        lastModified,
-        changeFrequency: 'monthly',
-        priority: locale === AppConfig.defaultLocale ? 0.7 : 0.6,
-        alternates: { languages: buildLanguageAlternates(blogPath) },
-      });
-    }
+    entries.push({
+      url: localizedUrl(AppConfig.defaultLocale, blogPath),
+      lastModified: new Date(post.updatedAt ?? post.publishedAt),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages: buildDefaultOnlyAlternates(blogPath) },
+    });
   }
-
-  // Blog category index pages, one row per locale per category.
   for (const categorySlug of getAllCategorySlugs(blogPosts)) {
     const categoryPath = `/blog/category/${categorySlug}`;
-    for (const locale of AppConfig.locales) {
-      entries.push({
-        url: localizedUrl(locale, categoryPath),
-        lastModified: now,
-        changeFrequency: 'weekly',
-        priority: locale === AppConfig.defaultLocale ? 0.6 : 0.5,
-        alternates: { languages: buildLanguageAlternates(categoryPath) },
-      });
-    }
+    entries.push({
+      url: localizedUrl(AppConfig.defaultLocale, categoryPath),
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.6,
+      alternates: { languages: buildDefaultOnlyAlternates(categoryPath) },
+    });
   }
 
   return entries;

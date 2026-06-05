@@ -33,6 +33,12 @@ const nextConfig = {
         hostname: 'placehold.co',
         pathname: '/**',
       },
+      // Unsplash — default blog cover provider when no custom image is uploaded.
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
     ],
   },
   webpack(config) {

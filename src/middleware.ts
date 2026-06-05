@@ -32,12 +32,37 @@ const hasLocalePrefix = (pathname: string) =>
     locale => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
 
+// The blog is intentionally pt-BR-only (editorial decision — local audience,
+// no translation pipeline). The locale switcher is hidden there and any
+// localized URL is canonicalized back to the default-locale path so search
+// engines see a single canonical blog tree.
+const isBlogPath = (pathname: string) =>
+  pathname === '/blog' || pathname.startsWith('/blog/');
+
+const localizedBlogRedirect = (request: NextRequest) => {
+  const { pathname, search } = request.nextUrl;
+  for (const locale of nonDefaultLocales) {
+    const prefix = `/${locale}`;
+    if (pathname === `${prefix}/blog` || pathname.startsWith(`${prefix}/blog/`)) {
+      const url = request.nextUrl.clone();
+      url.pathname = pathname.slice(prefix.length);
+      url.search = search;
+      return NextResponse.redirect(url, 308);
+    }
+  }
+  return null;
+};
+
 // If the visitor previously chose a non-default locale (stored in the
 // NEXT_LOCALE cookie by the LocaleSwitcher), promote that choice to a real
 // redirect so the rest of the pipeline — and search engines — see the locale.
 const localePreferredRedirect = (request: NextRequest) => {
   const { pathname, search } = request.nextUrl;
   if (hasLocalePrefix(pathname)) {
+    return null;
+  }
+  // Blog is locale-locked to pt-BR — never honor a cookie redirect into /en/blog.
+  if (isBlogPath(pathname)) {
     return null;
   }
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
@@ -62,6 +87,13 @@ export default function middleware(
   // Don't let next-intl rewrite them to a localized page path.
   if (request.nextUrl.pathname.startsWith('/api/')) {
     return;
+  }
+
+  // /en/blog* (and any other non-default locale prefix on /blog) canonicalizes
+  // to /blog* so search engines and users only ever see one blog URL tree.
+  const blogCanonical = localizedBlogRedirect(request);
+  if (blogCanonical) {
+    return blogCanonical;
   }
 
   // Honor a stored locale preference before any locale-routing logic kicks in.

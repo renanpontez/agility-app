@@ -1,5 +1,13 @@
 {
-  "publicados": [],
+  "publicados": [
+    {
+      "date": "2026-06-05",
+      "slug": "microsoft-build-2026-agentes-de-ia-que-conhecem-sua-empresa",
+      "title": "Microsoft Build 2026: a aposta nos agentes de IA que conhecem a sua empresa",
+      "url": "https://www.agilitycreative.com/blog/microsoft-build-2026-agentes-de-ia-que-conhecem-sua-empresa",
+      "category": "Inteligência Artificial"
+    }
+  ],
   "links_lidos": [
     "https://news.microsoft.com/source/emea/features/microsoft-build-2026-reforca-nova-era-da-ia-com-agentes-inteligentes-plataformas-abertas-e-avancos-em-computacao-quantica/",
     "https://news.microsoft.com/build-2026-live-blog",

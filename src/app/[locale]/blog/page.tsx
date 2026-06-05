@@ -7,21 +7,19 @@ import { getPostsSafe } from '@/libs/blogStore';
 import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
 import { getBaseUrl } from '@/utils/Helpers';
-import { buildAlternates, localizedUrl, ogAlternateLocales, ogLocale } from '@/utils/seo';
+import { buildDefaultLocaleAlternates, localizedUrl, ogLocale } from '@/utils/seo';
 
 export const dynamic = 'force-dynamic';
 
 const BLOG_PATH = '/blog';
 
-export async function generateMetadata(props: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await props.params;
-  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
-    ? (locale as (typeof AppConfig.locales)[number])
-    : AppConfig.defaultLocale;
-  const t = await getTranslations({ locale: safeLocale, namespace: 'BlogPage' });
-  const alternates = buildAlternates(safeLocale, BLOG_PATH);
+export async function generateMetadata(): Promise<Metadata> {
+  // Blog is pt-BR only by editorial decision — pin metadata to the default
+  // locale even if `[locale]` happens to be `en` (middleware redirects /en/blog
+  // → /blog, but generateMetadata can still be called once before the redirect
+  // is followed).
+  const t = await getTranslations({ locale: AppConfig.defaultLocale, namespace: 'BlogPage' });
+  const alternates = buildDefaultLocaleAlternates(BLOG_PATH);
   const title = `${t('titlePrefix')} ${t('titleHighlight')}`.trim();
 
   return {
@@ -35,8 +33,7 @@ export async function generateMetadata(props: {
       description: t('subtitle'),
       url: alternates.canonical,
       siteName: AppConfig.name,
-      locale: ogLocale(safeLocale),
-      alternateLocale: ogAlternateLocales(safeLocale),
+      locale: ogLocale(AppConfig.defaultLocale),
       type: 'website',
     },
     twitter: {
@@ -47,12 +44,13 @@ export async function generateMetadata(props: {
   };
 }
 
-const BlogPage = async (props: { params: Promise<{ locale: string }> }) => {
-  const { locale } = await props.params;
-  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
-    ? (locale as (typeof AppConfig.locales)[number])
-    : AppConfig.defaultLocale;
-  const t = await getTranslations('BlogPage');
+const BlogPage = async () => {
+  // Blog locale is pinned to pt-BR (editorial decision). Middleware redirects
+  // /en/blog → /blog before this page renders, so `[locale]` is always pt-BR
+  // in practice — but pin it explicitly so the page is self-consistent even
+  // if middleware is bypassed.
+  const safeLocale = AppConfig.defaultLocale;
+  const t = await getTranslations({ locale: safeLocale, namespace: 'BlogPage' });
 
   const posts = await getPostsSafe();
   const sortedPosts = posts
@@ -106,7 +104,7 @@ const BlogPage = async (props: { params: Promise<{ locale: string }> }) => {
       <BlogIndex
         items={items}
         categories={categories}
-        locale={locale}
+        locale={safeLocale}
         allLabel={t('allLabel')}
         readArticleLabel={t('readArticle')}
         emptyLabel={t('empty')}

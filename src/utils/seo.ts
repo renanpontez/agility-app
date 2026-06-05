@@ -35,6 +35,24 @@ export const buildAlternates = (locale: Locale, path: string) => {
 };
 
 /**
+ * Alternates for content that only exists in the default locale (e.g. the
+ * blog — editorial decision: pt-BR only, no translation pipeline). The
+ * canonical and every hreflang point at the same default-locale URL, and we
+ * intentionally omit other locales so search engines don't crawl URLs that
+ * just redirect.
+ */
+export const buildDefaultLocaleAlternates = (path: string) => {
+  const defaultPath = localizedPath(AppConfig.defaultLocale, path);
+  return {
+    canonical: defaultPath,
+    languages: {
+      [AppConfig.defaultLocale]: defaultPath,
+      'x-default': defaultPath,
+    },
+  };
+};
+
+/**
  * Open Graph locale tag for the chosen UI locale.
  * Maps the project's locale strings to Open Graph's `language_TERRITORY` form.
  */

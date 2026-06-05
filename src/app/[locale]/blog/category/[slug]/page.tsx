@@ -14,7 +14,7 @@ import { getPostsSafe } from '@/libs/blogStore';
 import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
 import { getBaseUrl } from '@/utils/Helpers';
-import { buildAlternates, localizedUrl, ogAlternateLocales, ogLocale } from '@/utils/seo';
+import { buildDefaultLocaleAlternates, localizedUrl, ogLocale } from '@/utils/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,14 +26,12 @@ type Params = {
 export async function generateMetadata(props: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { slug, locale } = await props.params;
-  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
-    ? (locale as (typeof AppConfig.locales)[number])
-    : AppConfig.defaultLocale;
+  const { slug } = await props.params;
+  const safeLocale = AppConfig.defaultLocale;
   const posts = await getPostsSafe();
   const category = findCategoryBySlug(posts, slug);
   const t = await getTranslations({ locale: safeLocale, namespace: 'BlogCategory' });
-  const alternates = buildAlternates(safeLocale, `/blog/category/${slug}`);
+  const alternates = buildDefaultLocaleAlternates(`/blog/category/${slug}`);
 
   if (!category) {
     return {
@@ -59,7 +57,6 @@ export async function generateMetadata(props: {
       url: alternates.canonical,
       siteName: AppConfig.name,
       locale: ogLocale(safeLocale),
-      alternateLocale: ogAlternateLocales(safeLocale),
       type: 'website',
     },
     twitter: {
@@ -71,10 +68,9 @@ export async function generateMetadata(props: {
 }
 
 const BlogCategoryPage = async (props: { params: Promise<Params> }) => {
-  const { slug, locale } = await props.params;
-  const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
-    ? (locale as (typeof AppConfig.locales)[number])
-    : AppConfig.defaultLocale;
+  const { slug } = await props.params;
+  // Blog is pt-BR only — pin locale regardless of `[locale]` segment.
+  const safeLocale = AppConfig.defaultLocale;
   const posts = await getPostsSafe();
   const category = findCategoryBySlug(posts, slug);
 
@@ -82,8 +78,8 @@ const BlogCategoryPage = async (props: { params: Promise<Params> }) => {
     notFound();
   }
 
-  const tBlog = await getTranslations('BlogPage');
-  const tCategory = await getTranslations('BlogCategory');
+  const tBlog = await getTranslations({ locale: safeLocale, namespace: 'BlogPage' });
+  const tCategory = await getTranslations({ locale: safeLocale, namespace: 'BlogCategory' });
 
   const sortedPosts = posts
     .filter(post =>
@@ -146,7 +142,7 @@ const BlogCategoryPage = async (props: { params: Promise<Params> }) => {
         items={items}
         categories={categories}
         activeSlug={slug}
-        locale={locale}
+        locale={safeLocale}
         allLabel={tBlog('allLabel')}
         readArticleLabel={tBlog('readArticle')}
         emptyLabel={tBlog('empty')}

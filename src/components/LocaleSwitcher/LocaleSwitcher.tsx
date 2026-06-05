@@ -41,6 +41,24 @@ const THEME_STYLES: Record<LocaleSwitcherTheme, {
   },
 };
 
+// One year — long enough that the choice survives the typical "remember-me"
+// session but short enough that abandoned browsers eventually reset.
+const PREFERRED_LOCALE_TTL_SECONDS = 60 * 60 * 24 * 365;
+
+const persistLocaleChoice = (locale: (typeof AppConfig.locales)[number]) => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  // localStorage is per the user's request — handy for client-only reads.
+  try {
+    window.localStorage.setItem('preferredLocale', locale);
+  } catch {
+    // Storage can be blocked (private mode, quota). Fall through to cookie.
+  }
+  // Cookie is what the middleware reads on subsequent SSR requests.
+  document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=${PREFERRED_LOCALE_TTL_SECONDS}; samesite=lax`;
+};
+
 const LocaleSwitcher = ({ className, theme = 'dark' }: LocaleSwitcherProps) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -52,6 +70,9 @@ const LocaleSwitcher = ({ className, theme = 'dark' }: LocaleSwitcherProps) => {
     if (nextLocale === activeLocale || isPending) {
       return;
     }
+    // Persist before navigating so the cookie is in flight by the time
+    // the SSR request for the new URL hits the middleware.
+    persistLocaleChoice(nextLocale);
     startTransition(() => {
       router.replace(pathname, { locale: nextLocale });
     });

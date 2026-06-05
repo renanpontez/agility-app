@@ -1,9 +1,9 @@
 import type { MetadataRoute } from 'next';
 
 import { getAllCategorySlugs } from '@/components/blog/categories';
-import blogData from '@/data/blog.json';
 import portfolioData from '@/data/portfolio.json';
-import type { BlogPost } from '@/types/blog';
+import { getPostsSafe } from '@/libs/blogStore';
+import { isPublished } from '@/types/blog';
 import type { Project } from '@/types/portfolio';
 import { AppConfig } from '@/utils/AppConfig';
 import { localizedUrl } from '@/utils/seo';
@@ -30,7 +30,9 @@ const buildLanguageAlternates = (path: string) => {
   return languages;
 };
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const entries: MetadataRoute.Sitemap = [];
 
@@ -75,7 +77,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   // Blog article pages, one row per locale, lastModified from the post itself.
-  const blogPosts = blogData as BlogPost[];
+  // Drafts (status: 'draft') stay out of the sitemap.
+  const blogPosts = (await getPostsSafe()).filter(isPublished);
   for (const post of blogPosts) {
     const blogPath = `/blog/${post.slug}`;
     const lastModified = new Date(post.updatedAt ?? post.publishedAt);

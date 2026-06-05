@@ -3,15 +3,15 @@ import { getTranslations } from 'next-intl/server';
 
 import type { BlogCardItem } from '@/components/blog';
 import { BlogHero, BlogIndex, getOrderedCategories } from '@/components/blog';
-import blogData from '@/data/blog.json';
-import type { BlogPost } from '@/types/blog';
+import { getPostsSafe } from '@/libs/blogStore';
+import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
 import { getBaseUrl } from '@/utils/Helpers';
 import { buildAlternates, localizedUrl, ogAlternateLocales, ogLocale } from '@/utils/seo';
 
-const BLOG_PATH = '/blog';
+export const dynamic = 'force-dynamic';
 
-const posts = blogData as BlogPost[];
+const BLOG_PATH = '/blog';
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -54,9 +54,10 @@ const BlogPage = async (props: { params: Promise<{ locale: string }> }) => {
     : AppConfig.defaultLocale;
   const t = await getTranslations('BlogPage');
 
-  const sortedPosts = [...posts].sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-  );
+  const posts = await getPostsSafe();
+  const sortedPosts = posts
+    .filter(isPublished)
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
   const items: BlogCardItem[] = sortedPosts.map(post => ({
     slug: post.slug,
@@ -109,6 +110,7 @@ const BlogPage = async (props: { params: Promise<{ locale: string }> }) => {
         allLabel={t('allLabel')}
         readArticleLabel={t('readArticle')}
         emptyLabel={t('empty')}
+        moreLabel={t('more')}
       />
 
       <script

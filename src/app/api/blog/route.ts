@@ -1,18 +1,14 @@
-import { Buffer } from 'node:buffer';
-import crypto from 'node:crypto';
-import fs from 'node:fs/promises';
-import path from 'node:path';
-
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
 import { slugifyCategory } from '@/components/blog/categories';
-import type { BlogBodyBlock, BlogPost } from '@/types/blog';
+import { getPosts, savePosts } from '@/libs/blogStore';
+import type { BlogBodyBlock, BlogPost, BlogStatus } from '@/types/blog';
+
+import { isAuthorized } from './auth';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-const BLOG_PATH = path.resolve(process.cwd(), 'src/data/blog.json');
 
 const dateOrIso = z
   .string()
@@ -33,6 +29,8 @@ const imageSrcSchema = z
   .refine(s => s.startsWith('http://') || s.startsWith('https://') || s.startsWith('/'), {
     message: 'must be an absolute URL or a path starting with /',
   });
+
+const statusSchema = z.enum(['draft', 'published']);
 
 const bodyBlockSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('paragraph'), text: z.string().min(1) }),
@@ -82,6 +80,7 @@ const postCreateSchema = z.object({
   category: z.string().min(1).max(60).optional(),
   tags: z.array(z.string().min(1).max(40)).max(20).optional(),
   author: authorSchema.optional(),
+  status: statusSchema.optional(),
   body: z.array(bodyBlockSchema).min(1),
 });
 
@@ -94,12 +93,17 @@ const requestSchema = z.discriminatedUnion('action', [
     action: z.literal('list'),
     category: z.string().optional(),
     categorySlug: z.string().optional(),
+    status: statusSchema.optional(),
+    includeDrafts: z.boolean().optional(),
     limit: z.number().int().positive().max(100).optional(),
     offset: z.number().int().nonnegative().optional(),
   }),
   z.object({ action: z.literal('read'), slug: slugSchema }),
   z.object({ action: z.literal('create'), post: postCreateSchema }),
   z.object({ action: z.literal('update'), slug: slugSchema, patch: postPatchSchema }),
+  z.object({ action: z.literal('publish'), slug: slugSchema }),
+  z.object({ action: z.literal('unpublish'), slug: slugSchema }),
+  z.object({ action: z.literal('delete'), slug: slugSchema }),
 ]);
 
 const slugifyTitle = (title: string) =>
@@ -137,54 +141,60 @@ const estimateReadingTime = (blocks: BlogBodyBlock[]) => {
 
 const today = () => new Date().toISOString().slice(0, 10);
 
+// Normalize a stored post's status — legacy posts without the field are
+// "published" by grandfather rule. Surface it explicitly in API responses
+// so callers don't have to interpret undefined.
+const effectiveStatus = (post: BlogPost): BlogStatus =>
+  post.status ?? 'published';
+
 const summarize = (post: BlogPost) => ({
   slug: post.slug,
   title: post.title,
   excerpt: post.excerpt,
   category: post.category,
+  status: effectiveStatus(post),
   publishedAt: post.publishedAt,
   updatedAt: post.updatedAt,
   readingTimeMinutes: post.readingTimeMinutes,
   coverImage: post.coverImage,
 });
 
-const isAuthorized = (req: Request) => {
-  const expected = process.env.BLOG_API_TOKEN;
-  if (!expected) {
-    return false;
-  }
-  const header = req.headers.get('authorization') ?? '';
-  // Anchored single-space separator avoids super-linear backtracking on \s+(.+).
-  const match = /^Bearer (\S.*)$/i.exec(header);
-  if (!match || !match[1]) {
-    return false;
-  }
-  const provided = match[1].trim();
-  const expectedBuf = Buffer.from(expected);
-  const providedBuf = Buffer.from(provided);
-  if (expectedBuf.length !== providedBuf.length) {
-    return false;
-  }
-  try {
-    return crypto.timingSafeEqual(expectedBuf, providedBuf);
-  } catch {
-    return false;
-  }
-};
-
-const readPosts = async (): Promise<BlogPost[]> => {
-  const raw = await fs.readFile(BLOG_PATH, 'utf8');
-  return JSON.parse(raw) as BlogPost[];
-};
-
-const writePosts = async (posts: BlogPost[]) => {
-  const tmp = `${BLOG_PATH}.tmp`;
-  await fs.writeFile(tmp, `${JSON.stringify(posts, null, 2)}\n`, 'utf8');
-  await fs.rename(tmp, BLOG_PATH);
-};
+// Armazenamento agora é Postgres (ver src/libs/blogStore). Mantemos os mesmos
+// nomes readPosts/writePosts para não tocar no resto do handler.
+const readPosts = getPosts;
+const writePosts = savePosts;
 
 const errorResponse = (status: number, error: string, details?: unknown) =>
   NextResponse.json({ ok: false, error, ...(details === undefined ? {} : { details }) }, { status });
+
+const setStatusAndPersist = async (
+  posts: BlogPost[],
+  slug: string,
+  nextStatus: BlogStatus,
+) => {
+  const index = posts.findIndex(p => p.slug === slug);
+  if (index === -1) {
+    return { ok: false as const, error: 'not_found' as const };
+  }
+  const current = posts[index]!;
+  if (effectiveStatus(current) === nextStatus) {
+    // Idempotent — no write, return current post.
+    return { ok: true as const, post: current, changed: false };
+  }
+  const merged: BlogPost = {
+    ...current,
+    status: nextStatus,
+    updatedAt: today(),
+  };
+  const next = [...posts];
+  next[index] = merged;
+  try {
+    await writePosts(next);
+  } catch {
+    return { ok: false as const, error: 'storage_write_failed' as const };
+  }
+  return { ok: true as const, post: merged, changed: true };
+};
 
 export async function POST(req: Request) {
   if (!isAuthorized(req)) {
@@ -214,7 +224,18 @@ export async function POST(req: Request) {
 
   switch (command.action) {
     case 'list': {
+      const wantsDrafts = command.includeDrafts === true || command.status === 'draft';
       const filtered = posts.filter((post) => {
+        // Status filter: by default, only published. Caller can request drafts
+        // explicitly with includeDrafts=true (returns both) or status='draft'
+        // (returns only drafts).
+        if (command.status) {
+          if (effectiveStatus(post) !== command.status) {
+            return false;
+          }
+        } else if (!wantsDrafts && effectiveStatus(post) === 'draft') {
+          return false;
+        }
         if (command.categorySlug) {
           return post.category ? slugifyCategory(post.category) === command.categorySlug : false;
         }
@@ -246,7 +267,10 @@ export async function POST(req: Request) {
       if (!post) {
         return errorResponse(404, 'not_found', { slug: command.slug });
       }
-      return NextResponse.json({ ok: true, data: { post } });
+      return NextResponse.json({
+        ok: true,
+        data: { post: { ...post, status: effectiveStatus(post) } },
+      });
     }
 
     case 'create': {
@@ -258,6 +282,8 @@ export async function POST(req: Request) {
       if (posts.some(p => p.slug === slug)) {
         return errorResponse(409, 'slug_conflict', { slug });
       }
+      // Backward-compatible default: status omitted means 'published'. The
+      // agent opts into drafts explicitly by sending status: 'draft'.
       const newPost: BlogPost = {
         slug,
         title: input.title,
@@ -270,6 +296,7 @@ export async function POST(req: Request) {
         category: input.category,
         tags: input.tags,
         author: input.author,
+        status: input.status ?? 'published',
         body: input.body,
       };
       const next = [newPost, ...posts];
@@ -294,6 +321,8 @@ export async function POST(req: Request) {
         slug: current.slug,
         updatedAt: today(),
         body: patch.body ?? current.body,
+        // Preserve current status unless patch explicitly sets it.
+        status: patch.status ?? effectiveStatus(current),
       };
       if (patch.body) {
         merged.readingTimeMinutes = patch.readingTimeMinutes ?? estimateReadingTime(patch.body);
@@ -306,6 +335,40 @@ export async function POST(req: Request) {
         return errorResponse(500, 'storage_write_failed');
       }
       return NextResponse.json({ ok: true, data: { post: merged } });
+    }
+
+    case 'publish':
+    case 'unpublish': {
+      const target: BlogStatus = command.action === 'publish' ? 'published' : 'draft';
+      const result = await setStatusAndPersist(posts, command.slug, target);
+      if (!result.ok) {
+        if (result.error === 'not_found') {
+          return errorResponse(404, 'not_found', { slug: command.slug });
+        }
+        return errorResponse(500, result.error);
+      }
+      return NextResponse.json({
+        ok: true,
+        data: { post: result.post, changed: result.changed },
+      });
+    }
+
+    case 'delete': {
+      const index = posts.findIndex(p => p.slug === command.slug);
+      if (index === -1) {
+        return errorResponse(404, 'not_found', { slug: command.slug });
+      }
+      const removed = posts[index]!;
+      const next = posts.filter((_, i) => i !== index);
+      try {
+        await writePosts(next);
+      } catch {
+        return errorResponse(500, 'storage_write_failed');
+      }
+      return NextResponse.json({
+        ok: true,
+        data: { slug: removed.slug, deleted: true },
+      });
     }
   }
 }

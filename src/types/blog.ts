@@ -12,6 +12,11 @@ export type BlogBodyBlock
     | { type: 'image'; src: string; alt: string; caption?: string }
     | { type: 'code'; language?: string; code: string };
 
+// Drafts are invisible to public surfaces (listing, detail page, sitemap,
+// generateStaticParams). A missing status means "published" — legacy posts
+// from before this field was introduced are grandfathered.
+export type BlogStatus = 'draft' | 'published';
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -24,5 +29,9 @@ export type BlogPost = {
   category?: string;
   tags?: string[];
   author?: BlogAuthor;
+  status?: BlogStatus;
   body: BlogBodyBlock[];
 };
+
+export const isPublished = (post: Pick<BlogPost, 'status'>): boolean =>
+  post.status !== 'draft';

@@ -27,6 +27,9 @@ export default antfu({
   ignores: [
     'migrations/**/*',
     'next-env.d.ts',
+    // Standalone Node bot runtime — runs under launchd outside the Next.js
+    // build pipeline. Has its own conventions (console logging, etc.).
+    'bot/**/*',
   ],
 }, ...tailwind.configs['flat/recommended'], jsxA11y.flatConfigs.recommended, {
   plugins: {

@@ -31,10 +31,10 @@ const BlogCategoryTabs = ({
   return (
     <nav
       aria-label="Blog categories"
-      className="-mx-4 border-b border-neutral-200 px-4 sm:mx-0 sm:px-0"
+      className="relative -mx-5 border-b border-stone-200/70 px-5 sm:mx-0 sm:px-0"
     >
       <ul
-        className="flex h-12 min-w-max items-stretch gap-1 overflow-x-auto overflow-y-hidden sm:gap-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex h-14 min-w-max items-stretch gap-1 overflow-x-auto overflow-y-hidden sm:gap-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item) => {
           const isActive = item.slug === activeSlug;
@@ -44,17 +44,17 @@ const BlogCategoryTabs = ({
                 href={item.href}
                 aria-current={isActive ? 'page' : undefined}
                 className={classNames(
-                  'relative inline-flex items-center whitespace-nowrap px-3 text-sm transition-colors',
+                  'relative inline-flex items-center whitespace-nowrap px-2 text-[13px] tracking-tight transition-colors',
                   isActive
-                    ? 'font-semibold text-neutral-900'
-                    : 'font-medium text-neutral-500 hover:text-neutral-900',
+                    ? 'font-semibold text-stone-900'
+                    : 'font-medium text-stone-500 hover:text-stone-900',
                 )}
               >
                 {item.label}
                 {isActive && (
                   <span
                     aria-hidden
-                    className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-primary"
+                    className="absolute inset-x-2 -bottom-px h-[2px] rounded-t-full bg-stone-900"
                   />
                 )}
               </Link>

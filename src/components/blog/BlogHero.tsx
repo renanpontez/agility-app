@@ -16,9 +16,9 @@ type BlogHeroProps = {
 };
 
 const SIZE_TO_TITLE = {
-  sm: 'text-2xl md:text-3xl',
-  md: 'text-3xl md:text-4xl lg:text-[2.75rem]',
-  lg: 'text-4xl md:text-5xl lg:text-[3.25rem]',
+  sm: 'text-3xl md:text-4xl',
+  md: 'text-4xl md:text-5xl lg:text-[3.5rem]',
+  lg: 'text-[2.5rem] leading-[1.05] md:text-6xl lg:text-[4.25rem]',
 } as const;
 
 const BlogHero = ({
@@ -33,49 +33,57 @@ const BlogHero = ({
   const isCenter = align === 'center';
 
   return (
-    <section className="border-b border-neutral-200/70 bg-white">
-      <div className={`mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 md:pb-14 md:pt-20 ${isCenter ? 'text-center' : 'text-left'}`}>
+    <section className="relative">
+      {/* Hairline divider — gradient fade for a more editorial finish than a flat border. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-stone-300/60 to-transparent"
+      />
+      <div className={`mx-auto max-w-6xl px-5 pb-14 pt-16 sm:px-8 md:pb-20 md:pt-28 ${isCenter ? 'text-center' : 'text-left'}`}>
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             aria-label="Breadcrumb"
-            className={`mb-6 flex flex-wrap items-center gap-1.5 text-xs text-neutral-500 ${isCenter ? 'justify-center' : ''}`}
+            className={`mb-8 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-stone-400 ${isCenter ? 'justify-center' : ''}`}
           >
             {breadcrumbs.map((crumb, index) => (
-              <div key={index} className="flex items-center gap-1.5">
+              <div key={index} className="flex items-center gap-2">
                 {crumb.href
                   ? (
-                      <Link href={crumb.href} className="transition-colors hover:text-neutral-900">
+                      <Link href={crumb.href} className="transition-colors hover:text-stone-900">
                         {crumb.label}
                       </Link>
                     )
                   : (
-                      <span className="text-neutral-700">{crumb.label}</span>
+                      <span className="text-stone-700">{crumb.label}</span>
                     )}
-                {index < breadcrumbs.length - 1 && <span className="text-neutral-300">/</span>}
+                {index < breadcrumbs.length - 1 && <span className="text-stone-300">/</span>}
               </div>
             ))}
           </nav>
         )}
 
-        <div className={isCenter ? 'mx-auto max-w-3xl' : 'max-w-3xl'}>
+        <div className={isCenter ? 'mx-auto max-w-3xl' : 'max-w-4xl'}>
           {eyebrow && (
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-              {eyebrow}
-            </p>
+            <div className={`mb-6 flex items-center gap-3 ${isCenter ? 'justify-center' : ''}`}>
+              <span aria-hidden className="h-px w-8 bg-primary" />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+                {eyebrow}
+              </p>
+            </div>
           )}
 
-          <h1 className={`font-bold leading-[1.1] tracking-tight text-neutral-900 ${SIZE_TO_TITLE[size]}`}>
+          <h1 className={`font-semibold tracking-[-0.02em] text-stone-900 ${SIZE_TO_TITLE[size]}`}>
             {title}
           </h1>
 
           {subtitle && (
-            <p className="mt-5 text-base leading-relaxed text-neutral-600 md:mt-6 md:text-lg">
+            <p className={`mt-6 text-lg leading-relaxed text-stone-500 md:mt-7 md:text-xl ${isCenter ? 'mx-auto max-w-2xl' : 'max-w-2xl'}`}>
               {subtitle}
             </p>
           )}
 
           {meta && (
-            <div className={`mt-7 flex flex-wrap items-center gap-3 text-sm text-neutral-500 ${isCenter ? 'justify-center' : ''}`}>
+            <div className={`mt-9 flex flex-wrap items-center gap-3 text-sm text-stone-500 ${isCenter ? 'justify-center' : ''}`}>
               {meta}
             </div>
           )}

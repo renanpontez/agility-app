@@ -1,25 +1,22 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
 import { BlogArticleBody, BlogHero } from '@/components/blog';
-import blogData from '@/data/blog.json';
+import { getPostsSafe } from '@/libs/blogStore';
 import { Link } from '@/libs/i18nNavigation';
-import type { BlogPost } from '@/types/blog';
+import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
 import { getBaseUrl } from '@/utils/Helpers';
 import { buildAlternates, localizedUrl, ogAlternateLocales, ogLocale } from '@/utils/seo';
+
+export const dynamic = 'force-dynamic';
 
 type Params = {
   slug: string;
   locale: string;
 };
-
-const posts = blogData as BlogPost[];
-
-export async function generateStaticParams() {
-  return posts.map(post => ({ slug: post.slug }));
-}
 
 export async function generateMetadata(props: {
   params: Promise<Params>;
@@ -28,6 +25,7 @@ export async function generateMetadata(props: {
   const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
     ? (locale as (typeof AppConfig.locales)[number])
     : AppConfig.defaultLocale;
+  const posts = await getPostsSafe();
   const post = posts.find(item => item.slug === slug);
   const alternates = buildAlternates(safeLocale, `/blog/${slug}`);
   const title = post?.title ?? slug;
@@ -70,15 +68,15 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
     ? (locale as (typeof AppConfig.locales)[number])
     : AppConfig.defaultLocale;
   const t = await getTranslations('BlogDetail');
-  const post = posts.find(item => item.slug === slug);
-
-  if (!post) {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="text-base text-neutral-500">{t('notFound')}</p>
-      </div>
-    );
+  const posts = await getPostsSafe();
+  const existing = posts.find(item => item.slug === slug);
+  // Real 404 (not a soft 200 with a "not found" message) for both missing
+  // slugs and drafts — keeps unpublished URLs out of search indexes and
+  // matches the category page's behavior.
+  if (!existing || !isPublished(existing)) {
+    notFound();
   }
+  const post = existing;
 
   const dateLabel = new Intl.DateTimeFormat(safeLocale === 'pt-BR' ? 'pt-BR' : 'en-US', {
     year: 'numeric',
@@ -106,24 +104,24 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
   const heroMeta = (
     <>
       {post.author?.avatar && (
-        <span className="relative inline-flex size-7 overflow-hidden rounded-full border border-neutral-200 bg-neutral-50">
+        <span className="relative inline-flex size-8 overflow-hidden rounded-full border border-stone-200/70 bg-stone-100">
           <Image
             src={post.author.avatar}
             alt={post.author.name}
             fill
-            sizes="28px"
+            sizes="32px"
             className="object-contain p-1.5"
           />
         </span>
       )}
       {post.author && (
-        <span className="font-medium text-neutral-700">{post.author.name}</span>
+        <span className="font-medium text-stone-700">{post.author.name}</span>
       )}
-      <span aria-hidden className="text-neutral-300">·</span>
+      <span aria-hidden className="size-1 rounded-full bg-stone-300" />
       <time dateTime={post.publishedAt}>{dateLabel}</time>
       {post.readingTimeMinutes && (
         <>
-          <span aria-hidden className="text-neutral-300">·</span>
+          <span aria-hidden className="size-1 rounded-full bg-stone-300" />
           <span>
             {post.readingTimeMinutes}
             {' '}
@@ -147,15 +145,15 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
         ]}
       />
 
-      <article className="mx-auto max-w-[680px] px-4 py-16 sm:px-6 md:py-20">
+      <article className="mx-auto max-w-[720px] px-5 py-20 sm:px-8 md:py-28">
         {post.coverImage && (
-          <figure className="mb-12 overflow-hidden rounded-xl border border-neutral-200">
+          <figure className="mb-16 overflow-hidden rounded-2xl ring-1 ring-stone-200/70">
             <Image
               src={post.coverImage}
               alt={post.coverAlt ?? post.title}
               width={1600}
               height={900}
-              sizes="(max-width: 768px) 100vw, 680px"
+              sizes="(max-width: 768px) 100vw, 720px"
               priority
               className="h-auto w-full"
             />
@@ -165,26 +163,24 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
         <BlogArticleBody blocks={post.body} />
 
         {post.tags && post.tags.length > 0 && (
-          <div className="mt-16 flex flex-wrap gap-2 border-t border-neutral-200 pt-8">
+          <div className="mt-20 flex flex-wrap gap-2 border-t border-stone-200/70 pt-10">
             {post.tags.map(tag => (
               <span
                 key={tag}
-                className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-500"
+                className="rounded-full border border-stone-200/70 bg-white px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-stone-500"
               >
-                #
                 {tag}
               </span>
             ))}
           </div>
         )}
 
-        <div className="mt-12 border-t border-neutral-200 pt-8">
+        <div className="mt-14 border-t border-stone-200/70 pt-10">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900"
+            className="group inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-500 transition-colors hover:text-stone-900"
           >
-            <span aria-hidden>←</span>
-            {' '}
+            <span aria-hidden className="transition-transform group-hover:-translate-x-0.5">←</span>
             {t('backToBlog')}
           </Link>
         </div>

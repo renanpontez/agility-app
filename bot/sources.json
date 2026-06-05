@@ -1,0 +1,65 @@
+{
+  "_comment": "Rascunho (Fase 0). Fontes de tópicos para o bot diário. 'weight' = prioridade relativa na seleção de tópicos.",
+  "language": "pt-BR",
+  "lookback_hours": 72,
+  "sources": [
+    {
+      "name": "Tecnoblog",
+      "url": "https://tecnoblog.net/",
+      "feed": "https://tecnoblog.net/feed/",
+      "type": "rss",
+      "category": "tech-consumo",
+      "weight": 1.0,
+      "status": "ok"
+    },
+    {
+      "name": "Olhar Digital",
+      "url": "https://olhardigital.com.br/",
+      "feed": "https://olhardigital.com.br/feed/",
+      "type": "rss",
+      "category": "tech-consumo",
+      "weight": 1.0,
+      "status": "ok"
+    },
+    {
+      "name": "Zoom Digital",
+      "url": "https://zoomdigital.com.br/",
+      "feed": "https://zoomdigital.com.br/feed/",
+      "type": "rss",
+      "category": "tech-consumo",
+      "weight": 0.8,
+      "status": "ok"
+    },
+    {
+      "name": "TechTudo",
+      "url": "https://www.techtudo.com.br/",
+      "feed": null,
+      "type": "web-fallback",
+      "category": "tech-consumo",
+      "weight": 0.7,
+      "status": "no-rss",
+      "note": "Sem RSS público. Coletar via busca web / leitura da página renderizada. Fonte menos estável."
+    },
+    {
+      "name": "TechRadar",
+      "url": "https://www.techradar.com/",
+      "feed": "https://www.techradar.com/feeds.xml",
+      "type": "rss",
+      "category": "tech-internacional",
+      "weight": 0.7,
+      "status": "ok",
+      "lang": "en",
+      "note": "Fonte em INGLES. Usar como fonte de topicos, mas escrever o artigo em PT-BR (traduzir/adaptar, nunca copiar). Bom para novidades globais antes de chegarem ao Brasil."
+    },
+    {
+      "name": "Blog SYDLE",
+      "url": "https://www.sydle.com/br/blog",
+      "feed": "https://www.sydle.com/br/blog/feed",
+      "type": "rss",
+      "category": "transformacao-digital-corporativa",
+      "weight": 0.4,
+      "status": "ok",
+      "note": "Perfil editorial diferente (BPM/CRM/fintech). Confirmar com o usuario se entra como fonte de topicos."
+    }
+  ]
+}

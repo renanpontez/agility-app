@@ -1,0 +1,37 @@
+{
+  "_comment": "Config da API de publicacao. O TOKEN nao fica aqui em texto puro — ver nota de seguranca no plano.",
+  "endpoint": "https://agilitycreative.com/api/blog",
+  "method": "POST",
+  "content_type": "application/json",
+  "auth": {
+    "type": "bearer",
+    "header": "Authorization",
+    "value_format": "Bearer <BLOG_API_TOKEN>",
+    "token_storage": "PENDENTE — definir local seguro (nao commitar no repo)"
+  },
+  "actions": ["list", "read", "create", "update"],
+  "no_delete": true,
+  "no_drafts": true,
+  "create": {
+    "wrapper": { "action": "create", "post": "<BlogPostInput>" },
+    "required_fields": ["title", "excerpt", "body"],
+    "title_len": "3-200",
+    "excerpt_len": "10-500",
+    "body_format": "array de blocos tipados (NAO e markdown/html)",
+    "body_block_types": ["paragraph", "heading", "list", "quote", "image", "code"],
+    "optional_fields": ["slug", "coverImage", "coverAlt", "publishedAt", "updatedAt", "readingTimeMinutes", "category", "tags", "author"],
+    "coverImage": "deve ser URL absoluta ou /caminho — 1600x900 recomendado",
+    "category_rule": "reusar labels existentes EXATAMENTE (rodar 'list' antes para ver labels)",
+    "success": "201"
+  },
+  "workflow_pre_publish": [
+    "1. action=list para ver categorias existentes e titulos recentes (evitar overlap/slug_conflict)",
+    "2. action=create com o artigo"
+  ],
+  "constraints": {
+    "instant_live": "create retorna 201 e o post JA fica publicado em /blog/<slug> e no sitemap",
+    "no_unpublish_via_api": "nao ha delete; 'revogar' so via edicao manual de blog.json no servidor",
+    "slug_imutavel": "slug nao pode mudar apos criado (SEO)",
+    "single_writer": "serializar chamadas — sem lock de concorrencia"
+  }
+}

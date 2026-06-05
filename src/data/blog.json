@@ -66,7 +66,8 @@
         "type": "paragraph",
         "text": "Por fim, peça referências e ligue para elas. Conversar 15 minutos com um cliente atual diz mais do que qualquer apresentação comercial."
       }
-    ]
+    ],
+    "status": "published"
   },
   {
     "slug": "mvp-em-30-dias-o-que-cabe-e-o-que-nao-cabe",
@@ -124,7 +125,8 @@
         "type": "paragraph",
         "text": "Se a equipe estiver tentada a adicionar tudo isso \"porque é simples\", lembre que cada feature opcional é um vetor de bug, manutenção e distração até o lançamento."
       }
-    ]
+    ],
+    "status": "published"
   },
   {
     "slug": "design-system-para-times-pequenos",
@@ -178,6 +180,7 @@
         "type": "paragraph",
         "text": "Esses quatro respondem por 70% das telas em produtos B2B. Resolvendo bem, o resto do design system pode crescer organicamente."
       }
-    ]
+    ],
+    "status": "published"
   }
 ]

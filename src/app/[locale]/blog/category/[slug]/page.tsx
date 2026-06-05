@@ -7,26 +7,21 @@ import {
   BlogHero,
   BlogIndex,
   findCategoryBySlug,
-  getAllCategorySlugs,
   getOrderedCategories,
   slugifyCategory,
 } from '@/components/blog';
-import blogData from '@/data/blog.json';
-import type { BlogPost } from '@/types/blog';
+import { getPostsSafe } from '@/libs/blogStore';
+import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
 import { getBaseUrl } from '@/utils/Helpers';
 import { buildAlternates, localizedUrl, ogAlternateLocales, ogLocale } from '@/utils/seo';
+
+export const dynamic = 'force-dynamic';
 
 type Params = {
   slug: string;
   locale: string;
 };
-
-const posts = blogData as BlogPost[];
-
-export function generateStaticParams() {
-  return getAllCategorySlugs(posts).map(slug => ({ slug }));
-}
 
 export async function generateMetadata(props: {
   params: Promise<Params>;
@@ -35,6 +30,7 @@ export async function generateMetadata(props: {
   const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
     ? (locale as (typeof AppConfig.locales)[number])
     : AppConfig.defaultLocale;
+  const posts = await getPostsSafe();
   const category = findCategoryBySlug(posts, slug);
   const t = await getTranslations({ locale: safeLocale, namespace: 'BlogCategory' });
   const alternates = buildAlternates(safeLocale, `/blog/category/${slug}`);
@@ -79,6 +75,7 @@ const BlogCategoryPage = async (props: { params: Promise<Params> }) => {
   const safeLocale = (AppConfig.locales as readonly string[]).includes(locale)
     ? (locale as (typeof AppConfig.locales)[number])
     : AppConfig.defaultLocale;
+  const posts = await getPostsSafe();
   const category = findCategoryBySlug(posts, slug);
 
   if (!category) {
@@ -88,8 +85,12 @@ const BlogCategoryPage = async (props: { params: Promise<Params> }) => {
   const tBlog = await getTranslations('BlogPage');
   const tCategory = await getTranslations('BlogCategory');
 
-  const sortedPosts = [...posts]
-    .filter(post => post.category && slugifyCategory(post.category) === slug)
+  const sortedPosts = posts
+    .filter(post =>
+      isPublished(post)
+      && post.category
+      && slugifyCategory(post.category) === slug,
+    )
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
   const items: BlogCardItem[] = sortedPosts.map(post => ({
@@ -103,7 +104,7 @@ const BlogCategoryPage = async (props: { params: Promise<Params> }) => {
     readingTimeMinutes: post.readingTimeMinutes,
   }));
 
-  const categories = getOrderedCategories(posts);
+  const categories = getOrderedCategories(posts.filter(isPublished));
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -149,6 +150,7 @@ const BlogCategoryPage = async (props: { params: Promise<Params> }) => {
         allLabel={tBlog('allLabel')}
         readArticleLabel={tBlog('readArticle')}
         emptyLabel={tBlog('empty')}
+        moreLabel={tBlog('more')}
       />
 
       <script

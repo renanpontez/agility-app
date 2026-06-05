@@ -50,3 +50,12 @@ local
 
 # vercel
 .vercel
+
+# blog bot secrets & runtime
+bot/.secret-token
+bot/.slack-webhook
+bot/rascunhos/
+bot/queue/*.json
+bot/published/
+bot/failed/
+bot/*.log

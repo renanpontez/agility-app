@@ -28,34 +28,50 @@ const BlogCard = ({ item, locale }: BlogCardProps) => {
   return (
     <Link
       href={`/blog/${item.slug}`}
-      className="group flex h-full flex-col gap-5 rounded-2xl border border-neutral-200 bg-white p-6 transition-colors hover:border-neutral-300"
+      className="group flex h-full flex-col gap-6 rounded-2xl border border-stone-200/70 bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-0.5 hover:border-stone-300/70 hover:shadow-[0_12px_28px_-12px_rgba(0,0,0,0.12),0_4px_10px_-6px_rgba(0,0,0,0.06)]"
     >
-      <div className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] text-neutral-500">
+      <div className="flex items-center gap-2.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-400">
         <span>{dateLabel}</span>
         {item.category && (
           <>
-            <span aria-hidden className="text-neutral-300">·</span>
-            <span className="uppercase text-primary">{item.category}</span>
+            <span aria-hidden className="size-1 rounded-full bg-stone-300" />
+            <span className="text-primary">{item.category}</span>
           </>
         )}
       </div>
 
-      <div className="flex flex-1 items-start gap-4">
-        <h3 className="flex-1 text-base font-semibold leading-snug text-neutral-900 transition-colors group-hover:text-primary">
-          {item.title}
-        </h3>
+      <div className="flex flex-1 items-start gap-5">
+        <div className="flex-1">
+          <h3 className="text-[17px] font-semibold leading-snug tracking-[-0.01em] text-stone-900 transition-colors duration-300 group-hover:text-primary">
+            {item.title}
+          </h3>
+          <p className="mt-2.5 line-clamp-2 text-[13px] leading-relaxed text-stone-500">
+            {item.excerpt}
+          </p>
+        </div>
         {item.coverImage && (
-          <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-neutral-100">
+          <div className="relative size-[88px] shrink-0 overflow-hidden rounded-xl bg-stone-100 ring-1 ring-inset ring-black/[0.04]">
             <Image
               src={item.coverImage}
               alt={item.coverAlt ?? item.title}
               fill
-              sizes="80px"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+              sizes="88px"
+              className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
             />
           </div>
         )}
       </div>
+
+      {item.readingTimeMinutes && (
+        <div className="flex items-center gap-2 text-[11px] text-stone-400">
+          <span aria-hidden className="h-px w-4 bg-stone-200" />
+          <span>
+            {item.readingTimeMinutes}
+            {' '}
+            min
+          </span>
+        </div>
+      )}
     </Link>
   );
 };

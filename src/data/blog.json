@@ -1,0 +1,183 @@
+[
+  {
+    "slug": "como-escolher-um-parceiro-de-tecnologia",
+    "title": "Como escolher um parceiro de tecnologia que entrega de verdade",
+    "excerpt": "Critérios práticos para avaliar fornecedores de software antes de assinar contrato e evitar projetos que estouram prazo, escopo e orçamento.",
+    "coverImage": "https://placehold.co/1600x900/0a0a0a/FD512E/png?text=Tech+Partner",
+    "coverAlt": "Time discutindo arquitetura em sala iluminada",
+    "publishedAt": "2026-05-12",
+    "readingTimeMinutes": 7,
+    "category": "Gestão",
+    "tags": [
+      "estratégia",
+      "fornecedores",
+      "produto"
+    ],
+    "author": {
+      "name": "Equipe Agility",
+      "role": "Editorial",
+      "avatar": "/assets/images/logo/logo_symbol_white.svg"
+    },
+    "body": [
+      {
+        "type": "paragraph",
+        "text": "Contratar um time de tecnologia é uma das decisões mais caras que uma empresa toma — e uma das que mais geram arrependimento quando feita no impulso. Este guia compila os critérios que mais previnem dor de cabeça em projetos de software."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Comece pelo problema, não pela tecnologia"
+      },
+      {
+        "type": "paragraph",
+        "text": "Antes de pedir orçamento, escreva em uma frase qual problema você quer resolver e qual métrica vai mover. Se o fornecedor começar respondendo com stack antes de entender o problema, é sinal de alerta."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Cinco perguntas que separam parceiros de prestadores"
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "Como vocês decidem o escopo do MVP?",
+          "O que acontece se a prioridade mudar no meio do projeto?",
+          "Quem do time atende em qual sprint — e por quanto tempo?",
+          "Como vocês medem qualidade além de testes automatizados?",
+          "Vocês conseguem rodar o projeto sozinhos depois do go-live?"
+        ]
+      },
+      {
+        "type": "quote",
+        "text": "Um bom parceiro de tecnologia é aquele que diz não para o cliente quando o pedido vai contra o objetivo de negócio.",
+        "cite": "Renan Martins"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Sinais de alerta antes de assinar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Propostas longas, vagas e cheias de jargão geralmente escondem ausência de processo. Prefira propostas que mostrem entregáveis claros por sprint e uma definição honesta de pronto."
+      },
+      {
+        "type": "paragraph",
+        "text": "Por fim, peça referências e ligue para elas. Conversar 15 minutos com um cliente atual diz mais do que qualquer apresentação comercial."
+      }
+    ]
+  },
+  {
+    "slug": "mvp-em-30-dias-o-que-cabe-e-o-que-nao-cabe",
+    "title": "MVP em 30 dias: o que cabe e o que não cabe",
+    "excerpt": "Como escopar um produto mínimo viável que pode ir ao ar em um mês sem virar um Frankenstein difícil de manter.",
+    "coverImage": "https://placehold.co/1600x900/0a0a0a/4F46E5/png?text=MVP+30+Days",
+    "coverAlt": "Pessoa desenhando wireframes em um notebook",
+    "publishedAt": "2026-04-28",
+    "readingTimeMinutes": 5,
+    "category": "Produto",
+    "tags": [
+      "mvp",
+      "discovery",
+      "lean"
+    ],
+    "author": {
+      "name": "Equipe Agility",
+      "role": "Editorial",
+      "avatar": "/assets/images/logo/logo_symbol_white.svg"
+    },
+    "body": [
+      {
+        "type": "paragraph",
+        "text": "Trinta dias é tempo suficiente para validar uma hipótese, não para construir um produto completo. A diferença entre um MVP útil e um protótipo descartável está em escolher bem o que não fazer."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "O que precisa estar dentro"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Uma única jornada feliz, ponta a ponta",
+          "Autenticação suficiente para identificar usuários reais",
+          "Telemetria mínima para medir a métrica que importa",
+          "Forma de coletar feedback qualitativo no produto"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "O que pode ficar para depois"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Painel administrativo robusto — planilha resolve no começo",
+          "Recuperação de senha por e-mail — login social cobre",
+          "Onboarding com tour guiado — o usuário aprende usando",
+          "Internacionalização — defina o idioma do mercado-alvo"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Se a equipe estiver tentada a adicionar tudo isso \"porque é simples\", lembre que cada feature opcional é um vetor de bug, manutenção e distração até o lançamento."
+      }
+    ]
+  },
+  {
+    "slug": "design-system-para-times-pequenos",
+    "title": "Design system para times pequenos: por onde começar",
+    "excerpt": "Você não precisa ser a Atlassian para colher os benefícios de um design system. Veja o caminho mínimo para um time de até 10 pessoas.",
+    "coverImage": "https://placehold.co/1600x900/0a0a0a/EC4899/png?text=Design+System",
+    "coverAlt": "Componentes de interface organizados em grid",
+    "publishedAt": "2026-04-10",
+    "readingTimeMinutes": 6,
+    "category": "Design",
+    "tags": [
+      "design system",
+      "tokens",
+      "ui"
+    ],
+    "author": {
+      "name": "Equipe Agility",
+      "role": "Editorial",
+      "avatar": "/assets/images/logo/logo_symbol_white.svg"
+    },
+    "body": [
+      {
+        "type": "paragraph",
+        "text": "Design system não é projeto à parte, é consequência de produto bem cuidado. Em times pequenos, ele nasce do código existente — não de uma biblioteca paralela."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Comece pelos tokens"
+      },
+      {
+        "type": "paragraph",
+        "text": "Cores, espaçamentos, raios e tipografia. Centralize esses valores em variáveis antes de criar qualquer componente novo. Você ganha consistência sem precisar de governança."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Componentes que pagam o investimento primeiro"
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "Botão (todas as variantes em um único lugar)",
+          "Campo de formulário com mensagens de erro",
+          "Modal e diálogo de confirmação",
+          "Toast / notificação"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Esses quatro respondem por 70% das telas em produtos B2B. Resolvendo bem, o resto do design system pode crescer organicamente."
+      }
+    ]
+  }
+]

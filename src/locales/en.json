@@ -4,6 +4,7 @@
     "about": "About",
     "services": "Services",
     "portfolio": "Portfolio",
+    "blog": "Blog",
     "cta": "Contact us"
   },
   "Footer": {
@@ -189,6 +190,31 @@
     "portfolio_agility_description": "Complete brand identity modernization — logo, typography, and color palette to reposition the brand.",
     "portfolio_dynotest_category": "Corporate Website",
     "portfolio_dynotest_description": "Website for brand positioning with WhatsApp integration for direct contact and increased conversions."
+  },
+  "BlogPage": {
+    "badge": "Agility Blog",
+    "titlePrefix": "Tech, AI and ideas",
+    "titleHighlight": "worth your time",
+    "subtitle": "AI news, hands-on product tutorials, curious tech finds, and behind-the-scenes from the Agility team — written for engineers who want depth and for everyone else who just wants to keep up.",
+    "readingTimeSuffix": "min read",
+    "allLabel": "All",
+    "readArticle": "Read article",
+    "empty": "No posts in this category yet — come back soon."
+  },
+  "BlogCategory": {
+    "eyebrowPrefix": "Category",
+    "titlePrefix": "All articles on",
+    "subtitle": "Everything we've published about {category} — quick reads, deep dives, and what we're learning along the way, for both technical readers and the simply curious.",
+    "metaDescription": "Articles by the Agility team about {category} — news, tutorials, and breakdowns for both technical readers and curious newcomers.",
+    "notFound": "Category not found",
+    "breadcrumbBlog": "Blog"
+  },
+  "BlogDetail": {
+    "notFound": "Article not found",
+    "breadcrumbBlog": "Blog",
+    "readingTimeSuffix": "min read",
+    "byPrefix": "By",
+    "backToBlog": "Back to all articles"
   },
   "PortfolioDetail": {
     "notFound": "Project not found",

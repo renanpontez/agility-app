@@ -19,6 +19,12 @@ export default function middleware(
   request: NextRequest,
   event: NextFetchEvent,
 ) {
+  // API routes carry their own auth (e.g. /api/blog uses bearer token).
+  // Don't let next-intl rewrite them to a localized page path.
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    return;
+  }
+
   // Run Clerk middleware only when it's necessary
   if (
     request.nextUrl.pathname.includes('/sign-in')

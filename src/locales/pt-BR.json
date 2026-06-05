@@ -4,6 +4,7 @@
     "about": "Sobre",
     "services": "Serviços",
     "portfolio": "Portfólio",
+    "blog": "Blog",
     "cta": "Fale conosco"
   },
   "Footer": {
@@ -189,6 +190,31 @@
     "portfolio_agility_description": "Modernização completa da identidade visual — logo, tipografia e paleta de cores para reposicionar a marca.",
     "portfolio_dynotest_category": "Site Corporativo",
     "portfolio_dynotest_description": "Site para posicionamento de marca com integração WhatsApp para contato direto e aumento de conversões."
+  },
+  "BlogPage": {
+    "badge": "Blog da Agility",
+    "titlePrefix": "Tecnologia, IA e ideias",
+    "titleHighlight": "que importam",
+    "subtitle": "Novidades de inteligência artificial, tutoriais de produto, curiosidades de tecnologia e bastidores da Agility — em uma linguagem que serve tanto para quem programa quanto para quem só quer entender o que está acontecendo.",
+    "readingTimeSuffix": "min de leitura",
+    "allLabel": "Todos",
+    "readArticle": "Leia o artigo",
+    "empty": "Ainda não temos posts nessa categoria — volte em breve."
+  },
+  "BlogCategory": {
+    "eyebrowPrefix": "Categoria",
+    "titlePrefix": "Tudo sobre",
+    "subtitle": "Tudo que publicamos sobre {category} — leituras rápidas, mergulhos profundos e o que aprendemos pelo caminho, para quem é da área e para quem só tem curiosidade.",
+    "metaDescription": "Artigos do time da Agility sobre {category} — novidades, tutoriais e análises para o público tech e para curiosos que querem se manter por dentro.",
+    "notFound": "Categoria não encontrada",
+    "breadcrumbBlog": "Blog"
+  },
+  "BlogDetail": {
+    "notFound": "Artigo não encontrado",
+    "breadcrumbBlog": "Blog",
+    "readingTimeSuffix": "min de leitura",
+    "byPrefix": "Por",
+    "backToBlog": "Voltar para todos os artigos"
   },
   "PortfolioDetail": {
     "notFound": "Projeto não encontrado",

@@ -1,6 +1,9 @@
 import type { MetadataRoute } from 'next';
 
+import { getAllCategorySlugs } from '@/components/blog/categories';
+import blogData from '@/data/blog.json';
 import portfolioData from '@/data/portfolio.json';
+import type { BlogPost } from '@/types/blog';
 import type { Project } from '@/types/portfolio';
 import { AppConfig } from '@/utils/AppConfig';
 import { localizedUrl } from '@/utils/seo';
@@ -15,6 +18,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/', changeFrequency: 'weekly', priority: 1 },
   { path: '/sobre-nos', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/portfolio', changeFrequency: 'weekly', priority: 0.9 },
+  { path: '/blog', changeFrequency: 'daily', priority: 0.8 },
 ];
 
 const buildLanguageAlternates = (path: string) => {
@@ -66,6 +70,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: 'monthly',
         priority: locale === AppConfig.defaultLocale ? 0.7 : 0.6,
         alternates: { languages: buildLanguageAlternates(portfolioPath) },
+      });
+    }
+  }
+
+  // Blog article pages, one row per locale, lastModified from the post itself.
+  const blogPosts = blogData as BlogPost[];
+  for (const post of blogPosts) {
+    const blogPath = `/blog/${post.slug}`;
+    const lastModified = new Date(post.updatedAt ?? post.publishedAt);
+    for (const locale of AppConfig.locales) {
+      entries.push({
+        url: localizedUrl(locale, blogPath),
+        lastModified,
+        changeFrequency: 'monthly',
+        priority: locale === AppConfig.defaultLocale ? 0.7 : 0.6,
+        alternates: { languages: buildLanguageAlternates(blogPath) },
+      });
+    }
+  }
+
+  // Blog category index pages, one row per locale per category.
+  for (const categorySlug of getAllCategorySlugs(blogPosts)) {
+    const categoryPath = `/blog/category/${categorySlug}`;
+    for (const locale of AppConfig.locales) {
+      entries.push({
+        url: localizedUrl(locale, categoryPath),
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: locale === AppConfig.defaultLocale ? 0.6 : 0.5,
+        alternates: { languages: buildLanguageAlternates(categoryPath) },
       });
     }
   }

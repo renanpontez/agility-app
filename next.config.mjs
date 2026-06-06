@@ -25,6 +25,20 @@ const nextConfig = {
     // package-lock.json exists in a parent directory.
     root: fileURLToPath(new URL('.', import.meta.url)),
   },
+  // Route /sitemap.xml through our custom route handler so we can inject the
+  // <?xml-stylesheet ?> directive Next.js's MetadataRoute.Sitemap convention
+  // doesn't allow. Crawlers see canonical XML; humans get the styled view via
+  // public/sitemap.xsl. `beforeFiles` runs before Next.js's special-file
+  // detection so we sidestep any collision with the metadata convention.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/sitemap.xml', destination: '/sitemap-feed' },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   images: {
     // Allow external image sources
     remotePatterns: [

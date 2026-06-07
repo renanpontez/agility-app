@@ -224,6 +224,24 @@
     "categoriesDropdownLabel": "Categories",
     "categoriesDropdownAll": "View all categories"
   },
+  "BioPage": {
+    "tagline": "Digital solutions that inspire.",
+    "handle": "@agilitycreative",
+    "sectionSite": "The agency",
+    "sectionBlog": "Latest reads",
+    "sectionContact": "Talk to us",
+    "siteLabel": "Visit our website",
+    "siteDescription": "Get to know Agility, our team, and our portfolio.",
+    "latestPostEyebrow": "Just published",
+    "latestPostReadCta": "Read now",
+    "latestPostMin": "{count} min",
+    "blogLabel": "All articles",
+    "blogDescription": "Tech, AI, and behind-the-scenes — in pt-BR.",
+    "whatsappLabel": "Chat on WhatsApp",
+    "whatsappDescription": "Talk to us directly. Quick reply.",
+    "metaTitle": "Agility Creative — Links",
+    "metaDescription": "Website, blog, and WhatsApp for Agility Creative. Everything in one place."
+  },
   "BlogDetail": {
     "notFound": "Article not found",
     "breadcrumbBlog": "Blog",

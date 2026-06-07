@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import { Link } from '@/libs/i18nNavigation';
 
+import { blogCategoryPath, blogIndexPath } from './blogUrls';
 import type { BlogCategoryRef } from './categories';
 
 type BlogCategoryTabsProps = {
@@ -20,11 +21,11 @@ const BlogCategoryTabs = ({
   allSlug = ALL_SLUG,
 }: BlogCategoryTabsProps) => {
   const items: { slug: string; label: string; href: string }[] = [
-    { slug: allSlug, label: allLabel, href: '/blog' },
+    { slug: allSlug, label: allLabel, href: blogIndexPath() },
     ...categories.map(category => ({
       slug: category.slug,
       label: category.label,
-      href: `/blog/category/${category.slug}`,
+      href: blogCategoryPath(category),
     })),
   ];
 

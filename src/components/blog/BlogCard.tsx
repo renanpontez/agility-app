@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { Link } from '@/libs/i18nNavigation';
 
+import { blogArticlePath } from './blogUrls';
 import { formatShortDate } from './formatDate';
 
 export type BlogCardItem = {
@@ -27,7 +28,7 @@ const BlogCard = ({ item, locale }: BlogCardProps) => {
 
   return (
     <Link
-      href={`/blog/${item.slug}`}
+      href={blogArticlePath(item)}
       className="group flex h-full flex-col gap-6 rounded-2xl border border-stone-200/70 bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-0.5 hover:border-stone-300/70 hover:shadow-[0_12px_28px_-12px_rgba(0,0,0,0.12),0_4px_10px_-6px_rgba(0,0,0,0.06)]"
     >
       <div className="flex items-center gap-2.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-400">

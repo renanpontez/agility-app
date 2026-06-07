@@ -4,9 +4,18 @@ import { AnimatePresence, motion } from 'motion/react';
 
 import BlogFooter from '@/components/blog/BlogFooter';
 import BlogHeader from '@/components/blog/BlogHeader';
+import type { BlogCategoryRef } from '@/components/blog/categories';
 import { usePathname } from '@/libs/i18nNavigation';
 
-const BlogTemplate = ({ children }: { children: React.ReactNode }) => {
+type BlogTemplateProps = {
+  children: React.ReactNode;
+  // Categories pre-fetched in the (server) layout — the header dropdown
+  // needs them but BlogTemplate is a client component, so we pass them down
+  // instead of refetching on the client.
+  categories?: BlogCategoryRef[];
+};
+
+const BlogTemplate = ({ children, categories = [] }: BlogTemplateProps) => {
   const pathname = usePathname();
 
   return (
@@ -21,7 +30,7 @@ const BlogTemplate = ({ children }: { children: React.ReactNode }) => {
           backgroundSize: '3px 3px',
         }}
       />
-      <BlogHeader />
+      <BlogHeader categories={categories} />
       <AnimatePresence mode="wait">
         <motion.main
           key={pathname}

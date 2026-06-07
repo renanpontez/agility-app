@@ -12,11 +12,21 @@ import { buildAlternates, ogAlternateLocales, ogLocale } from '@/utils/seo';
 import type { LatestPostSummary } from './page.client';
 import BioPageClient from './page.client';
 
-// Bio page is mostly static — refresh every minute as a safety net. The real
-// refresh happens via `revalidatePath('/bio')` called from the blog publish
-// hook (see src/app/api/blog/route.ts), so new articles surface here within
-// a single request after going live.
-export const revalidate = 60;
+// Always render at request time.
+//
+// We tried `revalidate = 60` + `revalidatePath('/bio')` from the publish hook,
+// but ran into a structural issue: at build time, the Vercel build runner
+// can't reach Postgres, so `getPostsSafe` falls back to the bundled JSON seed.
+// That seed-based HTML gets cached as the initial PRERENDER. Subsequent
+// `revalidatePath` calls only INVALIDATE — a real new render only happens on
+// the next user request, which means the first visitor after a publish still
+// sees the stale prerender. For the pt-BR /bio that gets traffic, that's
+// quickly replaced; for /en/bio it stuck for hours.
+//
+// `force-dynamic` skips the prerender entirely and reads Postgres on every
+// request. The query is one indexed SELECT against a single JSONB row, well
+// under 50ms — invisible for a low-traffic Instagram landing.
+export const dynamic = 'force-dynamic';
 
 type Params = { locale: string };
 

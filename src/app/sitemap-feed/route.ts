@@ -28,6 +28,9 @@ const STATIC_ROUTES: { path: string; changeFrequency: ChangeFreq; priority: numb
   { path: '/', changeFrequency: 'weekly', priority: 1 },
   { path: '/sobre-nos', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/portfolio', changeFrequency: 'weekly', priority: 0.9 },
+  // Bio landing — the Instagram link target. Lower priority because it's
+  // a redirect-style hub, not deep content; still worth indexing.
+  { path: '/bio', changeFrequency: 'monthly', priority: 0.5 },
 ];
 
 const localizedAlternates = (path: string): AlternateMap => {

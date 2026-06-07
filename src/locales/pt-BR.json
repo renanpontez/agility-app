@@ -224,6 +224,18 @@
     "categoriesDropdownLabel": "Categorias",
     "categoriesDropdownAll": "Ver todas as categorias"
   },
+  "BioPage": {
+    "tagline": "Soluções digitais que inspiram.",
+    "handle": "@agilitycreative",
+    "siteLabel": "Site institucional",
+    "siteDescription": "Conheça a Agility, nosso time e portfólio.",
+    "blogLabel": "Blog da Agility",
+    "blogDescription": "Tecnologia, IA e bastidores em pt-BR.",
+    "whatsappLabel": "Falar no WhatsApp",
+    "whatsappDescription": "Chama a gente direto. Resposta rápida.",
+    "metaTitle": "Agility Creative — Links",
+    "metaDescription": "Site, blog e WhatsApp da Agility Creative. Tudo o que você precisa em um lugar só."
+  },
   "BlogDetail": {
     "notFound": "Artigo não encontrado",
     "breadcrumbBlog": "Blog",

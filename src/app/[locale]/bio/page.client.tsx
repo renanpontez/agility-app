@@ -13,6 +13,19 @@ const INSTAGRAM_URL = 'https://instagram.com/agilitycreative';
 // Subtle ease curve that matches the rest of the site's motion language.
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+export type LatestPostSummary = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  coverImage?: string;
+  coverAlt?: string;
+  category?: string;
+  categorySlug?: string;
+  dateLabel: string;
+  readingTimeMinutes?: number;
+  href: string;
+};
+
 const SiteIcon = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
     <circle cx="12" cy="12" r="9" />
@@ -86,9 +99,92 @@ const LinkRow = ({ href, label, description, icon, external, accent }: LinkRowPr
   </a>
 );
 
-const BioPageClient = () => {
+// Visual eyebrow above each grouped section. Tiny letter-spaced label with a
+// short hairline rule — the same accent treatment as the rest of the site.
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <p className="mb-3 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40">
+    <span aria-hidden className="h-px w-6 bg-white/20" />
+    {children}
+  </p>
+);
+
+type LatestPostCardProps = {
+  post: LatestPostSummary;
+  eyebrow: string;
+  readCta: string;
+  minLabel: (count: number) => string;
+};
+
+const LatestPostCard = ({ post, eyebrow, readCta, minLabel }: LatestPostCardProps) => (
+  <a
+    href={post.href}
+    className="group relative block overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:shadow-[0_18px_40px_-18px_rgba(255,255,255,0.08)]"
+  >
+    <div className="flex gap-4 p-4 sm:p-5">
+      {/* Cover thumbnail — square to read well at this size; falls back to a
+          gradient if the post has no cover (drafts shouldn't reach here). */}
+      <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-primary/30 to-purple-500/20 ring-1 ring-inset ring-white/10 sm:size-24">
+        {post.coverImage && (
+          <Image
+            src={post.coverImage}
+            alt={post.coverAlt ?? post.title}
+            fill
+            sizes="96px"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+          />
+        )}
+      </div>
+
+      <div className="flex min-w-0 flex-1 flex-col justify-between gap-2">
+        <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em]">
+          <span className="rounded-full bg-primary/15 px-2 py-0.5 text-primary">
+            {eyebrow}
+          </span>
+        </div>
+        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug tracking-tight text-white sm:text-base">
+          {post.title}
+        </h3>
+        <div className="flex items-center gap-2 text-[11px] text-white/45">
+          <span>{post.dateLabel}</span>
+          {post.readingTimeMinutes && (
+            <>
+              <span aria-hidden className="size-1 rounded-full bg-white/25" />
+              <span>{minLabel(post.readingTimeMinutes)}</span>
+            </>
+          )}
+          {post.category && (
+            <>
+              <span aria-hidden className="size-1 rounded-full bg-white/25" />
+              <span className="truncate text-primary/80">{post.category}</span>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div className="flex items-center justify-between border-t border-white/[0.06] bg-white/[0.02] px-4 py-2.5 sm:px-5">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
+        {readCta}
+      </span>
+      <span
+        aria-hidden
+        className="inline-flex size-7 items-center justify-center rounded-full bg-primary text-white transition-transform duration-300 group-hover:translate-x-1"
+      >
+        <Arrow />
+      </span>
+    </div>
+  </a>
+);
+
+type BioPageClientProps = {
+  latestPost: LatestPostSummary | null;
+};
+
+const BioPageClient = ({ latestPost }: BioPageClientProps) => {
   const t = useTranslations('BioPage');
 
+  // Each section is its own motion group so the entrance staggers naturally
+  // even as content changes (e.g. latestPost appears/disappears).
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050505] font-poppins text-white antialiased">
       {/* Atmospheric backdrop — matches the main site's vibe without dragging
@@ -112,7 +208,7 @@ const BioPageClient = () => {
       />
 
       <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-md flex-col px-5 py-12 sm:px-6 sm:py-16">
-        {/* Logo + name */}
+        {/* HEADER — logo + name + tagline + @ pill */}
         <motion.div
           className="flex flex-col items-center text-center"
           initial={{ opacity: 0, y: 12 }}
@@ -137,7 +233,6 @@ const BioPageClient = () => {
           />
         </motion.div>
 
-        {/* Tagline */}
         <motion.p
           className="mt-5 text-center text-[14px] leading-relaxed text-white/60 sm:text-[15px]"
           initial={{ opacity: 0, y: 12 }}
@@ -159,47 +254,72 @@ const BioPageClient = () => {
           {t('handle')}
         </motion.a>
 
-        {/* Link buttons — staggered fade up */}
-        <div className="mt-10 flex flex-col gap-3">
-          {[
-            {
-              href: '/',
-              label: t('siteLabel'),
-              description: t('siteDescription'),
-              icon: <SiteIcon />,
-            },
-            {
-              href: '/blog',
-              label: t('blogLabel'),
-              description: t('blogDescription'),
-              icon: <BlogIcon />,
-            },
-            {
-              href: whatsappHref,
-              label: t('whatsappLabel'),
-              description: t('whatsappDescription'),
-              icon: <WhatsAppIcon />,
-              external: true,
-              accent: true,
-            },
-          ].map((link, index) => (
-            <motion.div
-              key={link.href}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.22 + index * 0.07 }}
-            >
-              <LinkRow {...link} />
-            </motion.div>
-          ))}
-        </div>
+        {/* SITE SECTION */}
+        <motion.section
+          className="mt-12"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.22 }}
+        >
+          <SectionLabel>{t('sectionSite')}</SectionLabel>
+          <LinkRow
+            href="/"
+            label={t('siteLabel')}
+            description={t('siteDescription')}
+            icon={<SiteIcon />}
+          />
+        </motion.section>
 
-        {/* Footer */}
+        {/* BLOG SECTION — latest article first, then "all articles" link */}
+        <motion.section
+          className="mt-10"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.32 }}
+        >
+          <SectionLabel>{t('sectionBlog')}</SectionLabel>
+          <div className="flex flex-col gap-3">
+            {latestPost && (
+              <LatestPostCard
+                post={latestPost}
+                eyebrow={t('latestPostEyebrow')}
+                readCta={t('latestPostReadCta')}
+                minLabel={count => t('latestPostMin', { count })}
+              />
+            )}
+            <LinkRow
+              href="/blog"
+              label={t('blogLabel')}
+              description={t('blogDescription')}
+              icon={<BlogIcon />}
+            />
+          </div>
+        </motion.section>
+
+        {/* CONTACT SECTION */}
+        <motion.section
+          className="mt-10"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.42 }}
+        >
+          <SectionLabel>{t('sectionContact')}</SectionLabel>
+          <LinkRow
+            href={whatsappHref}
+            label={t('whatsappLabel')}
+            description={t('whatsappDescription')}
+            icon={<WhatsAppIcon />}
+            external
+            accent
+          />
+        </motion.section>
+
+        {/* FOOTER */}
         <motion.p
           className="mt-auto pt-12 text-center text-[11px] text-white/30"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.5 }}
+          transition={{ duration: 0.6, ease: EASE, delay: 0.6 }}
         >
           ©
           {' '}

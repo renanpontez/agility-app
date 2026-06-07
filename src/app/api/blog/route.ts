@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -7,6 +8,24 @@ import { fireNewPostNotification } from '@/libs/email/notifyNewPost';
 import type { BlogBodyBlock, BlogPost, BlogStatus } from '@/types/blog';
 
 import { isAuthorized } from './auth';
+
+// Pages that snapshot the "latest post" — they're cached with a revalidate
+// fallback, but a publish should refresh them instantly so the bio link and
+// search engines see the new article without waiting for the cache to expire.
+const PUBLISH_INVALIDATION_PATHS = ['/bio', '/en/bio'] as const;
+
+const invalidatePublishedSurfaces = (): void => {
+  for (const path of PUBLISH_INVALIDATION_PATHS) {
+    try {
+      revalidatePath(path);
+    } catch (err) {
+      // Non-fatal — the page will still self-refresh on its `revalidate`
+      // timer (60s for /bio). Just log so we notice if it ever spikes.
+
+      console.error('[revalidatePath] failed', path, err);
+    }
+  }
+};
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -309,6 +328,9 @@ export async function POST(req: Request) {
       // Notify confirmed subscribers when a post is born as published.
       // Drafts never trigger this — the agent gets a chance to review first.
       fireNewPostNotification(newPost);
+      if (newPost.status === 'published') {
+        invalidatePublishedSurfaces();
+      }
       return NextResponse.json({ ok: true, data: { post: newPost } }, { status: 201 });
     }
 
@@ -345,6 +367,11 @@ export async function POST(req: Request) {
       const isNowPublished = effectiveStatus(merged) === 'published';
       if (wasDraft && isNowPublished) {
         fireNewPostNotification(merged);
+        invalidatePublishedSurfaces();
+      } else if (isNowPublished) {
+        // Edit on an already-published post — no email, but the cached "latest
+        // post" snapshot needs refreshing if the edit changed visible fields.
+        invalidatePublishedSurfaces();
       }
       return NextResponse.json({ ok: true, data: { post: merged } });
     }
@@ -364,6 +391,11 @@ export async function POST(req: Request) {
       if (command.action === 'publish' && result.changed) {
         fireNewPostNotification(result.post);
       }
+      // Any state change (publish, unpublish, including the no-op idempotent
+      // case) refreshes the cached snapshots — cheap and avoids stale bio.
+      if (result.changed) {
+        invalidatePublishedSurfaces();
+      }
       return NextResponse.json({
         ok: true,
         data: { post: result.post, changed: result.changed },
@@ -381,6 +413,11 @@ export async function POST(req: Request) {
         await writePosts(next);
       } catch {
         return errorResponse(500, 'storage_write_failed');
+      }
+      // If the deleted post was published, the "latest post" snapshot might
+      // change — refresh the cached surfaces so we don't link to a 404.
+      if (effectiveStatus(removed) === 'published') {
+        invalidatePublishedSurfaces();
       }
       return NextResponse.json({
         ok: true,

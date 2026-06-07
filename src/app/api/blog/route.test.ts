@@ -18,6 +18,14 @@ vi.mock('@/libs/email/notifyNewPost', () => ({
   notifyNewPost: vi.fn(),
 }));
 
+// Stub Next.js cache revalidation — calling revalidatePath outside a request
+// context throws ("static generation store missing"). The route swallows the
+// throw, but the resulting console.error trips vitest-fail-on-console.
+vi.mock('next/cache', () => ({
+  revalidatePath: vi.fn(),
+  revalidateTag: vi.fn(),
+}));
+
 const TOKEN = '11111111111111111111111111111111';
 
 const samplePosts = (): BlogPost[] => [

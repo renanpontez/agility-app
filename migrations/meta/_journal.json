@@ -15,6 +15,13 @@
       "when": 1780691119589,
       "tag": "0001_handy_vampiro",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780791420892,
+      "tag": "0002_natural_nehzno",
+      "breakpoints": true
     }
   ]
 }

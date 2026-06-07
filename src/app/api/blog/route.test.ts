@@ -11,6 +11,13 @@ vi.mock('@/libs/blogStore', () => ({
   savePosts: vi.fn(),
 }));
 
+// Stub the notification fan-out — the route fires it asynchronously on
+// publish, but the test environment doesn't have RESEND_API_KEY or DB access.
+vi.mock('@/libs/email/notifyNewPost', () => ({
+  fireNewPostNotification: vi.fn(),
+  notifyNewPost: vi.fn(),
+}));
+
 const TOKEN = '11111111111111111111111111111111';
 
 const samplePosts = (): BlogPost[] => [

@@ -24,7 +24,7 @@ export async function generateMetadata(props: {
   const { slug } = await props.params;
   const posts = await getPostsSafe();
   const post = posts.find(item => item.slug === slug);
-  const alternates = buildDefaultLocaleAlternates(`/blog/${slug}`);
+  const alternates = buildDefaultLocaleAlternates(`/blog/${slug}`, { withRssFeed: true });
   const title = post?.title ?? slug;
   const description = post?.excerpt ?? '';
   const ogImage = post?.coverImage;

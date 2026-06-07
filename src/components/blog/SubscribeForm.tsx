@@ -12,6 +12,11 @@ type SubscribeFormProps = {
   source?: string;
 };
 
+// Server should answer the subscribe POST well under a second. If we don't
+// hear back within 5s, treat it as a failure — the user shouldn't be left
+// staring at a spinner forever (Resend timeout, cold start, dropped connection).
+const SUBMIT_TIMEOUT_MS = 5000;
+
 const COPY = {
   eyebrow: 'Receba no e-mail',
   title: 'Novos artigos toda semana',
@@ -20,10 +25,15 @@ const COPY = {
   emailLabel: 'Seu melhor e-mail',
   cta: 'Assinar',
   ctaLoading: 'Enviando…',
-  successTitle: 'Falta um clique',
-  successBody:
-    'Mandamos um e-mail de confirmação. Abra sua caixa de entrada e confirme para começar a receber.',
+  successTitle: 'Falta um clique para confirmar',
+  successBodyStrong: 'Abra seu e-mail agora e clique em',
+  successBodyButton: 'Confirmar inscrição',
+  successBodyTail:
+    '. Sem esse clique a inscrição não vale — exigência da LGPD e dos provedores de e-mail.',
+  successFootnote:
+    'Não chegou em alguns minutos? Confira a pasta de spam ou tente assinar de novo.',
   errorGeneric: 'Algo deu errado. Tente de novo em alguns minutos.',
+  errorTimeout: 'A confirmação demorou demais. Tente de novo.',
   invalidEmail: 'Esse e-mail parece inválido.',
   privacy: 'Você pode cancelar a inscrição a qualquer momento.',
 };
@@ -43,11 +53,16 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
       return;
     }
     setState({ kind: 'submitting' });
+    // Hard timeout via AbortController — without it the UI stays in
+    // "Enviando…" indefinitely if the server hangs or the network drops.
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
     try {
       const res = await fetch('/api/blog/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: trimmed, source, locale: 'pt-BR' }),
+        signal: controller.signal,
       });
       if (!res.ok) {
         const detail: { error?: string } = await res.json().catch(() => ({}));
@@ -61,8 +76,14 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
       }
       setState({ kind: 'success' });
       setEmail('');
-    } catch {
-      setState({ kind: 'error', message: COPY.errorGeneric });
+    } catch (err) {
+      const aborted = err instanceof DOMException && err.name === 'AbortError';
+      setState({
+        kind: 'error',
+        message: aborted ? COPY.errorTimeout : COPY.errorGeneric,
+      });
+    } finally {
+      window.clearTimeout(timeoutId);
     }
   };
 
@@ -71,13 +92,21 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
       <section className="mx-auto my-20 max-w-3xl rounded-3xl border border-stone-200/70 bg-white p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)] sm:p-14">
         <p className="mb-4 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
           <span aria-hidden className="h-px w-8 bg-primary" />
-          {COPY.eyebrow}
+          Verifique seu e-mail
         </p>
         <h2 className="text-2xl font-semibold leading-tight tracking-[-0.02em] text-stone-900 md:text-3xl">
           {COPY.successTitle}
         </h2>
-        <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-stone-500">
-          {COPY.successBody}
+        <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-stone-600">
+          {COPY.successBodyStrong}
+          {' '}
+          <span className="rounded-md bg-stone-900 px-2 py-0.5 text-[13px] font-medium text-stone-50">
+            {COPY.successBodyButton}
+          </span>
+          {COPY.successBodyTail}
+        </p>
+        <p className="mx-auto mt-5 max-w-md text-[12px] leading-relaxed text-stone-400">
+          {COPY.successFootnote}
         </p>
       </section>
     );

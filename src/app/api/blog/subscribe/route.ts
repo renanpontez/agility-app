@@ -25,7 +25,7 @@ const errorResponse = (status: number, error: string) =>
   NextResponse.json({ ok: false, error }, { status });
 
 const buildConfirmUrl = (token: string) =>
-  `${EMAIL_CONFIG.baseUrl}/api/blog/confirm?token=${encodeURIComponent(token)}`;
+  `${EMAIL_CONFIG.baseUrl}/blog/confirm?token=${encodeURIComponent(token)}`;
 
 export async function POST(req: Request) {
   let raw: unknown;

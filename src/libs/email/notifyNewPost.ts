@@ -8,7 +8,14 @@ const PER_SEND_DELAY_MS = 110; // 9 sends/sec → safely under Resend's 10/sec c
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-const buildUnsubscribeUrl = (token: string) =>
+// The user-facing unsubscribe page. RFC 8058 one-click POSTs to the API
+// route directly (see the List-Unsubscribe-Post header below); only this URL
+// is what's rendered when the link is clicked normally.
+const buildUnsubscribePageUrl = (token: string) =>
+  `${EMAIL_CONFIG.baseUrl}/blog/unsubscribe?token=${encodeURIComponent(token)}`;
+
+// The RFC 8058 one-click endpoint Gmail/Apple Mail POST to from inbox UI.
+const buildUnsubscribePostUrl = (token: string) =>
   `${EMAIL_CONFIG.baseUrl}/api/blog/unsubscribe?token=${encodeURIComponent(token)}`;
 
 const buildPostUrl = (slug: string) => `${EMAIL_CONFIG.baseUrl}/blog/${slug}`;
@@ -45,7 +52,8 @@ export const notifyNewPost = async (post: BlogPost): Promise<NotifyResult> => {
   };
 
   for (const sub of subscribers) {
-    const unsubscribeUrl = buildUnsubscribeUrl(sub.unsubscribeToken);
+    const unsubscribePageUrl = buildUnsubscribePageUrl(sub.unsubscribeToken);
+    const unsubscribePostUrl = buildUnsubscribePostUrl(sub.unsubscribeToken);
     const { subject, html, text } = buildNewPostEmail({
       title: post.title,
       excerpt: post.excerpt,
@@ -53,7 +61,7 @@ export const notifyNewPost = async (post: BlogPost): Promise<NotifyResult> => {
       coverImage: post.coverImage,
       coverAlt: post.coverAlt,
       postUrl: buildPostUrl(post.slug),
-      unsubscribeUrl,
+      unsubscribeUrl: unsubscribePageUrl,
     });
 
     const send = await sendEmail({
@@ -62,9 +70,11 @@ export const notifyNewPost = async (post: BlogPost): Promise<NotifyResult> => {
       html,
       text,
       headers: {
-        // Both forms — Gmail/Apple Mail accept either; some legacy clients
-        // only look at <…> URI form, others want mailto:.
-        'List-Unsubscribe': `<${unsubscribeUrl}>, <mailto:${EMAIL_CONFIG.replyTo}?subject=unsubscribe>`,
+        // List-Unsubscribe carries BOTH the human-facing page URL (clicked
+        // from the email footer) and the one-click POST endpoint Gmail/Apple
+        // Mail invoke from the inbox UI. mailto: is the legacy fallback for
+        // ancient clients.
+        'List-Unsubscribe': `<${unsubscribePostUrl}>, <${unsubscribePageUrl}>, <mailto:${EMAIL_CONFIG.replyTo}?subject=unsubscribe>`,
         // RFC 8058 — Gmail's "Unsubscribe" button needs this to one-click.
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },

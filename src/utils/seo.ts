@@ -40,8 +40,14 @@ export const buildAlternates = (locale: Locale, path: string) => {
  * canonical and every hreflang point at the same default-locale URL, and we
  * intentionally omit other locales so search engines don't crawl URLs that
  * just redirect.
+ *
+ * Pass `withRssFeed: true` on blog pages to advertise the RSS feed via
+ * `<link rel="alternate" type="application/rss+xml">` for auto-discovery.
  */
-export const buildDefaultLocaleAlternates = (path: string) => {
+export const buildDefaultLocaleAlternates = (
+  path: string,
+  options: { withRssFeed?: boolean } = {},
+) => {
   const defaultPath = localizedPath(AppConfig.defaultLocale, path);
   return {
     canonical: defaultPath,
@@ -49,6 +55,15 @@ export const buildDefaultLocaleAlternates = (path: string) => {
       [AppConfig.defaultLocale]: defaultPath,
       'x-default': defaultPath,
     },
+    ...(options.withRssFeed
+      ? {
+          types: {
+            'application/rss+xml': [
+              { url: '/feed.xml', title: 'Agility Creative — Blog' },
+            ],
+          },
+        }
+      : {}),
   };
 };
 

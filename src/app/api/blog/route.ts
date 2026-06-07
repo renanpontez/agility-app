@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { slugifyCategory } from '@/components/blog/categories';
 import { getPosts, savePosts } from '@/libs/blogStore';
+import { fireNewPostNotification } from '@/libs/email/notifyNewPost';
 import type { BlogBodyBlock, BlogPost, BlogStatus } from '@/types/blog';
 
 import { isAuthorized } from './auth';
@@ -305,6 +306,9 @@ export async function POST(req: Request) {
       } catch {
         return errorResponse(500, 'storage_write_failed');
       }
+      // Notify confirmed subscribers when a post is born as published.
+      // Drafts never trigger this — the agent gets a chance to review first.
+      fireNewPostNotification(newPost);
       return NextResponse.json({ ok: true, data: { post: newPost } }, { status: 201 });
     }
 
@@ -334,6 +338,14 @@ export async function POST(req: Request) {
       } catch {
         return errorResponse(500, 'storage_write_failed');
       }
+      // Fire-on-transition: notify only when the patch actually moves the
+      // post from draft → published (a status-less patch or a published →
+      // published edit is intentionally silent so updates don't spam).
+      const wasDraft = effectiveStatus(current) === 'draft';
+      const isNowPublished = effectiveStatus(merged) === 'published';
+      if (wasDraft && isNowPublished) {
+        fireNewPostNotification(merged);
+      }
       return NextResponse.json({ ok: true, data: { post: merged } });
     }
 
@@ -346,6 +358,11 @@ export async function POST(req: Request) {
           return errorResponse(404, 'not_found', { slug: command.slug });
         }
         return errorResponse(500, result.error);
+      }
+      // Only notify on a real transition draft → published; an idempotent
+      // re-publish (changed=false) is silent.
+      if (command.action === 'publish' && result.changed) {
+        fireNewPostNotification(result.post);
       }
       return NextResponse.json({
         ok: true,

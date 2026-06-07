@@ -31,7 +31,7 @@ export async function generateMetadata(props: {
   const posts = await getPostsSafe();
   const category = findCategoryBySlug(posts, slug);
   const t = await getTranslations({ locale: safeLocale, namespace: 'BlogCategory' });
-  const alternates = buildDefaultLocaleAlternates(`/blog/category/${slug}`);
+  const alternates = buildDefaultLocaleAlternates(`/blog/category/${slug}`, { withRssFeed: true });
 
   if (!category) {
     return {

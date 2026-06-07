@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import type { BlogCardItem } from '@/components/blog';
-import { BlogHero, BlogIndex, getOrderedCategories } from '@/components/blog';
+import { BlogHero, BlogIndex, getOrderedCategories, SubscribeForm } from '@/components/blog';
 import { getPostsSafe } from '@/libs/blogStore';
 import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   // → /blog, but generateMetadata can still be called once before the redirect
   // is followed).
   const t = await getTranslations({ locale: AppConfig.defaultLocale, namespace: 'BlogPage' });
-  const alternates = buildDefaultLocaleAlternates(BLOG_PATH);
+  const alternates = buildDefaultLocaleAlternates(BLOG_PATH, { withRssFeed: true });
   const title = `${t('titlePrefix')} ${t('titleHighlight')}`.trim();
 
   return {
@@ -110,6 +110,10 @@ const BlogPage = async () => {
         emptyLabel={t('empty')}
         moreLabel={t('more')}
       />
+
+      <div className="px-5 sm:px-8">
+        <SubscribeForm source="blog-index" />
+      </div>
 
       <script
         type="application/ld+json"

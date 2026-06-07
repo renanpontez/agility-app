@@ -15,3 +15,4 @@ export {
   slugifyCategory,
 } from './categories';
 export { formatLongDate, formatShortDate } from './formatDate';
+export { default as SubscribeForm } from './SubscribeForm';

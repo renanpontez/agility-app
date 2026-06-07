@@ -33,7 +33,14 @@ const nextConfig = {
   async rewrites() {
     return {
       beforeFiles: [
+        // /sitemap.xml → custom route (lets us inject the XSL stylesheet
+        // directive; the MetadataRoute.Sitemap convention doesn't support it).
         { source: '/sitemap.xml', destination: '/sitemap-feed' },
+        // /feed.xml + /rss.xml → the RSS route. Same rewrite reason as above
+        // and gives subscribers two URLs that work (some readers default to
+        // /rss.xml, others to /feed.xml).
+        { source: '/feed.xml', destination: '/feed-rss' },
+        { source: '/rss.xml', destination: '/feed-rss' },
       ],
       afterFiles: [],
       fallback: [],

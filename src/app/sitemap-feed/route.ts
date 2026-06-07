@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+import { blogArticlePath, blogCategoriesPath, blogCategoryPath, blogIndexPath } from '@/components/blog/blogUrls';
 import { getAllCategorySlugs } from '@/components/blog/categories';
 import portfolioData from '@/data/portfolio.json';
 import { getPostsSafe } from '@/libs/blogStore';
@@ -119,25 +120,37 @@ const buildEntries = async (): Promise<Entry[]> => {
   // Blog is pt-BR only — one row per published post, hreflang locked to the
   // default locale so /en/blog* doesn't get crawled (middleware 308s it back).
   const blogPosts = (await getPostsSafe()).filter(isPublished);
+  const blogIndex = blogIndexPath();
+  const categoriesHub = blogCategoriesPath();
   entries.push({
-    url: localizedUrl(AppConfig.defaultLocale, '/blog'),
+    url: localizedUrl(AppConfig.defaultLocale, blogIndex),
     lastModified: now,
     changeFrequency: 'daily',
     priority: 0.8,
-    alternates: defaultOnlyAlternates('/blog'),
+    alternates: defaultOnlyAlternates(blogIndex),
+  });
+  entries.push({
+    url: localizedUrl(AppConfig.defaultLocale, categoriesHub),
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.6,
+    alternates: defaultOnlyAlternates(categoriesHub),
   });
   for (const post of blogPosts) {
-    const blogPath = `/blog/${post.slug}`;
+    // Canonical URL is the new /blog/<category>/<slug> shape. Old
+    // /blog/<slug> URLs are handled by the in-app 308 redirect.
+    const articlePath = blogArticlePath(post);
     entries.push({
-      url: localizedUrl(AppConfig.defaultLocale, blogPath),
+      url: localizedUrl(AppConfig.defaultLocale, articlePath),
       lastModified: new Date(post.updatedAt ?? post.publishedAt),
       changeFrequency: 'monthly',
       priority: 0.7,
-      alternates: defaultOnlyAlternates(blogPath),
+      alternates: defaultOnlyAlternates(articlePath),
     });
   }
   for (const categorySlug of getAllCategorySlugs(blogPosts)) {
-    const categoryPath = `/blog/category/${categorySlug}`;
+    // Category pages moved from /blog/category/<slug> to /blog/<slug>.
+    const categoryPath = blogCategoryPath(categorySlug);
     entries.push({
       url: localizedUrl(AppConfig.defaultLocale, categoryPath),
       lastModified: now,

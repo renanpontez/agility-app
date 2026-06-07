@@ -1,9 +1,16 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
-import { BlogArticleBody, BlogHero } from '@/components/blog';
+import {
+  BlogArticleBody,
+  blogArticlePath,
+  blogCategoryPath,
+  BlogHero,
+  postCategorySlug,
+  SubscribeForm,
+} from '@/components/blog';
 import { getPostsSafe } from '@/libs/blogStore';
 import { Link } from '@/libs/i18nNavigation';
 import { isPublished } from '@/types/blog';
@@ -14,6 +21,7 @@ import { buildDefaultLocaleAlternates, localizedUrl, ogLocale } from '@/utils/se
 export const dynamic = 'force-dynamic';
 
 type Params = {
+  category: string;
   slug: string;
   locale: string;
 };
@@ -21,10 +29,15 @@ type Params = {
 export async function generateMetadata(props: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { slug } = await props.params;
+  const { category, slug } = await props.params;
   const posts = await getPostsSafe();
   const post = posts.find(item => item.slug === slug);
-  const alternates = buildDefaultLocaleAlternates(`/blog/${slug}`, { withRssFeed: true });
+  // Canonical URL always uses the post's true category slug, even if the
+  // request came in under a stale or wrong category (we redirect those — see
+  // page body — but metadata must still point at the canonical path).
+  const canonicalCategory = post ? postCategorySlug(post) : category;
+  const canonicalPath = `/blog/${canonicalCategory}/${slug}`;
+  const alternates = buildDefaultLocaleAlternates(canonicalPath, { withRssFeed: true });
   const title = post?.title ?? slug;
   const description = post?.excerpt ?? '';
   const ogImage = post?.coverImage;
@@ -59,19 +72,28 @@ export async function generateMetadata(props: {
 }
 
 const BlogArticlePage = async (props: { params: Promise<Params> }) => {
-  const { slug } = await props.params;
+  const { category, slug } = await props.params;
   // Blog is pt-BR only — pin locale regardless of `[locale]` segment.
   const safeLocale = AppConfig.defaultLocale;
   const t = await getTranslations({ locale: safeLocale, namespace: 'BlogDetail' });
   const posts = await getPostsSafe();
   const existing = posts.find(item => item.slug === slug);
+
   // Real 404 (not a soft 200 with a "not found" message) for both missing
-  // slugs and drafts — keeps unpublished URLs out of search indexes and
-  // matches the category page's behavior.
+  // slugs and drafts — keeps unpublished URLs out of search indexes.
   if (!existing || !isPublished(existing)) {
     notFound();
   }
   const post = existing;
+
+  // The category segment is part of the URL but only the slug uniquely
+  // identifies the post. If the visitor arrived under a stale category
+  // (renamed, typo, old share), permanent-redirect them to the canonical
+  // URL so SEO equity consolidates on one path.
+  const canonicalCategorySlug = postCategorySlug(post);
+  if (canonicalCategorySlug !== category) {
+    permanentRedirect(blogArticlePath(post));
+  }
 
   const dateLabel = new Intl.DateTimeFormat(safeLocale === 'pt-BR' ? 'pt-BR' : 'en-US', {
     year: 'numeric',
@@ -79,6 +101,7 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
     day: 'numeric',
   }).format(new Date(post.publishedAt));
 
+  const articleUrl = localizedUrl(safeLocale, blogArticlePath(post));
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -90,9 +113,10 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
     'author': post.author
       ? { '@type': 'Person', 'name': post.author.name }
       : undefined,
+    'articleSection': post.category,
     'mainEntityOfPage': {
       '@type': 'WebPage',
-      '@id': localizedUrl(safeLocale, `/blog/${slug}`),
+      '@id': articleUrl,
     },
   };
 
@@ -127,6 +151,16 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
     </>
   );
 
+  // Breadcrumb: Blog → Category → Article. The category crumb is the new
+  // navigation surface — readers can click it to see siblings.
+  const breadcrumbs = [
+    { label: t('breadcrumbBlog'), href: '/blog' },
+    ...(post.category
+      ? [{ label: post.category, href: blogCategoryPath(canonicalCategorySlug) }]
+      : []),
+    { label: post.title },
+  ];
+
   return (
     <>
       <BlogHero
@@ -134,10 +168,7 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
         title={post.title}
         subtitle={post.excerpt}
         meta={heroMeta}
-        breadcrumbs={[
-          { label: t('breadcrumbBlog'), href: '/blog' },
-          { label: post.title },
-        ]}
+        breadcrumbs={breadcrumbs}
       />
 
       <article className="mx-auto max-w-[720px] px-5 py-20 sm:px-8 md:py-28">
@@ -180,6 +211,12 @@ const BlogArticlePage = async (props: { params: Promise<Params> }) => {
           </Link>
         </div>
       </article>
+
+      {/* Newsletter CTA inside the article column so it reads as a natural
+          end-of-piece prompt, not a separate site-wide footer block. */}
+      <div className="mx-auto max-w-3xl px-5 pb-8 sm:px-8">
+        <SubscribeForm source={`blog-article:${post.slug}`} />
+      </div>
 
       <script
         type="application/ld+json"

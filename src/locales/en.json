@@ -210,6 +210,20 @@
     "notFound": "Category not found",
     "breadcrumbBlog": "Blog"
   },
+  "BlogCategories": {
+    "eyebrow": "Categories",
+    "title": "Everything we cover",
+    "subtitle": "Each category groups articles around one topic. Good if you only want to dig into one subject.",
+    "postCountOne": "{count} article",
+    "postCountOther": "{count} articles",
+    "exploreLink": "Explore category",
+    "metaTitle": "Blog Categories",
+    "metaDescription": "Complete list of categories on the Agility Creative blog — product, AI, design, management, and more."
+  },
+  "BlogHeader": {
+    "categoriesDropdownLabel": "Categories",
+    "categoriesDropdownAll": "View all categories"
+  },
   "BlogDetail": {
     "notFound": "Article not found",
     "breadcrumbBlog": "Blog",

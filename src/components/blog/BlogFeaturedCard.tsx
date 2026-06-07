@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Link } from '@/libs/i18nNavigation';
 
 import type { BlogCardItem } from './BlogCard';
+import { blogArticlePath } from './blogUrls';
 import { formatShortDate } from './formatDate';
 
 type BlogFeaturedCardProps = {
@@ -18,7 +19,7 @@ const BlogFeaturedCard = ({ item, locale, readArticleLabel }: BlogFeaturedCardPr
 
   return (
     <Link
-      href={`/blog/${item.slug}`}
+      href={blogArticlePath(item)}
       className="group relative grid grid-cols-1 overflow-hidden rounded-3xl border border-stone-200/70 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-500 hover:-translate-y-0.5 hover:border-stone-300/70 hover:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.18),0_8px_20px_-12px_rgba(0,0,0,0.08)] lg:grid-cols-[1.55fr_1fr]"
     >
       {item.coverImage

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+import { blogArticlePath } from '@/components/blog/blogUrls';
 import { getPostsSafe } from '@/libs/blogStore';
 import type { BlogBodyBlock, BlogPost } from '@/types/blog';
 import { isPublished } from '@/types/blog';
@@ -59,7 +60,7 @@ const renderBlockToHtml = (block: BlogBodyBlock): string => {
 };
 
 const renderItem = (post: BlogPost): string => {
-  const link = localizedUrl(AppConfig.defaultLocale, `/blog/${post.slug}`);
+  const link = localizedUrl(AppConfig.defaultLocale, blogArticlePath(post));
   const html = post.body.map(renderBlockToHtml).join('\n');
   const pubDate = new Date(post.publishedAt).toUTCString();
   const category = post.category

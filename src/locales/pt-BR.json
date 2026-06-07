@@ -210,6 +210,20 @@
     "notFound": "Categoria não encontrada",
     "breadcrumbBlog": "Blog"
   },
+  "BlogCategories": {
+    "eyebrow": "Categorias",
+    "title": "Tudo o que cobrimos",
+    "subtitle": "Cada categoria reúne os artigos sobre um tema. Boa pra dar uma navegada quando você quer saber só de um assunto.",
+    "postCountOne": "{count} artigo",
+    "postCountOther": "{count} artigos",
+    "exploreLink": "Ver categoria",
+    "metaTitle": "Categorias do Blog",
+    "metaDescription": "Lista completa de categorias do blog da Agility Creative — produto, IA, design, gestão e mais."
+  },
+  "BlogHeader": {
+    "categoriesDropdownLabel": "Categorias",
+    "categoriesDropdownAll": "Ver todas as categorias"
+  },
   "BlogDetail": {
     "notFound": "Artigo não encontrado",
     "breadcrumbBlog": "Blog",

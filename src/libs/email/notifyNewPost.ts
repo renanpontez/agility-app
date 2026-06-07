@@ -1,3 +1,4 @@
+import { blogArticlePath } from '@/components/blog/blogUrls';
 import { EMAIL_CONFIG } from '@/libs/email/config';
 import { sendEmail } from '@/libs/email/sender';
 import { buildNewPostEmail } from '@/libs/email/templates/new-post';
@@ -18,7 +19,7 @@ const buildUnsubscribePageUrl = (token: string) =>
 const buildUnsubscribePostUrl = (token: string) =>
   `${EMAIL_CONFIG.baseUrl}/api/blog/unsubscribe?token=${encodeURIComponent(token)}`;
 
-const buildPostUrl = (slug: string) => `${EMAIL_CONFIG.baseUrl}/blog/${slug}`;
+const buildPostUrl = (post: BlogPost) => `${EMAIL_CONFIG.baseUrl}${blogArticlePath(post)}`;
 
 export type NotifyResult = {
   attempted: number;
@@ -60,7 +61,7 @@ export const notifyNewPost = async (post: BlogPost): Promise<NotifyResult> => {
       category: post.category,
       coverImage: post.coverImage,
       coverAlt: post.coverAlt,
-      postUrl: buildPostUrl(post.slug),
+      postUrl: buildPostUrl(post),
       unsubscribeUrl: unsubscribePageUrl,
     });
 

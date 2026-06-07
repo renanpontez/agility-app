@@ -7,12 +7,21 @@ import { useState } from 'react';
 
 import { Link } from '@/libs/i18nNavigation';
 
+import { blogIndexPath } from './blogUrls';
+import type { BlogCategoryRef } from './categories';
+import HeaderCategoriesDropdown from './HeaderCategoriesDropdown';
+
 const HIDE_AFTER = 120;
 const ELEVATE_AFTER = 8;
 
-const BlogHeader = () => {
+type BlogHeaderProps = {
+  categories?: BlogCategoryRef[];
+};
+
+const BlogHeader = ({ categories = [] }: BlogHeaderProps) => {
   const t = useTranslations('Navbar');
   const tBlog = useTranslations('BlogPage');
+  const tHeader = useTranslations('BlogHeader');
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
@@ -36,24 +45,25 @@ const BlogHeader = () => {
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-6 px-5 sm:px-8">
-        <Link href="/" className="group flex items-center gap-2.5">
+        <Link href={blogIndexPath()} className="group flex items-center gap-2.5">
           <Image src="/assets/images/logo/logo_symbol_black.svg" alt="Agility" width={26} height={26} />
           <Image src="/assets/images/logo/logo_name_black.svg" alt="Agility" width={82} height={20} className="hidden sm:block" />
         </Link>
 
         <nav className="flex items-center gap-1 sm:gap-1.5">
           <Link
-            href="/blog"
+            href={blogIndexPath()}
             className="rounded-full px-3.5 py-2 text-[13px] font-medium tracking-tight text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900"
           >
             {tBlog('badge')}
           </Link>
-          <Link
-            href="/"
-            className="hidden rounded-full px-3.5 py-2 text-[13px] font-medium tracking-tight text-stone-600 transition-colors hover:bg-stone-100 hover:text-stone-900 sm:inline-block"
-          >
-            {t('home')}
-          </Link>
+
+          <HeaderCategoriesDropdown
+            label={tHeader('categoriesDropdownLabel')}
+            allLabel={tHeader('categoriesDropdownAll')}
+            categories={categories}
+          />
+
           <Link
             href="/#Contato"
             className="ml-1.5 hidden items-center gap-1.5 rounded-full bg-stone-900 px-4 py-2 text-[13px] font-medium tracking-tight text-stone-50 shadow-[0_1px_2px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all hover:bg-stone-800 hover:shadow-[0_4px_12px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)] sm:inline-flex"

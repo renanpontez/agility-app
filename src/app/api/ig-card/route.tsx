@@ -172,19 +172,24 @@ export async function GET(req: Request) {
               )
             : null}
 
-          {/* Soft gradient — transparent at top, ramps to ~92% dark by the
-              bottom. The dark band has to reach the brand-chip area (~58%
-              from top) so the chip and the "Agility Creative" wordmark read
-              clearly without the photo bleeding through. Tuned for smoothness
-              over contrast: long fade band, no hard transition line. */}
+          {/* Smooth dark mask — continuous linear gradient from transparent
+              at the top of the canvas to 90% dark at the bottom. Single fade,
+              no plateaus, max opacity 90% per spec. Satori requires explicit
+              top/right/bottom/left (no `inset` shorthand) AND a non-empty
+              child for the overlay div to actually render. */}
           <div
             style={{
               position: 'absolute',
-              inset: 0,
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
               display: 'flex',
-              background: 'linear-gradient(to bottom, rgba(10,10,10,0) 0%, rgba(10,10,10,0) 25%, rgba(10,10,10,0.30) 38%, rgba(10,10,10,0.70) 48%, rgba(10,10,10,0.90) 55%, rgba(10,10,10,0.90) 100%)',
+              background: 'linear-gradient(to bottom, rgba(10,10,10,0) 0%, rgba(10,10,10,0.90) 100%)',
             }}
-          />
+          >
+            <span style={{ display: 'flex' }} />
+          </div>
 
           {/* Content — absolutely anchored to the bottom of the canvas.
               Using `bottom` + `left/right` directly because Satori doesn't

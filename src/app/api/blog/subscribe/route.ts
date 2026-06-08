@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     }
 
     const confirmUrl = buildConfirmUrl(result.subscriber.confirmToken);
-    const { subject, html, text } = buildConfirmEmail({ confirmUrl });
+    const { subject, html, text } = await buildConfirmEmail({ confirmUrl });
 
     // Send + ignore non-fatal errors (e.g. Resend rate-limited a duplicate
     // retry). The row exists either way — the user can re-request later.

@@ -22,6 +22,7 @@ const sortsMillGoudy = Sorts_Mill_Goudy({
   style: ['normal', 'italic'],
   display: 'swap',
   variable: '--font-sorts-mill-goudy',
+  preload: false,
 });
 
 export async function generateMetadata(props: {

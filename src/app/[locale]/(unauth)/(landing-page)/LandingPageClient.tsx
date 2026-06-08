@@ -11,13 +11,13 @@ import { TbDeviceAnalytics } from 'react-icons/tb';
 
 import type { FaqItem, PortfolioItem, ServiceCardData } from '@/components/landing-v2';
 import {
-  PortfolioCard,
   RevealOnScroll,
-  ServiceCard,
-  TechTicker,
   V2Hero,
 } from '@/components/landing-v2';
 
+const TechTicker = dynamic(() => import('@/components/landing-v2/TechTicker'));
+const ServiceCard = dynamic(() => import('@/components/landing-v2/ServiceCard'));
+const PortfolioCard = dynamic(() => import('@/components/landing-v2/PortfolioCard'));
 const ScrollBanner = dynamic(() => import('@/components/landing-v2/ScrollBanner'));
 const FaqAccordion = dynamic(() => import('@/components/landing-v2/FaqAccordion'));
 const ContactSection = dynamic(() => import('@/components/landing-v2/ContactSection'));
@@ -168,10 +168,22 @@ const LandingPage = () => {
                   <span className="mt-1 text-sm text-white/40">{t('projectsDelivered')}</span>
                 </div>
                 <div className="relative row-span-2 overflow-hidden rounded-2xl">
-                  <Image src="/assets/images/about-us-img.svg" alt={t('aboutImgAlt')} fill className="object-cover" />
+                  <Image
+                    src="/assets/images/about-us-img.svg"
+                    alt={t('aboutImgAlt')}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
                 <div className="relative overflow-hidden rounded-2xl">
-                  <Image src="/assets/images/agility-team-working.jpeg" alt={t('aboutWorkAlt')} fill className="object-cover" />
+                  <Image
+                    src="/assets/images/agility-team-working.jpeg"
+                    alt={t('aboutWorkAlt')}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </RevealOnScroll>
@@ -288,6 +300,7 @@ const LandingPage = () => {
             src="/assets/images/agility-team-working.jpeg"
             alt="Agility team"
             fill
+            sizes="100vw"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />

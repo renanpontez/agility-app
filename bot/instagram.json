@@ -1,0 +1,20 @@
+{
+  "_comment": "Config do Instagram via FILA NO GOOGLE DRIVE. O bot diário NÃO grava em pasta local — ele cria um arquivo JSON (um por post) DENTRO da pasta do Drive abaixo, via conector de Google Drive. Uma automação no Manus lê essa pasta, publica e apaga o item. Sem token/API do Instagram do nosso lado.",
+  "enabled": true,
+  "drive": {
+    "account": "renanpontez@gmail.com",
+    "folder_path": "___ agility ____/site/ig-queue",
+    "folder_id": "1kHYZcyzEkeNBragDWl3NhjXsCGmh3WRz"
+  },
+  "caption": {
+    "cta": "👉 Leia o artigo completo no nosso blog (link na bio).",
+    "hashtags": ["tecnologia", "inteligenciaartificial", "ia", "inovacao", "agilitycreative"],
+    "max_chars": 2200
+  },
+  "card": {
+    "_comment": "A imagem do post é um card branded renderizado pela rota do site (PNG 1080x1350). O bot monta a URL com os params abaixo. bg = foto Unsplash da capa (fm=jpg).",
+    "endpoint": "https://www.agilitycreative.com/api/ig-card",
+    "default_tag": "AGILITY",
+    "ratio": "4:5"
+  }
+}

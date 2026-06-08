@@ -177,6 +177,50 @@ canal com uma linha sobre o erro (sem vazar o token).
 
 ---
 
+## ETAPA 8 — Enfileirar post do Instagram NO GOOGLE DRIVE (NÃO publica aqui)
+**Só execute se** `bot/instagram.json` tiver `enabled: true` E o post do blog tiver sido
+publicado com sucesso (Etapa 5, 201). Caso contrário, pule.
+
+⚠️ **A fila do Instagram vive no Google Drive, NÃO em pasta local.** O Manus (nuvem) só
+enxerga o Drive — então o item TEM que ser criado lá, via **conector de Google Drive**. NÃO
+grave o item em `bot/ig-queue/` local (o Manus não veria). Quem publica é a automação do
+Manus, que lê a pasta do Drive, posta e apaga o item.
+
+1. **Imagem (card branded):** a imagem do post é um **card** renderizado pela rota do site
+   (`card.endpoint` em `bot/instagram.json`). Monte a `image_url` assim (URL-encode cada valor):
+   `https://www.agilitycreative.com/api/ig-card?title=<título>&subtitle=<gancho curto>&highlight=<1-2 palavras-chave do título>&tag=<card.default_tag>&bg=<foto Unsplash da capa em JPEG>`
+   - `bg` = a foto da `coverImage` forçando JPEG e 4:5:
+     `https://images.unsplash.com/photo-<photo-id>?w=1080&h=1350&fit=crop&fm=jpg&q=80`
+   - `highlight` = uma palavra/expressão forte que aparece no título (vai destacada em roxo).
+   - `subtitle` = gancho curto (≤ ~80 chars), pode ser derivado do `excerpt`.
+   Essa `image_url` (do card) é o que entra no item da fila. (A rota retorna PNG.)
+2. **Legenda (PT-BR, ≤ 2200 chars)**, lendo `caption` de `bot/instagram.json`:
+   título → 2-3 linhas de gancho (do `excerpt`, sem copiar) → `cta` → `hashtags` com `#`.
+3. **Crie o arquivo no Google Drive** via conector (ferramenta create_file do Drive), DENTRO
+   da pasta indicada em `bot/instagram.json` → `drive.folder_id`
+   (`1kHYZcyzEkeNBragDWl3NhjXsCGmh3WRz`, caminho `___ agility ____/site/ig-queue`). Parâmetros:
+   - `parentId` = esse `folder_id`
+   - `title` = `<YYYY-MM-DD>-<slug>.json`
+   - `contentMimeType` = `application/json`, `disableConversionToGoogleType` = true
+   - `textContent` = o JSON do item:
+   ```json
+   {
+     "slug": "<slug>",
+     "title": "<título>",
+     "blog_url": "https://www.agilitycreative.com/blog/<slug>",
+     "image_url": "https://www.agilitycreative.com/api/ig-card?title=...&subtitle=...&highlight=...&tag=AGILITY&bg=https%3A%2F%2Fimages.unsplash.com%2Fphoto-<id>%3Fw%3D1080%26h%3D1350%26fit%3Dcrop%26fm%3Djpg%26q%3D80",
+     "caption": "<legenda do passo 2>",
+     "type": "feed",
+     "status": "pending",
+     "created_at": "<ISO 8601>"
+   }
+   ```
+   Um arquivo por post. Sem segredos. Confirme que o conector de Drive está na conta
+   `renanpontez@gmail.com` (mesma do `drive.account`). Não publique no Instagram daqui.
+4. No aviso do Slack (Etapa 7), acrescente a linha "📸 Instagram: enfileirado no Drive".
+
+---
+
 ## REGRAS DE OURO
 - **Nunca** invente fatos. Na dúvida, atribua à fonte ou omita.
 - **Nunca** copie trechos — sempre reescreva.

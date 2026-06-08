@@ -4,7 +4,7 @@ export const EMAIL_CONFIG = {
   fromName: 'Agility Creative',
   fromAddress: 'hi@agilitycreative.com',
   replyTo: 'hi@agilitycreative.com',
-  brandColor: '#FD512E',
+  brandColor: '#BC01FD',
   // Used inside email bodies as the "View on the web" link and to sign URLs.
   baseUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://www.agilitycreative.com',
 } as const;

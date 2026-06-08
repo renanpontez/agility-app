@@ -55,7 +55,8 @@ export const notifyNewPost = async (post: BlogPost): Promise<NotifyResult> => {
   for (const sub of subscribers) {
     const unsubscribePageUrl = buildUnsubscribePageUrl(sub.unsubscribeToken);
     const unsubscribePostUrl = buildUnsubscribePostUrl(sub.unsubscribeToken);
-    const { subject, html, text } = buildNewPostEmail({
+
+    const { subject, html, text } = await buildNewPostEmail({
       title: post.title,
       excerpt: post.excerpt,
       category: post.category,
@@ -63,6 +64,7 @@ export const notifyNewPost = async (post: BlogPost): Promise<NotifyResult> => {
       coverAlt: post.coverAlt,
       postUrl: buildPostUrl(post),
       unsubscribeUrl: unsubscribePageUrl,
+      body: post.body,
     });
 
     const send = await sendEmail({

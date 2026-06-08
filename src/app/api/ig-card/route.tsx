@@ -185,7 +185,7 @@ export async function GET(req: Request) {
               bottom: 0,
               left: 0,
               display: 'flex',
-              background: 'linear-gradient(to bottom, rgba(10,10,10,0) 0%, rgba(10,10,10,0.90) 100%)',
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.95) 100%)',
             }}
           >
             <span style={{ display: 'flex' }} />
@@ -265,10 +265,10 @@ export async function GET(req: Request) {
               ? (
                   <span
                     style={{
-                      color: 'rgba(255,255,255,0.82)',
-                      fontSize: 32,
+                      color: 'rgba(255,255,255,0.85)',
+                      fontSize: 38,
                       fontWeight: 400,
-                      marginTop: 22,
+                      marginTop: 24,
                       lineHeight: 1.3,
                       maxWidth: 880,
                     }}

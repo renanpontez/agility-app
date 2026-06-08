@@ -54,8 +54,11 @@ local
 # blog bot secrets & runtime
 bot/.secret-token
 bot/.slack-webhook
+bot/.ig-token
 bot/rascunhos/
 bot/queue/*.json
 bot/published/
 bot/failed/
+bot/ig-queue/*.json
+bot/ig-published/
 bot/*.log

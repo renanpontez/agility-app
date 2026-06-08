@@ -52,7 +52,7 @@ const styles = {
     fontWeight: 700,
     letterSpacing: '0.18em',
     textTransform: 'uppercase' as const,
-    color: '#BC01FD',
+    color: EMAIL_CONFIG.brandColor,
   } as React.CSSProperties,
   heading: {
     margin: '0 0 16px',
@@ -182,7 +182,7 @@ const styles = {
     color: '#57534e',
   } as React.CSSProperties,
   moreCtaLink: {
-    color: '#BC01FD',
+    color: EMAIL_CONFIG.brandColor,
     fontSize: '14px',
     fontWeight: 600,
     textDecoration: 'none',

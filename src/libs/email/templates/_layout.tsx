@@ -31,8 +31,7 @@ import { EMAIL_CONFIG } from '../config';
 const FONT_STACK
   = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif';
 
-const LOGO_SYMBOL_URL = `${EMAIL_CONFIG.baseUrl}/assets/images/logo/email/logo_symbol_primary@2x.png`;
-const LOGO_NAME_URL = `${EMAIL_CONFIG.baseUrl}/assets/images/logo/email/logo_name_primary@2x.png`;
+const LOGO_URL = `${EMAIL_CONFIG.baseUrl}/assets/images/agility_full_primary.png`;
 
 const styles = {
   body: {
@@ -60,18 +59,9 @@ const styles = {
     display: 'inline-block',
     lineHeight: 0,
   } as React.CSSProperties,
-  headerSymbol: {
+  headerLogo: {
     display: 'inline-block',
-    height: '24px',
-    width: 'auto',
-    verticalAlign: 'middle',
-    marginRight: '8px',
-    border: 0,
-    outline: 'none',
-  } as React.CSSProperties,
-  headerName: {
-    display: 'inline-block',
-    height: '20px',
+    height: '26px',
     width: 'auto',
     verticalAlign: 'middle',
     border: 0,
@@ -145,16 +135,10 @@ export const Layout = ({ previewText, unsubscribeUrl, children }: LayoutProps) =
             <Column align="left" valign="middle">
               <Link href={blogUrl} style={styles.headerLink}>
                 <Img
-                  src={LOGO_SYMBOL_URL}
-                  alt="Agility"
-                  height="24"
-                  style={styles.headerSymbol}
-                />
-                <Img
-                  src={LOGO_NAME_URL}
+                  src={LOGO_URL}
                   alt="Agility Creative"
-                  height="20"
-                  style={styles.headerName}
+                  height="26"
+                  style={styles.headerLogo}
                 />
               </Link>
             </Column>

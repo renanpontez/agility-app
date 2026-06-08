@@ -64,6 +64,7 @@ export const notifyNewPost = async (post: BlogPost): Promise<NotifyResult> => {
       coverAlt: post.coverAlt,
       postUrl: buildPostUrl(post),
       unsubscribeUrl: unsubscribePageUrl,
+      body: post.body,
     });
 
     const send = await sendEmail({

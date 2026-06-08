@@ -1,11 +1,14 @@
 import {
   Body,
+  Column,
   Container,
   Head,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
+  Row,
   Section,
   Text,
 } from '@react-email/components';
@@ -13,18 +16,23 @@ import * as React from 'react';
 
 import { EMAIL_CONFIG } from '../config';
 
-// Shared shell for every email. Same layout the inline-HTML templates used
-// (560px max-width container, light bg, header/footer, hidden preview text)
-// — refactored into React Email primitives so:
+// Shared shell for every email. 560px max-width container, light bg,
+// rounded header pill with the purple Agility logo on the left and a
+// "blog da agility" wordmark on the right. Refactored into React Email
+// primitives so:
 //   - `react-email dev` can preview templates with hot reload
 //   - templates compose with `<Layout>` instead of string concatenation
 //   - `render(<Component />)` produces email-client-safe HTML and a plain-text fallback
 //
-// Inline styles only (Gmail strips <style> blocks) and explicit colors on
-// every text node (dark-mode inversion is unpredictable).
+// Inline styles only (Gmail strips <style> blocks), explicit colors on
+// every text node (dark-mode inversion is unpredictable), and table-based
+// layout via <Row>/<Column> so Outlook doesn't drop the pill.
 
 const FONT_STACK
   = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif';
+
+const LOGO_SYMBOL_URL = `${EMAIL_CONFIG.baseUrl}/assets/images/logo/email/logo_symbol_primary@2x.png`;
+const LOGO_NAME_URL = `${EMAIL_CONFIG.baseUrl}/assets/images/logo/email/logo_name_primary@2x.png`;
 
 const styles = {
   body: {
@@ -38,26 +46,45 @@ const styles = {
   container: {
     maxWidth: '560px',
     margin: '0 auto',
-    padding: '40px 24px 56px',
+    padding: '32px 24px 56px',
+  } as React.CSSProperties,
+  headerPill: {
+    background: '#ffffff',
+    border: '1px solid rgba(0,0,0,0.06)',
+    borderRadius: '999px',
+    padding: '10px 18px',
   } as React.CSSProperties,
   headerLink: {
     textDecoration: 'none',
-    color: '#1c1917',
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '8px',
-  } as React.CSSProperties,
-  headerMark: {
+    color: 'inherit',
     display: 'inline-block',
-    width: '24px',
-    height: '24px',
-    background: EMAIL_CONFIG.brandColor,
-    borderRadius: '6px',
+    lineHeight: 0,
   } as React.CSSProperties,
-  headerBrand: {
-    fontSize: '15px',
-    letterSpacing: '-0.01em',
-    fontWeight: 700,
+  headerSymbol: {
+    display: 'inline-block',
+    height: '24px',
+    width: 'auto',
+    verticalAlign: 'middle',
+    marginRight: '8px',
+    border: 0,
+    outline: 'none',
+  } as React.CSSProperties,
+  headerName: {
+    display: 'inline-block',
+    height: '20px',
+    width: 'auto',
+    verticalAlign: 'middle',
+    border: 0,
+    outline: 'none',
+  } as React.CSSProperties,
+  headerTag: {
+    margin: 0,
+    fontSize: '12px',
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase' as const,
+    color: '#78716c',
+    textAlign: 'right' as const,
   } as React.CSSProperties,
   headerHr: {
     border: 'none',
@@ -113,11 +140,28 @@ export const Layout = ({ previewText, unsubscribeUrl, children }: LayoutProps) =
     <Preview>{previewText}</Preview>
     <Body style={styles.body}>
       <Container style={styles.container}>
-        <Section>
-          <Link href={blogUrl} style={styles.headerLink}>
-            <span style={styles.headerMark} />
-            <span style={styles.headerBrand}>Agility Creative</span>
-          </Link>
+        <Section style={styles.headerPill}>
+          <Row>
+            <Column align="left" valign="middle">
+              <Link href={blogUrl} style={styles.headerLink}>
+                <Img
+                  src={LOGO_SYMBOL_URL}
+                  alt="Agility"
+                  height="24"
+                  style={styles.headerSymbol}
+                />
+                <Img
+                  src={LOGO_NAME_URL}
+                  alt="Agility Creative"
+                  height="20"
+                  style={styles.headerName}
+                />
+              </Link>
+            </Column>
+            <Column align="right" valign="middle">
+              <Text style={styles.headerTag}>blog da agility</Text>
+            </Column>
+          </Row>
         </Section>
         <Hr style={styles.headerHr} />
         {children}

@@ -13,13 +13,20 @@ describe('email templates render', () => {
       coverAlt: 'capa',
       postUrl: 'https://www.agilitycreative.com/blog/ia/alexa-plus',
       unsubscribeUrl: 'https://www.agilitycreative.com/blog/unsubscribe?token=x',
+      body: [
+        { type: 'paragraph', text: 'Primeiro parágrafo do artigo de teste.' },
+        { type: 'heading', level: 2, text: 'Subseção' },
+        { type: 'list', items: ['ponto um', 'ponto dois'] },
+      ],
     });
     expect(subject).toBe('Alexa+ chega ao Brasil');
     expect(html).toMatch(/^<!DOCTYPE html/i);
     expect(html).toContain('Alexa+ chega ao Brasil');
-    expect(html).toContain('Ler artigo completo');
+    expect(html).toContain('Primeiro parágrafo do artigo de teste.');
+    expect(html).toContain('Ver mais artigos');
     expect(html).toContain('Cancelar inscrição');
-    expect(text).toContain('Ler completo: https://www.agilitycreative.com/blog/ia/alexa-plus');
+    expect(text).toContain('Ver no site: https://www.agilitycreative.com/blog/ia/alexa-plus');
+    expect(text).toContain('Primeiro parágrafo do artigo de teste.');
   });
 
   it('builds a well-formed Confirm email', async () => {

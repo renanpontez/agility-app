@@ -9,7 +9,7 @@ import {
 import * as React from 'react';
 
 import { EMAIL_CONFIG } from '../config';
-import { Layout } from './Layout';
+import { Layout } from './_layout';
 
 export type NewPostEmailProps = {
   title: string;

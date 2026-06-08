@@ -7,7 +7,7 @@ import {
 } from '@react-email/components';
 import * as React from 'react';
 
-import { Layout } from './Layout';
+import { Layout } from './_layout';
 
 export type ConfirmEmailProps = {
   confirmUrl: string;

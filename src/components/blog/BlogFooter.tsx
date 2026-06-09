@@ -9,7 +9,7 @@ const BlogFooter = () => {
   const tBlog = useTranslations('BlogPage');
 
   return (
-    <footer className="relative border-t border-stone-200/70 bg-stone-50">
+    <footer className="relative border-t border-stone-200/70 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">

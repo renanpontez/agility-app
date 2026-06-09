@@ -42,3 +42,27 @@ export const findCategoryBySlug = (
 
 export const getAllCategorySlugs = (posts: Pick<BlogPost, 'category'>[]): string[] =>
   getOrderedCategories(posts).map(category => category.slug);
+
+export type BlogCategoryWithCount = BlogCategoryRef & { count: number };
+
+export const getPopularCategories = (
+  posts: Pick<BlogPost, 'category'>[],
+  limit: number,
+): BlogCategoryWithCount[] => {
+  const counts = new Map<string, BlogCategoryWithCount>();
+  for (const post of posts) {
+    if (!post.category) {
+      continue;
+    }
+    const slug = slugifyCategory(post.category);
+    const existing = counts.get(slug);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      counts.set(slug, { slug, label: post.category, count: 1 });
+    }
+  }
+  return [...counts.values()]
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
+    .slice(0, limit);
+};

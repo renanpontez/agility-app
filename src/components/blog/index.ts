@@ -1,12 +1,13 @@
 export { default as BlogArticleBody } from './BlogArticleBody';
 export type { BlogCardItem } from './BlogCard';
 export { default as BlogCard } from './BlogCard';
-export { ALL_SLUG, default as BlogCategoryTabs } from './BlogCategoryTabs';
+export { default as BlogCardHorizontal } from './BlogCardHorizontal';
 export { default as BlogFeaturedCard } from './BlogFeaturedCard';
 export { default as BlogFooter } from './BlogFooter';
 export { default as BlogHeader } from './BlogHeader';
 export { default as BlogHero } from './BlogHero';
 export { default as BlogIndex } from './BlogIndex';
+export { default as BlogSidebar } from './BlogSidebar';
 export {
   blogArticlePath,
   blogCategoriesPath,
@@ -15,11 +16,12 @@ export {
   postCategorySlug,
   UNCATEGORIZED_SLUG,
 } from './blogUrls';
-export type { BlogCategoryRef } from './categories';
+export type { BlogCategoryRef, BlogCategoryWithCount } from './categories';
 export {
   findCategoryBySlug,
   getAllCategorySlugs,
   getOrderedCategories,
+  getPopularCategories,
   slugifyCategory,
 } from './categories';
 export { formatLongDate, formatShortDate } from './formatDate';

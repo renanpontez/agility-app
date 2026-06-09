@@ -3,6 +3,8 @@ import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 
+import { ADMIN_COOKIE_NAME, constantTimeEquals, deriveAdminToken } from '@/libs/adminAuth';
+
 import { AppConfig } from './utils/AppConfig';
 
 const intlMiddleware = createMiddleware({
@@ -53,36 +55,37 @@ const localizedBlogRedirect = (request: NextRequest) => {
   return null;
 };
 
-// HTTP Basic Auth for /admin/*. Credentials are a shared user/password in
-// env (`ADMIN_USER` / `ADMIN_PASSWORD`) — these pages don't need per-user
-// identity, just a credential gate over operator-only views.
-const adminAuthGate = (request: NextRequest): NextResponse | null => {
-  if (!request.nextUrl.pathname.startsWith('/admin')) {
+// Cookie-based auth for /admin/*. The login page (/admin/login) and its API
+// (/api/admin/login, /api/admin/logout) are public; every other /admin path
+// requires a session cookie whose value matches a token derived from
+// ADMIN_PASSWORD. Rotating the password invalidates every existing cookie.
+const adminAuthGate = async (request: NextRequest): Promise<NextResponse | null> => {
+  const { pathname, search } = request.nextUrl;
+  const isAdminPage = pathname.startsWith('/admin');
+  const isLoginApi = pathname === '/api/admin/login' || pathname === '/api/admin/logout';
+  if (!isAdminPage && !isLoginApi) {
     return null;
   }
-  const user = process.env.ADMIN_USER;
+  if (pathname === '/admin/login' || isLoginApi) {
+    return NextResponse.next();
+  }
   const password = process.env.ADMIN_PASSWORD;
-  if (!user || !password) {
+  if (!process.env.ADMIN_USER || !password) {
     return new NextResponse('Admin disabled — set ADMIN_USER and ADMIN_PASSWORD.', {
       status: 503,
     });
   }
-  const header = request.headers.get('authorization');
-  if (header?.startsWith('Basic ')) {
-    const decoded = atob(header.slice(6));
-    const sep = decoded.indexOf(':');
-    if (sep > 0) {
-      const u = decoded.slice(0, sep);
-      const p = decoded.slice(sep + 1);
-      if (u === user && p === password) {
-        return NextResponse.next();
-      }
+  const cookie = request.cookies.get(ADMIN_COOKIE_NAME)?.value;
+  if (cookie) {
+    const expected = await deriveAdminToken(password);
+    if (constantTimeEquals(cookie, expected)) {
+      return NextResponse.next();
     }
   }
-  return new NextResponse('Authentication required.', {
-    status: 401,
-    headers: { 'WWW-Authenticate': 'Basic realm="admin", charset="UTF-8"' },
-  });
+  const loginUrl = request.nextUrl.clone();
+  loginUrl.pathname = '/admin/login';
+  loginUrl.search = `?next=${encodeURIComponent(pathname + search)}`;
+  return NextResponse.redirect(loginUrl);
 };
 
 // If the visitor previously chose a non-default locale (stored in the
@@ -111,21 +114,23 @@ const localePreferredRedirect = (request: NextRequest) => {
   return NextResponse.redirect(url);
 };
 
-export default function middleware(
+export default async function middleware(
   request: NextRequest,
   event: NextFetchEvent,
 ) {
+  // Admin pages and their auth API are gated by a session cookie and not
+  // localized — handle them before the intl middleware gets a chance to
+  // rewrite the URL. Runs first so the /admin/login bypass works even before
+  // the /api/ early-return below.
+  const adminGate = await adminAuthGate(request);
+  if (adminGate) {
+    return adminGate;
+  }
+
   // API routes carry their own auth (e.g. /api/blog uses bearer token).
   // Don't let next-intl rewrite them to a localized page path.
   if (request.nextUrl.pathname.startsWith('/api/')) {
     return;
-  }
-
-  // Admin pages are gated by Basic Auth and not localized — handle them
-  // before the intl middleware gets a chance to rewrite the URL.
-  const adminGate = adminAuthGate(request);
-  if (adminGate) {
-    return adminGate;
   }
 
   // /en/blog* (and any other non-default locale prefix on /blog) canonicalizes

@@ -1,5 +1,6 @@
 import { desc } from 'drizzle-orm';
 
+import DashboardShell from '@/app/admin/_components/DashboardShell';
 import { db } from '@/libs/DB';
 import { blogSubscribersSchema } from '@/models/Schema';
 
@@ -38,40 +39,33 @@ const AdminSubscribersPage = async () => {
     { total: 0, confirmed: 0, pending: 0, unsubscribed: 0 },
   );
 
+  const stats = [
+    { label: 'Total', value: totals.total, tone: 'text-stone-900' },
+    { label: 'Confirmados', value: totals.confirmed, tone: 'text-emerald-700' },
+    { label: 'Pendentes', value: totals.pending, tone: 'text-amber-700' },
+    { label: 'Cancelados', value: totals.unsubscribed, tone: 'text-stone-500' },
+  ];
+
   return (
-    <main className="min-h-screen bg-stone-50 py-12">
-      <div className="mx-auto max-w-6xl px-6">
-        <header className="mb-10">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-400">
-            Admin
-          </p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-[-0.02em] text-stone-900">
-            Newsletter subscribers
-          </h1>
-        </header>
+    <DashboardShell title="Newsletter subscribers" eyebrow="Admin · Newsletter">
+      <section className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {stats.map(stat => (
+          <div
+            key={stat.label}
+            className="rounded-2xl border border-stone-200/70 bg-white p-5"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-400">
+              {stat.label}
+            </p>
+            <p className={`mt-2 text-3xl font-semibold tracking-tight ${stat.tone}`}>
+              {stat.value}
+            </p>
+          </div>
+        ))}
+      </section>
 
-        <section className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {([
-            { label: 'Total', value: totals.total, tone: 'text-stone-900' },
-            { label: 'Confirmados', value: totals.confirmed, tone: 'text-emerald-700' },
-            { label: 'Pendentes', value: totals.pending, tone: 'text-amber-700' },
-            { label: 'Cancelados', value: totals.unsubscribed, tone: 'text-stone-500' },
-          ]).map(stat => (
-            <div
-              key={stat.label}
-              className="rounded-2xl border border-stone-200/70 bg-white p-5"
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-400">
-                {stat.label}
-              </p>
-              <p className={`mt-2 text-3xl font-semibold tracking-tight ${stat.tone}`}>
-                {stat.value}
-              </p>
-            </div>
-          ))}
-        </section>
-
-        <section className="overflow-hidden rounded-2xl border border-stone-200/70 bg-white">
+      <section className="overflow-hidden rounded-2xl border border-stone-200/70 bg-white">
+        <div className="overflow-x-auto">
           <table className="w-full text-left text-[14px]">
             <thead className="bg-stone-50 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-500">
               <tr>
@@ -116,9 +110,9 @@ const AdminSubscribersPage = async () => {
                   )}
             </tbody>
           </table>
-        </section>
-      </div>
-    </main>
+        </div>
+      </section>
+    </DashboardShell>
   );
 };
 

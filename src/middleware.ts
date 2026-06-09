@@ -53,6 +53,38 @@ const localizedBlogRedirect = (request: NextRequest) => {
   return null;
 };
 
+// HTTP Basic Auth for /admin/*. Credentials are a shared user/password in
+// env (`ADMIN_USER` / `ADMIN_PASSWORD`) — these pages don't need per-user
+// identity, just a credential gate over operator-only views.
+const adminAuthGate = (request: NextRequest): NextResponse | null => {
+  if (!request.nextUrl.pathname.startsWith('/admin')) {
+    return null;
+  }
+  const user = process.env.ADMIN_USER;
+  const password = process.env.ADMIN_PASSWORD;
+  if (!user || !password) {
+    return new NextResponse('Admin disabled — set ADMIN_USER and ADMIN_PASSWORD.', {
+      status: 503,
+    });
+  }
+  const header = request.headers.get('authorization');
+  if (header?.startsWith('Basic ')) {
+    const decoded = atob(header.slice(6));
+    const sep = decoded.indexOf(':');
+    if (sep > 0) {
+      const u = decoded.slice(0, sep);
+      const p = decoded.slice(sep + 1);
+      if (u === user && p === password) {
+        return NextResponse.next();
+      }
+    }
+  }
+  return new NextResponse('Authentication required.', {
+    status: 401,
+    headers: { 'WWW-Authenticate': 'Basic realm="admin", charset="UTF-8"' },
+  });
+};
+
 // If the visitor previously chose a non-default locale (stored in the
 // NEXT_LOCALE cookie by the LocaleSwitcher), promote that choice to a real
 // redirect so the rest of the pipeline — and search engines — see the locale.
@@ -87,6 +119,13 @@ export default function middleware(
   // Don't let next-intl rewrite them to a localized page path.
   if (request.nextUrl.pathname.startsWith('/api/')) {
     return;
+  }
+
+  // Admin pages are gated by Basic Auth and not localized — handle them
+  // before the intl middleware gets a chance to rewrite the URL.
+  const adminGate = adminAuthGate(request);
+  if (adminGate) {
+    return adminGate;
   }
 
   // /en/blog* (and any other non-default locale prefix on /blog) canonicalizes

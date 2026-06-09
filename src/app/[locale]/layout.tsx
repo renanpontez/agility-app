@@ -2,6 +2,7 @@ import '@/styles/global.css';
 
 import type { Metadata, Viewport } from 'next';
 import { Poppins, Sorts_Mill_Goudy } from 'next/font/google';
+import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 
@@ -104,6 +105,13 @@ export default async function RootLayout(props: {
         >
           {props.children}
         </NextIntlClientProvider>
+        {process.env.VERCEL_ENV === 'production' && (
+          <Script
+            src="https://cloud.umami.is/script.js"
+            data-website-id="fbef5db3-d9f6-407f-a106-7fb818d1ecf4"
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

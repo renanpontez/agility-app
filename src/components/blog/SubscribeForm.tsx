@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
 type SubmitState
   = | { kind: 'idle' }
@@ -16,6 +16,41 @@ type SubscribeFormProps = {
 // hear back within 5s, treat it as a failure — the user shouldn't be left
 // staring at a spinner forever (Resend timeout, cold start, dropped connection).
 const SUBMIT_TIMEOUT_MS = 5000;
+
+// Most-used domains for the pt-BR audience, ranked by share. Static list for
+// now — once we have signup data we can re-rank from analytics.
+const EMAIL_DOMAINS = [
+  'gmail.com',
+  'hotmail.com',
+  'outlook.com',
+  'yahoo.com.br',
+  'yahoo.com',
+  'icloud.com',
+  'live.com',
+  'uol.com.br',
+  'bol.com.br',
+  'terra.com.br',
+  'proton.me',
+];
+const MAX_SUGGESTIONS = 5;
+
+const getDomainSuggestions = (value: string): string[] => {
+  const at = value.indexOf('@');
+  if (at < 1) {
+    return [];
+  }
+  const localPart = value.slice(0, at);
+  const domainPart = value.slice(at + 1).toLowerCase();
+  // Once the user has typed a `.` in the domain, they're committing to a
+  // specific TLD — suggesting completions would just get in the way.
+  if (domainPart.includes('.')) {
+    return [];
+  }
+  return EMAIL_DOMAINS
+    .filter(d => d.startsWith(domainPart))
+    .slice(0, MAX_SUGGESTIONS)
+    .map(d => `${localPart}@${d}`);
+};
 
 const COPY = {
   eyebrow: 'Receba no e-mail',
@@ -41,6 +76,45 @@ const COPY = {
 const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
   const [email, setEmail] = useState('');
   const [state, setState] = useState<SubmitState>({ kind: 'idle' });
+  const [focused, setFocused] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+  const [highlight, setHighlight] = useState(-1);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const listboxId = useId();
+
+  const suggestions = useMemo(() => getDomainSuggestions(email), [email]);
+  const showSuggestions = focused && !dismissed && suggestions.length > 0;
+
+  useEffect(() => {
+    setHighlight(-1);
+  }, [email]);
+
+  const acceptSuggestion = (value: string) => {
+    setEmail(value);
+    setDismissed(true);
+    setHighlight(-1);
+    inputRef.current?.focus();
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSuggestions) {
+      return;
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setHighlight(h => (h + 1) % suggestions.length);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setHighlight(h => (h <= 0 ? suggestions.length - 1 : h - 1));
+    } else if (event.key === 'Enter' && highlight >= 0) {
+      event.preventDefault();
+      acceptSuggestion(suggestions[highlight]!);
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      setDismissed(true);
+      setHighlight(-1);
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -128,9 +202,10 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
       </div>
 
       <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-3 sm:flex-row" noValidate>
-        <label className="flex-1">
+        <label className="relative flex-1">
           <span className="sr-only">{COPY.emailLabel}</span>
           <input
+            ref={inputRef}
             type="email"
             inputMode="email"
             autoComplete="email"
@@ -139,14 +214,53 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
+              setDismissed(false);
               if (state.kind === 'error') {
                 setState({ kind: 'idle' });
               }
             }}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            onKeyDown={handleKeyDown}
             disabled={state.kind === 'submitting'}
+            role="combobox"
+            aria-controls={listboxId}
+            aria-expanded={showSuggestions}
+            aria-autocomplete="list"
+            aria-activedescendant={
+              showSuggestions && highlight >= 0 ? `${listboxId}-${highlight}` : undefined
+            }
             aria-invalid={state.kind === 'error'}
             className="h-12 w-full rounded-full border border-stone-200/70 bg-stone-50 px-5 text-[15px] text-stone-900 outline-none transition-colors placeholder:text-stone-400 hover:border-stone-300 focus:border-stone-400 focus:bg-white focus:ring-4 focus:ring-stone-900/5"
           />
+          {showSuggestions && (
+            <ul
+              id={listboxId}
+              role="listbox"
+              className="absolute inset-x-0 top-full z-10 mt-2 overflow-hidden rounded-2xl border border-stone-200/70 bg-white py-1 shadow-[0_8px_24px_rgba(0,0,0,0.08)]"
+            >
+              {suggestions.map((s, i) => (
+                <li
+                  key={s}
+                  id={`${listboxId}-${i}`}
+                  role="option"
+                  aria-selected={i === highlight}
+                  onMouseDown={(e) => {
+                    // mousedown — onClick would lose focus on the input
+                    // before firing, dismissing the dropdown.
+                    e.preventDefault();
+                    acceptSuggestion(s);
+                  }}
+                  onMouseEnter={() => setHighlight(i)}
+                  className={`cursor-pointer px-5 py-2 text-[14px] text-stone-700 ${
+                    i === highlight ? 'bg-stone-100 text-stone-900' : ''
+                  }`}
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          )}
         </label>
         <button
           type="submit"

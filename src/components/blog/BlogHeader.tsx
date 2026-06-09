@@ -37,8 +37,8 @@ const BlogHeader = ({ categories = [] }: BlogHeaderProps) => {
     <motion.header
       className={`sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
         scrolled
-          ? 'border-b border-stone-200/70 bg-stone-50/80 backdrop-blur-xl'
-          : 'border-b border-transparent bg-stone-50'
+          ? 'border-b border-stone-200/70 bg-white/80 backdrop-blur-xl'
+          : 'border-b border-transparent bg-white'
       }`}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: hidden ? -80 : 0, opacity: 1 }}

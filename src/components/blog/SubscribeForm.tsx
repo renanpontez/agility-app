@@ -10,6 +10,7 @@ type SubmitState
 
 type SubscribeFormProps = {
   source?: string;
+  variant?: 'full' | 'sidebar';
 };
 
 // Server should answer the subscribe POST well under a second. If we don't
@@ -73,7 +74,8 @@ const COPY = {
   privacy: 'Você pode cancelar a inscrição a qualquer momento.',
 };
 
-const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
+const SubscribeForm = ({ source = 'blog-index', variant = 'full' }: SubscribeFormProps) => {
+  const isSidebar = variant === 'sidebar';
   const [email, setEmail] = useState('');
   const [state, setState] = useState<SubmitState>({ kind: 'idle' });
   const [focused, setFocused] = useState(false);
@@ -163,23 +165,44 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
 
   if (state.kind === 'success') {
     return (
-      <section className="mx-auto my-20 max-w-3xl rounded-3xl border border-stone-200/70 bg-white p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)] sm:p-14">
-        <p className="mb-4 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+      <section
+        className={
+          isSidebar
+            ? ''
+            : 'mx-auto my-20 max-w-3xl rounded-3xl border border-stone-200/70 bg-white p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)] sm:p-14'
+        }
+      >
+        <p className={`${isSidebar ? 'mb-3' : 'mb-4'} inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary`}>
           <span aria-hidden className="h-px w-8 bg-primary" />
           Verifique seu e-mail
         </p>
-        <h2 className="text-2xl font-semibold leading-tight tracking-[-0.02em] text-stone-900 md:text-3xl">
+        <h2 className={
+          isSidebar
+            ? 'text-[17px] font-semibold leading-tight tracking-[-0.01em] text-stone-900'
+            : 'text-2xl font-semibold leading-tight tracking-[-0.02em] text-stone-900 md:text-3xl'
+        }
+        >
           {COPY.successTitle}
         </h2>
-        <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-stone-600">
+        <p className={
+          isSidebar
+            ? 'mt-3 text-[13px] leading-relaxed text-stone-600'
+            : 'mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-stone-600'
+        }
+        >
           {COPY.successBodyStrong}
           {' '}
-          <span className="rounded-md bg-stone-900 px-2 py-0.5 text-[13px] font-medium text-stone-50">
+          <span className="rounded-md bg-stone-900 px-2 py-0.5 text-[12px] font-medium text-stone-50">
             {COPY.successBodyButton}
           </span>
           {COPY.successBodyTail}
         </p>
-        <p className="mx-auto mt-5 max-w-md text-[12px] leading-relaxed text-stone-400">
+        <p className={
+          isSidebar
+            ? 'mt-3 text-[11.5px] leading-relaxed text-stone-400'
+            : 'mx-auto mt-5 max-w-md text-[12px] leading-relaxed text-stone-400'
+        }
+        >
           {COPY.successFootnote}
         </p>
       </section>
@@ -187,21 +210,40 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
   }
 
   return (
-    <section className="mx-auto my-20 max-w-3xl rounded-3xl border border-stone-200/70 bg-white p-10 shadow-[0_1px_2px_rgba(0,0,0,0.02)] sm:p-14">
-      <div className="text-center">
-        <p className="mb-4 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-          <span aria-hidden className="h-px w-8 bg-primary" />
-          {COPY.eyebrow}
-        </p>
-        <h2 className="text-2xl font-semibold leading-tight tracking-[-0.02em] text-stone-900 md:text-[1.875rem]">
-          {COPY.title}
-        </h2>
-        <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-stone-500">
-          {COPY.subtitle}
-        </p>
-      </div>
+    <section
+      className={
+        isSidebar
+          ? ''
+          : 'mx-auto my-20 max-w-3xl rounded-3xl border border-stone-200/70 bg-white p-10 shadow-[0_1px_2px_rgba(0,0,0,0.02)] sm:p-14'
+      }
+    >
+      {isSidebar
+        ? (
+            <div>
+              <h2 className="text-[17px] font-semibold leading-snug tracking-[-0.01em] text-stone-900">
+                {COPY.title}
+              </h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-stone-500">
+                {COPY.subtitle}
+              </p>
+            </div>
+          )
+        : (
+            <div className="text-center">
+              <p className="mb-4 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+                <span aria-hidden className="h-px w-8 bg-primary" />
+                {COPY.eyebrow}
+              </p>
+              <h2 className="text-2xl font-semibold leading-tight tracking-[-0.02em] text-stone-900 md:text-[1.875rem]">
+                {COPY.title}
+              </h2>
+              <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-stone-500">
+                {COPY.subtitle}
+              </p>
+            </div>
+          )}
 
-      <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-3 sm:flex-row" noValidate>
+      <form onSubmit={handleSubmit} className={`${isSidebar ? 'mt-4 flex flex-col gap-2' : 'mt-8 flex flex-col gap-3 sm:flex-row'}`} noValidate>
         <label className="relative flex-1">
           <span className="sr-only">{COPY.emailLabel}</span>
           <input
@@ -231,7 +273,9 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
               showSuggestions && highlight >= 0 ? `${listboxId}-${highlight}` : undefined
             }
             aria-invalid={state.kind === 'error'}
-            className="h-12 w-full rounded-full border border-stone-200/70 bg-stone-50 px-5 text-[15px] text-stone-900 outline-none transition-colors placeholder:text-stone-400 hover:border-stone-300 focus:border-stone-400 focus:bg-white focus:ring-4 focus:ring-stone-900/5"
+            className={`w-full rounded-full border border-stone-200/70 bg-stone-100 text-stone-900 outline-none transition-colors placeholder:text-stone-400 hover:border-stone-300 focus:border-stone-400 focus:bg-white focus:ring-4 focus:ring-stone-900/5 ${
+              isSidebar ? 'h-11 px-4 text-[14px]' : 'h-12 px-5 text-[15px]'
+            }`}
           />
           {showSuggestions && (
             <ul
@@ -265,7 +309,9 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
         <button
           type="submit"
           disabled={state.kind === 'submitting'}
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-stone-900 px-6 text-[14px] font-medium tracking-tight text-stone-50 shadow-[0_1px_2px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all hover:bg-stone-800 hover:shadow-[0_4px_12px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)] disabled:cursor-not-allowed disabled:opacity-60"
+          className={`inline-flex items-center justify-center gap-2 rounded-full bg-stone-900 font-medium tracking-tight text-stone-50 shadow-[0_1px_2px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all hover:bg-stone-800 hover:shadow-[0_4px_12px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)] disabled:cursor-not-allowed disabled:opacity-60 ${
+            isSidebar ? 'h-11 px-5 text-[13px]' : 'h-12 px-6 text-[14px]'
+          }`}
         >
           {state.kind === 'submitting' ? COPY.ctaLoading : COPY.cta}
           {state.kind !== 'submitting' && (
@@ -274,7 +320,7 @@ const SubscribeForm = ({ source = 'blog-index' }: SubscribeFormProps) => {
         </button>
       </form>
 
-      <div className="mt-4 flex min-h-[20px] items-center justify-center text-[12px]">
+      <div className={`mt-3 flex min-h-[20px] items-center text-[12px] ${isSidebar ? 'justify-start' : 'justify-center'}`}>
         {state.kind === 'error'
           ? (
               <p className="text-rose-600" role="alert">

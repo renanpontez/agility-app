@@ -195,11 +195,13 @@
     "badge": "Blog da Agility",
     "titlePrefix": "Tecnologia, IA e ideias",
     "titleHighlight": "que importam",
-    "subtitle": "Novidades de inteligência artificial, tutoriais de produto, curiosidades de tecnologia e bastidores da Agility — em uma linguagem que serve tanto para quem programa quanto para quem só quer entender o que está acontecendo.",
+    "subtitle": "IA, tecnologia e bastidores do time — em linguagem que serve pra quem programa e pra quem só quer entender.",
     "readingTimeSuffix": "min de leitura",
-    "allLabel": "Todos",
     "readArticle": "Leia o artigo",
-    "more": "Mais artigos",
+    "featured": "Artigo em destaque",
+    "latest": "Últimos artigos",
+    "popularCategories": "Categorias populares",
+    "loadMore": "Carregar mais",
     "empty": "Ainda não temos posts nessa categoria — volte em breve."
   },
   "BlogCategory": {

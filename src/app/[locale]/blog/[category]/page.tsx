@@ -9,7 +9,7 @@ import {
   BlogHero,
   BlogIndex,
   findCategoryBySlug,
-  getOrderedCategories,
+  getPopularCategories,
   slugifyCategory,
 } from '@/components/blog';
 import { getPostsSafe } from '@/libs/blogStore';
@@ -123,9 +123,10 @@ const BlogCategoryOrLegacyArticlePage = async (props: { params: Promise<Params> 
     category: post.category,
     publishedAt: post.publishedAt,
     readingTimeMinutes: post.readingTimeMinutes,
+    author: post.author,
   }));
 
-  const categories = getOrderedCategories(posts.filter(isPublished));
+  const popularCategories = getPopularCategories(posts.filter(isPublished), 6);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -165,13 +166,14 @@ const BlogCategoryOrLegacyArticlePage = async (props: { params: Promise<Params> 
 
       <BlogIndex
         items={items}
-        categories={categories}
-        activeSlug={categorySegment}
+        popularCategories={popularCategories}
         locale={safeLocale}
-        allLabel={tBlog('allLabel')}
         readArticleLabel={tBlog('readArticle')}
         emptyLabel={tBlog('empty')}
-        moreLabel={tBlog('more')}
+        featuredLabel={tBlog('featured')}
+        latestLabel={tBlog('latest')}
+        popularCategoriesLabel={tBlog('popularCategories')}
+        loadMoreLabel={tBlog('loadMore')}
       />
 
       <script

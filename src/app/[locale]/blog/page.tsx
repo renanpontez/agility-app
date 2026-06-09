@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import type { BlogCardItem } from '@/components/blog';
-import { BlogHero, BlogIndex, getOrderedCategories, SubscribeForm } from '@/components/blog';
+import { BlogHero, BlogIndex, getPopularCategories } from '@/components/blog';
 import { getPostsSafe } from '@/libs/blogStore';
 import { isPublished } from '@/types/blog';
 import { AppConfig } from '@/utils/AppConfig';
@@ -66,9 +66,10 @@ const BlogPage = async () => {
     category: post.category,
     publishedAt: post.publishedAt,
     readingTimeMinutes: post.readingTimeMinutes,
+    author: post.author,
   }));
 
-  const categories = getOrderedCategories(sortedPosts);
+  const popularCategories = getPopularCategories(sortedPosts, 6);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -103,17 +104,15 @@ const BlogPage = async () => {
 
       <BlogIndex
         items={items}
-        categories={categories}
+        popularCategories={popularCategories}
         locale={safeLocale}
-        allLabel={t('allLabel')}
         readArticleLabel={t('readArticle')}
         emptyLabel={t('empty')}
-        moreLabel={t('more')}
+        featuredLabel={t('featured')}
+        latestLabel={t('latest')}
+        popularCategoriesLabel={t('popularCategories')}
+        loadMoreLabel={t('loadMore')}
       />
-
-      <div className="px-5 sm:px-8">
-        <SubscribeForm source="blog-index" />
-      </div>
 
       <script
         type="application/ld+json"

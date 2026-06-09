@@ -18,7 +18,7 @@ type BlogHeroProps = {
 const SIZE_TO_TITLE = {
   sm: 'text-3xl md:text-4xl',
   md: 'text-4xl md:text-5xl lg:text-[3.5rem]',
-  lg: 'text-[2.5rem] leading-[1.05] md:text-6xl lg:text-[4.25rem]',
+  lg: 'text-[2rem] leading-[1.05] md:text-5xl lg:text-[3.25rem]',
 } as const;
 
 const BlogHero = ({
@@ -39,7 +39,7 @@ const BlogHero = ({
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-stone-300/60 to-transparent"
       />
-      <div className={`mx-auto max-w-6xl px-5 pb-14 pt-16 sm:px-8 md:pb-20 md:pt-28 ${isCenter ? 'text-center' : 'text-left'}`}>
+      <div className={`mx-auto max-w-6xl px-5 pb-10 pt-12 sm:px-8 md:pb-14 md:pt-20 ${isCenter ? 'text-center' : 'text-left'}`}>
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             aria-label="Breadcrumb"
@@ -62,7 +62,7 @@ const BlogHero = ({
           </nav>
         )}
 
-        <div className={isCenter ? 'mx-auto max-w-3xl' : 'max-w-4xl'}>
+        <div className={isCenter ? 'mx-auto max-w-3xl' : ''}>
           {eyebrow && (
             <div className={`mb-6 flex items-center gap-3 ${isCenter ? 'justify-center' : ''}`}>
               <span aria-hidden className="h-px w-8 bg-primary" />
@@ -77,7 +77,7 @@ const BlogHero = ({
           </h1>
 
           {subtitle && (
-            <p className={`mt-6 text-lg leading-relaxed text-stone-500 md:mt-7 md:text-xl ${isCenter ? 'mx-auto max-w-2xl' : 'max-w-2xl'}`}>
+            <p className={`mt-5 text-[15px] leading-relaxed text-stone-500 md:mt-6 md:text-base ${isCenter ? 'mx-auto max-w-2xl' : 'max-w-3xl'}`}>
               {subtitle}
             </p>
           )}

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 
 import { Link } from '@/libs/i18nNavigation';
+import type { BlogAuthor } from '@/types/blog';
 
 import { blogArticlePath } from './blogUrls';
 import { formatShortDate } from './formatDate';
@@ -16,6 +17,7 @@ export type BlogCardItem = {
   category?: string;
   publishedAt: string;
   readingTimeMinutes?: number;
+  author?: BlogAuthor;
 };
 
 type BlogCardProps = {

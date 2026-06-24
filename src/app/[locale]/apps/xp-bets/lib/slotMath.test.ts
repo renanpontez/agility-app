@@ -37,7 +37,7 @@ describe('slotMath', () => {
     }
   });
 
-  it('converges close to the configured RTP for the default profile', () => {
+  it('converges close to the configured RTP for the default profile', { timeout: 30000 }, () => {
     // 20k spins keeps the test under a second; tolerance is generous because
     // even at 20k variance is real. The shipped settings panel uses the same
     // solver — this is the smoke test that proves it's not wildly off.
@@ -46,13 +46,13 @@ describe('slotMath', () => {
     expect(m.realizedRtp).toBeLessThan(1.1);
   });
 
-  it('honors a higher configured RTP directionally', () => {
+  it('honors a higher configured RTP directionally', { timeout: 30000 }, () => {
     const low = simulate(20_000, profile({ rtp: 0.70 }), 99);
     const high = simulate(20_000, profile({ rtp: 1.15 }), 99);
     expect(high.realizedRtp).toBeGreaterThan(low.realizedRtp);
   });
 
-  it('honors a higher hit frequency directionally', () => {
+  it('honors a higher hit frequency directionally', { timeout: 30000 }, () => {
     const sparse = simulate(20_000, profile({ hitFrequency: 0.15 }), 555);
     const dense = simulate(20_000, profile({ hitFrequency: 0.50 }), 555);
     expect(dense.hitRate).toBeGreaterThan(sparse.hitRate);

@@ -79,7 +79,16 @@ const totalHitProbability = (weights: WeightVector): number => {
  * which is intentional — the reveal screen surfaces "configured vs. realized"
  * exactly to dramatize this limit.
  */
-export const solveWeights = (settings: GameSettings): WeightVector => {
+const weightsKey = (s: GameSettings): string =>
+  `${s.rtp}|${s.hitFrequency}|${s.volatility}|${s.wildChance}`;
+
+// LRU-ish cache. The solver is pure of settings, and players keep settings
+// stable across many spins — caching turns spin() from O(60 math passes) into
+// O(1) after the first call per (rtp, hitFreq, volatility, wildChance) tuple.
+const WEIGHT_CACHE = new Map<string, WeightVector>();
+const WEIGHT_CACHE_LIMIT = 64;
+
+const solveWeightsImpl = (settings: GameSettings): WeightVector => {
   const weights: WeightVector = baseWeights(settings.volatility);
   weights.wild = Math.max(0.001, settings.wildChance * 30);
 
@@ -113,6 +122,23 @@ export const solveWeights = (settings: GameSettings): WeightVector => {
   }
 
   return weights;
+};
+
+export const solveWeights = (settings: GameSettings): WeightVector => {
+  const key = weightsKey(settings);
+  const cached = WEIGHT_CACHE.get(key);
+  if (cached) {
+    return { ...cached };
+  }
+  const fresh = solveWeightsImpl(settings);
+  if (WEIGHT_CACHE.size >= WEIGHT_CACHE_LIMIT) {
+    const firstKey = WEIGHT_CACHE.keys().next().value;
+    if (firstKey !== undefined) {
+      WEIGHT_CACHE.delete(firstKey);
+    }
+  }
+  WEIGHT_CACHE.set(key, fresh);
+  return { ...fresh };
 };
 
 const pickSymbol = (weights: WeightVector, rng: Rng): SymbolId => {

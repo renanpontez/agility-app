@@ -35,6 +35,8 @@
     "@react-email/components": "^1.0.12",
     "@react-email/render": "^2.0.8",
     "@react-spring/web": "^10.1.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "@sentry/nextjs": "10.55.0",
     "@spotlightjs/spotlight": "^2.3.1",
     "@t3-oss/env-nextjs": "0.13.11",
@@ -56,6 +58,7 @@
     "resend": "^6.12.4",
     "sharp": "^0.33.5",
     "tailwind-merge": "3.6.0",
+    "three": "^0.184.0",
     "zod": "4.4.3"
   },
   "devDependencies": {
@@ -85,6 +88,7 @@
     "@types/node": "^22.4.1",
     "@types/pg": "^8.11.6",
     "@types/react": "^19.2.15",
+    "@types/three": "^0.184.1",
     "@vitejs/plugin-react": "^5.2.0",
     "@vitest/coverage-v8": "^4.1.7",
     "@vitest/expect": "^4.1.7",

@@ -4,16 +4,15 @@ import { AnimatePresence, motion } from 'motion/react';
 
 import V2Footer from '@/components/landing-v2/Footer';
 import V2Navbar from '@/components/landing-v2/Navbar';
-import ParallaxBlobs from '@/components/landing-v2/ParallaxBlobs';
+import Starfield from '@/components/landing-v2/Starfield';
 import { usePathname } from '@/libs/i18nNavigation';
 
 const LandingV2Template = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   return (
-    <div className="relative min-h-screen bg-[#050505] font-poppins text-white">
-      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_rgba(188,1,253,0.04)_0%,_transparent_60%)]" />
-      <ParallaxBlobs />
+    <div className="relative min-h-screen bg-[#040406] font-poppins text-white antialiased">
+      <Starfield />
       <V2Navbar />
       <AnimatePresence mode="wait">
         <motion.main

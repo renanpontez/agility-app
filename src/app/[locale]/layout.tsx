@@ -1,7 +1,7 @@
 import '@/styles/global.css';
 
 import type { Metadata, Viewport } from 'next';
-import { Poppins, Sorts_Mill_Goudy } from 'next/font/google';
+import { Figtree, Poppins, Sorts_Mill_Goudy } from 'next/font/google';
 import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -15,6 +15,13 @@ const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-poppins',
+});
+
+const figtree = Figtree({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-figtree',
 });
 
 const sortsMillGoudy = Sorts_Mill_Goudy({
@@ -97,7 +104,7 @@ export default async function RootLayout(props: {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${poppins.variable} ${sortsMillGoudy.variable}`}>
+    <html lang={locale} className={`${poppins.variable} ${sortsMillGoudy.variable} ${figtree.variable}`}>
       <body>
         <NextIntlClientProvider
           locale={locale}

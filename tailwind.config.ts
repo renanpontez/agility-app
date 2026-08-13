@@ -41,6 +41,15 @@ export default {
         primaryLight: '#DA71FF',
         primaryDark: '#861AAB',
         primaryDarker: '#6A008F',
+        // Refined near-black surfaces, tinted toward the brand violet.
+        ink: '#07060A',
+        inkSoft: '#0C0A12',
+        inkCard: '#100D18',
+        // Metallic accent — a whisper of champagne/platinum for high-ticket edges.
+        champagne: '#E7CFA6',
+        champagneLight: '#F5E6C8',
+        // Cool rim light that pairs with the violet aurora.
+        ice: '#8FB8FF',
         secondary: '#3c3c3c',
         secondaryLighter: '#B9B9B9',
         secondaryLight: '#595959',
@@ -65,6 +74,8 @@ export default {
       },
       fontFamily: {
         poppins: ['var(--font-poppins)', ...defaultSans],
+        display: ['var(--font-figtree)', 'var(--font-poppins)', ...defaultSans],
+        figtree: ['var(--font-figtree)', ...defaultSans],
         serif: ['var(--font-sorts-mill-goudy)', ...defaultSerif],
       },
       fontSize: {
@@ -146,9 +157,23 @@ export default {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-33.333%)' },
         },
+        auroraDrift: {
+          '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)', opacity: '0.9' },
+          '50%': { transform: 'translate3d(2%,-3%,0) scale(1.08)', opacity: '1' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         pulseShadow: 'pulseShadow 10s infinite',
+        auroraDrift: 'auroraDrift 18s ease-in-out infinite',
+        shimmer: 'shimmer 6s linear infinite',
       },
     },
   },

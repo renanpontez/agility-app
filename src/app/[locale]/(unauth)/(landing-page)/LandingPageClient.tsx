@@ -69,11 +69,27 @@ const LandingPage = () => {
 
   const PORTFOLIO: PortfolioItem[] = [
     {
+      name: 'RM Projeto & Construção',
+      category: t('portfolio_rm_projeto_category'),
+      type: 'Site',
+      description: t('portfolio_rm_projeto_description'),
+      image: '/assets/images/portfolio/rm-projeto-e-construcao/cover.webp',
+      slug: 'rm-projeto-e-construcao',
+    },
+    {
+      name: 'Smayly Maia',
+      category: t('portfolio_smayly_category'),
+      type: 'Site',
+      description: t('portfolio_smayly_description'),
+      image: '/assets/images/portfolio/smayly-maia/cover.webp',
+      slug: 'smayly-maia',
+    },
+    {
       name: 'Dra. Barbarela Freire',
       category: t('portfolio_dra_category'),
       type: 'Site',
       description: t('portfolio_dra_description'),
-      image: '/assets/images/portfolio/dra-barbarela-freire/thumbnail.png',
+      image: '/assets/images/portfolio/dra-barbarela-freire/cover.webp',
       slug: 'dra-barbarela-freire',
     },
     {
@@ -83,46 +99,6 @@ const LandingPage = () => {
       description: t('portfolio_mr_description'),
       image: '/assets/images/portfolio/mr-advogados/thumbnail.webp',
       slug: 'mr-advogados',
-    },
-    {
-      name: 'EasyToLive',
-      category: t('portfolio_easy_category'),
-      type: 'App',
-      description: t('portfolio_easy_description'),
-      image: '/assets/images/portfolio/easytolive_cover.webp',
-      slug: 'easytolive',
-    },
-    {
-      name: 'Academia Cearense de Economia',
-      category: t('portfolio_academia_category'),
-      type: 'Site',
-      description: t('portfolio_academia_description'),
-      image: '/assets/images/portfolio/academia_cover.webp',
-      slug: 'academia-cearense-de-economia',
-    },
-    {
-      name: 'Agillock',
-      category: t('portfolio_agillock_category'),
-      type: 'Landing Page',
-      description: t('portfolio_agillock_description'),
-      image: '/assets/images/portfolio/agillock_cover.webp',
-      slug: 'agillock',
-    },
-    {
-      name: 'Agility',
-      category: t('portfolio_agility_category'),
-      type: 'Design',
-      description: t('portfolio_agility_description'),
-      image: '/assets/images/portfolio/agility/thumbnail.webp',
-      slug: 'agility',
-    },
-    {
-      name: 'Dynotest',
-      category: t('portfolio_dynotest_category'),
-      type: 'Site',
-      description: t('portfolio_dynotest_description'),
-      image: '/assets/images/portfolio/dynotest_cover.webp',
-      slug: 'dynotest',
     },
   ];
 
@@ -144,6 +120,13 @@ const LandingPage = () => {
       a: t('faq4_a'),
     },
   ];
+
+  // Only offer filters for the types actually present, and skip the bar entirely
+  // when every project shares the same type.
+  const presentTypes = PORTFOLIO_FILTERS.filter(
+    filter => filter !== 'Todos' && PORTFOLIO.some(p => p.type === filter),
+  );
+  const visibleFilters = presentTypes.length > 1 ? ['Todos', ...presentTypes] : [];
 
   const filteredPortfolio = activeFilter === 'Todos'
     ? PORTFOLIO
@@ -267,23 +250,25 @@ const LandingPage = () => {
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll>
-            <div className="mb-12 flex flex-wrap items-center justify-center gap-2">
-              {PORTFOLIO_FILTERS.map(filter => (
-                <button
-                  key={filter}
-                  type="button"
-                  onClick={() => setActiveFilter(filter)}
-                  className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${activeFilter === filter
-                    ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                    : 'border border-white/10 text-white/50 hover:border-white/20 hover:text-white/80'
-                  }`}
-                >
-                  {filterLabels[filter]}
-                </button>
-              ))}
-            </div>
-          </RevealOnScroll>
+          {visibleFilters.length > 0 && (
+            <RevealOnScroll>
+              <div className="mb-12 flex flex-wrap items-center justify-center gap-2">
+                {visibleFilters.map(filter => (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() => setActiveFilter(filter)}
+                    className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${activeFilter === filter
+                      ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                      : 'border border-white/10 text-white/50 hover:border-white/20 hover:text-white/80'
+                    }`}
+                  >
+                    {filterLabels[filter]}
+                  </button>
+                ))}
+              </div>
+            </RevealOnScroll>
+          )}
 
           <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-3">
             {filteredPortfolio.map((item, i) => (

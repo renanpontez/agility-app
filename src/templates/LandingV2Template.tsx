@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 
 import V2Footer from '@/components/landing-v2/Footer';
 import V2Navbar from '@/components/landing-v2/Navbar';
-import Starfield from '@/components/landing-v2/Starfield';
+import ParallaxBlobs from '@/components/landing-v2/ParallaxBlobs';
 import { usePathname } from '@/libs/i18nNavigation';
 
 const LandingV2Template = ({ children }: { children: React.ReactNode }) => {
@@ -12,7 +12,7 @@ const LandingV2Template = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="relative min-h-screen bg-[#040406] font-poppins text-white antialiased">
-      <Starfield />
+      <ParallaxBlobs />
       <V2Navbar />
       <AnimatePresence mode="wait">
         <motion.main

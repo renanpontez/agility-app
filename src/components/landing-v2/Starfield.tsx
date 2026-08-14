@@ -10,6 +10,11 @@ import { useEffect, useRef } from 'react';
  * living sky. Every so often (rare, randomly timed) a shooting star streaks
  * across at 45° with a bright head and a fading violet-white trail.
  *
+ * Scoped to its positioned parent (absolute, not fixed), so the sky belongs to
+ * the hero alone; below the fold the body carries the parallax ambience
+ * instead. The canvas dissolves toward its bottom edge so there is no seam
+ * where the two backdrops meet.
+ *
  * Honors prefers-reduced-motion by painting a single static field with no
  * drift, twinkle, or shooting stars.
  */
@@ -157,9 +162,19 @@ const Starfield = () => {
     };
 
     const resize = () => {
+      const nextWidth = canvas.clientWidth;
+      const nextHeight = canvas.clientHeight;
+      // The observer fires on every layout pass; only rebuild the field when
+      // the box genuinely changed, otherwise the sky resets as fonts settle.
+      if (nextWidth === width && nextHeight === height) {
+        return;
+      }
+      width = nextWidth;
+      height = nextHeight;
+      if (width === 0 || height === 0) {
+        return;
+      }
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -213,7 +228,10 @@ const Starfield = () => {
     };
 
     resize();
-    window.addEventListener('resize', resize);
+    // Track the hero box itself, not just the window: the section grows when
+    // the headline rewraps or the display font swaps in.
+    const observer = new ResizeObserver(resize);
+    observer.observe(canvas);
 
     if (!reduce) {
       last = performance.now();
@@ -222,7 +240,7 @@ const Starfield = () => {
     }
 
     return () => {
-      window.removeEventListener('resize', resize);
+      observer.disconnect();
       cancelAnimationFrame(raf);
     };
   }, []);
@@ -231,7 +249,12 @@ const Starfield = () => {
     <canvas
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 block size-full"
+      className="pointer-events-none absolute inset-0 z-0 block size-full"
+      style={{
+        // Dissolve into the body ambience rather than cutting off at the fold.
+        maskImage: 'linear-gradient(to bottom, black 58%, transparent 97%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 58%, transparent 97%)',
+      }}
     />
   );
 };

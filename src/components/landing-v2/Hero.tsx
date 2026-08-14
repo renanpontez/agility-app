@@ -5,6 +5,8 @@ import { motion, useReducedMotion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { FiArrowUpRight } from 'react-icons/fi';
 
+import Starfield from './Starfield';
+
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 type HeroCta = { label: string; href: string };
@@ -18,7 +20,9 @@ type V2HeroProps = {
 };
 
 /**
- * Centered, text-first hero over the starfield. Entrance choreography:
+ * Centered, text-first hero. Owns the starfield: the sky is one viewport tall
+ * and fades out at the fold, so it reads as the opening frame rather than as
+ * wallpaper for the whole site. Entrance choreography:
  *  1. Navbar drops in from the top (handled in Navbar).
  *  2. After a short beat, the headline cascades in word by word (blur +
  *     opacity → crisp), then the subtitle and the two CTAs.
@@ -62,13 +66,15 @@ const V2Hero = ({ titlePrefix, highlight, subtitle, cta1, cta2 }: V2HeroProps) =
   return (
     <section
       id="Home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-32 text-center sm:px-6"
+      className="relative flex min-h-svh items-center justify-center overflow-hidden px-4 py-32 text-center sm:px-6"
     >
+      <Starfield />
+
       <motion.div
         variants={outer}
         initial="hidden"
         animate="show"
-        className="mx-auto flex max-w-4xl flex-col items-center"
+        className="relative z-10 mx-auto flex max-w-4xl flex-col items-center"
       >
         {/* Headline — word by word, blur → crisp */}
         <motion.h1
@@ -128,7 +134,7 @@ const V2Hero = ({ titlePrefix, highlight, subtitle, cta1, cta2 }: V2HeroProps) =
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center"
+        className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center"
       >
         <div className="flex h-9 w-5 items-start justify-center rounded-full border border-white/15 p-1.5">
           <motion.span

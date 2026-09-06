@@ -1,6 +1,5 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
-import type { NextRequest } from 'next/server';
 
 // Edge-safe rate limiting via Upstash Redis (REST transport — no TCP). This file
 // is imported by the middleware, so it must stay free of any node-only imports.
@@ -52,13 +51,15 @@ export const limiters = {
 };
 
 // Client IP on Vercel: NextRequest.ip was removed, so read the forwarded headers.
-export const clientIp = (req: NextRequest): string =>
+// Typed as the base `Request` so Node route handlers (which get a plain Request)
+// can reuse it, not just the edge middleware.
+export const clientIp = (req: Request): string =>
   req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
   || req.headers.get('x-real-ip')
   || '0.0.0.0';
 
 // Geo/location, populated by Vercel's edge network (ASN is not exposed on Hobby).
-export const geo = (req: NextRequest) => ({
+export const geo = (req: Request) => ({
   country: req.headers.get('x-vercel-ip-country') ?? undefined,
   city: req.headers.get('x-vercel-ip-city') ?? undefined,
   region: req.headers.get('x-vercel-ip-country-region') ?? undefined,

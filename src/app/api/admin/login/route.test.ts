@@ -55,6 +55,16 @@ describe('POST /api/admin/login', () => {
     await expect(res.json()).resolves.toEqual({ error: 'invalid_request' });
   });
 
+  it('returns 400 (not 500) on a non-object JSON body', async () => {
+    // JSON `null`, a bare string, and an array all parse fine but have no
+    // `.user`/`.password` — property access must not throw an uncaught 500.
+    for (const payload of [null, 'a-string', [1, 2, 3]]) {
+      const res = await POST(buildRequest(payload));
+      expect(res.status).toBe(400);
+      await expect(res.json()).resolves.toEqual({ error: 'invalid_request' });
+    }
+  });
+
   it('returns 401 on wrong username', async () => {
     const res = await POST(buildRequest({ user: 'nope', password: 'hunter2' }));
     expect(res.status).toBe(401);

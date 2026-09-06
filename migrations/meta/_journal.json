@@ -22,6 +22,13 @@
       "when": 1780791420892,
       "tag": "0002_natural_nehzno",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1785113795975,
+      "tag": "0003_lively_wolverine",
+      "breakpoints": true
     }
   ]
 }

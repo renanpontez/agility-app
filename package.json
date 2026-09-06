@@ -41,6 +41,8 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "@types/react-dom": "^19.2.3",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.0",
     "classnames": "^2.5.1",
     "drizzle-orm": "0.45.2",
     "motion": "^12.8.0",

@@ -30,6 +30,28 @@ const BG = '#0A0A0A';
 
 const FONT_BASE = 'https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/files';
 
+// SSRF guard: `bg` is fetched + rendered server-side, so restrict it to the same
+// public CDNs allowed in next.config's images.remotePatterns. A strict https
+// host allowlist inherently blocks private-IP / internal-host SSRF (no raw IPs,
+// no http:/file:/gopher: schemes, no attacker-chosen host).
+const BG_ALLOWED_HOSTS = new Set(['images.unsplash.com', 'placehold.co']);
+
+const safeBg = (raw: string | null): string | null => {
+  if (!raw) {
+    return null;
+  }
+  let url: URL;
+  try {
+    url = new URL(raw);
+  } catch {
+    return null;
+  }
+  if (url.protocol !== 'https:' || !BG_ALLOWED_HOSTS.has(url.hostname)) {
+    return null;
+  }
+  return url.toString();
+};
+
 const loadFont = async (weight: 400 | 700 | 800): Promise<ArrayBuffer | null> => {
   try {
     const res = await fetch(`${FONT_BASE}/inter-latin-${weight}-normal.woff`);
@@ -121,7 +143,7 @@ export async function GET(req: Request) {
   const tagRaw = searchParams.get('tag');
   const tag = tagRaw ? tagRaw.slice(0, 24) : undefined;
   const icon = searchParams.get('icon') ?? undefined;
-  const bg = searchParams.get('bg');
+  const bg = safeBg(searchParams.get('bg'));
   const ratio = searchParams.get('ratio') === '9:16' ? '9:16' : '4:5';
 
   const width = 1080;
@@ -316,6 +338,11 @@ export async function GET(req: Request) {
         width,
         height,
         ...(fonts.length > 0 ? { fonts } : {}),
+        // Cache rendered cards on the CDN (keyed by the full query string) so
+        // repeated hits don't re-run the ~1080px render + font fetches.
+        headers: {
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+        },
       },
     )
   );

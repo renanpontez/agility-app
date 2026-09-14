@@ -9,7 +9,7 @@ test.describe('Guestbook', () => {
       await page.goto('/guestbook');
       await expect(page.getByText('Username')).toBeVisible();
 
-      const username = faker.internet.userName();
+      const username = faker.internet.username();
       const body = faker.lorem.words();
 
       // Create

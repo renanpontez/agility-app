@@ -42,8 +42,11 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# env files — real secrets live in Vercel env vars (and untracked .env.local).
+# Never commit a populated env file; only the names-only template is tracked.
+.env
+.env.*
+!.env.example
 
 # local folder
 local

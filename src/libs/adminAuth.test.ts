@@ -1,27 +1,52 @@
 import { describe, expect, it } from 'vitest';
 
-import { ADMIN_COOKIE_NAME, constantTimeEquals, deriveAdminToken } from './adminAuth';
+import {
+  ADMIN_COOKIE_NAME,
+  constantTimeEquals,
+  createAdminSession,
+  verifyAdminSession,
+} from './adminAuth';
+
+const SECRET = 'test-secret-at-least-32-characters-long!';
 
 describe('adminAuth', () => {
   it('exports a stable cookie name', () => {
     expect(ADMIN_COOKIE_NAME).toBe('agility_admin');
   });
 
-  it('derives a 64-char hex token from the password', async () => {
-    const token = await deriveAdminToken('hunter2');
-    expect(token).toMatch(/^[0-9a-f]{64}$/);
+  it('createAdminSession round-trips through verifyAdminSession', async () => {
+    const token = await createAdminSession(SECRET);
+    await expect(verifyAdminSession(token, SECRET)).resolves.toBe(true);
   });
 
-  it('is deterministic for the same password', async () => {
-    const a = await deriveAdminToken('hunter2');
-    const b = await deriveAdminToken('hunter2');
-    expect(a).toBe(b);
-  });
-
-  it('produces different tokens for different passwords', async () => {
-    const a = await deriveAdminToken('hunter2');
-    const b = await deriveAdminToken('hunter3');
+  it('mints a unique token on each call (no longer a static fingerprint)', async () => {
+    const a = await createAdminSession(SECRET);
+    const b = await createAdminSession(SECRET);
     expect(a).not.toBe(b);
+    await expect(verifyAdminSession(a, SECRET)).resolves.toBe(true);
+    await expect(verifyAdminSession(b, SECRET)).resolves.toBe(true);
+  });
+
+  it('rejects a token signed with a different secret', async () => {
+    const token = await createAdminSession(SECRET);
+    await expect(verifyAdminSession(token, `${SECRET}-other`)).resolves.toBe(false);
+  });
+
+  it('rejects a tampered token', async () => {
+    const token = await createAdminSession(SECRET);
+    const tampered = `x${token.slice(1)}`;
+    await expect(verifyAdminSession(tampered, SECRET)).resolves.toBe(false);
+  });
+
+  it('rejects an expired token', async () => {
+    const token = await createAdminSession(SECRET, -1);
+    await expect(verifyAdminSession(token, SECRET)).resolves.toBe(false);
+  });
+
+  it('rejects undefined and malformed tokens', async () => {
+    await expect(verifyAdminSession(undefined, SECRET)).resolves.toBe(false);
+    await expect(verifyAdminSession('', SECRET)).resolves.toBe(false);
+    await expect(verifyAdminSession('no-dot-here', SECRET)).resolves.toBe(false);
   });
 
   it('constantTimeEquals returns true for identical strings', () => {

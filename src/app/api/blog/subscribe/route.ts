@@ -19,6 +19,10 @@ const requestSchema = z.object({
   // attribution. Bounded to keep adversarial input out of the DB.
   source: z.string().min(1).max(64).optional(),
   locale: z.string().min(2).max(8).optional(),
+  // Honeypot — a hidden field no human fills. Accept any string (rather than
+  // rejecting) so a tripped honeypot can be silently dropped below instead of
+  // returning a 400 that would tell the bot it was caught.
+  company: z.string().max(200).optional(),
 });
 
 const errorResponse = (status: number, error: string) =>
@@ -37,6 +41,12 @@ export async function POST(req: Request) {
   const parsed = requestSchema.safeParse(raw);
   if (!parsed.success) {
     return errorResponse(400, 'invalid_request');
+  }
+
+  // Honeypot tripped — a bot filled a field no human can see. Return the same
+  // generic success as the real path so it can't tell; skip email + DB write.
+  if (parsed.data.company && parsed.data.company.trim() !== '') {
+    return NextResponse.json({ ok: true, status: 'pending' });
   }
 
   try {

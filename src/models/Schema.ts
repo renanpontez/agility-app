@@ -62,3 +62,34 @@ export const blogSubscribersSchema = pgTable(
 );
 
 export type BlogSubscriber = typeof blogSubscribersSchema.$inferSelect;
+
+// Security/request events captured by the edge middleware — probe hits, admin
+// auth failures, and rate-limit blocks. This is the durable, queryable source
+// of truth for the weekly digest, independent of BetterStack's log retention.
+// Only "interesting" events are stored (normal page views are never written);
+// the digest job prunes rows older than ~60 days.
+export const securityEventsSchema = pgTable(
+  'security_events',
+  {
+    id: serial('id').primaryKey(),
+    ts: timestamp('ts', { mode: 'date' }).defaultNow().notNull(),
+    ip: varchar('ip', { length: 45 }).notNull(), // IPv6 max length
+    country: varchar('country', { length: 2 }),
+    city: varchar('city', { length: 128 }),
+    asn: varchar('asn', { length: 32 }), // not exposed on Vercel Hobby → null
+    method: varchar('method', { length: 10 }).notNull(),
+    path: varchar('path', { length: 512 }).notNull(),
+    status: integer('status').notNull(),
+    ua: text('ua'),
+    referer: text('referer'),
+    // 'probe' | 'auth_fail' | 'rate_limited'
+    tag: varchar('tag', { length: 16 }).notNull(),
+  },
+  table => ({
+    tsIdx: index('security_events_ts_idx').on(table.ts),
+    ipIdx: index('security_events_ip_idx').on(table.ip),
+    tagIdx: index('security_events_tag_idx').on(table.tag),
+  }),
+);
+
+export type SecurityEventRow = typeof securityEventsSchema.$inferSelect;

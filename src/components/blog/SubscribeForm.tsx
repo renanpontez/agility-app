@@ -77,6 +77,7 @@ const COPY = {
 const SubscribeForm = ({ source = 'blog-index', variant = 'full' }: SubscribeFormProps) => {
   const isSidebar = variant === 'sidebar';
   const [email, setEmail] = useState('');
+  const [company, setCompany] = useState(''); // honeypot — must stay empty
   const [state, setState] = useState<SubmitState>({ kind: 'idle' });
   const [focused, setFocused] = useState(false);
   const [dismissed, setDismissed] = useState(false);
@@ -137,7 +138,7 @@ const SubscribeForm = ({ source = 'blog-index', variant = 'full' }: SubscribeFor
       const res = await fetch('/api/blog/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmed, source, locale: 'pt-BR' }),
+        body: JSON.stringify({ email: trimmed, source, locale: 'pt-BR', company }),
         signal: controller.signal,
       });
       if (!res.ok) {
@@ -244,6 +245,19 @@ const SubscribeForm = ({ source = 'blog-index', variant = 'full' }: SubscribeFor
           )}
 
       <form onSubmit={handleSubmit} className={`${isSidebar ? 'mt-4 flex flex-col gap-2' : 'mt-8 flex flex-col gap-3 sm:flex-row'}`} noValidate>
+        {/* Honeypot — hidden from real users (off-screen, not focusable, hidden
+            from assistive tech). A bot that auto-fills every field trips it and
+            gets a silent success: no email sent, no DB row. */}
+        <input
+          type="text"
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={company}
+          onChange={e => setCompany(e.target.value)}
+          className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0"
+        />
         <label className="relative flex-1">
           <span className="sr-only">{COPY.emailLabel}</span>
           <input
